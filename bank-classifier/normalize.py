@@ -19,6 +19,19 @@ KNOWN_PLACES = [
 # Cache for unique details to build reference list for fuzzy matching
 _reference_details = set()
 
+def normalize_hyphens(text: str):
+    """Normalize spaces around dashes in Details and standardize to ASCII hyphen.
+
+    - Replaces en dash (–) and em dash (—) with '-'
+    - Removes spaces around hyphens: "A - B" -> "A-B"
+    """
+    if text is None or (isinstance(text, float) and pd.isna(text)):
+        return text
+    s = str(text)
+    s = s.replace("–", "-").replace("—", "-")
+    s = re.sub(r"\s*-\s*", "-", s)
+    return s
+
 def normalize_city(text):
     """Normalize city names in the address text."""
     if not text:
@@ -193,6 +206,10 @@ def normalize_csv(input_file, output_file):
     """
     # Read the CSV file
     df = pd.read_csv(input_file)
+    
+    # FIRST STEP: normalize Details in-place
+    if 'Details' in df.columns:
+        df['Details'] = df['Details'].apply(normalize_hyphens)
     
     # Apply parsing to each row
     parsed_data = df.apply(
