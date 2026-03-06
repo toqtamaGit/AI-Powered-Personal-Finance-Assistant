@@ -18,8 +18,31 @@ AMOUNT_RE = re.compile(
     r"\b([+-]?\d[\d\s,\.]*)\s*([₸$€₽]?)\s*(KZT|USD|EUR|RUB)?\b"
 )
 
+# Canonical operation name -> (default_sign, [aliases in other languages])
+OP_MAP: Dict[str, Tuple[int, List[str]]] = {
+    "Acquiring":      (-1, ["Покупка"]),
+    "Payment":        (-1, ["Платеж"]),
+    "Replenishment":  (+1, ["Пополнение"]),
+    "Transfer":       (-1, ["Перевод"]),
+    "Withdrawal":     (-1, ["Снятие"]),
+    "Others":         (-1, ["Другое"]),
+    "Commission":     (-1, ["Комиссия"]),
+    "Refund":         (+1, ["Возврат"]),
+    "Cashback":       (+1, ["Кэшбэк"]),
+    "Pending amount": (-1, ["Сумма в обработке"]),
+}
+
+# Build reverse lookup: any name/alias -> (canonical, sign)
+_OP_LOOKUP: Dict[str, Tuple[str, int]] = {}
+for _canon, (_sign, _aliases) in OP_MAP.items():
+    _OP_LOOKUP[_canon] = (_canon, _sign)
+    for _alias in _aliases:
+        _OP_LOOKUP[_alias] = (_canon, _sign)
+
+# Build regex from all names, longest first to avoid partial matches
+_all_op_names = sorted(_OP_LOOKUP.keys(), key=len, reverse=True)
 OP_RE = re.compile(
-    r"\b(Покупка|Платеж|Пополнение|Перевод|Снятие|Другое|Комиссия|Возврат|Кэшбэк)\b"
+    r"(?<!\w)(" + "|".join(re.escape(n) for n in _all_op_names) + r")(?!\w)"
 )
 
 MCC_RE = re.compile(r"\bMCC\s*(\d{4})\b", re.IGNORECASE)
@@ -111,6 +134,24 @@ def parse_amount(s: str) -> Optional[float]:
         return None
 
 
+def normalize_operation(raw_op: Optional[str]) -> Tuple[Optional[str], int]:
+    """Return (canonical_name, default_sign) for a matched operation string.
+
+    If raw_op is not recognized, returns (raw_op, -1).
+    """
+    if not raw_op:
+        return None, -1
+    cleaned = raw_op.replace("\n", " ").strip()
+    hit = _OP_LOOKUP.get(cleaned)
+    if hit:
+        return hit
+    # Try case-insensitive fallback
+    for key, val in _OP_LOOKUP.items():
+        if key.lower() == cleaned.lower():
+            return val
+    return cleaned, -1
+
+
 def extract_text_pages(pdf_path: str) -> List[str]:
     pages: List[str] = []
 
@@ -166,25 +207,33 @@ def extract_tables(pdf_path: str) -> List[pd.DataFrame]:
 def map_table_headers(df: pd.DataFrame) -> pd.DataFrame:
     """Пытаемся привести заголовки к: date, amount_raw, currency, operation, details."""
     df2 = df.copy()
-    header_row = df2.iloc[0].astype(str).str.lower()
-    if any("дата" in x for x in header_row):
+    # Scan first few rows for a header row (may not be row 0)
+    header_idx = None
+    for idx in range(min(5, len(df2))):
+        row_vals = df2.iloc[idx].astype(str).str.lower()
+        if any("дата" in x or "date" in x for x in row_vals):
+            header_idx = idx
+            break
+
+    if header_idx is not None:
+        header_row = df2.iloc[header_idx].astype(str).str.lower()
         df2.columns = header_row
-        df2 = df2.iloc[1:].reset_index(drop=True)
+        df2 = df2.iloc[header_idx + 1:].reset_index(drop=True)
 
     colmap: Dict[str, str] = {}
     for c in df2.columns:
         lc = str(c).lower()
-        if "дата" in lc:
+        if "дата" in lc or lc == "date":
             colmap[c] = "date"
         elif "сумм" in lc or "amount" in lc:
             colmap[c] = "amount_raw"
         elif "валют" in lc or "curr" in lc:
             colmap[c] = "currency"
-        elif "операц" in lc or "тип" in lc:
+        elif "операц" in lc or "тип" in lc or "operation" in lc:
             colmap[c] = "operation"
         elif any(
             key in lc
-            for key in ("детал", "описан", "назнач", "merchant")
+            for key in ("детал", "описан", "назнач", "merchant", "detail")
         ):
             colmap[c] = "details"
 
@@ -361,19 +410,20 @@ def extract_fields_from_chunk(chunk: List[str]) -> Dict:
 
     # тип операции
     opm = OP_RE.search(post)
-    operation = opm.group(1) if opm else None
+    raw_op = opm.group(1) if opm else None
+    operation, op_sign = normalize_operation(raw_op)
 
-    # детали
-    if operation:
-        details = post.split(operation, 1)[1].strip()
+    # детали — strip matched operation text from details
+    if raw_op:
+        details = post.split(raw_op, 1)[1].strip()
     elif am:
         details = post.split(am.group(0), 1)[1].strip()
     else:
         details = post.strip()
 
-    merchant = guess_merchant(details)
+    merchant = None if operation in ("Replenishment", "Others", "Transfer") else guess_merchant(details)
 
-    # знак
+    # знак: prefer explicit +/- from amount_raw, fallback to op_sign
     sign = None
     if isinstance(amount_raw, str):
         if amount_raw.strip().startswith("+"):
@@ -381,7 +431,7 @@ def extract_fields_from_chunk(chunk: List[str]) -> Dict:
         elif amount_raw.strip().startswith("-"):
             sign = -1
     if sign is None:
-        sign = 1 if operation in ("Пополнение", "Возврат", "Кэшбэк") else -1
+        sign = op_sign
     amount = (
         amount_val * sign
         if isinstance(amount_val, (int, float))
@@ -478,24 +528,35 @@ def try_parse_tables(pdf_path: str) -> List[Dict]:
                 else None
             )
 
-            op = (
+            raw_op = (
                 str(row.get("operation")).strip()
                 if pd.notna(row.get("operation"))
                 else None
             )
+            op, op_sign = normalize_operation(raw_op)
             details = (
-                str(row.get("details")).strip()
+                re.sub(r"\s+", " ", str(row.get("details"))).strip()
                 if pd.notna(row.get("details"))
                 else ""
             )
 
-            merchant = guess_merchant(details)
-            sign = 1 if op in ("Пополнение", "Возврат", "Кэшбэк") else -1
+            merchant = None if op in ("Replenishment", "Others", "Transfer") else guess_merchant(details)
+            # prefer explicit +/- from amount string, fallback to op_sign
+            sign = op_sign
+            if isinstance(ar, str):
+                if ar.strip().startswith("+"):
+                    sign = 1
+                elif ar.strip().startswith("-"):
+                    sign = -1
             amount = (
                 am_val * sign
                 if isinstance(am_val, (int, float))
                 else None
             )
+
+            # skip junk rows with no date and no amount
+            if not date_iso and am_val is None:
+                continue
 
             out.append(
                 {
@@ -525,6 +586,57 @@ def try_parse_tables(pdf_path: str) -> List[Dict]:
     return out
 
 
+def fix_similar_details(records: List[Dict], threshold: float = 0.85) -> List[Dict]:
+    """Fix corrupted details caused by PDF generation artifacts.
+
+    Builds a reference set of unique details strings. For each record,
+    if a longer detail string exists with >= threshold similarity,
+    the record's details (and merchant) are replaced with the longer version.
+
+    All rows are kept — no rows are removed.
+    """
+    from difflib import SequenceMatcher
+
+    if not records:
+        return records
+
+    # Collect unique detail strings, sorted longest first
+    unique_details = sorted(
+        {str(r.get("details") or "") for r in records},
+        key=len,
+        reverse=True,
+    )
+
+    # Build a map: short/corrupted detail -> best (longest) similar detail
+    fix_map: Dict[str, str] = {}
+
+    for detail in unique_details:
+        if not detail or detail in fix_map:
+            continue
+        # Check against already-seen (longer) details
+        for longer in unique_details:
+            if len(longer) <= len(detail):
+                break  # sorted longest-first; no point checking shorter
+            if longer == detail:
+                continue
+            ratio = SequenceMatcher(None, detail, longer).ratio()
+            if ratio >= threshold:
+                fix_map[detail] = longer
+                break  # take the first (longest) match
+
+    if not fix_map:
+        return records
+
+    # Apply fixes
+    for rec in records:
+        old = str(rec.get("details") or "")
+        if old in fix_map:
+            rec["details"] = fix_map[old]
+            rec["merchant"] = guess_merchant(fix_map[old])
+
+    return records
+
+
 def parse_pdf(pdf_path: str) -> Tuple[List[Dict], List[str]]:
     """
     Возвращает (records, rejects).
@@ -540,6 +652,7 @@ def parse_pdf(pdf_path: str) -> Tuple[List[Dict], List[str]]:
         if bank_name:
             for r in records:
                 r["bank"] = bank_name
+        records = fix_similar_details(records)
         return records, []
 
     # 2) Построчный режим
@@ -563,6 +676,7 @@ def parse_pdf(pdf_path: str) -> Tuple[List[Dict], List[str]]:
                     rec["bank"] = bank_name
                 records.append(rec)
 
+    records = fix_similar_details(records)
     return records, rejects
 
 
