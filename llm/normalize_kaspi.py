@@ -56,7 +56,7 @@ def parse_details(
         business_type = None
         business_name = text
 
-    # Clean up quotes/brackets that may remain in Kaspi merchant names
+    # Clean up quotes/brackets that may remain in Kaspi business names
     business_name = re.sub(r'["\'\[\]\(\)]', '', business_name).strip()
 
     if not business_name:

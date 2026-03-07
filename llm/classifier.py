@@ -36,21 +36,18 @@ def _load_model():
         return False
 
 
-def classify_transaction(merchant: Optional[str], details: Optional[str]) -> str:
+def classify_transaction(details: Optional[str]) -> str:
     """
     Classify a transaction into a category using the trained model.
 
     Args:
-        merchant: Merchant name from transaction
         details: Transaction details/description
 
     Returns:
         Category string (e.g., "переводы", "покупки", "транспорт", etc.)
     """
     # Prepare text
-    merchant_str = str(merchant) if merchant else ""
-    details_str = str(details) if details else ""
-    text = f"{merchant_str} {details_str}".strip()
+    text = str(details).strip() if details else ""
 
     if not text:
         return "другое"
@@ -93,7 +90,7 @@ def classify_transactions(transactions: List[Dict]) -> List[Dict]:
     Classify a list of transactions.
 
     Args:
-        transactions: List of transaction dicts with 'merchant' and 'details' fields
+        transactions: List of transaction dicts with 'details' field
 
     Returns:
         Same list with 'category' field added to each transaction
@@ -103,7 +100,6 @@ def classify_transactions(transactions: List[Dict]) -> List[Dict]:
 
     for tx in transactions:
         tx["category"] = classify_transaction(
-            tx.get("merchant"),
             tx.get("details")
         )
     return transactions

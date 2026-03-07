@@ -1,427 +1,444 @@
-﻿date,amount_raw,amount,currency,operation,merchant,details,bank,source_file,business_type,business_name
-2024-11-13,"- 1 000,00 KZT",-1000.0,KZT,Transfers,,Саида О.,Kaspi Bank,kaspi_en.pdf,,
-2024-11-13,"- 1 444,00 KZT",-1444.0,KZT,Purchases,Magnum Cash&Carry,Magnum Cash&Carry - The amount is blocked. The bank expects the confirmation of the payment system.,Kaspi Bank,kaspi_en.pdf,,Magnum Cash&Carry
-2024-11-14,"- 4 300,00 KZT",-4300.0,KZT,Transfers,,Айым Ш.,Kaspi Bank,kaspi_en.pdf,,
-2024-11-15,"- 1 190,00 KZT",-1190.0,KZT,Purchases,Сенсата парк,Сенсата парк,Kaspi Bank,kaspi_en.pdf,,Сенсата парк
-2024-11-16,"- 1 360,00 KZT",-1360.0,KZT,Purchases,Апельсин,Апельсин,Kaspi Bank,kaspi_en.pdf,,Апельсин
-2024-11-17,"- 2 830,00 KZT",-2830.0,KZT,Purchases,продукты,продукты,Kaspi Bank,kaspi_en.pdf,,продукты
-2024-11-18,"+ 800,00 KZT",800.0,KZT,Replenishment,,Аяулым М.,Kaspi Bank,kaspi_en.pdf,,
-2024-11-18,"- 1 400,00 KZT",-1400.0,KZT,Purchases,Green Food,Green Food,Kaspi Bank,kaspi_en.pdf,,Green Food
-2024-11-18,"- 2 314,00 KZT",-2314.0,KZT,Purchases,Magnum Cash&Carry,Magnum Cash&Carry,Kaspi Bank,kaspi_en.pdf,,Magnum Cash&Carry
-2024-11-19,"- 4 028,00 KZT",-4028.0,KZT,Purchases,YANDEX.EDA,YANDEX.EDA,Kaspi Bank,kaspi_en.pdf,,YANDEX.EDA
-2024-11-19,"- 7 000,00 KZT",-7000.0,KZT,Transfers,,Макпал Т.,Kaspi Bank,kaspi_en.pdf,,
-2024-11-20,"- 20 000,00 KZT",-20000.0,KZT,Purchases,KazInterstaff,KazInterstaff,Kaspi Bank,kaspi_en.pdf,,KazInterstaff
-2024-11-21,"- 990,00 KZT",-990.0,KZT,Purchases,ИП Берсиновв,ИП Берсиновв,Kaspi Bank,kaspi_en.pdf,IP,Берсиновв
-2024-11-21,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,,Рауан А.,Kaspi Bank,kaspi_en.pdf,,
-2024-11-21,"- 1 300,00 KZT",-1300.0,KZT,Transfers,,Алибек М.,Kaspi Bank,kaspi_en.pdf,,
-2024-11-22,"- 800,00 KZT",-800.0,KZT,Purchases,YANDEX.GO,YANDEX.GO,Kaspi Bank,kaspi_en.pdf,,YANDEX.GO
-2024-11-23,"- 490,77 KZT",-490.77,KZT,Purchases,Парковка. ТРЦ Keruen,Парковка. ТРЦ Keruen,Kaspi Bank,kaspi_en.pdf,,Парковка. ТРЦ Keruen
-2024-11-23,"+ 47 000,00 KZT",47000.0,KZT,Replenishment,,From card of other banks,Kaspi Bank,kaspi_en.pdf,,
-2024-11-24,"- 31 878,00 KZT",-31878.0,KZT,Purchases,ТОО Kaspi Travel,ТОО Kaspi Travel,Kaspi Bank,kaspi_en.pdf,TOO,Kaspi Travel
-2024-11-24,"+ 38 000,00 KZT",38000.0,KZT,Replenishment,,From Kaspi Deposit,Kaspi Bank,kaspi_en.pdf,,
-2024-11-25,"- 10 516,00 KZT",-10516.0,KZT,Transfers,,Жадыра К.,Kaspi Bank,kaspi_en.pdf,,
-2024-11-25,"- 300,00 KZT",-300.0,KZT,Purchases,Парковка. ТРЦ Mega Silkway,Парковка. ТРЦ Mega Silkway,Kaspi Bank,kaspi_en.pdf,,Парковка. ТРЦ Mega Silkway
-2024-11-25,"- 16 990,00 KZT",-16990.0,KZT,Purchases,Bershka,Bershka,Kaspi Bank,kaspi_en.pdf,,Bershka
-2024-11-25,"+ 50 000,00 KZT",50000.0,KZT,Replenishment,,In the Kaspi Terminal,Kaspi Bank,kaspi_en.pdf,,
-2024-11-26,"+ 34 000,00 KZT",34000.0,KZT,Replenishment,,At Kaspi ATM,Kaspi Bank,kaspi_en.pdf,,
-2024-11-26,"- 8 000,00 KZT",-8000.0,KZT,Purchases,Nomad Oil,Nomad Oil,Kaspi Bank,kaspi_en.pdf,,Nomad Oil
-2024-11-26,"- 17 976,00 KZT",-17976.0,KZT,Purchases,Узбечка 1,Узбечка 1,Kaspi Bank,kaspi_en.pdf,,Узбечка 1
-2024-11-27,"- 2 185,00 KZT",-2185.0,KZT,Purchases,DN-маркет,DN-маркет,Kaspi Bank,kaspi_en.pdf,,DN-маркет
-2024-11-27,"+ 21 000,00 KZT",21000.0,KZT,Replenishment,,Алтынбек К.,Kaspi Bank,kaspi_en.pdf,,
-2024-11-28,"- 499,00 KZT",-499.0,KZT,Purchases,APPLE.COM/BILL,APPLE.COM/BILL,Kaspi Bank,kaspi_en.pdf,,APPLE.COM/BILL
-2024-11-29,"- 3 390,00 KZT",-3390.0,KZT,Purchases,Kcell,Kcell,Kaspi Bank,kaspi_en.pdf,,Kcell
-2024-11-29,"- 4 020,00 KZT",-4020.0,KZT,Purchases,Meloman/Marwin,Meloman/Marwin,Kaspi Bank,kaspi_en.pdf,,Meloman/Marwin
-2024-11-29,"- 250,00 KZT",-250.0,KZT,Purchases,NU,NU,Kaspi Bank,kaspi_en.pdf,,NU
-2024-11-29,"- 1 900,00 KZT",-1900.0,KZT,Purchases,Парковка. Назарбаев Университет,Парковка. Назарбаев Университет,Kaspi Bank,kaspi_en.pdf,,Парковка. Назарбаев Университет
-2024-11-30,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Чечел паб,Чечел паб,Kaspi Bank,kaspi_en.pdf,,Чечел паб
-2024-12-01,"- 1 700,00 KZT",-1700.0,KZT,Transfers,,Нурмаганбет Р.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,,Амиржан А.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,,Наргиза И.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-03,"- 1 000,00 KZT",-1000.0,KZT,Transfers,,Досан С.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,,Асет Б.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,,Айдана О.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-03,"- 19 800,00 KZT",-19800.0,KZT,Purchases,ИП Бапова Гульнур,ИП Бапова Гульнур,Kaspi Bank,kaspi_en.pdf,IP,Бапова Гульнур
-2024-12-03,"- 16 473,00 KZT",-16473.0,KZT,Purchases,Супермаркет GALMART,Супермаркет GALMART,Kaspi Bank,kaspi_en.pdf,,Супермаркет GALMART
-2024-12-05,"- 12 000,00 KZT",-12000.0,KZT,Purchases,TLP FLOWERS & COFFEE,TLP FLOWERS & COFFEE,Kaspi Bank,kaspi_en.pdf,,TLP FLOWERS & COFFEE
-2024-12-06,"- 1 800,00 KZT",-1800.0,KZT,Purchases,ТРЦ Евразия,ТРЦ Евразия,Kaspi Bank,kaspi_en.pdf,,ТРЦ Евразия
-2024-12-06,"- 10 000,00 KZT",-10000.0,KZT,Purchases,Beauty Workshop,Beauty Workshop,Kaspi Bank,kaspi_en.pdf,,Beauty Workshop
-2024-12-07,"- 5 000,00 KZT",-5000.0,KZT,Transfers,,Айгуль И.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-07,"- 1 420,00 KZT",-1420.0,KZT,Transfers,,Думан Ш.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-07,"- 2 949,00 KZT",-2949.0,KZT,Purchases,Всё для всех,Всё для всех,Kaspi Bank,kaspi_en.pdf,,Всё для всех
-2024-12-09,"- 1 413,00 KZT",-1413.0,KZT,Purchases,ИП Корнилова,ИП Корнилова,Kaspi Bank,kaspi_en.pdf,IP,Корнилова
-2024-12-09,"- 6 940,00 KZT",-6940.0,KZT,Transfers,,Sobir F.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-09,"- 2 742,00 KZT",-2742.0,KZT,Purchases,Flip.kz (Онлайн-оплата),Flip.kz (Онлайн-оплата),Kaspi Bank,kaspi_en.pdf,,Flip.kz Онлайн-оплата
-2024-12-10,"- 1 900,00 KZT",-1900.0,KZT,Transfers,,Сымбат Т.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-10,"- 10 000,00 KZT",-10000.0,KZT,Transfers,,Жібек Е.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-11,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,,Елдана К.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-12,"- 1 700,00 KZT",-1700.0,KZT,Purchases,Tutto Bene,Tutto Bene,Kaspi Bank,kaspi_en.pdf,,Tutto Bene
-2024-12-12,"- 3 120,00 KZT",-3120.0,KZT,Purchases,Алые Паруса Dostyk Plaza,Алые Паруса Dostyk Plaza,Kaspi Bank,kaspi_en.pdf,,Алые Паруса Dostyk Plaza
-2024-12-12,"- 3 960,00 KZT",-3960.0,KZT,Purchases,Тикетон,Тикетон,Kaspi Bank,kaspi_en.pdf,,Тикетон
-2024-12-13,"- 2 670,00 KZT",-2670.0,KZT,Purchases,Магазин Мандарин,Магазин Мандарин,Kaspi Bank,kaspi_en.pdf,,Магазин Мандарин
-2024-12-13,"- 3 645,00 KZT",-3645.0,KZT,Purchases,Good Food KZ,Good Food KZ,Kaspi Bank,kaspi_en.pdf,,Good Food KZ
-2024-12-14,"- 33 000,00 KZT",-33000.0,KZT,Purchases,Языковая онлайн школа Rainier,Языковая онлайн школа Rainier,Kaspi Bank,kaspi_en.pdf,,Языковая онлайн школа Rainier
-2024-12-16,"+ 10 000,00 KZT",10000.0,KZT,Replenishment,,Серик К.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-17,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Shymbulak,Shymbulak,Kaspi Bank,kaspi_en.pdf,,Shymbulak
-2024-12-17,"+ 6 000,00 KZT",6000.0,KZT,Replenishment,,Батырхан Ш.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-17,"- 19 700,00 KZT",-19700.0,KZT,Transfers,,Тумар Д.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-18,"- 2 004,00 KZT",-2004.0,KZT,Purchases,"ТОО ""Книга-НВ""","ТОО ""Книга-НВ""",Kaspi Bank,kaspi_en.pdf,TOO,Книга-НВ
-2024-12-18,"- 14 745,00 KZT",-14745.0,KZT,Purchases,ИП R TRADE,ИП R TRADE,Kaspi Bank,kaspi_en.pdf,IP,R TRADE
-2024-12-18,"- 3 000,00 KZT",-3000.0,KZT,Transfers,,Али Қ.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-19,"- 7 500,00 KZT",-7500.0,KZT,Purchases,Manon,Manon,Kaspi Bank,kaspi_en.pdf,,Manon
-2024-12-19,"- 400,00 KZT",-400.0,KZT,Transfers,,Azizbek A.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-22,"- 170,00 KZT",-170.0,KZT,Purchases,"ТОО ""МИР ХОББИ КАЗАХСТАН И ЦЕНТРАЛЬНАЯ","ТОО ""МИР ХОББИ КАЗАХСТАН И ЦЕНТРАЛЬНАЯ АЗИЯ",Kaspi Bank,kaspi_en.pdf,TOO,МИР ХОББИ КАЗАХСТАН И ЦЕНТРАЛЬНАЯ АЗИЯ
-2024-12-22,"- 3 050,00 KZT",-3050.0,KZT,Purchases,Burger King Dostyk Plaza Almaty,Burger King Dostyk Plaza Almaty,Kaspi Bank,kaspi_en.pdf,,Burger King Dostyk Plaza Almaty
-2024-12-22,"- 290,00 KZT",-290.0,KZT,Purchases,Stradivarius,Stradivarius,Kaspi Bank,kaspi_en.pdf,,Stradivarius
-2024-12-23,"- 22 089,00 KZT",-22089.0,KZT,Purchases,Del Papa,Del Papa,Kaspi Bank,kaspi_en.pdf,,Del Papa
-2024-12-23,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,,Іңкəр К.,Kaspi Bank,kaspi_en.pdf,,
-2024-12-25,"- 14 685,00 KZT",-14685.0,KZT,Purchases,NAVAT,NAVAT,Kaspi Bank,kaspi_en.pdf,,NAVAT
-2024-12-25,"- 2 150,00 KZT",-2150.0,KZT,Purchases,Jurek tau,Jurek tau,Kaspi Bank,kaspi_en.pdf,,Jurek tau
-2024-12-28,"- 44 924,00 KZT",-44924.0,KZT,Purchases,Air Astana,Air Astana,Kaspi Bank,kaspi_en.pdf,,Air Astana
-2024-12-28,"- 1 995,00 KZT",-1995.0,KZT,Others,,Yearly service fee,Kaspi Bank,kaspi_en.pdf,,
-2025-01-03,"- 200,00 KZT",-200.0,KZT,Purchases,ДОМ (кофейня),ДОМ (кофейня),Kaspi Bank,kaspi_en.pdf,,ДОМ кофейня
-2025-01-03,"- 1 000,00 KZT",-1000.0,KZT,Transfers,,Игорь Р.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-04,"- 32 238,60 KZT",-32238.6,KZT,Purchases,Marine Health,Marine Health,Kaspi Bank,kaspi_en.pdf,,Marine Health
-2025-01-04,"+ 32 000,00 KZT",32000.0,KZT,Replenishment,,Корлан Т.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-05,"- 7 990,00 KZT",-7990.0,KZT,Transfers,,Нұрахмет Н.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-05,"- 5 000,00 KZT",-5000.0,KZT,Purchases,Premium case,Premium case,Kaspi Bank,kaspi_en.pdf,,Premium case
-2025-01-05,"- 7 000,00 KZT",-7000.0,KZT,Purchases,ZEVS,ZEVS,Kaspi Bank,kaspi_en.pdf,,ZEVS
-2025-01-06,"- 7 890,00 KZT",-7890.0,KZT,Purchases,iU Market,iU Market,Kaspi Bank,kaspi_en.pdf,,iU Market
-2025-01-06,"- 3 300,00 KZT",-3300.0,KZT,Purchases,BTB GROUP,BTB GROUP,Kaspi Bank,kaspi_en.pdf,,BTB GROUP
-2025-01-06,"- 1 600,00 KZT",-1600.0,KZT,Purchases,Студенческий,Студенческий,Kaspi Bank,kaspi_en.pdf,,Студенческий
-2025-01-06,"- 500,00 KZT",-500.0,KZT,Purchases,Гардероб,Гардероб,Kaspi Bank,kaspi_en.pdf,,Гардероб
-2025-01-06,"- 2 500,00 KZT",-2500.0,KZT,Purchases,Медео. Аренда коньков,Медео. Аренда коньков,Kaspi Bank,kaspi_en.pdf,,Медео. Аренда коньков
-2025-01-07,"- 12 000,00 KZT",-12000.0,KZT,Purchases,AIR ASTANA,AIR ASTANA,Kaspi Bank,kaspi_en.pdf,,AIR ASTANA
-2025-01-08,"- 500,00 KZT",-500.0,KZT,Purchases,Аппарат самообслуживания,Аппарат самообслуживания,Kaspi Bank,kaspi_en.pdf,,Аппарат самообслуживания
-2025-01-08,"- 2 100,00 KZT",-2100.0,KZT,Purchases,Аэропорт 2,Аэропорт 2,Kaspi Bank,kaspi_en.pdf,,Аэропорт 2
-2025-01-08,"- 3 900,00 KZT",-3900.0,KZT,Purchases,"ИП ""БИБИНУР""","ИП ""БИБИНУР""",Kaspi Bank,kaspi_en.pdf,IP,БИБИНУР
-2025-01-08,"- 2 398,00 KZT",-2398.0,KZT,Purchases,ИП 717 SHOP,ИП 717 SHOP,Kaspi Bank,kaspi_en.pdf,IP,717 SHOP
-2025-01-09,"- 2 510,00 KZT",-2510.0,KZT,Purchases,DN-market,DN-market,Kaspi Bank,kaspi_en.pdf,,DN-market
-2025-01-09,"+ 7 200,00 KZT",7200.0,KZT,Replenishment,,Томирис Р.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-09,"- 15 455,00 KZT",-15455.0,KZT,Purchases,Take eat easy,Take eat easy,Kaspi Bank,kaspi_en.pdf,,Take eat easy
-2025-01-10,"+ 6 500,00 KZT",6500.0,KZT,Replenishment,,Қайсар О.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-10,"- 27 500,00 KZT",-27500.0,KZT,Purchases,MY.NU.EDU.KZ,MY.NU.EDU.KZ,Kaspi Bank,kaspi_en.pdf,,MY.NU.EDU.KZ
-2025-01-10,"+ 5 000,00 KZT",5000.0,KZT,Replenishment,,Сагит И.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-11,"- 110,00 KZT",-110.0,KZT,Transfers,,Kozibek T.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-13,"- 8 107,00 KZT",-8107.0,KZT,Purchases,Семейное кафе «Мико» на Улы Дала,Семейное кафе «Мико» на Улы Дала,Kaspi Bank,kaspi_en.pdf,,Семейное кафе «Мико» на Улы Дала
-2025-01-14,"- 2 000,00 KZT",-2000.0,KZT,Purchases,The Saem,The Saem,Kaspi Bank,kaspi_en.pdf,,The Saem
-2025-01-15,"- 404,00 KZT",-404.0,KZT,Purchases,"ТОО ""ОФИС ДОМ.kz"" /ОФИС ДОМ.кз/","ТОО ""ОФИС ДОМ.kz"" /ОФИС ДОМ.кз/",Kaspi Bank,kaspi_en.pdf,TOO,ОФИС ДОМ.kz /ОФИС ДОМ.кз/
-2025-01-15,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,,Камила И.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-15,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,,Ұлпан Қ.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-15,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,,Альнура Е.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-16,"- 1 673,00 KZT",-1673.0,KZT,Purchases,OZON,OZON,Kaspi Bank,kaspi_en.pdf,,OZON
-2025-01-18,"- 5 085,10 KZT",-5085.1,KZT,Purchases,ТОО BAKERIST,ТОО BAKERIST,Kaspi Bank,kaspi_en.pdf,TOO,BAKERIST
-2025-01-19,"- 12 300,00 KZT",-12300.0,KZT,Transfers,,Амина Н.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-21,"+ 42 300,00 KZT",42300.0,KZT,Replenishment,,Айнаш Д.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-21,"- 2 400,00 KZT",-2400.0,KZT,Purchases,Mokko cafe,Mokko cafe,Kaspi Bank,kaspi_en.pdf,,Mokko cafe
-2025-01-22,"- 1 420,00 KZT",-1420.0,KZT,Transfers,,Бақдəулет Т.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-22,"- 6 177,00 KZT",-6177.0,KZT,Purchases,AST24,AST24,Kaspi Bank,kaspi_en.pdf,,AST24
-2025-01-24,"- 3 900,00 KZT",-3900.0,KZT,Transfers,,Рамазан А.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-26,"- 5 200,00 KZT",-5200.0,KZT,Purchases,Burger King Mega Silk Way,Burger King Mega Silk Way,Kaspi Bank,kaspi_en.pdf,,Burger King Mega Silk Way
-2025-01-28,"- 130,00 KZT",-130.0,KZT,Purchases,YANDEX.DELIVERY,YANDEX.DELIVERY,Kaspi Bank,kaspi_en.pdf,,YANDEX.DELIVERY
-2025-01-28,"- 1 740,00 KZT",-1740.0,KZT,Transfers,,Рустам Ш.,Kaspi Bank,kaspi_en.pdf,,
-2025-01-30,"- 960,00 KZT",-960.0,KZT,Purchases,ИП,ИП,Kaspi Bank,kaspi_en.pdf,IP,
-2025-01-31,"- 2 240,00 KZT",-2240.0,KZT,Purchases,Aiwa,Aiwa,Kaspi Bank,kaspi_en.pdf,,Aiwa
-2025-02-03,"- 12 188,00 KZT",-12188.0,KZT,Purchases,Меломан/MARWIN,Меломан/MARWIN,Kaspi Bank,kaspi_en.pdf,,Меломан/MARWIN
-2025-02-04,"+ 6 000,00 KZT",6000.0,KZT,Replenishment,,Арна Д.,Kaspi Bank,kaspi_en.pdf,,
-2025-02-07,"- 4 000,00 KZT",-4000.0,KZT,Purchases,Green Clinic,Green Clinic,Kaspi Bank,kaspi_en.pdf,,Green Clinic
-2025-02-07,"- 2 725,00 KZT",-2725.0,KZT,Purchases,Summer love,Summer love,Kaspi Bank,kaspi_en.pdf,,Summer love
-2025-02-12,"- 12 990,00 KZT",-12990.0,KZT,Purchases,Billion.co,Billion.co,Kaspi Bank,kaspi_en.pdf,,Billion.co
-2025-02-12,"- 3 800,00 KZT",-3800.0,KZT,Purchases,HP COFFEE,HP COFFEE,Kaspi Bank,kaspi_en.pdf,,HP COFFEE
-2025-02-12,"+ 6 000,00 KZT",6000.0,KZT,Replenishment,,Анел О.,Kaspi Bank,kaspi_en.pdf,,
-2025-02-14,"- 1 980,00 KZT",-1980.0,KZT,Purchases,Coffee Boom,Coffee Boom,Kaspi Bank,kaspi_en.pdf,,Coffee Boom
-2025-02-14,"- 980,00 KZT",-980.0,KZT,Purchases,Магазин,Магазин,Kaspi Bank,kaspi_en.pdf,,Магазин
-2025-02-16,"- 13 046,00 KZT",-13046.0,KZT,Purchases,Mola,Mola,Kaspi Bank,kaspi_en.pdf,,Mola
-2025-02-16,"- 100,00 KZT",-100.0,KZT,Purchases,Оплата парковки Астаны,Оплата парковки Астаны,Kaspi Bank,kaspi_en.pdf,,Оплата парковки Астаны
-2025-02-16,"- 60,00 KZT",-60.0,KZT,Purchases,Аптека 49 Цветная,Аптека 49 Цветная,Kaspi Bank,kaspi_en.pdf,,Аптека 49 Цветная
-2025-02-17,"- 3 500,00 KZT",-3500.0,KZT,Purchases,Бенто торты Астана,Бенто торты Астана,Kaspi Bank,kaspi_en.pdf,,Бенто торты Астана
-2025-02-17,"- 7 000,00 KZT",-7000.0,KZT,Purchases,Astana Tower Clean,Astana Tower Clean,Kaspi Bank,kaspi_en.pdf,,Astana Tower Clean
-2025-02-19,"- 13 156,00 KZT",-13156.0,KZT,Transfers,,Нилуфар Ə.,Kaspi Bank,kaspi_en.pdf,,
-2025-02-20,"- 60,00 KZT",-60.0,KZT,Purchases,ТС Mega Supermarket Astana,ТС Mega Supermarket Astana,Kaspi Bank,kaspi_en.pdf,,ТС Mega Supermarket Astana
-2025-02-22,"- 740,00 KZT",-740.0,KZT,Purchases,ИП АБЕЛЬДИНОВ КАНАТ АБЫЛАЕВИЧ,ИП АБЕЛЬДИНОВ КАНАТ АБЫЛАЕВИЧ,Kaspi Bank,kaspi_en.pdf,IP,АБЕЛЬДИНОВ КАНАТ АБЫЛАЕВИЧ
-2025-02-22,"- 2 690,00 KZT",-2690.0,KZT,Purchases,"ИП ""SKYNET-ASTANA""","ИП ""SKYNET-ASTANA""",Kaspi Bank,kaspi_en.pdf,IP,SKYNET-ASTANA
-2025-02-22,"- 1 600,00 KZT",-1600.0,KZT,Purchases,ИП САВЧИЦ ТАТЬЯНА АЛЕКСАНДРОВНА,ИП САВЧИЦ ТАТЬЯНА АЛЕКСАНДРОВНА,Kaspi Bank,kaspi_en.pdf,IP,САВЧИЦ ТАТЬЯНА АЛЕКСАНДРОВНА
-2025-02-25,"- 1 000,00 KZT",-1000.0,KZT,Transfers,,Нұрмерей А.,Kaspi Bank,kaspi_en.pdf,,
-2025-02-27,"- 1 590,00 KZT",-1590.0,KZT,Purchases,DailyCup,DailyCup,Kaspi Bank,kaspi_en.pdf,,DailyCup
-2025-03-01,"- 4 850,00 KZT",-4850.0,KZT,Purchases,Burger King Mega Astana,Burger King Mega Astana,Kaspi Bank,kaspi_en.pdf,,Burger King Mega Astana
-2025-03-01,"- 400,00 KZT",-400.0,KZT,Purchases,Woodtoys,Woodtoys,Kaspi Bank,kaspi_en.pdf,,Woodtoys
-2025-03-01,"+ 505,51 KZT",505.51,KZT,Purchases,Canva* paAAAGQHWQEUOCVA,"Canva* paAAAGQHWQEUOCVA (+ 1,00 USD)",Kaspi Bank,kaspi_en.pdf,,"Canva* paAAAGQHWQEUOCVA + 1,00 USD"
-2025-03-01,"- 505,51 KZT",-505.51,KZT,Purchases,Canva* paAAAGQHWQEUOCVA,"Canva* paAAAGQHWQEUOCVA (- 1,00 USD)",Kaspi Bank,kaspi_en.pdf,,"Canva* paAAAGQHWQEUOCVA - 1,00 USD"
-2025-03-02,"- 8 000,00 KZT",-8000.0,KZT,Purchases,DiZhaNi 1,DiZhaNi 1,Kaspi Bank,kaspi_en.pdf,,DiZhaNi 1
-2025-03-05,"- 115 000,00 KZT",-115000.0,KZT,Purchases,ТОО Brusnika (Брусника),ТОО Brusnika (Брусника),Kaspi Bank,kaspi_en.pdf,TOO,Brusnika Брусника
-2025-03-05,"- 65 577,00 KZT",-65577.0,KZT,Purchases,Calvin Klein Jeans,Calvin Klein Jeans,Kaspi Bank,kaspi_en.pdf,,Calvin Klein Jeans
-2025-03-05,"- 2 150,00 KZT",-2150.0,KZT,Purchases,Достык Плаза,Достык Плаза,Kaspi Bank,kaspi_en.pdf,,Достык Плаза
-2025-03-06,"- 4 400,00 KZT",-4400.0,KZT,Purchases,KINO.KZ,KINO.KZ,Kaspi Bank,kaspi_en.pdf,,KINO.KZ
-2025-03-09,"- 3 700,00 KZT",-3700.0,KZT,Purchases,French croissant,French croissant,Kaspi Bank,kaspi_en.pdf,,French croissant
-2025-03-17,"- 6 200,00 KZT",-6200.0,KZT,Purchases,OKADZAKI.KZ,OKADZAKI.KZ,Kaspi Bank,kaspi_en.pdf,,OKADZAKI.KZ
-2025-03-17,"- 10 000,00 KZT",-10000.0,KZT,Purchases,Национальный музей,Национальный музей,Kaspi Bank,kaspi_en.pdf,,Национальный музей
-2025-03-17,"- 9 560,00 KZT",-9560.0,KZT,Purchases,Wildberries,Wildberries,Kaspi Bank,kaspi_en.pdf,,Wildberries
-2025-03-18,"- 300,00 KZT",-300.0,KZT,Transfers,,Мадина Г.,Kaspi Bank,kaspi_en.pdf,,
-2025-03-18,"- 19 500,00 KZT",-19500.0,KZT,Transfers,,Шырайлым И.,Kaspi Bank,kaspi_en.pdf,,
-2025-03-19,"- 1 165,00 KZT",-1165.0,KZT,Purchases,Corner Meal,Corner Meal,Kaspi Bank,kaspi_en.pdf,,Corner Meal
-2025-03-22,"- 400,00 KZT",-400.0,KZT,Purchases,Qazaq Catering,Qazaq Catering,Kaspi Bank,kaspi_en.pdf,,Qazaq Catering
-2025-03-22,"- 995,00 KZT",-995.0,KZT,Purchases,"TOO ""Kaspi Magazin""","TOO ""Kaspi Magazin""",Kaspi Bank,kaspi_en.pdf,TOO,Kaspi Magazin
-2025-03-22,"- 1 500,00 KZT",-1500.0,KZT,Purchases,ИП КБК,ИП КБК,Kaspi Bank,kaspi_en.pdf,IP,КБК
-2025-03-25,"- 3 000,00 KZT",-3000.0,KZT,Transfers,,Əлішер А.,Kaspi Bank,kaspi_en.pdf,,
-2025-03-26,"- 14 569,00 KZT",-14569.0,KZT,Purchases,Налог на транспорт,Налог на транспорт,Kaspi Bank,kaspi_en.pdf,,Налог на транспорт
-2025-03-28,"- 22 207,00 KZT",-22207.0,KZT,Purchases,Ресторан Саксаул,Ресторан Саксаул,Kaspi Bank,kaspi_en.pdf,,Ресторан Саксаул
-2025-03-29,"- 1 200,00 KZT",-1200.0,KZT,Purchases,Парковка. Talan Towers,Парковка. Talan Towers,Kaspi Bank,kaspi_en.pdf,,Парковка. Talan Towers
-2025-03-29,"- 500 200,00 KZT",-500200.0,KZT,Purchases,VStyle Kids,VStyle Kids,Kaspi Bank,kaspi_en.pdf,,VStyle Kids
-2025-04-01,"- 110,00 KZT",-110.0,KZT,Purchases,Avtobys. Оплата проезда по QR,Avtobys. Оплата проезда по QR,Kaspi Bank,kaspi_en.pdf,,Avtobys. Оплата проезда по QR
-2025-04-03,"- 2 255,00 KZT",-2255.0,KZT,Purchases,224 MyMart Керей и Жанибек хандар,224 MyMart Керей и Жанибек хандар,Kaspi Bank,kaspi_en.pdf,,224 MyMart Керей и Жанибек хандар
-2025-04-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,,Индира К.,Kaspi Bank,kaspi_en.pdf,,
-2025-04-03,"- 3 300,00 KZT",-3300.0,KZT,Purchases,Mokashopkz,Mokashopkz,Kaspi Bank,kaspi_en.pdf,,Mokashopkz
-2025-04-04,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Парковка. ТРЦ Хан Шатыр,Парковка. ТРЦ Хан Шатыр,Kaspi Bank,kaspi_en.pdf,,Парковка. ТРЦ Хан Шатыр
-2025-04-04,"- 2 650,00 KZT",-2650.0,KZT,Purchases,Burger King Khan Shatyr Astana,Burger King Khan Shatyr Astana,Kaspi Bank,kaspi_en.pdf,,Burger King Khan Shatyr Astana
-2025-04-07,"- 300 000,00 KZT",-300000.0,KZT,Purchases,Курс по ИТ,Курс по ИТ,Kaspi Bank,kaspi_en.pdf,,Курс по ИТ
-2025-04-08,"- 5 500,00 KZT",-5500.0,KZT,Purchases,ИП Аймакова А.С.,ИП Аймакова А.С.,Kaspi Bank,kaspi_en.pdf,IP,Аймакова А.С.
-2025-04-08,"- 7 450,00 KZT",-7450.0,KZT,Purchases,Pluto.alm,Pluto.alm,Kaspi Bank,kaspi_en.pdf,,Pluto.alm
-2025-04-09,"- 1 190,00 KZT",-1190.0,KZT,Purchases,НУ,НУ,Kaspi Bank,kaspi_en.pdf,,НУ
-2025-04-09,"- 1 230,00 KZT",-1230.0,KZT,Purchases,HP Canteen,HP Canteen,Kaspi Bank,kaspi_en.pdf,,HP Canteen
-2025-04-10,"- 1 000,00 KZT",-1000.0,KZT,Transfers,,Куаныш Ж.,Kaspi Bank,kaspi_en.pdf,,
-2025-04-11,"- 3 100,00 KZT",-3100.0,KZT,Purchases,Nunis Buyer,Nunis Buyer,Kaspi Bank,kaspi_en.pdf,,Nunis Buyer
-2025-04-15,"- 8 000,00 KZT",-8000.0,KZT,Purchases,Altel,Altel,Kaspi Bank,kaspi_en.pdf,,Altel
-2025-04-16,"- 2 670,00 KZT",-2670.0,KZT,Purchases,ТӨР,ТӨР,Kaspi Bank,kaspi_en.pdf,,ТӨР
-2025-04-18,"- 1 890,00 KZT",-1890.0,KZT,Purchases,Coffunitea,Coffunitea,Kaspi Bank,kaspi_en.pdf,,Coffunitea
-2025-04-19,"- 421 680,00 KZT",-421680.0,KZT,Transfers,,Акбота Т.,Kaspi Bank,kaspi_en.pdf,,
-2025-04-21,"+ 2 000,00 KZT",2000.0,KZT,Replenishment,,Алишер-Полат К.,Kaspi Bank,kaspi_en.pdf,,
-2025-04-24,"- 865,00 KZT",-865.0,KZT,Purchases,4 касса,4 касса,Kaspi Bank,kaspi_en.pdf,,4 касса
-2025-04-24,"- 2 800,00 KZT",-2800.0,KZT,Purchases,Дом книги Абай,Дом книги Абай,Kaspi Bank,kaspi_en.pdf,,Дом книги Абай
-2025-04-24,"- 1 800,00 KZT",-1800.0,KZT,Purchases,Mazmundama,Mazmundama,Kaspi Bank,kaspi_en.pdf,,Mazmundama
-2025-04-24,"- 4 000,00 KZT",-4000.0,KZT,Purchases,"ТОО ""Издательство Арман-ПВ""","ТОО ""Издательство Арман-ПВ""",Kaspi Bank,kaspi_en.pdf,TOO,Издательство Арман-ПВ
-2025-04-24,"- 16 940,00 KZT",-16940.0,KZT,Purchases,Мангилик 56,Мангилик 56,Kaspi Bank,kaspi_en.pdf,,Мангилик 56
-2025-04-26,"+ 3 750,00 KZT",3750.0,KZT,Replenishment,,Салтанат Т.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-07,"- 8 250,00 KZT",-8250.0,KZT,Purchases,KFC 12737,KFC 12737,Kaspi Bank,kaspi_en.pdf,,KFC 12737
-2025-05-08,"- 68 875,00 KZT",-68875.0,KZT,Purchases,SKHALYK.KZ,SKHALYK.KZ,Kaspi Bank,kaspi_en.pdf,,SKHALYK.KZ
-2025-05-08,"+ 930,00 KZT",930.0,KZT,Replenishment,,Акмарал Ж.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-08,"- 1 790,00 KZT",-1790.0,KZT,Purchases,ТОО Mega Coffee,ТОО Mega Coffee,Kaspi Bank,kaspi_en.pdf,TOO,Mega Coffee
-2025-05-08,"+ 23 900,00 KZT",23900.0,KZT,Replenishment,,Кунсулу М.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-09,"- 770,00 KZT",-770.0,KZT,Purchases,Магазин 1000 мелочей,Магазин 1000 мелочей,Kaspi Bank,kaspi_en.pdf,,Магазин 1000 мелочей
-2025-05-11,"+ 400,00 KZT",400.0,KZT,Replenishment,,Алиша А.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-12,"- 7 195,40 KZT",-7195.4,KZT,Purchases,FLYDUBAI,"FLYDUBAI (- 14,01 USD)",Kaspi Bank,kaspi_en.pdf,,"FLYDUBAI - 14,01 USD"
-2025-05-13,"- 2 200,00 KZT",-2200.0,KZT,Purchases,ALTEL,ALTEL,Kaspi Bank,kaspi_en.pdf,,ALTEL
-2025-05-13,"- 1 500,00 KZT",-1500.0,KZT,Purchases,"IP ""MALIKA""","IP ""MALIKA""",Kaspi Bank,kaspi_en.pdf,IP,MALIKA
-2025-05-13,"- 270,00 KZT",-270.0,KZT,Purchases,Хозяюшка,Хозяюшка,Kaspi Bank,kaspi_en.pdf,,Хозяюшка
-2025-05-14,"+ 541,44 KZT",541.44,KZT,Purchases,"CAREEM RIDE (+ 20,00 AED)","CAREEM RIDE (+ 20,00 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE + 20,00 AED"
-2025-05-14,"- 7 958,88 KZT",-7958.88,KZT,Purchases,"CAREEM RIDE (- 196,10 AED)","CAREEM RIDE (- 196,10 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 196,10 AED"
-2025-05-14,"- 3 514,71 KZT",-3514.71,KZT,Purchases,PENNY PRESS VENDING MACHI,"PENNY PRESS VENDING MACHI (- 24,99 AED)",Kaspi Bank,kaspi_en.pdf,,"PENNY PRESS VENDING MACHI - 24,99 AED"
-2025-05-14,"- 7 519,72 KZT",-7519.72,KZT,Purchases,WATSON BR OF ALFUTTAIM,"WATSON BR OF ALFUTTAIM (- 53,50 AED)",Kaspi Bank,kaspi_en.pdf,,"WATSON BR OF ALFUTTAIM - 53,50 AED"
-2025-05-14,"- 5 057,88 KZT",-5057.88,KZT,Purchases,RTA - JUMEIRAH LAKE TO,"RTA - JUMEIRAH LAKE TO (- 36,00 AED)",Kaspi Bank,kaspi_en.pdf,,"RTA - JUMEIRAH LAKE TO - 36,00 AED"
-2025-05-14,"- 6 322,35 KZT",-6322.35,KZT,Purchases,MY VAPE MAR FOR ELECT,"MY VAPE MAR FOR ELECT (- 45,00 AED)",Kaspi Bank,kaspi_en.pdf,,"MY VAPE MAR FOR ELECT - 45,00 AED"
-2025-05-14,"- 3 963,72 KZT",-3963.72,KZT,Purchases,WAITROSE-FINE FARE,"WAITROSE-FINE FARE (- 28,20 AED)",Kaspi Bank,kaspi_en.pdf,,"WAITROSE-FINE FARE - 28,20 AED"
-2025-05-14,"- 5 904,30 KZT",-5904.3,KZT,Purchases,DUBAI DUTY FREE,"DUBAI DUTY FREE (- 42,00 AED)",Kaspi Bank,kaspi_en.pdf,,"DUBAI DUTY FREE - 42,00 AED"
-2025-05-14,"- 650,00 KZT",-650.0,KZT,Transfers,,Дина И.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-14,"- 5 000,00 KZT",-5000.0,KZT,Transfers,,Алтынай К.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-15,"- 6 871,79 KZT",-6871.79,KZT,Purchases,CAREEM RIDE,"CAREEM RIDE (- 48,97 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 48,97 AED"
-2025-05-15,"- 638,72 KZT",-638.72,KZT,Purchases,"CAREEM RIDE (- 127,05 AED)","CAREEM RIDE (- 127,05 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 127,05 AED"
-2025-05-15,"- 16 833,47 KZT",-16833.47,KZT,Purchases,ADVENTURE HQ LLC,"ADVENTURE HQ LLC (- 120,00 AED)",Kaspi Bank,kaspi_en.pdf,LLC,"ADVENTURE HQ   - 120,00 AED"
-2025-05-16,"- 6 309,98 KZT",-6309.98,KZT,Purchases,GLB FOOD-MUSEUM CAFE-2,"GLB FOOD-MUSEUM CAFE-2 (- 45,00 AED)",Kaspi Bank,kaspi_en.pdf,,"GLB FOOD-MUSEUM CAFE-2 - 45,00 AED"
-2025-05-16,"- 4 908,90 KZT",-4908.9,KZT,Purchases,GLB FOOD-MUSEUM CAFE-2,"GLB FOOD-MUSEUM CAFE-2 (- 35,00 AED)",Kaspi Bank,kaspi_en.pdf,,"GLB FOOD-MUSEUM CAFE-2 - 35,00 AED"
-2025-05-16,"- 7 571,97 KZT",-7571.97,KZT,Purchases,CARREFOUR SUPERMARKET,"CARREFOUR SUPERMARKET (- 53,98 AED)",Kaspi Bank,kaspi_en.pdf,,"CARREFOUR SUPERMARKET - 53,98 AED"
-2025-05-16,"- 6 639,64 KZT",-6639.64,KZT,Purchases,CARREFOUR SUPERMARKET,"CARREFOUR SUPERMARKET (- 47,32 AED)",Kaspi Bank,kaspi_en.pdf,,"CARREFOUR SUPERMARKET - 47,32 AED"
-2025-05-17,"- 8 633,08 KZT",-8633.08,KZT,Purchases,AL MAYA B,"AL MAYA B (- 61,55 AED)",Kaspi Bank,kaspi_en.pdf,,"AL MAYA B - 61,55 AED"
-2025-05-17,"- 26 576,00 KZT",-26576.0,KZT,Transfers,,Oyatullo R.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-17,"- 51 762,40 KZT",-51762.4,KZT,Purchases,AL BOOM MARINE EVENTS,"AL BOOM MARINE EVENTS (- 369,00 AED)",Kaspi Bank,kaspi_en.pdf,,"AL BOOM MARINE EVENTS - 369,00 AED"
-2025-05-17,"- 12 764,18 KZT",-12764.18,KZT,Purchases,AL JABER NOVELTY STORE LL,"AL JABER NOVELTY STORE LL (- 91,00 AED)",Kaspi Bank,kaspi_en.pdf,,"AL JABER NOVELTY STORE LL - 91,00 AED"
-2025-05-18,"- 23 612,03 KZT",-23612.03,KZT,Purchases,STELLA MARINA HOTEL,"STELLA MARINA HOTEL (- 168,00 AED)",Kaspi Bank,kaspi_en.pdf,,"STELLA MARINA HOTEL - 168,00 AED"
-2025-05-18,"- 1 403,82 KZT",-1403.82,KZT,Purchases,BULAWAN GENERAL TRADING L,"BULAWAN GENERAL TRADING L (- 10,00 AED)",Kaspi Bank,kaspi_en.pdf,,"BULAWAN GENERAL TRADING L - 10,00 AED"
-2025-05-18,"- 9 837,06 KZT",-9837.06,KZT,Purchases,GLOBAL VILLAGE PARTNERS,"GLOBAL VILLAGE PARTNERS (- 70,00 AED)",Kaspi Bank,kaspi_en.pdf,,"GLOBAL VILLAGE PARTNERS - 70,00 AED"
-2025-05-18,"- 12 649,86 KZT",-12649.86,KZT,Purchases,GLOBAL VILLAGE PARTNERS,"GLOBAL VILLAGE PARTNERS (- 90,00 AED)",Kaspi Bank,kaspi_en.pdf,,"GLOBAL VILLAGE PARTNERS - 90,00 AED"
-2025-05-18,"- 14 053,68 KZT",-14053.68,KZT,Purchases,TEEB AL AMAKEN NOVELTIES,"TEEB AL AMAKEN NOVELTIES (- 100,00 AED)",Kaspi Bank,kaspi_en.pdf,,"TEEB AL AMAKEN NOVELTIES - 100,00 AED"
-2025-05-18,"- 7 029,42 KZT",-7029.42,KZT,Purchases,HADEKAT AL ZOHOR,"HADEKAT AL ZOHOR (- 50,00 AED)",Kaspi Bank,kaspi_en.pdf,,"HADEKAT AL ZOHOR - 50,00 AED"
-2025-05-19,"- 12 262,65 KZT",-12262.65,KZT,Purchases,DUBAI TAXI,"DUBAI TAXI (- 87,00 AED)",Kaspi Bank,kaspi_en.pdf,,"DUBAI TAXI - 87,00 AED"
-2025-05-19,"- 4 229,04 KZT",-4229.04,KZT,Purchases,MOTIONGATE GAMES,"MOTIONGATE GAMES (- 30,00 AED)",Kaspi Bank,kaspi_en.pdf,,"MOTIONGATE GAMES - 30,00 AED"
-2025-05-19,"- 15 500,00 KZT",-15500.0,KZT,Purchases,"ТОО ""ТОО MELLIS""","ТОО ""ТОО MELLIS""",Kaspi Bank,kaspi_en.pdf,TOO,ТОО MELLIS
-2025-05-20,"- 1 842,51 KZT",-1842.51,KZT,Purchases,DUBAI DUTY FREE,"DUBAI DUTY FREE (- 13,12 AED)",Kaspi Bank,kaspi_en.pdf,,"DUBAI DUTY FREE - 13,12 AED"
-2025-05-20,"- 11 812,57 KZT",-11812.57,KZT,Purchases,CAREEM RIDE,"CAREEM RIDE (- 84,46 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 84,46 AED"
-2025-05-20,"- 46 522,16 KZT",-46522.16,KZT,Purchases,WAGAMAMA RESTAURANT,"WAGAMAMA RESTAURANT (- 331,00 AED)",Kaspi Bank,kaspi_en.pdf,,"WAGAMAMA RESTAURANT - 331,00 AED"
-2025-05-20,"- 33 309,74 KZT",-33309.74,KZT,Purchases,KINOKUNIYA BOOK STORES,"KINOKUNIYA BOOK STORES (- 237,00 AED)",Kaspi Bank,kaspi_en.pdf,,"KINOKUNIYA BOOK STORES - 237,00 AED"
-2025-05-20,"- 19 679,27 KZT",-19679.27,KZT,Purchases,Pierre Cardin,"Pierre Cardin (- 140,00 AED)",Kaspi Bank,kaspi_en.pdf,,"Pierre Cardin - 140,00 AED"
-2025-05-20,"- 4 077,27 KZT",-4077.27,KZT,Purchases,DELIVERING YOUR BAGS LUGG,"DELIVERING YOUR BAGS LUGG (- 29,00 AED)",Kaspi Bank,kaspi_en.pdf,,"DELIVERING YOUR BAGS LUGG - 29,00 AED"
-2025-05-20,"+ 1 891,59 KZT",1891.59,KZT,Purchases,CAREEM RIDE,"CAREEM RIDE (+ 13,46 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE + 13,46 AED"
-2025-05-21,"+ 6 617,04 KZT",6617.04,KZT,Replenishment,,"PlanetTaxFree (+ 13,08 USD)",Kaspi Bank,kaspi_en.pdf,,
-2025-05-22,"- 600,00 KZT",-600.0,KZT,Purchases,PARKING 2,PARKING 2,Kaspi Bank,kaspi_en.pdf,,PARKING 2
-2025-05-22,"- 16 940,00 KZT",-16940.0,KZT,Purchases,ИП Кизатова А.,ИП Кизатова А.,Kaspi Bank,kaspi_en.pdf,IP,Кизатова А.
-2025-05-23,"- 10 769,60 KZT",-10769.6,KZT,Purchases,Астана РЭК для юридических лиц,Астана РЭК для юридических лиц,Kaspi Bank,kaspi_en.pdf,,Астана РЭК для юридических лиц
-2025-05-23,"- 4 400,00 KZT",-4400.0,KZT,Purchases,KINOPARK.KZ,KINOPARK.KZ,Kaspi Bank,kaspi_en.pdf,,KINOPARK.KZ
-2025-05-25,"- 23 925,00 KZT",-23925.0,KZT,Purchases,Six Coffee Wine EC Astana,Six Coffee Wine EC Astana,Kaspi Bank,kaspi_en.pdf,,Six Coffee Wine EC Astana
-2025-05-26,"- 6 000,00 KZT",-6000.0,KZT,Purchases,Interteach,Interteach,Kaspi Bank,kaspi_en.pdf,,Interteach
-2025-05-26,"- 11 000,00 KZT",-11000.0,KZT,Purchases,ТОО Медицинский центр iClinic,ТОО Медицинский центр iClinic,Kaspi Bank,kaspi_en.pdf,TOO,Медицинский центр iClinic
-2025-05-27,"- 400,00 KZT",-400.0,KZT,Transfers,,Хаётжон О.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-27,"- 580,00 KZT",-580.0,KZT,Transfers,,Сапархан Б.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-27,"- 670,00 KZT",-670.0,KZT,Purchases,Береке market,Береке market,Kaspi Bank,kaspi_en.pdf,,Береке market
-2025-05-27,"- 24 640,00 KZT",-24640.0,KZT,Purchases,КДЛ Олимп,КДЛ Олимп,Kaspi Bank,kaspi_en.pdf,,КДЛ Олимп
-2025-05-27,"+ 1 900,00 KZT",1900.0,KZT,Replenishment,,Дильназ К.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-28,"- 580,00 KZT",-580.0,KZT,Purchases,IP TIME OF JOY,IP TIME OF JOY,Kaspi Bank,kaspi_en.pdf,IP,TIME OF JOY
-2025-05-30,"- 41 000,00 KZT",-41000.0,KZT,Purchases,Chip,Chip,Kaspi Bank,kaspi_en.pdf,,Chip
-2025-05-30,"- 1 750,00 KZT",-1750.0,KZT,Purchases,Segafredo T2,Segafredo T2,Kaspi Bank,kaspi_en.pdf,,Segafredo T2
-2025-05-31,"- 42 500,00 KZT",-42500.0,KZT,Transfers,,Алуа Е.,Kaspi Bank,kaspi_en.pdf,,
-2025-05-31,"- 18 600,00 KZT",-18600.0,KZT,Purchases,Oasiswater,Oasiswater,Kaspi Bank,kaspi_en.pdf,,Oasiswater
-2025-05-31,"- 1 966,00 KZT",-1966.0,KZT,Purchases,Штрафы по ИИН,Штрафы по ИИН,Kaspi Bank,kaspi_en.pdf,,Штрафы по ИИН
-2025-06-01,"- 660,00 KZT",-660.0,KZT,Purchases,79 My Mart АФД,79 My Mart АФД,Kaspi Bank,kaspi_en.pdf,,79 My Mart АФД
-2025-06-02,"- 11 695,00 KZT",-11695.0,KZT,Purchases,TC Dostyk Plaza,TC Dostyk Plaza,Kaspi Bank,kaspi_en.pdf,,TC Dostyk Plaza
-2025-06-02,"- 2 550,00 KZT",-2550.0,KZT,Purchases,Fruit Republic ДП,Fruit Republic ДП,Kaspi Bank,kaspi_en.pdf,,Fruit Republic ДП
-2025-06-02,"- 16 170,00 KZT",-16170.0,KZT,Purchases,UMAY,UMAY,Kaspi Bank,kaspi_en.pdf,,UMAY
-2025-06-03,"- 20 000,00 KZT",-20000.0,KZT,Purchases,Art&fact,Art&fact,Kaspi Bank,kaspi_en.pdf,,Art&fact
-2025-06-03,"- 5 000,00 KZT",-5000.0,KZT,Transfers,,Роза С.,Kaspi Bank,kaspi_en.pdf,,
-2025-06-03,"- 3 500,00 KZT",-3500.0,KZT,Purchases,Aina art,Aina art,Kaspi Bank,kaspi_en.pdf,,Aina art
-2025-06-03,"- 4 500,00 KZT",-4500.0,KZT,Transfers,,Aidai N.,Kaspi Bank,kaspi_en.pdf,,
-2025-06-03,"- 590,00 KZT",-590.0,KZT,Purchases,Панфилова 113/56,Панфилова 113/56,Kaspi Bank,kaspi_en.pdf,,Панфилова 113/56
-2025-06-03,"+ 500,00 KZT",500.0,KZT,Purchases,JET SHARING,JET SHARING,Kaspi Bank,kaspi_en.pdf,,JET SHARING
-2025-06-04,"- 3 900,00 KZT",-3900.0,KZT,Transfers,,Mukhtado F.,Kaspi Bank,kaspi_en.pdf,,
-2025-06-04,"- 1 800,00 KZT",-1800.0,KZT,Purchases,ГРАНД ПАРК «33 пингвина»,ГРАНД ПАРК «33 пингвина»,Kaspi Bank,kaspi_en.pdf,,ГРАНД ПАРК «33 пингвина»
-2025-06-04,"- 5 000,00 KZT",-5000.0,KZT,Purchases,Activ,Activ,Kaspi Bank,kaspi_en.pdf,,Activ
-2025-06-04,"- 800,00 KZT",-800.0,KZT,Purchases,Almaty Tattoo 9 блок,Almaty Tattoo 9 блок,Kaspi Bank,kaspi_en.pdf,,Almaty Tattoo 9 блок
-2025-06-04,"- 350,00 KZT",-350.0,KZT,Purchases,ИП ДАНЕГУЛОВА АСЕМ,ИП ДАНЕГУЛОВА АСЕМ,Kaspi Bank,kaspi_en.pdf,IP,ДАНЕГУЛОВА АСЕМ
-2025-06-05,"- 1 450,00 KZT",-1450.0,KZT,Purchases,TheSAY Medical,TheSAY Medical,Kaspi Bank,kaspi_en.pdf,,TheSAY Medical
-2025-06-05,"- 9 050,00 KZT",-9050.0,KZT,Purchases,Burger King Esentai Mall Almaty,Burger King Esentai Mall Almaty,Kaspi Bank,kaspi_en.pdf,,Burger King Esentai Mall Almaty
-2025-06-05,"- 9 900,00 KZT",-9900.0,KZT,Purchases,KERUEN-MEDICUS,KERUEN-MEDICUS,Kaspi Bank,kaspi_en.pdf,,KERUEN-MEDICUS
-2025-06-07,"- 20 130,00 KZT",-20130.0,KZT,Purchases,"ТОО ""Лечебно-оздоровительный комплекс ""Алатау""","ТОО ""Лечебно-оздоровительный комплекс ""Алатау""",Kaspi Bank,kaspi_en.pdf,TOO,Лечебно-оздоровительный комплекс Алатау
-2025-06-07,"- 7 000,00 KZT",-7000.0,KZT,Purchases,ИП МАМБЕТАЛИЕВА ЭЛЬМИРА СУЛТАНГАЛИЕВНА,ИП МАМБЕТАЛИЕВА ЭЛЬМИРА СУЛТАНГАЛИЕВНА,Kaspi Bank,kaspi_en.pdf,IP,МАМБЕТАЛИЕВА ЭЛЬМИРА СУЛТАНГАЛИЕВНА
-2025-06-10,"- 3 310,00 KZT",-3310.0,KZT,Purchases,TEEZ,TEEZ,Kaspi Bank,kaspi_en.pdf,,TEEZ
-2025-06-10,"- 4 010,00 KZT",-4010.0,KZT,Purchases,ИП Зикрыяров Дильмурат,ИП Зикрыяров Дильмурат,Kaspi Bank,kaspi_en.pdf,IP,Зикрыяров Дильмурат
-2025-06-12,"- 70 900,00 KZT",-70900.0,KZT,Purchases,Saks Fifth Avenue,Saks Fifth Avenue,Kaspi Bank,kaspi_en.pdf,,Saks Fifth Avenue
-2025-06-12,"- 4 000,00 KZT",-4000.0,KZT,Transfers,,Сауле Ж.,Kaspi Bank,kaspi_en.pdf,,
-2025-06-12,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Музей Алматы,Музей Алматы,Kaspi Bank,kaspi_en.pdf,,Музей Алматы
-2025-06-12,"- 17 000,00 KZT",-17000.0,KZT,Transfers,,Дамира К.,Kaspi Bank,kaspi_en.pdf,,
-2025-06-14,"+ 300,00 KZT",300.0,KZT,Purchases,5 Bite The Beat Arbat,5 Bite The Beat Arbat,Kaspi Bank,kaspi_en.pdf,,5 Bite The Beat Arbat
-2025-06-15,"- 1 400,00 KZT",-1400.0,KZT,Purchases,Добрая Аптека 24,Добрая Аптека 24,Kaspi Bank,kaspi_en.pdf,,Добрая Аптека 24
-2025-06-16,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Steppe Coffee,Steppe Coffee,Kaspi Bank,kaspi_en.pdf,,Steppe Coffee
-2025-06-16,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,,Алмагуль Т.,Kaspi Bank,kaspi_en.pdf,,
-2025-06-16,"- 9 000,00 KZT",-9000.0,KZT,Purchases,ТОО Мир развлечений,ТОО Мир развлечений,Kaspi Bank,kaspi_en.pdf,TOO,Мир развлечений
-2025-06-20,"- 7 580,00 KZT",-7580.0,KZT,Purchases,Спортмастер,Спортмастер,Kaspi Bank,kaspi_en.pdf,,Спортмастер
-2025-06-21,"- 24 000,00 KZT",-24000.0,KZT,Purchases,APPLESIM,APPLESIM,Kaspi Bank,kaspi_en.pdf,,APPLESIM
-2025-06-21,"- 2 100,00 KZT",-2100.0,KZT,Purchases,Каракчайная,Каракчайная,Kaspi Bank,kaspi_en.pdf,,Каракчайная
-2025-06-25,"- 1 870,00 KZT",-1870.0,KZT,Purchases,Fresh market,Fresh market,Kaspi Bank,kaspi_en.pdf,,Fresh market
-2025-06-26,"- 800,00 KZT",-800.0,KZT,Transfers,,Амина Ч.,Kaspi Bank,kaspi_en.pdf,,
-2025-06-26,"- 264,00 KZT",-264.0,KZT,Purchases,Dushes,Dushes,Kaspi Bank,kaspi_en.pdf,,Dushes
-2025-06-26,"- 1 600,00 KZT",-1600.0,KZT,Purchases,TRIUMPH,TRIUMPH,Kaspi Bank,kaspi_en.pdf,,TRIUMPH
-2025-06-30,"- 4 000,00 KZT",-4000.0,KZT,Transfers,,Самшер Х.,Kaspi Bank,kaspi_en.pdf,,
-2025-06-30,"- 9 600,00 KZT",-9600.0,KZT,Purchases,EDUCON,EDUCON,Kaspi Bank,kaspi_en.pdf,,EDUCON
-2025-06-30,"- 520,00 KZT",-520.0,KZT,Purchases,ИП Курсаитова,ИП Курсаитова,Kaspi Bank,kaspi_en.pdf,IP,Курсаитова
-2025-07-05,"- 980,00 KZT",-980.0,KZT,Transfers,,Жанар К.,Kaspi Bank,kaspi_en.pdf,,
-2025-07-06,"- 4 991,00 KZT",-4991.0,KZT,Purchases,ТС Mega Supermarket Almaty,ТС Mega Supermarket Almaty,Kaspi Bank,kaspi_en.pdf,,ТС Mega Supermarket Almaty
-2025-07-13,"- 2 200,00 KZT",-2200.0,KZT,Purchases,ИП СЕРЕЕШБАЕВА,ИП СЕРЕЕШБАЕВА,Kaspi Bank,kaspi_en.pdf,IP,СЕРЕЕШБАЕВА
-2025-07-13,"- 650,00 KZT",-650.0,KZT,Purchases,Subscription Services,Subscription Services,Kaspi Bank,kaspi_en.pdf,,Subscription Services
-2025-07-15,"- 110,00 KZT",-110.0,KZT,Purchases,ZETA,ZETA,Kaspi Bank,kaspi_en.pdf,,ZETA
-2025-07-15,"- 232,75 KZT",-232.75,KZT,Others,,Commission for transfer of other banks,Kaspi Bank,kaspi_en.pdf,,
-2025-07-15,"- 24 500,00 KZT",-24500.0,KZT,Transfers,,To card Freedom Finance Bank*7326,Kaspi Bank,kaspi_en.pdf,,
-2025-07-17,"- 2 840,00 KZT",-2840.0,KZT,Purchases,Ваниль кондитерлік дүкені Астана,Ваниль кондитерлік дүкені Астана,Kaspi Bank,kaspi_en.pdf,,Ваниль кондитерлік дүкені Астана
-2025-07-17,"- 4 200,00 KZT",-4200.0,KZT,Purchases,ИП Смагулов,ИП Смагулов,Kaspi Bank,kaspi_en.pdf,IP,Смагулов
-2025-07-17,"- 4 792,00 KZT",-4792.0,KZT,Purchases,Cotton,Cotton,Kaspi Bank,kaspi_en.pdf,,Cotton
-2025-07-19,"- 550,00 KZT",-550.0,KZT,Purchases,Didi coffee,Didi coffee,Kaspi Bank,kaspi_en.pdf,,Didi coffee
-2025-07-20,"- 14 500,00 KZT",-14500.0,KZT,Transfers,,Нургуль Ж.,Kaspi Bank,kaspi_en.pdf,,
-2025-07-20,"- 10 000,00 KZT",-10000.0,KZT,Transfers,,Алуа Ш.,Kaspi Bank,kaspi_en.pdf,,
-2025-07-21,"- 5 193,00 KZT",-5193.0,KZT,Purchases,Леонардо,Леонардо,Kaspi Bank,kaspi_en.pdf,,Леонардо
-2025-07-21,"- 1 515,00 KZT",-1515.0,KZT,Transfers,,Арайлым Б.,Kaspi Bank,kaspi_en.pdf,,
-2025-07-21,"- 820,00 KZT",-820.0,KZT,Transfers,,Дастан А.,Kaspi Bank,kaspi_en.pdf,,
-2025-07-23,"- 10 799,00 KZT",-10799.0,KZT,Purchases,Золотое Яблоко,Золотое Яблоко,Kaspi Bank,kaspi_en.pdf,,Золотое Яблоко
-2025-07-23,"- 42 400,00 KZT",-42400.0,KZT,Purchases,Jo Malone,Jo Malone,Kaspi Bank,kaspi_en.pdf,,Jo Malone
-2025-07-26,"- 300,00 KZT",-300.0,KZT,Transfers,,Саят Т.,Kaspi Bank,kaspi_en.pdf,,
-2025-07-27,"- 73 500,00 KZT",-73500.0,KZT,Purchases,Yes Style,Yes Style,Kaspi Bank,kaspi_en.pdf,,Yes Style
-2025-07-27,"- 7 000,00 KZT",-7000.0,KZT,Purchases,Банный комплекс Тенговка,Банный комплекс Тенговка,Kaspi Bank,kaspi_en.pdf,,Банный комплекс Тенговка
-2025-08-10,"- 3 800,00 KZT",-3800.0,KZT,Transfers,,Жаннұр С.,Kaspi Bank,kaspi_en.pdf,,
-2025-08-14,"- 5 000,00 KZT",-5000.0,KZT,Purchases,ROYALACE TENNIS CLUB (ОП),ROYALACE TENNIS CLUB (ОП),Kaspi Bank,kaspi_en.pdf,,ROYALACE TENNIS CLUB ОП
-2025-08-15,"- 4 000,00 KZT",-4000.0,KZT,Purchases,Джунгли.Аквапарк.Колесо,Джунгли.Аквапарк.Колесо,Kaspi Bank,kaspi_en.pdf,,Джунгли.Аквапарк.Колесо
-2025-08-15,"- 17 100,00 KZT",-17100.0,KZT,Purchases,"CENTR SEMEYNOGO OTDYHA ""AIL","CENTR SEMEYNOGO OTDYHA ""AIL",Kaspi Bank,kaspi_en.pdf,,CENTR SEMEYNOGO OTDYHA AIL
-2025-08-16,"- 200,00 KZT",-200.0,KZT,Purchases,Парковка. Аэропорт Н. Назарбаев,Парковка. Аэропорт Н. Назарбаев,Kaspi Bank,kaspi_en.pdf,,Парковка. Аэропорт Н. Назарбаев
-2025-08-17,"+ 1 667,00 KZT",1667.0,KZT,Replenishment,,Айсулу Т.,Kaspi Bank,kaspi_en.pdf,,
-2025-08-17,"+ 1 667,00 KZT",1667.0,KZT,Replenishment,,Жансая О.,Kaspi Bank,kaspi_en.pdf,,
-2025-08-17,"+ 3 500,00 KZT",3500.0,KZT,Replenishment,,Райша А.,Kaspi Bank,kaspi_en.pdf,,
-2025-08-18,"- 28 500,00 KZT",-28500.0,KZT,Purchases,"N Ó R A (ЖК ""Галамат"")","N Ó R A (ЖК ""Галамат"")",Kaspi Bank,kaspi_en.pdf,,N Ó R A ЖК Галамат
-2025-08-18,"+ 5 700,00 KZT",5700.0,KZT,Replenishment,,Сұлтан М.,Kaspi Bank,kaspi_en.pdf,,
-2025-08-18,"+ 5 700,00 KZT",5700.0,KZT,Replenishment,,Қайырхан К.,Kaspi Bank,kaspi_en.pdf,,
-2025-08-18,"+ 5 700,00 KZT",5700.0,KZT,Replenishment,,Даниал Т.,Kaspi Bank,kaspi_en.pdf,,
-2025-08-21,"- 300,00 KZT",-300.0,KZT,Purchases,Ваш Копицентр,Ваш Копицентр,Kaspi Bank,kaspi_en.pdf,,Ваш Копицентр
-2025-08-21,"- 2 150,00 KZT",-2150.0,KZT,Purchases,Fermento NU,Fermento NU,Kaspi Bank,kaspi_en.pdf,,Fermento NU
-2025-08-23,"- 1 000,00 KZT",-1000.0,KZT,Purchases,прочее,прочее,Kaspi Bank,kaspi_en.pdf,,прочее
-2025-08-23,"- 2 070,00 KZT",-2070.0,KZT,Purchases,IP GREEN KITCHEN,IP GREEN KITCHEN,Kaspi Bank,kaspi_en.pdf,IP,GREEN KITCHEN
-2025-08-26,"- 3 500,00 KZT",-3500.0,KZT,Transfers,,Аян Т.,Kaspi Bank,kaspi_en.pdf,,
-2025-08-27,"- 15 000,00 KZT",-15000.0,KZT,Purchases,Охранные агентства,Охранные агентства,Kaspi Bank,kaspi_en.pdf,,Охранные агентства
-2025-08-27,"- 20 000,00 KZT",-20000.0,KZT,Purchases,Услуги Қазақтелеком по лицевому счету,Услуги Қазақтелеком по лицевому счету,Kaspi Bank,kaspi_en.pdf,,Услуги Қазақтелеком по лицевому счету
-2025-08-27,"- 27 830,92 KZT",-27830.92,KZT,Purchases,Астана ЕРЦ,Астана ЕРЦ,Kaspi Bank,kaspi_en.pdf,,Астана ЕРЦ
-2025-08-27,"- 8 181,77 KZT",-8181.77,KZT,Purchases,ПРЭК (квитанция),ПРЭК (квитанция),Kaspi Bank,kaspi_en.pdf,,ПРЭК квитанция
-2025-08-27,"- 22 427,60 KZT",-22427.6,KZT,Purchases,BI Group,BI Group,Kaspi Bank,kaspi_en.pdf,,BI Group
-2025-08-29,"- 7 554,49 KZT",-7554.49,KZT,Purchases,Астана-Теплотранзит. Теплоэнергия,Астана-Теплотранзит. Теплоэнергия,Kaspi Bank,kaspi_en.pdf,,Астана-Теплотранзит. Теплоэнергия
-2025-08-29,"- 2 585,00 KZT",-2585.0,KZT,Transfers,,Ойбек Ж.,Kaspi Bank,kaspi_en.pdf,,
-2025-09-01,"- 3 000,00 KZT",-3000.0,KZT,Purchases,KopKop Store,KopKop Store,Kaspi Bank,kaspi_en.pdf,,KopKop Store
-2025-09-01,"- 73 700,00 KZT",-73700.0,KZT,Transfers,,Нұрғасыр Д.,Kaspi Bank,kaspi_en.pdf,,
-2025-09-01,"- 279 392,00 KZT",-279392.0,KZT,Purchases,"ТОО ""KZ Sleep Market"" (КЗ Слип Маркет)","ТОО ""KZ Sleep Market"" (КЗ Слип Маркет)",Kaspi Bank,kaspi_en.pdf,TOO,KZ Sleep Market КЗ Слип Маркет
-2025-09-02,"- 1 640,00 KZT",-1640.0,KZT,Purchases,EspressoDay,EspressoDay,Kaspi Bank,kaspi_en.pdf,,EspressoDay
-2025-09-03,"- 1 130,00 KZT",-1130.0,KZT,Purchases,Школа НИШ ФМН,Школа НИШ ФМН,Kaspi Bank,kaspi_en.pdf,,Школа НИШ ФМН
-2025-09-04,"- 53 000,00 KZT",-53000.0,KZT,Transfers,,Саят Е.,Kaspi Bank,kaspi_en.pdf,,
-2025-09-07,"- 2 330,00 KZT",-2330.0,KZT,Purchases,ИП ЛУРОВ,ИП ЛУРОВ,Kaspi Bank,kaspi_en.pdf,IP,ЛУРОВ
-2025-09-07,"- 4 900,00 KZT",-4900.0,KZT,Purchases,ИП ЗАЙЦЕВА МАЙЯ АЛЕКСАНДРОВНА,ИП ЗАЙЦЕВА МАЙЯ АЛЕКСАНДРОВНА,Kaspi Bank,kaspi_en.pdf,IP,ЗАЙЦЕВА МАЙЯ АЛЕКСАНДРОВНА
-2025-09-07,"- 402,00 KZT",-402.0,KZT,Purchases,ИП INFERNO,ИП INFERNO,Kaspi Bank,kaspi_en.pdf,IP,INFERNO
-2025-09-07,"- 506,00 KZT",-506.0,KZT,Purchases,Ип Айтенов,Ип Айтенов,Kaspi Bank,kaspi_en.pdf,IP,Айтенов
-2025-09-07,"- 603,00 KZT",-603.0,KZT,Purchases,UpGrade_,UpGrade_,Kaspi Bank,kaspi_en.pdf,,UpGrade_
-2025-09-07,"- 604,00 KZT",-604.0,KZT,Purchases,ИП MIA BABY STORE,ИП MIA BABY STORE,Kaspi Bank,kaspi_en.pdf,IP,MIA BABY STORE
-2025-09-08,"- 2 500,00 KZT",-2500.0,KZT,Transfers,,Айым А.,Kaspi Bank,kaspi_en.pdf,,
-2025-09-12,"- 7 500,00 KZT",-7500.0,KZT,Purchases,ИП HAPPY FUTURE,ИП HAPPY FUTURE,Kaspi Bank,kaspi_en.pdf,IP,HAPPY FUTURE
-2025-09-12,"- 785,00 KZT",-785.0,KZT,Purchases,ИП LIME SHOP,ИП LIME SHOP,Kaspi Bank,kaspi_en.pdf,IP,LIME SHOP
-2025-09-12,"- 3 990,00 KZT",-3990.0,KZT,Purchases,ИП Игрушки,ИП Игрушки,Kaspi Bank,kaspi_en.pdf,IP,Игрушки
-2025-09-18,"- 1 890,00 KZT",-1890.0,KZT,Purchases,WILDBERRIES,WILDBERRIES,Kaspi Bank,kaspi_en.pdf,,WILDBERRIES
-2025-09-18,"- 1 850,00 KZT",-1850.0,KZT,Purchases,Yandex.GO,Yandex.GO,Kaspi Bank,kaspi_en.pdf,,Yandex.GO
-2025-09-18,"- 500,00 KZT",-500.0,KZT,Transfers,,Нұрай Н.,Kaspi Bank,kaspi_en.pdf,,
-2025-09-21,"- 5 000,00 KZT",-5000.0,KZT,Transfers,,Анастасия П.,Kaspi Bank,kaspi_en.pdf,,
-2025-09-22,"- 32 500,00 KZT",-32500.0,KZT,Purchases,Holy Cow,Holy Cow,Kaspi Bank,kaspi_en.pdf,,Holy Cow
-2025-09-22,"- 2 890,00 KZT",-2890.0,KZT,Transfers,,Даниял С.,Kaspi Bank,kaspi_en.pdf,,
-2025-09-23,"- 1 300,00 KZT",-1300.0,KZT,Purchases,DailyCup NU,DailyCup NU,Kaspi Bank,kaspi_en.pdf,,DailyCup NU
-2025-09-25,"- 790,00 KZT",-790.0,KZT,Purchases,Назарбаевский,Назарбаевский,Kaspi Bank,kaspi_en.pdf,,Назарбаевский
-2025-09-26,"- 19 200,00 KZT",-19200.0,KZT,Purchases,Assorti market,Assorti market,Kaspi Bank,kaspi_en.pdf,,Assorti market
-2025-09-28,"- 1 375,00 KZT",-1375.0,KZT,Purchases,STEAMGAMES.COM 4259522985,STEAMGAMES.COM 4259522985,Kaspi Bank,kaspi_en.pdf,,STEAMGAMES.COM 4259522985
-2025-09-30,"- 820,00 KZT",-820.0,KZT,Purchases,Аптека Альфамед,Аптека Альфамед,Kaspi Bank,kaspi_en.pdf,,Аптека Альфамед
-2025-09-30,"- 830,00 KZT",-830.0,KZT,Purchases,Орда маркет Рахмет,Орда маркет Рахмет,Kaspi Bank,kaspi_en.pdf,,Орда маркет Рахмет
-2025-09-30,"- 140,00 KZT",-140.0,KZT,Purchases,Аптека 329,Аптека 329,Kaspi Bank,kaspi_en.pdf,,Аптека 329
-2025-10-02,"- 4 000,00 KZT",-4000.0,KZT,Purchases,Университет,Университет,Kaspi Bank,kaspi_en.pdf,,Университет
-2025-10-03,"+ 20,00 KZT",20.0,KZT,Purchases,YANDEX.PLUS,YANDEX.PLUS,Kaspi Bank,kaspi_en.pdf,,YANDEX.PLUS
-2025-10-03,"- 2 800,00 KZT",-2800.0,KZT,Purchases,Burger King Keruen Astana,Burger King Keruen Astana,Kaspi Bank,kaspi_en.pdf,,Burger King Keruen Astana
-2025-10-04,"- 790,00 KZT",-790.0,KZT,Transfers,,Ерхан С.,Kaspi Bank,kaspi_en.pdf,,
-2025-10-07,"- 1 100,00 KZT",-1100.0,KZT,Purchases,Costa Coffee 18701,Costa Coffee 18701,Kaspi Bank,kaspi_en.pdf,,Costa Coffee 18701
-2025-10-07,"- 2 700,00 KZT",-2700.0,KZT,Purchases,Burger King Mega Almaty,Burger King Mega Almaty,Kaspi Bank,kaspi_en.pdf,,Burger King Mega Almaty
-2025-10-08,"+ 500 000,00 KZT",500000.0,KZT,Replenishment,,Ерсұлтан Б.,Kaspi Bank,kaspi_en.pdf,,
-2025-10-09,"- 500,00 KZT",-500.0,KZT,Purchases,Парковка. ТРЦ Dostyk Plaza,Парковка. ТРЦ Dostyk Plaza,Kaspi Bank,kaspi_en.pdf,,Парковка. ТРЦ Dostyk Plaza
-2025-10-09,"- 500,00 KZT",-500.0,KZT,Purchases,MUSEUMOFARTS,MUSEUMOFARTS,Kaspi Bank,kaspi_en.pdf,,MUSEUMOFARTS
-2025-10-11,"- 1 500,00 KZT",-1500.0,KZT,Purchases,Coffner,Coffner,Kaspi Bank,kaspi_en.pdf,,Coffner
-2025-10-14,"- 1 000,00 KZT",-1000.0,KZT,Purchases,ИП САГДАТОВА,ИП САГДАТОВА,Kaspi Bank,kaspi_en.pdf,IP,САГДАТОВА
-2025-10-14,"- 8 000,00 KZT",-8000.0,KZT,Purchases,ИП АШИРОВ,ИП АШИРОВ,Kaspi Bank,kaspi_en.pdf,IP,АШИРОВ
-2025-10-14,"- 6 668,00 KZT",-6668.0,KZT,Purchases,OZON.KZ,OZON.KZ,Kaspi Bank,kaspi_en.pdf,,OZON.KZ
-2025-10-15,"- 95 460,00 KZT",-95460.0,KZT,Purchases,THE BRITISH COUNCIL,THE BRITISH COUNCIL,Kaspi Bank,kaspi_en.pdf,,THE BRITISH COUNCIL
-2025-10-17,"- 2 000,00 KZT",-2000.0,KZT,Purchases,Фонд «Человек в маске»,Фонд «Человек в маске»,Kaspi Bank,kaspi_en.pdf,,Фонд «Человек в маске»
-2025-10-18,"+ 2 329,00 KZT",2329.0,KZT,Purchases,Magnum,Magnum,Kaspi Bank,kaspi_en.pdf,,Magnum
-2025-10-18,"- 15 772,81 KZT",-15772.81,KZT,Purchases,COURSERA.ORG,"COURSERA.ORG (- 29,00 USD)",Kaspi Bank,kaspi_en.pdf,,"COURSERA.ORG - 29,00 USD"
-2025-10-19,"- 7 000,00 KZT",-7000.0,KZT,Purchases,ИП A-TRANSLATION,ИП A-TRANSLATION,Kaspi Bank,kaspi_en.pdf,IP,A-TRANSLATION
-2025-10-19,"- 19 420,94 KZT",-19420.94,KZT,Purchases,FFPAY*SCIENCE-PUBLISH,FFPAY*SCIENCE-PUBLISH,Kaspi Bank,kaspi_en.pdf,,FFPAY*SCIENCE-PUBLISH
-2025-10-20,"- 1 500,00 KZT",-1500.0,KZT,Transfers,,Adilet E.,Kaspi Bank,kaspi_en.pdf,,
-2025-10-26,"- 3 600,00 KZT",-3600.0,KZT,Purchases,ALFA Game Club,ALFA Game Club,Kaspi Bank,kaspi_en.pdf,,ALFA Game Club
-2025-10-26,"- 3 500,00 KZT",-3500.0,KZT,Purchases,Центр фигурного катания ICE SKATE,Центр фигурного катания ICE SKATE,Kaspi Bank,kaspi_en.pdf,,Центр фигурного катания ICE SKATE
-2025-10-27,"- 4 590,00 KZT",-4590.0,KZT,Purchases,Tap-Tatti ТД Сауран,Tap-Tatti ТД Сауран,Kaspi Bank,kaspi_en.pdf,,Tap-Tatti ТД Сауран
-2025-10-27,"- 2 500,00 KZT",-2500.0,KZT,Transfers,,Қарақат Х.,Kaspi Bank,kaspi_en.pdf,,
-2025-10-27,"- 2 000,00 KZT",-2000.0,KZT,Purchases,ТЦ Сауран,ТЦ Сауран,Kaspi Bank,kaspi_en.pdf,,ТЦ Сауран
-2025-10-27,"- 3 290,00 KZT",-3290.0,KZT,Transfers,,Ақжан К.,Kaspi Bank,kaspi_en.pdf,,
-2025-10-27,"- 4 660,00 KZT",-4660.0,KZT,Transfers,,Айгул Д.,Kaspi Bank,kaspi_en.pdf,,
-2025-10-27,"- 16 000,00 KZT",-16000.0,KZT,Purchases,КАЯ,КАЯ,Kaspi Bank,kaspi_en.pdf,,КАЯ
-2025-10-28,"- 10 000,00 KZT",-10000.0,KZT,Purchases,Mobi Pro,Mobi Pro,Kaspi Bank,kaspi_en.pdf,,Mobi Pro
-2025-10-28,"- 6 300,00 KZT",-6300.0,KZT,Transfers,,Жалғас М.,Kaspi Bank,kaspi_en.pdf,,
-2025-10-31,"- 28 970,00 KZT",-28970.0,KZT,Purchases,Calzedonia,Calzedonia,Kaspi Bank,kaspi_en.pdf,,Calzedonia
-2025-10-31,"- 3 240,00 KZT",-3240.0,KZT,Purchases,Lady Collection,Lady Collection,Kaspi Bank,kaspi_en.pdf,,Lady Collection
-2025-11-01,"- 10 000,00 KZT",-10000.0,KZT,Purchases,Ice skate,Ice skate,Kaspi Bank,kaspi_en.pdf,,Ice skate
-2025-11-01,"- 1 500,00 KZT",-1500.0,KZT,Purchases,"IP ""TULPAR""","IP ""TULPAR""",Kaspi Bank,kaspi_en.pdf,IP,TULPAR
-2025-11-02,"- 4 310,00 KZT",-4310.0,KZT,Transfers,,Эргашали Э.,Kaspi Bank,kaspi_en.pdf,,
-2025-11-02,"- 1 830,00 KZT",-1830.0,KZT,Purchases,Сауран,Сауран,Kaspi Bank,kaspi_en.pdf,,Сауран
-2025-11-02,"- 2 250,00 KZT",-2250.0,KZT,Purchases,birlik-express.kz,birlik-express.kz,Kaspi Bank,kaspi_en.pdf,,birlik-express.kz
-2025-11-02,"- 1 200,00 KZT",-1200.0,KZT,Purchases,YZ ДШ,YZ ДШ,Kaspi Bank,kaspi_en.pdf,,YZ ДШ
-2025-11-03,"- 1 652,00 KZT",-1652.0,KZT,Purchases,Glamour shop,Glamour shop,Kaspi Bank,kaspi_en.pdf,,Glamour shop
-2025-11-03,"- 1 977,00 KZT",-1977.0,KZT,Purchases,ИП ВАХЕДИ АБДУЛЛАХ,ИП ВАХЕДИ АБДУЛЛАХ,Kaspi Bank,kaspi_en.pdf,IP,ВАХЕДИ АБДУЛЛАХ
-2025-11-03,"- 2 480,00 KZT",-2480.0,KZT,Purchases,ECO_SHINE,ECO_SHINE,Kaspi Bank,kaspi_en.pdf,,ECO_SHINE
-2025-11-03,"- 1 898,00 KZT",-1898.0,KZT,Purchases,Fast Shop,Fast Shop,Kaspi Bank,kaspi_en.pdf,,Fast Shop
-2025-11-03,"- 24 000,00 KZT",-24000.0,KZT,Purchases,ИП БЕКСУЛТАН,ИП БЕКСУЛТАН,Kaspi Bank,kaspi_en.pdf,IP,БЕКСУЛТАН
-2025-11-03,"- 599,00 KZT",-599.0,KZT,Purchases,YOIMISE,YOIMISE,Kaspi Bank,kaspi_en.pdf,,YOIMISE
-2025-11-03,"- 3 000,00 KZT",-3000.0,KZT,Purchases,BEK,BEK,Kaspi Bank,kaspi_en.pdf,,BEK
-2025-11-06,"- 6 000,00 KZT",-6000.0,KZT,Transfers,,To card Halyk Bank*4116,Kaspi Bank,kaspi_en.pdf,,
-2025-11-07,"- 7 000,00 KZT",-7000.0,KZT,Transfers,,Темірлан Қ.,Kaspi Bank,kaspi_en.pdf,,
-2025-11-08,"- 41 200,00 KZT",-41200.0,KZT,Purchases,Colibri,Colibri,Kaspi Bank,kaspi_en.pdf,,Colibri
-2025-11-10,"- 15 900,00 KZT",-15900.0,KZT,Purchases,ИП IQ,ИП IQ,Kaspi Bank,kaspi_en.pdf,IP,IQ
-2025-11-10,"- 9 625,00 KZT",-9625.0,KZT,Purchases,HOBBY_BOUTIQUE,HOBBY_BOUTIQUE,Kaspi Bank,kaspi_en.pdf,,HOBBY_BOUTIQUE
-2025-11-10,"- 1 000,00 KZT",-1000.0,KZT,Transfers,,Айгерим К.,Kaspi Bank,kaspi_en.pdf,,
-2025-11-11,"- 700,00 KZT",-700.0,KZT,Purchases,SPOTIFY,SPOTIFY,Kaspi Bank,kaspi_en.pdf,,SPOTIFY
-2025-11-12,"- 7 000,00 KZT",-7000.0,KZT,Purchases,"ИП ""НИКА""","ИП ""НИКА""",Kaspi Bank,kaspi_en.pdf,IP,НИКА
+﻿date,amount_raw,amount,currency,operation,details,bank,source_file,business_type,business_name
+2024-11-13,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Саида О.,Kaspi Bank,kaspi_en.pdf,,
+2024-11-13,"- 1 444,00 KZT",-1444.0,KZT,Purchases,Magnum Cash&Carry - The amount is blocked. The bank expects the confirmation of the payment system.,Kaspi Bank,kaspi_en.pdf,,Magnum Cash&Carry
+2024-11-14,"- 4 300,00 KZT",-4300.0,KZT,Transfers,Айым Ш.,Kaspi Bank,kaspi_en.pdf,,
+2024-11-15,"- 1 190,00 KZT",-1190.0,KZT,Purchases,Сенсата парк,Kaspi Bank,kaspi_en.pdf,,Сенсата парк
+2024-11-16,"- 1 360,00 KZT",-1360.0,KZT,Purchases,Апельсин,Kaspi Bank,kaspi_en.pdf,,Апельсин
+2024-11-17,"- 2 830,00 KZT",-2830.0,KZT,Purchases,продукты,Kaspi Bank,kaspi_en.pdf,,продукты
+2024-11-18,"+ 800,00 KZT",800.0,KZT,Replenishment,Аяулым М.,Kaspi Bank,kaspi_en.pdf,,
+2024-11-18,"- 1 400,00 KZT",-1400.0,KZT,Purchases,Green Food,Kaspi Bank,kaspi_en.pdf,,Green Food
+2024-11-18,"- 2 314,00 KZT",-2314.0,KZT,Purchases,Magnum Cash&Carry,Kaspi Bank,kaspi_en.pdf,,Magnum Cash&Carry
+2024-11-19,"- 4 028,00 KZT",-4028.0,KZT,Purchases,YANDEX.EDA,Kaspi Bank,kaspi_en.pdf,,YANDEX.EDA
+2024-11-19,"- 7 000,00 KZT",-7000.0,KZT,Transfers,Макпал Т.,Kaspi Bank,kaspi_en.pdf,,
+2024-11-20,"- 20 000,00 KZT",-20000.0,KZT,Purchases,KazInterstaff,Kaspi Bank,kaspi_en.pdf,,KazInterstaff
+2024-11-21,"- 990,00 KZT",-990.0,KZT,Purchases,ИП Берсиновв,Kaspi Bank,kaspi_en.pdf,IP,Берсиновв
+2024-11-21,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,Рауан А.,Kaspi Bank,kaspi_en.pdf,,
+2024-11-21,"- 1 300,00 KZT",-1300.0,KZT,Transfers,Алибек М.,Kaspi Bank,kaspi_en.pdf,,
+2024-11-22,"- 800,00 KZT",-800.0,KZT,Purchases,YANDEX.GO,Kaspi Bank,kaspi_en.pdf,,YANDEX.GO
+2024-11-23,"- 490,77 KZT",-490.77,KZT,Purchases,Парковка. ТРЦ Keruen,Kaspi Bank,kaspi_en.pdf,,Парковка. ТРЦ Keruen
+2024-11-23,"+ 47 000,00 KZT",47000.0,KZT,Replenishment,From card of other banks,Kaspi Bank,kaspi_en.pdf,,
+2024-11-24,"- 31 878,00 KZT",-31878.0,KZT,Purchases,Kaspi Travel,Kaspi Bank,kaspi_en.pdf,,Kaspi Travel
+2024-11-24,"+ 38 000,00 KZT",38000.0,KZT,Replenishment,From Kaspi Deposit,Kaspi Bank,kaspi_en.pdf,,
+2024-11-24,"- 38 000,00 KZT",-38000.0,KZT,Transfers,To Kaspi Deposit,Kaspi Bank,kaspi_en.pdf,,
+2024-11-25,"- 10 516,00 KZT",-10516.0,KZT,Transfers,Жадыра К.,Kaspi Bank,kaspi_en.pdf,,
+2024-11-25,"- 300,00 KZT",-300.0,KZT,Purchases,Парковка. ТРЦ Mega Silkway,Kaspi Bank,kaspi_en.pdf,,Парковка. ТРЦ Mega Silkway
+2024-11-25,"- 16 990,00 KZT",-16990.0,KZT,Purchases,Bershka,Kaspi Bank,kaspi_en.pdf,,Bershka
+2024-11-25,"+ 50 000,00 KZT",50000.0,KZT,Replenishment,In the Kaspi Terminal,Kaspi Bank,kaspi_en.pdf,,
+2024-11-26,"+ 34 000,00 KZT",34000.0,KZT,Replenishment,At Kaspi ATM,Kaspi Bank,kaspi_en.pdf,,
+2024-11-26,"- 8 000,00 KZT",-8000.0,KZT,Purchases,Nomad Oil,Kaspi Bank,kaspi_en.pdf,,Nomad Oil
+2024-11-26,"- 17 976,00 KZT",-17976.0,KZT,Purchases,Узбечка 1,Kaspi Bank,kaspi_en.pdf,,Узбечка 1
+2024-11-27,"- 2 185,00 KZT",-2185.0,KZT,Purchases,DN-маркет,Kaspi Bank,kaspi_en.pdf,,DN-маркет
+2024-11-27,"+ 21 000,00 KZT",21000.0,KZT,Replenishment,Алтынбек К.,Kaspi Bank,kaspi_en.pdf,,
+2024-11-28,"- 499,00 KZT",-499.0,KZT,Purchases,APPLE.COM/BILL,Kaspi Bank,kaspi_en.pdf,,APPLE.COM/BILL
+2024-11-29,"- 3 390,00 KZT",-3390.0,KZT,Purchases,Kcell,Kaspi Bank,kaspi_en.pdf,,Kcell
+2024-11-29,"- 4 020,00 KZT",-4020.0,KZT,Purchases,Meloman/Marwin,Kaspi Bank,kaspi_en.pdf,,Meloman/Marwin
+2024-11-29,"- 250,00 KZT",-250.0,KZT,Purchases,NU,Kaspi Bank,kaspi_en.pdf,,NU
+2024-11-29,"- 1 900,00 KZT",-1900.0,KZT,Purchases,Пабло Назарбаев Университет,Kaspi Bank,kaspi_en.pdf,,Пабло Назарбаев Университет
+2024-11-30,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Чечел паб,Kaspi Bank,kaspi_en.pdf,,Чечел паб
+2024-12-01,"- 1 700,00 KZT",-1700.0,KZT,Transfers,Нурмаганбет Р.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,Амиржан А.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,Наргиза И.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-03,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Досан С.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,Асет Б.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,Айдана О.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-03,"- 19 800,00 KZT",-19800.0,KZT,Purchases,ИП Бапова Гульнур,Kaspi Bank,kaspi_en.pdf,IP,Бапова Гульнур
+2024-12-03,"- 16 473,00 KZT",-16473.0,KZT,Purchases,Супермаркет GALMART,Kaspi Bank,kaspi_en.pdf,,Супермаркет GALMART
+2024-12-05,"- 12 000,00 KZT",-12000.0,KZT,Purchases,TLP FLOWERS & COFFEE,Kaspi Bank,kaspi_en.pdf,,TLP FLOWERS & COFFEE
+2024-12-06,"- 1 800,00 KZT",-1800.0,KZT,Purchases,ТРЦ Евразия,Kaspi Bank,kaspi_en.pdf,,ТРЦ Евразия
+2024-12-06,"- 10 000,00 KZT",-10000.0,KZT,Purchases,Beauty Workshop,Kaspi Bank,kaspi_en.pdf,,Beauty Workshop
+2024-12-07,"- 5 000,00 KZT",-5000.0,KZT,Transfers,Айгуль И.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-07,"- 1 420,00 KZT",-1420.0,KZT,Transfers,Думан Ш.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-07,"- 2 949,00 KZT",-2949.0,KZT,Purchases,Всё для всех,Kaspi Bank,kaspi_en.pdf,,Всё для всех
+2024-12-09,"- 1 413,00 KZT",-1413.0,KZT,Purchases,ИП Корнилова,Kaspi Bank,kaspi_en.pdf,IP,Корнилова
+2024-12-09,"- 6 940,00 KZT",-6940.0,KZT,Transfers,Sobir F.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-09,"- 2 742,00 KZT",-2742.0,KZT,Purchases,Flip.kz Онлайн-оплата,Kaspi Bank,kaspi_en.pdf,,Flip.kz Онлайн-оплата
+2024-12-10,"- 1 900,00 KZT",-1900.0,KZT,Transfers,Сымбат Т.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-10,"- 10 000,00 KZT",-10000.0,KZT,Transfers,Жібек Е.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-11,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,Елдана К.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-12,"- 1 700,00 KZT",-1700.0,KZT,Purchases,Tutto Bene,Kaspi Bank,kaspi_en.pdf,,Tutto Bene
+2024-12-12,"- 3 120,00 KZT",-3120.0,KZT,Purchases,Алые Паруса Dostyk Plaza,Kaspi Bank,kaspi_en.pdf,,Алые Паруса Dostyk Plaza
+2024-12-12,"- 3 960,00 KZT",-3960.0,KZT,Purchases,Тикетон,Kaspi Bank,kaspi_en.pdf,,Тикетон
+2024-12-13,"- 2 670,00 KZT",-2670.0,KZT,Purchases,Магазин Мандарин,Kaspi Bank,kaspi_en.pdf,,Магазин Мандарин
+2024-12-13,"- 3 645,00 KZT",-3645.0,KZT,Purchases,Good Food KZ,Kaspi Bank,kaspi_en.pdf,,Good Food KZ
+2024-12-14,"- 33 000,00 KZT",-33000.0,KZT,Purchases,Языковая онлайн школа Rainier,Kaspi Bank,kaspi_en.pdf,,Языковая онлайн школа Rainier
+2024-12-16,"+ 10 000,00 KZT",10000.0,KZT,Replenishment,Серик К.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-17,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Shymbulak,Kaspi Bank,kaspi_en.pdf,,Shymbulak
+2024-12-17,"+ 6 000,00 KZT",6000.0,KZT,Replenishment,Батырхан Ш.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-17,"- 19 700,00 KZT",-19700.0,KZT,Transfers,Тумар Д.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-18,"- 2 004,00 KZT",-2004.0,KZT,Purchases,ТОО Книга-НВ,Kaspi Bank,kaspi_en.pdf,TOO,Книга-НВ
+2024-12-18,"- 14 745,00 KZT",-14745.0,KZT,Purchases,ИП R TRADE,Kaspi Bank,kaspi_en.pdf,IP,R TRADE
+2024-12-18,"- 3 000,00 KZT",-3000.0,KZT,Transfers,Али Қ.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-19,"- 7 500,00 KZT",-7500.0,KZT,Purchases,Manon,Kaspi Bank,kaspi_en.pdf,,Manon
+2024-12-19,"- 400,00 KZT",-400.0,KZT,Transfers,Azizbek A.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-22,"- 170,00 KZT",-170.0,KZT,Purchases,ТОО МИР ХОББИ КАЗАХСТАН И ЦЕНТРАЛЬНАЯ АЗИЯ,Kaspi Bank,kaspi_en.pdf,TOO,МИР ХОББИ КАЗАХСТАН И ЦЕНТРАЛЬНАЯ АЗИЯ
+2024-12-22,"- 3 050,00 KZT",-3050.0,KZT,Purchases,Burger King Dostyk Plaza Almaty,Kaspi Bank,kaspi_en.pdf,,Burger King Dostyk Plaza Almaty
+2024-12-22,"- 290,00 KZT",-290.0,KZT,Purchases,Stradivarius,Kaspi Bank,kaspi_en.pdf,,Stradivarius
+2024-12-23,"- 22 089,00 KZT",-22089.0,KZT,Purchases,Del Papa,Kaspi Bank,kaspi_en.pdf,,Del Papa
+2024-12-23,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,Іңкəр К.,Kaspi Bank,kaspi_en.pdf,,
+2024-12-25,"- 14 685,00 KZT",-14685.0,KZT,Purchases,NAVAT,Kaspi Bank,kaspi_en.pdf,,NAVAT
+2024-12-25,"- 2 150,00 KZT",-2150.0,KZT,Purchases,Jurek tau,Kaspi Bank,kaspi_en.pdf,,Jurek tau
+2024-12-28,"- 44 924,00 KZT",-44924.0,KZT,Purchases,Air Astana,Kaspi Bank,kaspi_en.pdf,,Air Astana
+2024-12-28,"- 1 995,00 KZT",-1995.0,KZT,Others,Yearly service fee,Kaspi Bank,kaspi_en.pdf,,
+2025-01-03,"- 200,00 KZT",-200.0,KZT,Purchases,ДОМ кофейня,Kaspi Bank,kaspi_en.pdf,,ДОМ кофейня
+2025-01-03,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Игорь Р.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-04,"- 32 238,60 KZT",-32238.6,KZT,Purchases,Marine Health,Kaspi Bank,kaspi_en.pdf,,Marine Health
+2025-01-04,"+ 32 000,00 KZT",32000.0,KZT,Replenishment,Корлан Т.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-05,"- 7 990,00 KZT",-7990.0,KZT,Transfers,Нұрахмет Н.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-05,"- 5 000,00 KZT",-5000.0,KZT,Purchases,Premium case,Kaspi Bank,kaspi_en.pdf,,Premium case
+2025-01-05,"- 7 000,00 KZT",-7000.0,KZT,Purchases,ZEVS,Kaspi Bank,kaspi_en.pdf,,ZEVS
+2025-01-06,"- 7 890,00 KZT",-7890.0,KZT,Purchases,iU Market,Kaspi Bank,kaspi_en.pdf,,iU Market
+2025-01-06,"- 3 300,00 KZT",-3300.0,KZT,Purchases,BTB GROUP,Kaspi Bank,kaspi_en.pdf,,BTB GROUP
+2025-01-06,"- 1 600,00 KZT",-1600.0,KZT,Purchases,Студенческий,Kaspi Bank,kaspi_en.pdf,,Студенческий
+2025-01-06,"- 500,00 KZT",-500.0,KZT,Purchases,Гардероб,Kaspi Bank,kaspi_en.pdf,,Гардероб
+2025-01-06,"- 2 500,00 KZT",-2500.0,KZT,Purchases,Медео. Аренда коньков,Kaspi Bank,kaspi_en.pdf,,Медео. Аренда коньков
+2025-01-07,"- 12 000,00 KZT",-12000.0,KZT,Purchases,AIR ASTANA,Kaspi Bank,kaspi_en.pdf,,AIR ASTANA
+2025-01-08,"- 500,00 KZT",-500.0,KZT,Purchases,Аппарат самообслуживания,Kaspi Bank,kaspi_en.pdf,,Аппарат самообслуживания
+2025-01-08,"- 2 100,00 KZT",-2100.0,KZT,Purchases,Аэропорт 2,Kaspi Bank,kaspi_en.pdf,,Аэропорт 2
+2025-01-08,"- 3 900,00 KZT",-3900.0,KZT,Purchases,ИП БИБИНУР,Kaspi Bank,kaspi_en.pdf,IP,БИБИНУР
+2025-01-08,"- 2 398,00 KZT",-2398.0,KZT,Purchases,ИП 717 SHOP,Kaspi Bank,kaspi_en.pdf,IP,717 SHOP
+2025-01-09,"- 2 510,00 KZT",-2510.0,KZT,Purchases,DN-market,Kaspi Bank,kaspi_en.pdf,,DN-market
+2025-01-09,"+ 7 200,00 KZT",7200.0,KZT,Replenishment,Томирис Р.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-09,"- 15 455,00 KZT",-15455.0,KZT,Purchases,Take eat easy,Kaspi Bank,kaspi_en.pdf,,Take eat easy
+2025-01-10,"+ 6 500,00 KZT",6500.0,KZT,Replenishment,Қайсар О.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-10,"- 27 500,00 KZT",-27500.0,KZT,Purchases,NU.EDU.KZ,Kaspi Bank,kaspi_en.pdf,,NU.EDU.KZ
+2025-01-10,"+ 5 000,00 KZT",5000.0,KZT,Replenishment,Сагит И.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-11,"- 110,00 KZT",-110.0,KZT,Transfers,Kozibek T.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-13,"- 8 107,00 KZT",-8107.0,KZT,Purchases,Семейное кафе «Мико» на Улы Дала,Kaspi Bank,kaspi_en.pdf,,Семейное кафе «Мико» на Улы Дала
+2025-01-14,"- 2 000,00 KZT",-2000.0,KZT,Purchases,The Saem,Kaspi Bank,kaspi_en.pdf,,The Saem
+2025-01-15,"- 404,00 KZT",-404.0,KZT,Purchases,ТОО ОФИС ДОМ.kz /ОФИС ДОМ.кз/,Kaspi Bank,kaspi_en.pdf,TOO,ОФИС ДОМ.kz /ОФИС ДОМ.кз/
+2025-01-15,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,Камила И.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-15,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,Ұлпан Қ.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-15,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,Альнура Е.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-16,"- 1 673,00 KZT",-1673.0,KZT,Purchases,OZON,Kaspi Bank,kaspi_en.pdf,,OZON
+2025-01-18,"- 5 085,10 KZT",-5085.1,KZT,Purchases,ТОО BAKERIST,Kaspi Bank,kaspi_en.pdf,TOO,BAKERIST
+2025-01-19,"- 12 300,00 KZT",-12300.0,KZT,Transfers,Амина Н.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-21,"+ 42 300,00 KZT",42300.0,KZT,Replenishment,Айнаш Д.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-21,"- 2 400,00 KZT",-2400.0,KZT,Purchases,Mokko cafe,Kaspi Bank,kaspi_en.pdf,,Mokko cafe
+2025-01-22,"- 1 420,00 KZT",-1420.0,KZT,Transfers,Бақдəулет Т.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-22,"- 6 177,00 KZT",-6177.0,KZT,Purchases,AST24,Kaspi Bank,kaspi_en.pdf,,AST24
+2025-01-24,"- 3 900,00 KZT",-3900.0,KZT,Transfers,Рамазан А.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-26,"- 5 200,00 KZT",-5200.0,KZT,Purchases,Burger King Mega Silk Way,Kaspi Bank,kaspi_en.pdf,,Burger King Mega Silk Way
+2025-01-28,"- 130,00 KZT",-130.0,KZT,Purchases,YANDEX.DELIVERY,Kaspi Bank,kaspi_en.pdf,,YANDEX.DELIVERY
+2025-01-28,"- 1 740,00 KZT",-1740.0,KZT,Transfers,Рустам Ш.,Kaspi Bank,kaspi_en.pdf,,
+2025-01-30,"- 960,00 KZT",-960.0,KZT,Purchases,ИП,Kaspi Bank,kaspi_en.pdf,IP,
+2025-01-31,"- 2 240,00 KZT",-2240.0,KZT,Purchases,Aiwa,Kaspi Bank,kaspi_en.pdf,,Aiwa
+2025-02-03,"- 12 188,00 KZT",-12188.0,KZT,Purchases,Меломан/MARWIN,Kaspi Bank,kaspi_en.pdf,,Меломан/MARWIN
+2025-02-04,"+ 6 000,00 KZT",6000.0,KZT,Replenishment,Арна Д.,Kaspi Bank,kaspi_en.pdf,,
+2025-02-07,"- 4 000,00 KZT",-4000.0,KZT,Purchases,Green Clinic,Kaspi Bank,kaspi_en.pdf,,Green Clinic
+2025-02-07,"- 2 725,00 KZT",-2725.0,KZT,Purchases,Summer love,Kaspi Bank,kaspi_en.pdf,,Summer love
+2025-02-12,"- 12 990,00 KZT",-12990.0,KZT,Purchases,Billion.co,Kaspi Bank,kaspi_en.pdf,,Billion.co
+2025-02-12,"- 3 800,00 KZT",-3800.0,KZT,Purchases,HP COFFEE,Kaspi Bank,kaspi_en.pdf,,HP COFFEE
+2025-02-12,"+ 6 000,00 KZT",6000.0,KZT,Replenishment,Анел О.,Kaspi Bank,kaspi_en.pdf,,
+2025-02-14,"- 1 980,00 KZT",-1980.0,KZT,Purchases,Coffee Boom,Kaspi Bank,kaspi_en.pdf,,Coffee Boom
+2025-02-14,"- 980,00 KZT",-980.0,KZT,Purchases,Магазин,Kaspi Bank,kaspi_en.pdf,,Магазин
+2025-02-16,"- 13 046,00 KZT",-13046.0,KZT,Purchases,Mola,Kaspi Bank,kaspi_en.pdf,,Mola
+2025-02-16,"- 100,00 KZT",-100.0,KZT,Purchases,Оплата парковки Астаны,Kaspi Bank,kaspi_en.pdf,,Оплата парковки Астаны
+2025-02-16,"- 60,00 KZT",-60.0,KZT,Purchases,Аптека 49 Цветная,Kaspi Bank,kaspi_en.pdf,,Аптека 49 Цветная
+2025-02-17,"- 3 500,00 KZT",-3500.0,KZT,Purchases,Бенто торты Астана,Kaspi Bank,kaspi_en.pdf,,Бенто торты Астана
+2025-02-17,"- 7 000,00 KZT",-7000.0,KZT,Purchases,Astana Tower Clean,Kaspi Bank,kaspi_en.pdf,,Astana Tower Clean
+2025-02-19,"- 13 156,00 KZT",-13156.0,KZT,Transfers,Нилуфар Ə.,Kaspi Bank,kaspi_en.pdf,,
+2025-02-20,"- 60,00 KZT",-60.0,KZT,Purchases,ТС Mega Supermarket Astana,Kaspi Bank,kaspi_en.pdf,,ТС Mega Supermarket Astana
+2025-02-22,"- 740,00 KZT",-740.0,KZT,Purchases,ИП АБЕЛЬДИНОВ КАНАТ АБЫЛАЕВИЧ,Kaspi Bank,kaspi_en.pdf,IP,АБЕЛЬДИНОВ КАНАТ АБЫЛАЕВИЧ
+2025-02-22,"- 2 690,00 KZT",-2690.0,KZT,Purchases,ИП SKYNET-ASTANA,Kaspi Bank,kaspi_en.pdf,IP,SKYNET-ASTANA
+2025-02-22,"- 1 600,00 KZT",-1600.0,KZT,Purchases,ИП САВЧИЦ ТАТЬЯНА АЛЕКСАНДРОВНА,Kaspi Bank,kaspi_en.pdf,IP,САВЧИЦ ТАТЬЯНА АЛЕКСАНДРОВНА
+2025-02-25,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Нұрмерей А.,Kaspi Bank,kaspi_en.pdf,,
+2025-02-27,"- 1 590,00 KZT",-1590.0,KZT,Purchases,DailyCup,Kaspi Bank,kaspi_en.pdf,,DailyCup
+2025-03-01,"- 4 850,00 KZT",-4850.0,KZT,Purchases,Burger King Mega Astana,Kaspi Bank,kaspi_en.pdf,,Burger King Mega Astana
+2025-03-01,"- 400,00 KZT",-400.0,KZT,Purchases,Woodtoys,Kaspi Bank,kaspi_en.pdf,,Woodtoys
+2025-03-01,"+ 505,51 KZT",505.51,KZT,Purchases,"Canva* paAAAGQHWQEUOCVA (+ 1,00 USD)",Kaspi Bank,kaspi_en.pdf,,"Canva* paAAAGQHWQEUOCVA + 1,00 USD"
+2025-03-01,"- 505,51 KZT",-505.51,KZT,Purchases,"Canva* paAAAGQHWQEUOCVA (- 1,00 USD)",Kaspi Bank,kaspi_en.pdf,,"Canva* paAAAGQHWQEUOCVA - 1,00 USD"
+2025-03-02,"- 8 000,00 KZT",-8000.0,KZT,Purchases,DiZhaNi 1,Kaspi Bank,kaspi_en.pdf,,DiZhaNi 1
+2025-03-05,"- 115 000,00 KZT",-115000.0,KZT,Purchases,ТОО Brusnika Брусника,Kaspi Bank,kaspi_en.pdf,TOO,Brusnika Брусника
+2025-03-05,"- 65 577,00 KZT",-65577.0,KZT,Purchases,Calvin Klein Jeans,Kaspi Bank,kaspi_en.pdf,,Calvin Klein Jeans
+2025-03-05,"- 2 150,00 KZT",-2150.0,KZT,Purchases,Достык Плаза,Kaspi Bank,kaspi_en.pdf,,Достык Плаза
+2025-03-06,"- 4 400,00 KZT",-4400.0,KZT,Purchases,KINO.KZ,Kaspi Bank,kaspi_en.pdf,,KINO.KZ
+2025-03-09,"- 3 700,00 KZT",-3700.0,KZT,Purchases,French croissant,Kaspi Bank,kaspi_en.pdf,,French croissant
+2025-03-17,"- 6 200,00 KZT",-6200.0,KZT,Purchases,OKADZAKI.KZ,Kaspi Bank,kaspi_en.pdf,,OKADZAKI.KZ
+2025-03-17,"- 10 000,00 KZT",-10000.0,KZT,Purchases,Национальный музей,Kaspi Bank,kaspi_en.pdf,,Национальный музей
+2025-03-17,"- 9 560,00 KZT",-9560.0,KZT,Purchases,Wildberries,Kaspi Bank,kaspi_en.pdf,,Wildberries
+2025-03-18,"- 300,00 KZT",-300.0,KZT,Transfers,Мадина Г.,Kaspi Bank,kaspi_en.pdf,,
+2025-03-18,"- 19 500,00 KZT",-19500.0,KZT,Transfers,Шырайлым И.,Kaspi Bank,kaspi_en.pdf,,
+2025-03-19,"- 1 165,00 KZT",-1165.0,KZT,Purchases,Corner Meal,Kaspi Bank,kaspi_en.pdf,,Corner Meal
+2025-03-22,"- 400,00 KZT",-400.0,KZT,Purchases,Qazaq Catering,Kaspi Bank,kaspi_en.pdf,,Qazaq Catering
+2025-03-22,"- 995,00 KZT",-995.0,KZT,Purchases,TOO Kaspi Magazin,Kaspi Bank,kaspi_en.pdf,TOO,Kaspi Magazin
+2025-03-22,"- 1 500,00 KZT",-1500.0,KZT,Purchases,ИП КБК,Kaspi Bank,kaspi_en.pdf,IP,КБК
+2025-03-25,"- 3 000,00 KZT",-3000.0,KZT,Transfers,Əлішер А.,Kaspi Bank,kaspi_en.pdf,,
+2025-03-26,"- 14 569,00 KZT",-14569.0,KZT,Purchases,Налог на транспорт,Kaspi Bank,kaspi_en.pdf,,Налог на транспорт
+2025-03-28,"- 22 207,00 KZT",-22207.0,KZT,Purchases,Ресторан Саксаул,Kaspi Bank,kaspi_en.pdf,,Ресторан Саксаул
+2025-03-29,"- 1 200,00 KZT",-1200.0,KZT,Purchases,Парковка. Talan Towers,Kaspi Bank,kaspi_en.pdf,,Парковка. Talan Towers
+2025-03-29,"- 500 200,00 KZT",-500200.0,KZT,Purchases,VStyle Kids,Kaspi Bank,kaspi_en.pdf,,VStyle Kids
+2025-04-01,"- 110,00 KZT",-110.0,KZT,Purchases,Avtobys. Оплата проезда по QR,Kaspi Bank,kaspi_en.pdf,,Avtobys. Оплата проезда по QR
+2025-04-03,"- 2 255,00 KZT",-2255.0,KZT,Purchases,224 MyMart Керей и Жанибек хандар,Kaspi Bank,kaspi_en.pdf,,224 MyMart Керей и Жанибек хандар
+2025-04-03,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,Индира К.,Kaspi Bank,kaspi_en.pdf,,
+2025-04-03,"- 3 300,00 KZT",-3300.0,KZT,Purchases,Mokashopkz,Kaspi Bank,kaspi_en.pdf,,Mokashopkz
+2025-04-04,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Парковка. ТРЦ Хан Шатыр,Kaspi Bank,kaspi_en.pdf,,Парковка. ТРЦ Хан Шатыр
+2025-04-04,"- 2 650,00 KZT",-2650.0,KZT,Purchases,Burger King Khan Shatyr Astana,Kaspi Bank,kaspi_en.pdf,,Burger King Khan Shatyr Astana
+2025-04-07,"- 300 000,00 KZT",-300000.0,KZT,Purchases,Курс по ИТ,Kaspi Bank,kaspi_en.pdf,,Курс по ИТ
+2025-04-08,"- 5 500,00 KZT",-5500.0,KZT,Purchases,ИП Аймакова А.С.,Kaspi Bank,kaspi_en.pdf,IP,Аймакова А.С.
+2025-04-08,"- 7 450,00 KZT",-7450.0,KZT,Purchases,Pluto.alm,Kaspi Bank,kaspi_en.pdf,,Pluto.alm
+2025-04-09,"- 1 190,00 KZT",-1190.0,KZT,Purchases,НУ,Kaspi Bank,kaspi_en.pdf,,НУ
+2025-04-09,"- 1 230,00 KZT",-1230.0,KZT,Purchases,HP Canteen,Kaspi Bank,kaspi_en.pdf,,HP Canteen
+2025-04-10,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Куаныш Ж.,Kaspi Bank,kaspi_en.pdf,,
+2025-04-11,"- 3 100,00 KZT",-3100.0,KZT,Purchases,Nunis Buyer,Kaspi Bank,kaspi_en.pdf,,Nunis Buyer
+2025-04-15,"- 8 000,00 KZT",-8000.0,KZT,Purchases,Altel,Kaspi Bank,kaspi_en.pdf,,Altel
+2025-04-16,"- 2 670,00 KZT",-2670.0,KZT,Purchases,ТӨР,Kaspi Bank,kaspi_en.pdf,,ТӨР
+2025-04-18,"- 1 890,00 KZT",-1890.0,KZT,Purchases,Coffunitea,Kaspi Bank,kaspi_en.pdf,,Coffunitea
+2025-04-19,"- 421 680,00 KZT",-421680.0,KZT,Transfers,Акбота Т.,Kaspi Bank,kaspi_en.pdf,,
+2025-04-21,"+ 2 000,00 KZT",2000.0,KZT,Replenishment,Алишер-Полат К.,Kaspi Bank,kaspi_en.pdf,,
+2025-04-24,"- 865,00 KZT",-865.0,KZT,Purchases,4 касса,Kaspi Bank,kaspi_en.pdf,,4 касса
+2025-04-24,"- 2 800,00 KZT",-2800.0,KZT,Purchases,Дом книги Абай,Kaspi Bank,kaspi_en.pdf,,Дом книги Абай
+2025-04-24,"- 1 800,00 KZT",-1800.0,KZT,Purchases,Mazmundama,Kaspi Bank,kaspi_en.pdf,,Mazmundama
+2025-04-24,"- 4 000,00 KZT",-4000.0,KZT,Purchases,ТОО Издательство Арман-ПВ,Kaspi Bank,kaspi_en.pdf,TOO,Издательство Арман-ПВ
+2025-04-24,"- 16 940,00 KZT",-16940.0,KZT,Purchases,Мангилик 56,Kaspi Bank,kaspi_en.pdf,,Мангилик 56
+2025-04-26,"+ 3 750,00 KZT",3750.0,KZT,Replenishment,Салтанат Т.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-07,"- 8 250,00 KZT",-8250.0,KZT,Purchases,KFC 12737,Kaspi Bank,kaspi_en.pdf,,KFC 12737
+2025-05-08,"- 68 875,00 KZT",-68875.0,KZT,Purchases,SKHALYK.KZ,Kaspi Bank,kaspi_en.pdf,,SKHALYK.KZ
+2025-05-08,"+ 930,00 KZT",930.0,KZT,Replenishment,Акмарал Ж.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-08,"- 1 790,00 KZT",-1790.0,KZT,Purchases,ТОО Mega Coffee,Kaspi Bank,kaspi_en.pdf,TOO,Mega Coffee
+2025-05-08,"+ 23 900,00 KZT",23900.0,KZT,Replenishment,Кунсулу М.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-09,"- 770,00 KZT",-770.0,KZT,Purchases,Магазин 1000 мелочей,Kaspi Bank,kaspi_en.pdf,,Магазин 1000 мелочей
+2025-05-11,"+ 400,00 KZT",400.0,KZT,Replenishment,Алиша А.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-12,"- 7 195,40 KZT",-7195.4,KZT,Purchases,"FLYDUBAI (- 14,01 USD)",Kaspi Bank,kaspi_en.pdf,,"FLYDUBAI - 14,01 USD"
+2025-05-13,"- 2 200,00 KZT",-2200.0,KZT,Purchases,ALTEL,Kaspi Bank,kaspi_en.pdf,,ALTEL
+2025-05-13,"- 1 500,00 KZT",-1500.0,KZT,Purchases,IP MALIKA,Kaspi Bank,kaspi_en.pdf,IP,MALIKA
+2025-05-13,"- 270,00 KZT",-270.0,KZT,Purchases,Хозяюшка,Kaspi Bank,kaspi_en.pdf,,Хозяюшка
+2025-05-14,"+ 541,44 KZT",541.44,KZT,Purchases,"CAREEM RIDE (+ 3,86 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE + 3,86 AED"
+2025-05-14,"+ 0,00 KZT",0.0,KZT,Purchases,"CAREEM RIDE (+ 0,00 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE + 0,00 AED"
+2025-05-14,"- 7 958,88 KZT",-7958.88,KZT,Purchases,"CAREEM RIDE (- 56,74 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 56,74 AED"
+2025-05-14,"- 3 514,71 KZT",-3514.71,KZT,Purchases,"PENNY PRESS VENDING MACHI (- 24,99 AED)",Kaspi Bank,kaspi_en.pdf,,"PENNY PRESS VENDING MACHI - 24,99 AED"
+2025-05-14,"- 7 519,72 KZT",-7519.72,KZT,Purchases,"WATSON BR OF ALFUTTAIM (- 53,50 AED)",Kaspi Bank,kaspi_en.pdf,,"WATSON BR OF ALFUTTAIM - 53,50 AED"
+2025-05-14,"- 5 057,88 KZT",-5057.88,KZT,Purchases,"RTA - JUMEIRAH LAKE TO (- 36,00 AED)",Kaspi Bank,kaspi_en.pdf,,"RTA - JUMEIRAH LAKE TO - 36,00 AED"
+2025-05-14,"- 6 322,35 KZT",-6322.35,KZT,Purchases,"MY VAPE MAR FOR ELECT (- 45,00 AED)",Kaspi Bank,kaspi_en.pdf,,"MY VAPE MAR FOR ELECT - 45,00 AED"
+2025-05-14,"- 3 963,72 KZT",-3963.72,KZT,Purchases,"WAITROSE-FINE FARE (- 28,20 AED)",Kaspi Bank,kaspi_en.pdf,,"WAITROSE-FINE FARE - 28,20 AED"
+2025-05-14,"- 6 518,47 KZT",-6518.47,KZT,Purchases,"CAREEM RIDE (- 46,39 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 46,39 AED"
+2025-05-14,"- 27 560,27 KZT",-27560.27,KZT,Purchases,"CAREEM RIDE (- 196,10 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 196,10 AED"
+2025-05-14,"- 5 904,30 KZT",-5904.3,KZT,Purchases,"DUBAI DUTY FREE (- 42,00 AED)",Kaspi Bank,kaspi_en.pdf,,"DUBAI DUTY FREE - 42,00 AED"
+2025-05-14,"- 650,00 KZT",-650.0,KZT,Transfers,Дина И.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-14,"- 5 000,00 KZT",-5000.0,KZT,Transfers,Алтынай К.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-15,"+ 520,61 KZT",520.61,KZT,Purchases,"CAREEM RIDE (+ 3,71 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE + 3,71 AED"
+2025-05-15,"- 6 871,79 KZT",-6871.79,KZT,Purchases,"CAREEM RIDE (- 48,97 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 48,97 AED"
+2025-05-15,"- 638,72 KZT",-638.72,KZT,Purchases,"CAREEM RIDE (- 4,57 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 4,57 AED"
+2025-05-15,"- 8 535,21 KZT",-8535.21,KZT,Purchases,"CAREEM RIDE (- 60,85 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 60,85 AED"
+2025-05-15,"- 16 833,47 KZT",-16833.47,KZT,Purchases,"ADVENTURE HQ LLC (- 120,00 AED)",Kaspi Bank,kaspi_en.pdf,LLC,"ADVENTURE HQ   - 120,00 AED"
+2025-05-16,"- 6 309,98 KZT",-6309.98,KZT,Purchases,"GLB FOOD-MUSEUM CAFE-2 (- 45,00 AED)",Kaspi Bank,kaspi_en.pdf,,"GLB FOOD-MUSEUM CAFE-2 - 45,00 AED"
+2025-05-16,"- 4 908,90 KZT",-4908.9,KZT,Purchases,"GLB FOOD-MUSEUM CAFE-2 (- 35,00 AED)",Kaspi Bank,kaspi_en.pdf,,"GLB FOOD-MUSEUM CAFE-2 - 35,00 AED"
+2025-05-16,"- 7 571,97 KZT",-7571.97,KZT,Purchases,"CARREFOUR SUPERMARKET (- 53,98 AED)",Kaspi Bank,kaspi_en.pdf,,"CARREFOUR SUPERMARKET - 53,98 AED"
+2025-05-16,"- 6 639,64 KZT",-6639.64,KZT,Purchases,"CARREFOUR SUPERMARKET (- 47,32 AED)",Kaspi Bank,kaspi_en.pdf,,"CARREFOUR SUPERMARKET - 47,32 AED"
+2025-05-16,"+ 2 812,80 KZT",2812.8,KZT,Purchases,"CAREEM RIDE (+ 20,00 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE + 20,00 AED"
+2025-05-16,"- 2 812,80 KZT",-2812.8,KZT,Purchases,"CAREEM RIDE (- 20,00 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 20,00 AED"
+2025-05-17,"- 8 633,08 KZT",-8633.08,KZT,Purchases,"AL MAYA B (- 61,55 AED)",Kaspi Bank,kaspi_en.pdf,,"AL MAYA B - 61,55 AED"
+2025-05-17,"- 26 576,00 KZT",-26576.0,KZT,Transfers,Oyatullo R.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-17,"- 51 762,40 KZT",-51762.4,KZT,Purchases,"AL BOOM MARINE EVENTS (- 369,00 AED)",Kaspi Bank,kaspi_en.pdf,,"AL BOOM MARINE EVENTS - 369,00 AED"
+2025-05-17,"- 12 764,18 KZT",-12764.18,KZT,Purchases,"AL JABER NOVELTY STORE LL (- 91,00 AED)",Kaspi Bank,kaspi_en.pdf,,"AL JABER NOVELTY STORE LL - 91,00 AED"
+2025-05-18,"- 23 612,03 KZT",-23612.03,KZT,Purchases,"STELLA MARINA HOTEL (- 168,00 AED)",Kaspi Bank,kaspi_en.pdf,,"STELLA MARINA HOTEL - 168,00 AED"
+2025-05-18,"- 1 403,82 KZT",-1403.82,KZT,Purchases,"BULAWAN GENERAL TRADING L (- 10,00 AED)",Kaspi Bank,kaspi_en.pdf,,"BULAWAN GENERAL TRADING L - 10,00 AED"
+2025-05-18,"- 9 837,06 KZT",-9837.06,KZT,Purchases,"GLOBAL VILLAGE PARTNERS (- 70,00 AED)",Kaspi Bank,kaspi_en.pdf,,"GLOBAL VILLAGE PARTNERS - 70,00 AED"
+2025-05-18,"- 12 649,86 KZT",-12649.86,KZT,Purchases,"GLOBAL VILLAGE PARTNERS (- 90,00 AED)",Kaspi Bank,kaspi_en.pdf,,"GLOBAL VILLAGE PARTNERS - 90,00 AED"
+2025-05-18,"- 14 053,68 KZT",-14053.68,KZT,Purchases,"TEEB AL AMAKEN NOVELTIES (- 100,00 AED)",Kaspi Bank,kaspi_en.pdf,,"TEEB AL AMAKEN NOVELTIES - 100,00 AED"
+2025-05-18,"- 7 029,42 KZT",-7029.42,KZT,Purchases,"HADEKAT AL ZOHOR (- 50,00 AED)",Kaspi Bank,kaspi_en.pdf,,"HADEKAT AL ZOHOR - 50,00 AED"
+2025-05-19,"- 12 262,65 KZT",-12262.65,KZT,Purchases,"DUBAI TAXI (- 87,00 AED)",Kaspi Bank,kaspi_en.pdf,,"DUBAI TAXI - 87,00 AED"
+2025-05-19,"- 4 229,04 KZT",-4229.04,KZT,Purchases,"MOTIONGATE GAMES (- 30,00 AED)",Kaspi Bank,kaspi_en.pdf,,"MOTIONGATE GAMES - 30,00 AED"
+2025-05-19,"- 2 650,27 KZT",-2650.27,KZT,Purchases,"CAREEM RIDE (- 18,81 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 18,81 AED"
+2025-05-19,"- 13 442,85 KZT",-13442.85,KZT,Purchases,"CAREEM RIDE (- 95,35 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 95,35 AED"
+2025-05-19,"- 15 500,00 KZT",-15500.0,KZT,Purchases,ТОО ТОО MELLIS,Kaspi Bank,kaspi_en.pdf,TOO,ТОО MELLIS
+2025-05-20,"- 1 842,51 KZT",-1842.51,KZT,Purchases,"DUBAI DUTY FREE (- 13,12 AED)",Kaspi Bank,kaspi_en.pdf,,"DUBAI DUTY FREE - 13,12 AED"
+2025-05-20,"- 950,14 KZT",-950.14,KZT,Purchases,"CAREEM RIDE (- 6,80 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 6,80 AED"
+2025-05-20,"- 11 812,57 KZT",-11812.57,KZT,Purchases,"CAREEM RIDE (- 84,46 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 84,46 AED"
+2025-05-20,"- 46 522,16 KZT",-46522.16,KZT,Purchases,"WAGAMAMA RESTAURANT (- 331,00 AED)",Kaspi Bank,kaspi_en.pdf,,"WAGAMAMA RESTAURANT - 331,00 AED"
+2025-05-20,"- 33 309,74 KZT",-33309.74,KZT,Purchases,"KINOKUNIYA BOOK STORES (- 237,00 AED)",Kaspi Bank,kaspi_en.pdf,,"KINOKUNIYA BOOK STORES - 237,00 AED"
+2025-05-20,"- 19 679,27 KZT",-19679.27,KZT,Purchases,"Pierre Cardin (- 140,00 AED)",Kaspi Bank,kaspi_en.pdf,,"Pierre Cardin - 140,00 AED"
+2025-05-20,"- 4 077,27 KZT",-4077.27,KZT,Purchases,"DELIVERING YOUR BAGS LUGG (- 29,00 AED)",Kaspi Bank,kaspi_en.pdf,,"DELIVERING YOUR BAGS LUGG - 29,00 AED"
+2025-05-20,"+ 1 891,59 KZT",1891.59,KZT,Purchases,"CAREEM RIDE (+ 13,46 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE + 13,46 AED"
+2025-05-20,"- 17 854,87 KZT",-17854.87,KZT,Purchases,"CAREEM RIDE (- 127,05 AED)",Kaspi Bank,kaspi_en.pdf,,"CAREEM RIDE - 127,05 AED"
+2025-05-21,"+ 6 617,04 KZT",6617.04,KZT,Replenishment,"PlanetTaxFree (+ 13,08 USD)",Kaspi Bank,kaspi_en.pdf,,
+2025-05-21,"- 46 053,00 KZT",-46053.0,KZT,Purchases,ТОО Kaspi Travel,Kaspi Bank,kaspi_en.pdf,TOO,Kaspi Travel
+2025-05-22,"- 600,00 KZT",-600.0,KZT,Purchases,PARKING 2,Kaspi Bank,kaspi_en.pdf,,PARKING 2
+2025-05-22,"- 16 940,00 KZT",-16940.0,KZT,Purchases,ИП Кизатова А.,Kaspi Bank,kaspi_en.pdf,IP,Кизатова А.
+2025-05-23,"- 10 769,60 KZT",-10769.6,KZT,Purchases,Астана РЭК для юридических лиц,Kaspi Bank,kaspi_en.pdf,,Астана РЭК для юридических лиц
+2025-05-23,"- 4 400,00 KZT",-4400.0,KZT,Purchases,KINOPARK.KZ,Kaspi Bank,kaspi_en.pdf,,KINOPARK.KZ
+2025-05-25,"- 23 925,00 KZT",-23925.0,KZT,Purchases,Six Coffee Wine EC Astana,Kaspi Bank,kaspi_en.pdf,,Six Coffee Wine EC Astana
+2025-05-26,"- 6 000,00 KZT",-6000.0,KZT,Purchases,Interteach,Kaspi Bank,kaspi_en.pdf,,Interteach
+2025-05-26,"- 11 000,00 KZT",-11000.0,KZT,Purchases,ТОО Медицинский центр iClinic,Kaspi Bank,kaspi_en.pdf,TOO,Медицинский центр iClinic
+2025-05-27,"- 400,00 KZT",-400.0,KZT,Transfers,Хаётжон О.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-27,"- 580,00 KZT",-580.0,KZT,Transfers,Сапархан Б.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-27,"- 670,00 KZT",-670.0,KZT,Purchases,Береке market,Kaspi Bank,kaspi_en.pdf,,Береке market
+2025-05-27,"- 24 640,00 KZT",-24640.0,KZT,Purchases,КДЛ Олимп,Kaspi Bank,kaspi_en.pdf,,КДЛ Олимп
+2025-05-27,"+ 1 900,00 KZT",1900.0,KZT,Replenishment,Дильназ К.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-28,"- 580,00 KZT",-580.0,KZT,Purchases,IP TIME OF JOY,Kaspi Bank,kaspi_en.pdf,IP,TIME OF JOY
+2025-05-30,"- 41 000,00 KZT",-41000.0,KZT,Purchases,Chip,Kaspi Bank,kaspi_en.pdf,,Chip
+2025-05-30,"- 1 750,00 KZT",-1750.0,KZT,Purchases,Segafredo T2,Kaspi Bank,kaspi_en.pdf,,Segafredo T2
+2025-05-31,"- 42 500,00 KZT",-42500.0,KZT,Transfers,Алуа Е.,Kaspi Bank,kaspi_en.pdf,,
+2025-05-31,"- 18 600,00 KZT",-18600.0,KZT,Purchases,Oasiswater,Kaspi Bank,kaspi_en.pdf,,Oasiswater
+2025-05-31,"- 1 966,00 KZT",-1966.0,KZT,Purchases,Штрафы по ИИН,Kaspi Bank,kaspi_en.pdf,,Штрафы по ИИН
+2025-06-01,"- 660,00 KZT",-660.0,KZT,Purchases,79 My Mart АФД,Kaspi Bank,kaspi_en.pdf,,79 My Mart АФД
+2025-06-02,"- 11 695,00 KZT",-11695.0,KZT,Purchases,TC Dostyk Plaza,Kaspi Bank,kaspi_en.pdf,,TC Dostyk Plaza
+2025-06-02,"- 2 550,00 KZT",-2550.0,KZT,Purchases,Fruit Republic ДП,Kaspi Bank,kaspi_en.pdf,,Fruit Republic ДП
+2025-06-02,"- 16 170,00 KZT",-16170.0,KZT,Purchases,UMAY,Kaspi Bank,kaspi_en.pdf,,UMAY
+2025-06-03,"- 20 000,00 KZT",-20000.0,KZT,Purchases,Art&fact,Kaspi Bank,kaspi_en.pdf,,Art&fact
+2025-06-03,"- 5 000,00 KZT",-5000.0,KZT,Transfers,Роза С.,Kaspi Bank,kaspi_en.pdf,,
+2025-06-03,"- 3 500,00 KZT",-3500.0,KZT,Purchases,Aina art,Kaspi Bank,kaspi_en.pdf,,Aina art
+2025-06-03,"- 4 500,00 KZT",-4500.0,KZT,Transfers,Aidai N.,Kaspi Bank,kaspi_en.pdf,,
+2025-06-03,"- 590,00 KZT",-590.0,KZT,Purchases,Панфилова 113/56,Kaspi Bank,kaspi_en.pdf,,Панфилова 113/56
+2025-06-03,"+ 500,00 KZT",500.0,KZT,Purchases,JET SHARING,Kaspi Bank,kaspi_en.pdf,,JET SHARING
+2025-06-04,"- 3 900,00 KZT",-3900.0,KZT,Transfers,Mukhtado F.,Kaspi Bank,kaspi_en.pdf,,
+2025-06-04,"- 1 800,00 KZT",-1800.0,KZT,Purchases,ГРАНД ПАРК «33 пингвина»,Kaspi Bank,kaspi_en.pdf,,ГРАНД ПАРК «33 пингвина»
+2025-06-04,"- 5 000,00 KZT",-5000.0,KZT,Purchases,Activ,Kaspi Bank,kaspi_en.pdf,,Activ
+2025-06-04,"- 800,00 KZT",-800.0,KZT,Purchases,Almaty Tattoo 9 блок,Kaspi Bank,kaspi_en.pdf,,Almaty Tattoo 9 блок
+2025-06-04,"- 350,00 KZT",-350.0,KZT,Purchases,ИП ДАНЕГУЛОВА АСЕМ,Kaspi Bank,kaspi_en.pdf,IP,ДАНЕГУЛОВА АСЕМ
+2025-06-05,"- 1 450,00 KZT",-1450.0,KZT,Purchases,TheSAY Medical,Kaspi Bank,kaspi_en.pdf,,TheSAY Medical
+2025-06-05,"- 9 050,00 KZT",-9050.0,KZT,Purchases,Burger King Esentai Mall Almaty,Kaspi Bank,kaspi_en.pdf,,Burger King Esentai Mall Almaty
+2025-06-05,"- 9 900,00 KZT",-9900.0,KZT,Purchases,KERUEN-MEDICUS,Kaspi Bank,kaspi_en.pdf,,KERUEN-MEDICUS
+2025-06-07,"- 20 130,00 KZT",-20130.0,KZT,Purchases,ТОО Лечебно-оздоровительный комплекс Алатау,Kaspi Bank,kaspi_en.pdf,TOO,Лечебно-оздоровительный комплекс Алатау
+2025-06-07,"- 7 000,00 KZT",-7000.0,KZT,Purchases,ИП МАМБЕТАЛИЕВА ЭЛЬМИРА СУЛТАНГАЛИЕВНА,Kaspi Bank,kaspi_en.pdf,IP,МАМБЕТАЛИЕВА ЭЛЬМИРА СУЛТАНГАЛИЕВНА
+2025-06-10,"- 3 310,00 KZT",-3310.0,KZT,Purchases,TEEZ,Kaspi Bank,kaspi_en.pdf,,TEEZ
+2025-06-10,"- 4 010,00 KZT",-4010.0,KZT,Purchases,ИП Зикрыяров Дильмурат,Kaspi Bank,kaspi_en.pdf,IP,Зикрыяров Дильмурат
+2025-06-12,"- 70 900,00 KZT",-70900.0,KZT,Purchases,Saks Fifth Avenue,Kaspi Bank,kaspi_en.pdf,,Saks Fifth Avenue
+2025-06-12,"- 4 000,00 KZT",-4000.0,KZT,Transfers,Сауле Ж.,Kaspi Bank,kaspi_en.pdf,,
+2025-06-12,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Музей Алматы,Kaspi Bank,kaspi_en.pdf,,Музей Алматы
+2025-06-12,"- 17 000,00 KZT",-17000.0,KZT,Transfers,Дамира К.,Kaspi Bank,kaspi_en.pdf,,
+2025-06-14,"+ 300,00 KZT",300.0,KZT,Purchases,5 Bite The Beat Arbat,Kaspi Bank,kaspi_en.pdf,,5 Bite The Beat Arbat
+2025-06-15,"- 1 400,00 KZT",-1400.0,KZT,Purchases,Добрая Аптека 24,Kaspi Bank,kaspi_en.pdf,,Добрая Аптека 24
+2025-06-16,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Steppe Coffee,Kaspi Bank,kaspi_en.pdf,,Steppe Coffee
+2025-06-16,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,Алмагуль Т.,Kaspi Bank,kaspi_en.pdf,,
+2025-06-16,"- 9 000,00 KZT",-9000.0,KZT,Purchases,ТОО Мир развлечений,Kaspi Bank,kaspi_en.pdf,TOO,Мир развлечений
+2025-06-20,"- 7 580,00 KZT",-7580.0,KZT,Purchases,Спортмастер,Kaspi Bank,kaspi_en.pdf,,Спортмастер
+2025-06-21,"- 24 000,00 KZT",-24000.0,KZT,Purchases,APPLESIM,Kaspi Bank,kaspi_en.pdf,,APPLESIM
+2025-06-21,"- 2 100,00 KZT",-2100.0,KZT,Purchases,Каракчайная,Kaspi Bank,kaspi_en.pdf,,Каракчайная
+2025-06-25,"- 1 870,00 KZT",-1870.0,KZT,Purchases,Fresh market,Kaspi Bank,kaspi_en.pdf,,Fresh market
+2025-06-26,"- 800,00 KZT",-800.0,KZT,Transfers,Амина Ч.,Kaspi Bank,kaspi_en.pdf,,
+2025-06-26,"- 264,00 KZT",-264.0,KZT,Purchases,Dushes,Kaspi Bank,kaspi_en.pdf,,Dushes
+2025-06-26,"- 1 600,00 KZT",-1600.0,KZT,Purchases,TRIUMPH,Kaspi Bank,kaspi_en.pdf,,TRIUMPH
+2025-06-30,"- 4 000,00 KZT",-4000.0,KZT,Transfers,Самшер Х.,Kaspi Bank,kaspi_en.pdf,,
+2025-06-30,"- 9 600,00 KZT",-9600.0,KZT,Purchases,EDUCON,Kaspi Bank,kaspi_en.pdf,,EDUCON
+2025-06-30,"- 520,00 KZT",-520.0,KZT,Purchases,ИП Курсаитова,Kaspi Bank,kaspi_en.pdf,IP,Курсаитова
+2025-07-05,"- 980,00 KZT",-980.0,KZT,Transfers,Жанар К.,Kaspi Bank,kaspi_en.pdf,,
+2025-07-06,"- 4 991,00 KZT",-4991.0,KZT,Purchases,ТС Mega Supermarket Almaty,Kaspi Bank,kaspi_en.pdf,,ТС Mega Supermarket Almaty
+2025-07-13,"- 2 200,00 KZT",-2200.0,KZT,Purchases,ИП СЕРЕЕШБАЕВА,Kaspi Bank,kaspi_en.pdf,IP,СЕРЕЕШБАЕВА
+2025-07-13,"- 650,00 KZT",-650.0,KZT,Purchases,Subscription Services,Kaspi Bank,kaspi_en.pdf,,Subscription Services
+2025-07-15,"- 110,00 KZT",-110.0,KZT,Purchases,ZETA,Kaspi Bank,kaspi_en.pdf,,ZETA
+2025-07-15,"- 232,75 KZT",-232.75,KZT,Others,Commission for transfer of other banks,Kaspi Bank,kaspi_en.pdf,,
+2025-07-15,"- 24 500,00 KZT",-24500.0,KZT,Transfers,To card Freedom Finance Bank*7326,Kaspi Bank,kaspi_en.pdf,,
+2025-07-17,"- 2 840,00 KZT",-2840.0,KZT,Purchases,Ваниль кондитерлік дүкені Астана,Kaspi Bank,kaspi_en.pdf,,Ваниль кондитерлік дүкені Астана
+2025-07-17,"- 4 200,00 KZT",-4200.0,KZT,Purchases,ИП Смагулов,Kaspi Bank,kaspi_en.pdf,IP,Смагулов
+2025-07-17,"- 4 792,00 KZT",-4792.0,KZT,Purchases,Cotton,Kaspi Bank,kaspi_en.pdf,,Cotton
+2025-07-19,"- 550,00 KZT",-550.0,KZT,Purchases,Didi coffee,Kaspi Bank,kaspi_en.pdf,,Didi coffee
+2025-07-20,"- 14 500,00 KZT",-14500.0,KZT,Transfers,Нургуль Ж.,Kaspi Bank,kaspi_en.pdf,,
+2025-07-20,"- 10 000,00 KZT",-10000.0,KZT,Transfers,Алуа Ш.,Kaspi Bank,kaspi_en.pdf,,
+2025-07-21,"- 5 193,00 KZT",-5193.0,KZT,Purchases,Леонардо,Kaspi Bank,kaspi_en.pdf,,Леонардо
+2025-07-21,"- 1 515,00 KZT",-1515.0,KZT,Transfers,Арайлым Б.,Kaspi Bank,kaspi_en.pdf,,
+2025-07-21,"- 820,00 KZT",-820.0,KZT,Transfers,Дастан А.,Kaspi Bank,kaspi_en.pdf,,
+2025-07-23,"- 10 799,00 KZT",-10799.0,KZT,Purchases,Золотое Яблоко,Kaspi Bank,kaspi_en.pdf,,Золотое Яблоко
+2025-07-23,"- 42 400,00 KZT",-42400.0,KZT,Purchases,Jo Malone,Kaspi Bank,kaspi_en.pdf,,Jo Malone
+2025-07-26,"- 300,00 KZT",-300.0,KZT,Transfers,Саят Т.,Kaspi Bank,kaspi_en.pdf,,
+2025-07-27,"- 73 500,00 KZT",-73500.0,KZT,Purchases,Yes Style,Kaspi Bank,kaspi_en.pdf,,Yes Style
+2025-07-27,"- 7 000,00 KZT",-7000.0,KZT,Purchases,Банный комплекс Тенговка,Kaspi Bank,kaspi_en.pdf,,Банный комплекс Тенговка
+2025-08-10,"- 3 800,00 KZT",-3800.0,KZT,Transfers,Жаннұр С.,Kaspi Bank,kaspi_en.pdf,,
+2025-08-14,"- 5 000,00 KZT",-5000.0,KZT,Purchases,ROYALACE TENNIS CLUB ОП,Kaspi Bank,kaspi_en.pdf,,ROYALACE TENNIS CLUB ОП
+2025-08-15,"- 4 000,00 KZT",-4000.0,KZT,Purchases,Джунгли.Аквапарк.Колесо,Kaspi Bank,kaspi_en.pdf,,Джунгли.Аквапарк.Колесо
+2025-08-15,"- 17 100,00 KZT",-17100.0,KZT,Purchases,CENTR SEMEYNOGO OTDYHA AIL,Kaspi Bank,kaspi_en.pdf,,CENTR SEMEYNOGO OTDYHA AIL
+2025-08-16,"- 200,00 KZT",-200.0,KZT,Purchases,Парковка. Аэропорт Н. Назарбаев,Kaspi Bank,kaspi_en.pdf,,Парковка. Аэропорт Н. Назарбаев
+2025-08-17,"+ 1 667,00 KZT",1667.0,KZT,Replenishment,Айсулу Т.,Kaspi Bank,kaspi_en.pdf,,
+2025-08-17,"+ 1 667,00 KZT",1667.0,KZT,Replenishment,Жансая О.,Kaspi Bank,kaspi_en.pdf,,
+2025-08-17,"+ 3 500,00 KZT",3500.0,KZT,Replenishment,Райша А.,Kaspi Bank,kaspi_en.pdf,,
+2025-08-18,"- 28 500,00 KZT",-28500.0,KZT,Purchases,N Ó R A ЖК Галамат,Kaspi Bank,kaspi_en.pdf,,N Ó R A ЖК Галамат
+2025-08-18,"+ 5 700,00 KZT",5700.0,KZT,Replenishment,Сұлтан М.,Kaspi Bank,kaspi_en.pdf,,
+2025-08-18,"+ 5 700,00 KZT",5700.0,KZT,Replenishment,Қайырхан К.,Kaspi Bank,kaspi_en.pdf,,
+2025-08-18,"+ 5 700,00 KZT",5700.0,KZT,Replenishment,Даниал Т.,Kaspi Bank,kaspi_en.pdf,,
+2025-08-19,"- 5 000,00 KZT",-5000.0,KZT,Purchases,Парковка. Назарбаев Университет,Kaspi Bank,kaspi_en.pdf,,Парковка. Назарбаев Университет
+2025-08-21,"- 300,00 KZT",-300.0,KZT,Purchases,Ваш Копицентр,Kaspi Bank,kaspi_en.pdf,,Ваш Копицентр
+2025-08-21,"- 2 150,00 KZT",-2150.0,KZT,Purchases,Fermento NU,Kaspi Bank,kaspi_en.pdf,,Fermento NU
+2025-08-23,"- 1 000,00 KZT",-1000.0,KZT,Purchases,прочее,Kaspi Bank,kaspi_en.pdf,,прочее
+2025-08-23,"- 2 070,00 KZT",-2070.0,KZT,Purchases,IP GREEN KITCHEN,Kaspi Bank,kaspi_en.pdf,IP,GREEN KITCHEN
+2025-08-26,"- 5 500,00 KZT",-5500.0,KZT,Purchases,ИП Аймакова АС,Kaspi Bank,kaspi_en.pdf,IP,Аймакова АС
+2025-08-26,"- 3 500,00 KZT",-3500.0,KZT,Transfers,Аян Т.,Kaspi Bank,kaspi_en.pdf,,
+2025-08-27,"- 15 000,00 KZT",-15000.0,KZT,Purchases,Охранные агентства,Kaspi Bank,kaspi_en.pdf,,Охранные агентства
+2025-08-27,"- 20 000,00 KZT",-20000.0,KZT,Purchases,Услуги Қазақтелеком по лицевому счету,Kaspi Bank,kaspi_en.pdf,,Услуги Қазақтелеком по лицевому счету
+2025-08-27,"- 27 830,92 KZT",-27830.92,KZT,Purchases,Астана ЕРЦ,Kaspi Bank,kaspi_en.pdf,,Астана ЕРЦ
+2025-08-27,"- 8 181,77 KZT",-8181.77,KZT,Purchases,ПРЭК квитанция,Kaspi Bank,kaspi_en.pdf,,ПРЭК квитанция
+2025-08-27,"- 22 427,60 KZT",-22427.6,KZT,Purchases,BI Group,Kaspi Bank,kaspi_en.pdf,,BI Group
+2025-08-29,"- 7 554,49 KZT",-7554.49,KZT,Purchases,Астана-Теплотранзит. Теплоэнергия,Kaspi Bank,kaspi_en.pdf,,Астана-Теплотранзит. Теплоэнергия
+2025-08-29,"- 2 585,00 KZT",-2585.0,KZT,Transfers,Ойбек Ж.,Kaspi Bank,kaspi_en.pdf,,
+2025-09-01,"- 3 000,00 KZT",-3000.0,KZT,Purchases,KopKop Store,Kaspi Bank,kaspi_en.pdf,,KopKop Store
+2025-09-01,"- 73 700,00 KZT",-73700.0,KZT,Transfers,Нұрғасыр Д.,Kaspi Bank,kaspi_en.pdf,,
+2025-09-01,"- 279 392,00 KZT",-279392.0,KZT,Purchases,ТОО KZ Sleep Market КЗ Слип Маркет,Kaspi Bank,kaspi_en.pdf,TOO,KZ Sleep Market КЗ Слип Маркет
+2025-09-02,"- 1 640,00 KZT",-1640.0,KZT,Purchases,EspressoDay,Kaspi Bank,kaspi_en.pdf,,EspressoDay
+2025-09-03,"- 1 130,00 KZT",-1130.0,KZT,Purchases,Школа НИШ ФМН,Kaspi Bank,kaspi_en.pdf,,Школа НИШ ФМН
+2025-09-04,"- 53 000,00 KZT",-53000.0,KZT,Transfers,Саят Е.,Kaspi Bank,kaspi_en.pdf,,
+2025-09-07,"- 2 330,00 KZT",-2330.0,KZT,Purchases,ИП ЛУРОВ,Kaspi Bank,kaspi_en.pdf,IP,ЛУРОВ
+2025-09-07,"- 4 900,00 KZT",-4900.0,KZT,Purchases,ИП ЗАЙЦЕВА МАЙЯ АЛЕКСАНДРОВНА,Kaspi Bank,kaspi_en.pdf,IP,ЗАЙЦЕВА МАЙЯ АЛЕКСАНДРОВНА
+2025-09-07,"- 402,00 KZT",-402.0,KZT,Purchases,ИП INFERNO,Kaspi Bank,kaspi_en.pdf,IP,INFERNO
+2025-09-07,"- 506,00 KZT",-506.0,KZT,Purchases,Ип Айтенов,Kaspi Bank,kaspi_en.pdf,IP,Айтенов
+2025-09-07,"- 603,00 KZT",-603.0,KZT,Purchases,UpGrade_,Kaspi Bank,kaspi_en.pdf,,UpGrade_
+2025-09-07,"- 604,00 KZT",-604.0,KZT,Purchases,ИП MIA BABY STORE,Kaspi Bank,kaspi_en.pdf,IP,MIA BABY STORE
+2025-09-08,"- 2 500,00 KZT",-2500.0,KZT,Transfers,Айым А.,Kaspi Bank,kaspi_en.pdf,,
+2025-09-09,"- 5 000,00 KZT",-5000.0,KZT,Purchases,MY.NU.EDU.KZ,Kaspi Bank,kaspi_en.pdf,,MY.NU.EDU.KZ
+2025-09-12,"- 7 500,00 KZT",-7500.0,KZT,Purchases,ИП HAPPY FUTURE,Kaspi Bank,kaspi_en.pdf,IP,HAPPY FUTURE
+2025-09-12,"- 785,00 KZT",-785.0,KZT,Purchases,ИП LIME SHOP,Kaspi Bank,kaspi_en.pdf,IP,LIME SHOP
+2025-09-12,"- 3 990,00 KZT",-3990.0,KZT,Purchases,ИП Игрушки,Kaspi Bank,kaspi_en.pdf,IP,Игрушки
+2025-09-18,"- 1 890,00 KZT",-1890.0,KZT,Purchases,WILDBERRIES,Kaspi Bank,kaspi_en.pdf,,WILDBERRIES
+2025-09-18,"- 1 850,00 KZT",-1850.0,KZT,Purchases,Yandex.GO,Kaspi Bank,kaspi_en.pdf,,Yandex.GO
+2025-09-18,"- 500,00 KZT",-500.0,KZT,Transfers,Нұрай Н.,Kaspi Bank,kaspi_en.pdf,,
+2025-09-21,"- 5 000,00 KZT",-5000.0,KZT,Transfers,Анастасия П.,Kaspi Bank,kaspi_en.pdf,,
+2025-09-22,"- 32 500,00 KZT",-32500.0,KZT,Purchases,Holy Cow,Kaspi Bank,kaspi_en.pdf,,Holy Cow
+2025-09-22,"- 2 890,00 KZT",-2890.0,KZT,Transfers,Даниял С.,Kaspi Bank,kaspi_en.pdf,,
+2025-09-23,"- 1 300,00 KZT",-1300.0,KZT,Purchases,DailyCup NU,Kaspi Bank,kaspi_en.pdf,,DailyCup NU
+2025-09-25,"- 790,00 KZT",-790.0,KZT,Purchases,Назарбаевский,Kaspi Bank,kaspi_en.pdf,,Назарбаевский
+2025-09-26,"- 19 200,00 KZT",-19200.0,KZT,Purchases,Assorti market,Kaspi Bank,kaspi_en.pdf,,Assorti market
+2025-09-28,"- 1 375,00 KZT",-1375.0,KZT,Purchases,STEAMGAMES.COM 4259522985,Kaspi Bank,kaspi_en.pdf,,STEAMGAMES.COM 4259522985
+2025-09-30,"- 820,00 KZT",-820.0,KZT,Purchases,Аптека Альфамед,Kaspi Bank,kaspi_en.pdf,,Аптека Альфамед
+2025-09-30,"- 830,00 KZT",-830.0,KZT,Purchases,Орда маркет Рахмет,Kaspi Bank,kaspi_en.pdf,,Орда маркет Рахмет
+2025-09-30,"- 140,00 KZT",-140.0,KZT,Purchases,Аптека 329,Kaspi Bank,kaspi_en.pdf,,Аптека 329
+2025-10-02,"- 4 000,00 KZT",-4000.0,KZT,Purchases,Университет,Kaspi Bank,kaspi_en.pdf,,Университет
+2025-10-03,"+ 20,00 KZT",20.0,KZT,Purchases,YANDEX.PLUS,Kaspi Bank,kaspi_en.pdf,,YANDEX.PLUS
+2025-10-03,"- 2 800,00 KZT",-2800.0,KZT,Purchases,Burger King Keruen Astana,Kaspi Bank,kaspi_en.pdf,,Burger King Keruen Astana
+2025-10-04,"- 790,00 KZT",-790.0,KZT,Transfers,Ерхан С.,Kaspi Bank,kaspi_en.pdf,,
+2025-10-07,"- 1 100,00 KZT",-1100.0,KZT,Purchases,Costa Coffee 18701,Kaspi Bank,kaspi_en.pdf,,Costa Coffee 18701
+2025-10-07,"- 2 700,00 KZT",-2700.0,KZT,Purchases,Burger King Mega Almaty,Kaspi Bank,kaspi_en.pdf,,Burger King Mega Almaty
+2025-10-08,"+ 500 000,00 KZT",500000.0,KZT,Replenishment,Ерсұлтан Б.,Kaspi Bank,kaspi_en.pdf,,
+2025-10-09,"- 500,00 KZT",-500.0,KZT,Purchases,Парковка. ТРЦ Dostyk Plaza,Kaspi Bank,kaspi_en.pdf,,Парковка. ТРЦ Dostyk Plaza
+2025-10-09,"- 500,00 KZT",-500.0,KZT,Purchases,MUSEUMOFARTS,Kaspi Bank,kaspi_en.pdf,,MUSEUMOFARTS
+2025-10-11,"- 1 500,00 KZT",-1500.0,KZT,Purchases,Coffner,Kaspi Bank,kaspi_en.pdf,,Coffner
+2025-10-11,"- 700,00 KZT",-700.0,KZT,Purchases,Subscription Service,Kaspi Bank,kaspi_en.pdf,,Subscription Service
+2025-10-14,"- 1 000,00 KZT",-1000.0,KZT,Purchases,ИП САГДАТОВА,Kaspi Bank,kaspi_en.pdf,IP,САГДАТОВА
+2025-10-14,"- 8 000,00 KZT",-8000.0,KZT,Purchases,ИП АШИРОВ,Kaspi Bank,kaspi_en.pdf,IP,АШИРОВ
+2025-10-14,"- 6 668,00 KZT",-6668.0,KZT,Purchases,OZON.KZ,Kaspi Bank,kaspi_en.pdf,,OZON.KZ
+2025-10-15,"- 95 460,00 KZT",-95460.0,KZT,Purchases,THE BRITISH COUNCIL,Kaspi Bank,kaspi_en.pdf,,THE BRITISH COUNCIL
+2025-10-17,"- 2 000,00 KZT",-2000.0,KZT,Purchases,Фонд «Человек в маске»,Kaspi Bank,kaspi_en.pdf,,Фонд «Человек в маске»
+2025-10-18,"+ 2 329,00 KZT",2329.0,KZT,Purchases,Magnum,Kaspi Bank,kaspi_en.pdf,,Magnum
+2025-10-18,"- 15 772,81 KZT",-15772.81,KZT,Purchases,"COURSERA.ORG (- 29,00 USD)",Kaspi Bank,kaspi_en.pdf,,"COURSERA.ORG - 29,00 USD"
+2025-10-19,"- 7 000,00 KZT",-7000.0,KZT,Purchases,ИП A-TRANSLATION,Kaspi Bank,kaspi_en.pdf,IP,A-TRANSLATION
+2025-10-19,"- 19 420,94 KZT",-19420.94,KZT,Purchases,FFPAY*SCIENCE-PUBLISH,Kaspi Bank,kaspi_en.pdf,,FFPAY*SCIENCE-PUBLISH
+2025-10-20,"- 1 500,00 KZT",-1500.0,KZT,Transfers,Adilet E.,Kaspi Bank,kaspi_en.pdf,,
+2025-10-26,"- 3 600,00 KZT",-3600.0,KZT,Purchases,ALFA Game Club,Kaspi Bank,kaspi_en.pdf,,ALFA Game Club
+2025-10-26,"- 3 500,00 KZT",-3500.0,KZT,Purchases,Центр фигурного катания ICE SKATE,Kaspi Bank,kaspi_en.pdf,,Центр фигурного катания ICE SKATE
+2025-10-27,"- 4 590,00 KZT",-4590.0,KZT,Purchases,Tap-Tatti ТД Сауран,Kaspi Bank,kaspi_en.pdf,,Tap-Tatti ТД Сауран
+2025-10-27,"- 2 500,00 KZT",-2500.0,KZT,Transfers,Қарақат Х.,Kaspi Bank,kaspi_en.pdf,,
+2025-10-27,"- 2 000,00 KZT",-2000.0,KZT,Purchases,ТЦ Сауран,Kaspi Bank,kaspi_en.pdf,,ТЦ Сауран
+2025-10-27,"- 3 290,00 KZT",-3290.0,KZT,Transfers,Ақжан К.,Kaspi Bank,kaspi_en.pdf,,
+2025-10-27,"- 4 660,00 KZT",-4660.0,KZT,Transfers,Айгул Д.,Kaspi Bank,kaspi_en.pdf,,
+2025-10-27,"- 16 000,00 KZT",-16000.0,KZT,Purchases,КАЯ,Kaspi Bank,kaspi_en.pdf,,КАЯ
+2025-10-28,"- 10 000,00 KZT",-10000.0,KZT,Purchases,Mobi Pro,Kaspi Bank,kaspi_en.pdf,,Mobi Pro
+2025-10-28,"- 6 300,00 KZT",-6300.0,KZT,Transfers,Жалғас М.,Kaspi Bank,kaspi_en.pdf,,
+2025-10-31,"- 28 970,00 KZT",-28970.0,KZT,Purchases,Calzedonia,Kaspi Bank,kaspi_en.pdf,,Calzedonia
+2025-10-31,"- 3 240,00 KZT",-3240.0,KZT,Purchases,Lady Collection,Kaspi Bank,kaspi_en.pdf,,Lady Collection
+2025-11-01,"- 10 000,00 KZT",-10000.0,KZT,Purchases,Ice skate,Kaspi Bank,kaspi_en.pdf,,Ice skate
+2025-11-01,"- 1 500,00 KZT",-1500.0,KZT,Purchases,IP TULPAR,Kaspi Bank,kaspi_en.pdf,IP,TULPAR
+2025-11-02,"- 4 310,00 KZT",-4310.0,KZT,Transfers,Эргашали Э.,Kaspi Bank,kaspi_en.pdf,,
+2025-11-02,"- 1 830,00 KZT",-1830.0,KZT,Purchases,Сауран,Kaspi Bank,kaspi_en.pdf,,Сауран
+2025-11-02,"- 2 250,00 KZT",-2250.0,KZT,Purchases,birlik-express.kz,Kaspi Bank,kaspi_en.pdf,,birlik-express.kz
+2025-11-02,"- 1 200,00 KZT",-1200.0,KZT,Purchases,YZ ДШ,Kaspi Bank,kaspi_en.pdf,,YZ ДШ
+2025-11-03,"- 1 652,00 KZT",-1652.0,KZT,Purchases,Glamour shop,Kaspi Bank,kaspi_en.pdf,,Glamour shop
+2025-11-03,"- 1 977,00 KZT",-1977.0,KZT,Purchases,ИП ВАХЕДИ АБДУЛЛАХ,Kaspi Bank,kaspi_en.pdf,IP,ВАХЕДИ АБДУЛЛАХ
+2025-11-03,"- 2 480,00 KZT",-2480.0,KZT,Purchases,ECO_SHINE,Kaspi Bank,kaspi_en.pdf,,ECO_SHINE
+2025-11-03,"- 1 898,00 KZT",-1898.0,KZT,Purchases,Fast Shop,Kaspi Bank,kaspi_en.pdf,,Fast Shop
+2025-11-03,"- 24 000,00 KZT",-24000.0,KZT,Purchases,ИП БЕКСУЛТАН,Kaspi Bank,kaspi_en.pdf,IP,БЕКСУЛТАН
+2025-11-03,"- 599,00 KZT",-599.0,KZT,Purchases,YOIMISE,Kaspi Bank,kaspi_en.pdf,,YOIMISE
+2025-11-03,"- 3 000,00 KZT",-3000.0,KZT,Purchases,BEK,Kaspi Bank,kaspi_en.pdf,,BEK
+2025-11-06,"- 6 000,00 KZT",-6000.0,KZT,Transfers,To card Halyk Bank*4116,Kaspi Bank,kaspi_en.pdf,,
+2025-11-07,"- 7 000,00 KZT",-7000.0,KZT,Transfers,Темірлан Қ.,Kaspi Bank,kaspi_en.pdf,,
+2025-11-08,"- 41 200,00 KZT",-41200.0,KZT,Purchases,Colibri,Kaspi Bank,kaspi_en.pdf,,Colibri
+2025-11-10,"- 15 900,00 KZT",-15900.0,KZT,Purchases,ИП IQ,Kaspi Bank,kaspi_en.pdf,IP,IQ
+2025-11-10,"- 9 625,00 KZT",-9625.0,KZT,Purchases,HOBBY_BOUTIQUE,Kaspi Bank,kaspi_en.pdf,,HOBBY_BOUTIQUE
+2025-11-10,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Айгерим К.,Kaspi Bank,kaspi_en.pdf,,
+2025-11-11,"- 700,00 KZT",-700.0,KZT,Purchases,SPOTIFY,Kaspi Bank,kaspi_en.pdf,,SPOTIFY
+2025-11-12,"- 7 000,00 KZT",-7000.0,KZT,Purchases,ИП НИКА,Kaspi Bank,kaspi_en.pdf,IP,НИКА

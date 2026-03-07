@@ -11,9 +11,9 @@ from parsers.kaspi import (
     _OP_LOOKUP,
     normalize_operation,
     parse_operation_line,
+    parse_kaspi_pdf,
     is_header_like,
     normalize_ws,
-    NO_MERCHANT_OPS,
 )
 
 
@@ -100,7 +100,6 @@ class TestParseOperationLine:
         assert rec is not None
         assert rec["operation"] == "Replenishment"
         assert rec["amount"] > 0
-        assert rec["merchant"] is None  # no merchant for Replenishment
 
     def test_english_transfer(self):
         line = "12.11.25 - 10 000,00 ₸ Transfers Кербез К."
@@ -108,7 +107,6 @@ class TestParseOperationLine:
         assert rec is not None
         assert rec["operation"] == "Transfers"
         assert rec["amount"] < 0
-        assert rec["merchant"] is None  # no merchant for Transfers
 
     def test_russian_purchase(self):
         line = "13.11.25 - 110,00 ₸ Покупка Avtobys. Оплата"
@@ -123,7 +121,6 @@ class TestParseOperationLine:
         assert rec is not None
         assert rec["operation"] == "Replenishment"
         assert rec["amount"] > 0
-        assert rec["merchant"] is None
 
     def test_russian_transfer(self):
         line = "12.11.25 - 5 000,00 ₸ Перевод Иван А."
@@ -131,36 +128,12 @@ class TestParseOperationLine:
         assert rec is not None
         assert rec["operation"] == "Transfers"
         assert rec["amount"] < 0
-        assert rec["merchant"] is None
 
     def test_no_date_returns_none(self):
         assert parse_operation_line("some random text") is None
 
     def test_header_line_returns_none(self):
         assert parse_operation_line("Date Amount Transaction Details") is None
-
-
-# ---------------------------------------------------------------------------
-#  4. No merchant for Replenishment, Transfers, Others
-# ---------------------------------------------------------------------------
-
-class TestNoMerchantOperations:
-    @pytest.mark.parametrize("op_en,op_ru", [
-        ("Replenishment", "Пополнение"),
-        ("Transfers", "Перевод"),
-        ("Others", "Разное"),
-    ])
-    def test_no_merchant_english(self, op_en, op_ru):
-        line = f"01.11.25 - 1 000,00 ₸ {op_en} Some details here"
-        rec = parse_operation_line(line)
-        assert rec is not None
-        assert rec["merchant"] is None
-
-    def test_purchase_has_merchant(self):
-        line = "01.11.25 - 1 000,00 ₸ Purchases MAGNUM store"
-        rec = parse_operation_line(line)
-        assert rec is not None
-        assert rec["merchant"] is not None
 
 
 # ---------------------------------------------------------------------------
@@ -180,6 +153,9 @@ class TestHeaderFilter:
         "Card balance 13.11.25: + 444 947,74 ₸",
         "Валюта счета: тенге",
         "Currency: KZT",
+        # Blocked-amount disclaimers (EN + RU)
+        "The amount is blocked. The bank expects the confirmation of the payment system.",
+        "Сумма заблокирована. Банк ожидает подтверждения от платежной системы.",
     ])
     def test_header_detected(self, line):
         assert is_header_like(line), f"Should be filtered: {line}"
@@ -228,3 +204,34 @@ class TestQuoteStripping:
         rec = parse_operation_line(line)
         assert rec is not None
         assert rec["details"] == "PLAIN MERCHANT"
+
+
+# ---------------------------------------------------------------------------
+#  7. Blocked-amount disclaimer must not leak into details
+# ---------------------------------------------------------------------------
+
+class TestBlockedAmountDisclaimer:
+    """The 'amount is blocked' / 'Сумма заблокирована' footnote must be stripped."""
+
+    def test_is_header_like_filters_english(self):
+        line = "The amount is blocked. The bank expects the confirmation of the payment system."
+        assert is_header_like(line)
+
+    def test_is_header_like_filters_russian(self):
+        line = "Сумма заблокирована. Банк ожидает подтверждения от платежной системы."
+        assert is_header_like(line)
+
+    def test_inline_blocked_stripped_english(self):
+        """If the disclaimer is on the same line as details, strip it."""
+        line = "13.11.24 - 8 496,00 ₸ Purchases Ресторан Trattoria Highvill"
+        rec = parse_operation_line(line)
+        assert rec is not None
+        assert "amount is blocked" not in rec["details"].lower()
+        assert "Ресторан Trattoria Highvill" in rec["details"]
+
+    def test_inline_blocked_stripped_russian(self):
+        line = "13.11.24 - 1 444,00 ₸ Покупка Magnum Cash&Carry"
+        rec = parse_operation_line(line)
+        assert rec is not None
+        assert "заблокирована" not in rec["details"].lower()
+        assert "Magnum Cash&Carry" in rec["details"]

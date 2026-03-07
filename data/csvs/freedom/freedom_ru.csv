@@ -1,48 +1,48 @@
-﻿date,amount_raw,amount,amount_abs,currency,operation,merchant,details,bank,source_file,category
-2025-08-23,"-2,060.00 ₸",-2060.0,2060.0,KZT,Acquiring,YANDEX.GO,YANDEX.GO ALMATY KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-08-24,-640.00 ₸,-640.0,640.0,KZT,Acquiring,IP GLOBAL MANAGEMENT,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-08-25,-385.00 ₸,-385.0,385.0,KZT,Acquiring,IP GLOBAL MANAGEMENT,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-01,-350.00 ₸,-350.0,350.0,KZT,Acquiring,IP GLOBAL MANAGEMENT,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-01,"-1,910.00 ₸",-1910.0,1910.0,KZT,Acquiring,YANDEX.GO,YANDEX.GO ALMATY KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-01,"-2,230.00 ₸",-2230.0,2230.0,KZT,Acquiring,YANDEX.GO,YANDEX.GO ALMATY KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-01,-781.00 ₸,-781.0,781.0,KZT,Acquiring,MAGNUM.ASF46.KCO-2.,MAGNUM.ASF46.KCO-2. ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,продукты
-2025-09-01,"-26,300.00 ₸",-26300.0,26300.0,KZT,Acquiring,EXTAZ.KZ BOUTIQUE,EXTAZ.KZ BOUTIQUE ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-01,"-6,000.00 ₸",-6000.0,6000.0,KZT,Transfer,,Лабакбай Болат Анварұлы Безвозмездный перевод,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-01,"-40,000.00 ₸",-40000.0,40000.0,KZT,Transfer,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-01,"+100,090.00 ₸",100090.0,100090.0,KZT,Replenishment,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-02,-675.00 ₸,-675.0,675.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-02,"+110,000.00 ₸",110000.0,110000.0,KZT,Replenishment,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-02,"-4,000.00 ₸",-4000.0,4000.0,KZT,Transfer,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-02,-650.00 ₸,-650.0,650.0,KZT,Acquiring,IP GLOBAL MANAGEMENT,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-03,"-2,700.00 ₸",-2700.0,2700.0,KZT,Transfer,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-03,"-1,400.00 ₸",-1400.0,1400.0,KZT,Acquiring,IP SUNNATOVA,IP SUNNATOVA ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-03,-570.00 ₸,-570.0,570.0,KZT,Acquiring,IP DANIYAROV A,IP DANIYAROV A ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-03,"-12,840.00 ₸",-12840.0,12840.0,KZT,Payment,Ticketon Events Тикетон Евентс,ТОО Ticketon Events Тикетон Евентс За оплату заказа Тикетон,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-03,"-160,000.00 ₸",-160000.0,160000.0,KZT,Transfer,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-03,"+179,800.00 ₸",179800.0,179800.0,KZT,Replenishment,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-03,"-1,550.00 ₸",-1550.0,1550.0,KZT,Acquiring,HEALTH PROJECT,HEALTH PROJECT NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-03,-350.00 ₸,-350.0,350.0,KZT,Acquiring,IP GLOBAL MANAGEMENT,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-04,"-1,245.00 ₸",-1245.0,1245.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-04,-610.00 ₸,-610.0,610.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-04,-520.00 ₸,-520.0,520.0,KZT,Acquiring,IP GREEN FOOD,IP GREEN FOOD ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,еда
-2025-09-04,-800.00 ₸,-800.0,800.0,KZT,Acquiring,IP GREEN FOOD,IP GREEN FOOD ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,еда
-2025-09-04,"+45,000.00 ₸",45000.0,45000.0,KZT,Replenishment,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-04,"-1,190.00 ₸",-1190.0,1190.0,KZT,Acquiring,IP SARSEN,IP SARSEN ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-04,-740.00 ₸,-740.0,740.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-04,-850.00 ₸,-850.0,850.0,KZT,Acquiring,IP GLOBAL MANAGEMENT,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-05,"-10,000.00 ₸",-10000.0,10000.0,KZT,Transfer,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-05,"-2,480.00 ₸",-2480.0,2480.0,KZT,Acquiring,IP GREEN FOOD,IP GREEN FOOD ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,еда
-2025-09-05,-845.00 ₸,-845.0,845.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-05,"-1,100.00 ₸",-1100.0,1100.0,KZT,Acquiring,IP MUKAZHANOVA,IP MUKAZHANOVA NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-05,"-3,000.00 ₸",-3000.0,3000.0,KZT,Payment,Ticketon Events Тикетон Евентс,ТОО Ticketon Events Тикетон Евентс За оплату заказа Тикетон,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-06,-140.00 ₸,-140.0,140.0,KZT,Pending amount,TOO KIKIS MS,TOO KIKIS MS NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-06,"+3,300.00 ₸",3300.0,3300.0,KZT,Replenishment,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-06,"+2,000.00 ₸",2000.0,2000.0,KZT,Replenishment,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-06,"-9,800.00 ₸",-9800.0,9800.0,KZT,Pending amount,TOO KIKIS MS,TOO KIKIS MS NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-06,"+29,700.00 ₸",29700.0,29700.0,KZT,Replenishment,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-06,-570.00 ₸,-570.0,570.0,KZT,Pending amount,IP DANIYAROV A,IP DANIYAROV A ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-06,"-5,000.00 ₸",-5000.0,5000.0,KZT,Transfer,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-06,"-70,000.00 ₸",-70000.0,70000.0,KZT,Transfer,,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
-2025-09-06,-950.00 ₸,-950.0,950.0,KZT,Pending amount,HP CANTEEN,HP CANTEEN NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-06,"-1,670.00 ₸",-1670.0,1670.0,KZT,Acquiring,IP DANIYAROV A,IP DANIYAROV A ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
-2025-09-07,"-15,000.00 ₸",-15000.0,15000.0,KZT,Pending amount,Перевод с карты на карту,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+﻿date,amount_raw,amount,amount_abs,currency,operation,details,bank,source_file,category
+2025-08-23,"-2,060.00 ₸",-2060.0,2060.0,KZT,Acquiring,YANDEX.GO ALMATY KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-08-24,-640.00 ₸,-640.0,640.0,KZT,Acquiring,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-08-25,-385.00 ₸,-385.0,385.0,KZT,Acquiring,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-01,-350.00 ₸,-350.0,350.0,KZT,Acquiring,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-01,"-1,910.00 ₸",-1910.0,1910.0,KZT,Acquiring,YANDEX.GO ALMATY KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-01,"-2,230.00 ₸",-2230.0,2230.0,KZT,Acquiring,YANDEX.GO ALMATY KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-01,-781.00 ₸,-781.0,781.0,KZT,Acquiring,MAGNUM.ASF46.KCO-2. ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,продукты
+2025-09-01,"-26,300.00 ₸",-26300.0,26300.0,KZT,Acquiring,EXTAZ.KZ BOUTIQUE ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-01,"-6,000.00 ₸",-6000.0,6000.0,KZT,Transfer,Лабакбай Болат Анварұлы Безвозмездный перевод,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-01,"-40,000.00 ₸",-40000.0,40000.0,KZT,Transfer,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-01,"+100,090.00 ₸",100090.0,100090.0,KZT,Replenishment,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-02,-675.00 ₸,-675.0,675.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-02,"+110,000.00 ₸",110000.0,110000.0,KZT,Replenishment,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-02,"-4,000.00 ₸",-4000.0,4000.0,KZT,Transfer,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-02,-650.00 ₸,-650.0,650.0,KZT,Acquiring,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-03,"-2,700.00 ₸",-2700.0,2700.0,KZT,Transfer,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-03,"-1,400.00 ₸",-1400.0,1400.0,KZT,Acquiring,IP SUNNATOVA ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-03,-570.00 ₸,-570.0,570.0,KZT,Acquiring,IP DANIYAROV A ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-03,"-12,840.00 ₸",-12840.0,12840.0,KZT,Payment,ТОО Ticketon Events Тикетон Евентс За оплату заказа Тикетон,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-03,"-160,000.00 ₸",-160000.0,160000.0,KZT,Transfer,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-03,"+179,800.00 ₸",179800.0,179800.0,KZT,Replenishment,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-03,"-1,550.00 ₸",-1550.0,1550.0,KZT,Acquiring,HEALTH PROJECT NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-03,-350.00 ₸,-350.0,350.0,KZT,Acquiring,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-04,"-1,245.00 ₸",-1245.0,1245.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-04,-610.00 ₸,-610.0,610.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-04,-520.00 ₸,-520.0,520.0,KZT,Acquiring,IP GREEN FOOD ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,еда
+2025-09-04,-800.00 ₸,-800.0,800.0,KZT,Acquiring,IP GREEN FOOD ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,еда
+2025-09-04,"+45,000.00 ₸",45000.0,45000.0,KZT,Replenishment,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-04,"-1,190.00 ₸",-1190.0,1190.0,KZT,Acquiring,IP SARSEN ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-04,-740.00 ₸,-740.0,740.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-04,-850.00 ₸,-850.0,850.0,KZT,Acquiring,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-05,"-10,000.00 ₸",-10000.0,10000.0,KZT,Transfer,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-05,"-2,480.00 ₸",-2480.0,2480.0,KZT,Acquiring,IP GREEN FOOD ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,еда
+2025-09-05,-845.00 ₸,-845.0,845.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-05,"-1,100.00 ₸",-1100.0,1100.0,KZT,Acquiring,IP MUKAZHANOVA NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-05,"-3,000.00 ₸",-3000.0,3000.0,KZT,Payment,ТОО Ticketon Events Тикетон Евентс За оплату заказа Тикетон,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-06,-140.00 ₸,-140.0,140.0,KZT,Pending amount,TOO KIKIS MS NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-06,"+3,300.00 ₸",3300.0,3300.0,KZT,Replenishment,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-06,"+2,000.00 ₸",2000.0,2000.0,KZT,Replenishment,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-06,"-9,800.00 ₸",-9800.0,9800.0,KZT,Pending amount,TOO KIKIS MS NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-06,"+29,700.00 ₸",29700.0,29700.0,KZT,Replenishment,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-06,-570.00 ₸,-570.0,570.0,KZT,Pending amount,IP DANIYAROV A ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-06,"-5,000.00 ₸",-5000.0,5000.0,KZT,Transfer,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-06,"-70,000.00 ₸",-70000.0,70000.0,KZT,Transfer,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы
+2025-09-06,-950.00 ₸,-950.0,950.0,KZT,Pending amount,HP CANTEEN NUR-SULTAN KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-06,"-1,670.00 ₸",-1670.0,1670.0,KZT,Acquiring,IP DANIYAROV A ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,
+2025-09-07,"-15,000.00 ₸",-15000.0,15000.0,KZT,Pending amount,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы

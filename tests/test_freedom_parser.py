@@ -216,8 +216,8 @@ class TestFixSimilarDetails:
     def test_corrupted_detail_gets_fixed(self):
         """NUR-ULTAN (broken) should be replaced by NUR-SULTAN (full)."""
         records = [
-            {"date": "2025-07-05", "amount": -120.0, "details": "SUPERMARKET GALMART NUR-SULTAN KZ", "merchant": None},
-            {"date": "2025-07-06", "amount": -200.0, "details": "SUPERMARKET GALMART NUR-ULTAN KZ", "merchant": None},
+            {"date": "2025-07-05", "amount": -120.0, "details": "SUPERMARKET GALMART NUR-SULTAN KZ"},
+            {"date": "2025-07-06", "amount": -200.0, "details": "SUPERMARKET GALMART NUR-ULTAN KZ"},
         ]
         result = fix_similar_details(records)
         assert len(result) == 2, "No rows should be removed"
@@ -226,8 +226,8 @@ class TestFixSimilarDetails:
     def test_all_rows_preserved(self):
         """Even exact duplicates are kept — only details text is corrected."""
         records = [
-            {"date": "2025-09-23", "amount": -465.0, "details": "MAGNUM.ASF46.KCO-2. ASTANA KZ", "merchant": None},
-            {"date": "2025-09-23", "amount": -465.0, "details": "MAGNUM.ASF46.KCO-2. ASTANA KZ", "merchant": None},
+            {"date": "2025-09-23", "amount": -465.0, "details": "MAGNUM.ASF46.KCO-2. ASTANA KZ"},
+            {"date": "2025-09-23", "amount": -465.0, "details": "MAGNUM.ASF46.KCO-2. ASTANA KZ"},
         ]
         result = fix_similar_details(records)
         assert len(result) == 2
@@ -235,8 +235,8 @@ class TestFixSimilarDetails:
     def test_different_details_not_touched(self):
         """Rows with <85% similarity must NOT be altered."""
         records = [
-            {"date": "2025-08-02", "amount": -4250.0, "details": "SMART RESTAURANTS ALMATY KZ", "merchant": None},
-            {"date": "2025-08-02", "amount": -4250.0, "details": "Плательщик:Арстангалиев Получатель:Филиал", "merchant": None},
+            {"date": "2025-08-02", "amount": -4250.0, "details": "SMART RESTAURANTS ALMATY KZ"},
+            {"date": "2025-08-02", "amount": -4250.0, "details": "Плательщик:Арстангалиев Получатель:Филиал"},
         ]
         result = fix_similar_details(records)
         assert result[0]["details"] == "SMART RESTAURANTS ALMATY KZ"
@@ -245,9 +245,9 @@ class TestFixSimilarDetails:
     def test_longest_wins(self):
         """Among similar details, the longest string becomes the canonical one."""
         records = [
-            {"date": "2025-07-05", "amount": -120.0, "details": "MOMYSHULY STATION 1 ALMATY KZ", "merchant": None},
-            {"date": "2025-07-06", "amount": -150.0, "details": "MOMYSHULY STATION 1 ALMA KZ", "merchant": None},
-            {"date": "2025-07-07", "amount": -180.0, "details": "MOMYSHULY STATION 1 ALMATY KZ EXTRA", "merchant": None},
+            {"date": "2025-07-05", "amount": -120.0, "details": "MOMYSHULY STATION 1 ALMATY KZ"},
+            {"date": "2025-07-06", "amount": -150.0, "details": "MOMYSHULY STATION 1 ALMA KZ"},
+            {"date": "2025-07-07", "amount": -180.0, "details": "MOMYSHULY STATION 1 ALMATY KZ EXTRA"},
         ]
         result = fix_similar_details(records)
         # The longest version should propagate to the shorter similar ones
@@ -261,9 +261,9 @@ class TestFixSimilarDetails:
     def test_equal_length_similar_details_unified(self):
         """Equal-length details with >85% similarity should be unified."""
         records = [
-            {"date": "2025-06-01", "amount": -500.0, "details": "IP BERSINOVA S.IM.B.MOMY H KZ", "merchant": "IP BERSINOVA"},
-            {"date": "2025-06-01", "amount": -500.0, "details": "IP BERSINOVA S.IM.B.MOMY H KZ", "merchant": "IP BERSINOVA"},
-            {"date": "2025-06-02", "amount": -300.0, "details": "IP BERSINOVA S.IM.B.MOMYSH KZ", "merchant": "IP BERSINOVA"},
+            {"date": "2025-06-01", "amount": -500.0, "details": "IP BERSINOVA S.IM.B.MOMY H KZ"},
+            {"date": "2025-06-01", "amount": -500.0, "details": "IP BERSINOVA S.IM.B.MOMY H KZ"},
+            {"date": "2025-06-02", "amount": -300.0, "details": "IP BERSINOVA S.IM.B.MOMYSH KZ"},
         ]
         result = fix_similar_details(records)
         assert len(result) == 3
@@ -273,47 +273,15 @@ class TestFixSimilarDetails:
     def test_equal_length_most_frequent_wins(self):
         """When equal length, the most frequent variant becomes canonical."""
         records = [
-            {"date": "2025-06-01", "amount": -100.0, "details": "CAFE MOMYSH ASTANA KZ", "merchant": None},
-            {"date": "2025-06-02", "amount": -100.0, "details": "CAFE MOMYSH ASTANA KZ", "merchant": None},
-            {"date": "2025-06-03", "amount": -100.0, "details": "CAFE MOMYSH ASTANA KZ", "merchant": None},
-            {"date": "2025-06-04", "amount": -100.0, "details": "CAFE MOMY H ASTANA KZ", "merchant": None},
+            {"date": "2025-06-01", "amount": -100.0, "details": "CAFE MOMYSH ASTANA KZ"},
+            {"date": "2025-06-02", "amount": -100.0, "details": "CAFE MOMYSH ASTANA KZ"},
+            {"date": "2025-06-03", "amount": -100.0, "details": "CAFE MOMYSH ASTANA KZ"},
+            {"date": "2025-06-04", "amount": -100.0, "details": "CAFE MOMY H ASTANA KZ"},
         ]
         result = fix_similar_details(records)
         # The 3-occurrence version should win over the 1-occurrence version
         for r in result:
             assert r["details"] == "CAFE MOMYSH ASTANA KZ"
-
-
-# ---------------------------------------------------------------------------
-#  6. Replenishment, Others, Transfer operations should have merchant=None
-# ---------------------------------------------------------------------------
-
-class TestNoMerchantOperations:
-    """Replenishment, Others, and Transfer rows must not extract a merchant."""
-
-    def test_replenishment_no_merchant(self):
-        chunk = ["02.06.2025 +90.28 KZT Replenishment Пополнение. Выплата процентов по вкладу"]
-        rec = extract_fields_from_chunk(chunk)
-        assert rec["operation"] == "Replenishment"
-        assert rec["merchant"] is None
-
-    def test_others_no_merchant(self):
-        chunk = ["02.08.2025 4,250.00 KZT Others Плательщик:Арстангалиев Рауан"]
-        rec = extract_fields_from_chunk(chunk)
-        assert rec["operation"] == "Others"
-        assert rec["merchant"] is None
-
-    def test_transfer_no_merchant(self):
-        chunk = ["15.06.2025 50,000.00 KZT Transfer Перевод с карты на карту"]
-        rec = extract_fields_from_chunk(chunk)
-        assert rec["operation"] == "Transfer"
-        assert rec["merchant"] is None
-
-    def test_acquiring_still_has_merchant(self):
-        chunk = ["29.05.2025 15,992.00 KZT Acquiring TOO GLASMAN TRADE 3 ASTANA"]
-        rec = extract_fields_from_chunk(chunk)
-        assert rec["operation"] == "Acquiring"
-        assert rec["merchant"] is not None
 
 
 # ---------------------------------------------------------------------------

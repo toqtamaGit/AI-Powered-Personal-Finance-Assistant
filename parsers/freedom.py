@@ -242,62 +242,6 @@ def chunk_transactions_from_lines(lines: List[str]) -> List[List[str]]:
     return chunks
 
 
-def guess_merchant(details: str) -> Optional[str]:
-    ds = details or ""
-
-    # 1) ТОО/ИП "..."
-    m = re.search(r'(?:ТОО|ИП)\s*[«"]\s*([^»"]+?)\s*[»"]', ds)
-    if m:
-        return m.group(1).strip()
-
-    # 2) любые кавычки
-    m = re.search(r'[«"]\s*([^»"]+?)\s*[»"]', ds)
-    if m:
-        return m.group(1).strip()
-
-    # 3) Kaspi/Halyk/QR
-    m = re.search(
-        r"(KASPI\s*QR|QR\s*оплата|HALYK\s*POS|HALYK\s*QR|Kaspi Red|Kaspi Pay)",
-        ds,
-        re.IGNORECASE,
-    )
-    if m:
-        return m.group(1).strip()
-
-    # 4) CAPS + город/страна
-    m = re.search(
-        r"\b([A-Z0-9][A-Z0-9\s\.\-\/&']{3,}?)\s+"
-        r"(?:ASTANA|NUR-SULTAN|ALMATY|KZ|KAZAKHSTAN)\b",
-        ds,
-    )
-    if m:
-        return m.group(1).strip()
-
-    # 5) ТОО/ИП без кавычек
-    m = re.search(
-        r"\b(ТОО|ИП)\s+([A-Za-zА-ЯЁа-яё0-9\"«»\-\.\s]+)",
-        ds,
-    )
-    if m:
-        tail = m.group(2).split("За ")[0].split(".")[0]
-        return tail.strip()
-
-    # 6) домен/email
-    m = re.search(
-        r"\b([A-Za-z0-9\-]+\.(?:kz|ru|com|io|org))\b",
-        ds,
-        re.IGNORECASE,
-    )
-    if m:
-        return m.group(1).strip()
-
-    # 7) fallback — первые 5–6 слов
-    if ds:
-        return " ".join(ds.split()[:6])
-
-    return None
-
-
 
 def detect_bank_from_text(text: str) -> Optional[str]:
     """Грубая детекция банка по шапке/тексту выписки."""
@@ -362,8 +306,6 @@ def extract_fields_from_chunk(chunk: List[str]) -> Dict:
     details = normalize_hyphens(details)
     details = re.sub(r'["\'\[\]\(\)]', '', details).strip()
 
-    merchant = None if operation in ("Replenishment", "Others", "Transfer") else guess_merchant(details)
-
     # знак: prefer explicit +/- from amount_raw, fallback to op_sign
     sign = None
     if isinstance(amount_raw, str):
@@ -390,7 +332,6 @@ def extract_fields_from_chunk(chunk: List[str]) -> Dict:
         ),
         "currency": currency,
         "operation": operation,
-        "merchant": merchant,
         "details": details,
     }
 
@@ -442,7 +383,6 @@ def try_parse_tables(pdf_path: str) -> List[Dict]:
                 else ""
             )
 
-            merchant = None if op in ("Replenishment", "Others", "Transfer") else guess_merchant(details)
             # prefer explicit +/- from amount string, fallback to op_sign
             sign = op_sign
             if isinstance(ar, str):
@@ -472,7 +412,6 @@ def try_parse_tables(pdf_path: str) -> List[Dict]:
                     ),
                     "currency": curr,
                     "operation": op,
-                    "merchant": merchant,
                     "details": details,
                 }
             )
@@ -525,7 +464,6 @@ def fix_similar_details(records: List[Dict], threshold: float = 0.85) -> List[Di
         old = str(rec.get("details") or "")
         if old in fix_map:
             rec["details"] = fix_map[old]
-            rec["merchant"] = guess_merchant(fix_map[old])
 
     return records
 
@@ -612,11 +550,10 @@ def load_categories(path: Optional[str]) -> Dict[str, List[str]]:
 
 
 def classify_category(
-    merchant: Optional[str],
     details: Optional[str],
     cats: Dict[str, List[str]],
 ) -> Optional[str]:
-    text = " ".join([merchant or "", details or ""]).lower()
+    text = (details or "").lower()
     best_cat = None
     best_hit = 0
     for cat, kws in cats.items():
@@ -654,7 +591,7 @@ def main():
     ap.add_argument(
         "--dedupe",
         action="store_true",
-        help="Удалить дубликаты (date, amount, currency, merchant).",
+        help="Удалить дубликаты (date, amount, currency, details).",
     )
     ap.add_argument(
         "--prune-empty",
@@ -746,7 +683,6 @@ def main():
         "amount_abs",
         "currency",
         "operation",
-        "merchant",
         "details",
         "bank",
         "source_file",
@@ -759,7 +695,7 @@ def main():
     # Категоризация
     df["category"] = df.apply(
         lambda r: classify_category(
-            r.get("merchant"), r.get("details"), cats
+            r.get("details"), cats
         ),
         axis=1,
     )
@@ -767,7 +703,7 @@ def main():
     # Дедупликация
     if args.dedupe:
         df = df.drop_duplicates(
-            subset=["date", "amount", "currency", "merchant"],
+            subset=["date", "amount", "currency", "details"],
             keep="first",
         )
 

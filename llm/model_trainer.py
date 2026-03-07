@@ -16,11 +16,10 @@ MODEL_PATH = os.path.join(MODELS_DIR, "classifier.pkl")
 VECTORIZER_PATH = os.path.join(MODELS_DIR, "vectorizer.pkl")
 
 
-def prepare_text(merchant: str, details: str) -> str:
-    """Combine merchant and details into feature text."""
-    merchant = str(merchant) if pd.notna(merchant) else ""
+def prepare_text(details: str) -> str:
+    """Prepare details text as feature for classification."""
     details = str(details) if pd.notna(details) else ""
-    return f"{merchant} {details}".strip()
+    return details.strip()
 
 
 def train_model(data_path: str = None) -> Tuple[float, float]:
@@ -45,7 +44,7 @@ def train_model(data_path: str = None) -> Tuple[float, float]:
 
     # Prepare features
     df["text"] = df.apply(
-        lambda row: prepare_text(row.get("merchant"), row.get("details")),
+        lambda row: prepare_text(row.get("details")),
         axis=1
     )
 

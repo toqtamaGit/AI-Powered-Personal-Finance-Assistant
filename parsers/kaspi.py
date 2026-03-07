@@ -39,9 +39,6 @@ OP_RE = re.compile(
     r"(?<!\w)(" + "|".join(re.escape(n) for n in _all_op_names) + r")(?!\w)"
 )
 
-# Operations that should NOT have a merchant
-NO_MERCHANT_OPS = {"Replenishment", "Transfers", "Others"}
-
 
 # ---------------- Utilities ----------------
 
@@ -176,6 +173,9 @@ def is_header_like(line: str) -> bool:
         "другие пополнения", "other deposits", "итого", "total",
     ]):
         return True
+    # Blocked-amount disclaimers
+    if "the amount is blocked" in lw or "сумма заблокирована" in lw:
+        return True
     return False
 
 
@@ -235,16 +235,12 @@ def parse_operation_line(line: str) -> Optional[Dict]:
 
     amount = amount_val  # already has sign from parse_amount_kzt
 
-    # Merchant
-    merchant = None if operation in NO_MERCHANT_OPS else (details or None)
-
     return {
         "date": date_iso,
         "amount_raw": f"{amount_raw} {currency}".strip(),
         "amount": amount,
         "currency": currency,
         "operation": operation,
-        "merchant": merchant,
         "details": details or None,
     }
 
@@ -284,10 +280,6 @@ def parse_kaspi_pdf(pdf_path: str) -> List[Dict]:
                     if not is_header_like(extra):
                         prev_details = str(current.get("details") or "")
                         current["details"] = (prev_details + " " + extra).strip()
-                        # Update merchant only for ops that should have one
-                        if current.get("operation") not in NO_MERCHANT_OPS:
-                            if not current.get("merchant"):
-                                current["merchant"] = " ".join(extra.split()[:6])
 
     if current is not None:
         rows.append(current)
@@ -348,7 +340,7 @@ def main():
 
     base_cols = [
         "date", "amount_raw", "amount", "currency",
-        "operation", "merchant", "details", "bank", "source_file",
+        "operation", "details", "bank", "source_file",
     ]
     for c in base_cols:
         if c not in df.columns:
@@ -356,7 +348,7 @@ def main():
     df = df[base_cols + [c for c in df.columns if c not in base_cols]]
 
     if args.dedupe:
-        df = df.drop_duplicates(subset=["date", "amount", "merchant"], keep="first")
+        df = df.drop_duplicates(subset=["date", "amount", "details"], keep="first")
 
     def _to_dt(x):
         try:

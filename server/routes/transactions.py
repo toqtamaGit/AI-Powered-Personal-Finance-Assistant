@@ -27,7 +27,6 @@ def classify():
                     "amount": -1500.0,
                     "currency": "KZT",
                     "operation": "Покупка",
-                    "merchant": "YANDEX.GO",
                     "details": "YANDEX.GO ALMATY KZ",
                     "category": "Transport"
                 },
