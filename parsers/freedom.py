@@ -45,32 +45,6 @@ OP_RE = re.compile(
     r"(?<!\w)(" + "|".join(re.escape(n) for n in _all_op_names) + r")(?!\w)"
 )
 
-MCC_RE = re.compile(r"\bMCC\s*(\d{4})\b", re.IGNORECASE)
-
-CARD_MASK_RE = re.compile(
-    r"\b(\d{4}\*{4}\d{4}|\d{4}\s\*{4}\s\d{4})\b"
-)
-
-BALANCE_RE = re.compile(
-    r"(?:Баланс|Остаток)\s*[:\-]?\s*([+-]?\d[\d\s,\.]*)\s*"
-    r"(KZT|USD|EUR|RUB|₸|\$|€|₽)?",
-    re.IGNORECASE,
-)
-
-# FX-блоки
-FX_BLOCK_RES = [
-    re.compile(
-        r"Сумма\s*в\s*валюте\s*операции\s*[:\-]?\s*"
-        r"([+-]?\d[\d\s,\.]*)\s*(USD|EUR|RUB|KZT|\$|€|₽|₸)",
-        re.IGNORECASE,
-    ),
-    re.compile(r"Курс\s*[:\-]?\s*([\d,\.]+)", re.IGNORECASE),
-    re.compile(
-        r"(Списано|Итого\s*списано)\s*[:\-]?\s*"
-        r"([+-]?\d[\d\s,\.]*)\s*(KZT|USD|EUR|RUB|₸|\$|€|₽)",
-        re.IGNORECASE,
-    ),
-]
 
 # Базовые категории (можно переопределить через YAML)
 DEFAULT_CATEGORIES: Dict[str, List[str]] = {
@@ -324,48 +298,6 @@ def guess_merchant(details: str) -> Optional[str]:
     return None
 
 
-def parse_fx_block(
-    details: str,
-) -> Tuple[Optional[float], Optional[str], Optional[float], Optional[float], Optional[str]]:
-    """Парсим подсказки по валютным операциям."""
-    if not details:
-        return None, None, None, None, None
-
-    orig_amount = orig_curr = None
-    rate = charged_amt = charged_curr = None
-
-    m1 = FX_BLOCK_RES[0].search(details)
-    if m1:
-        orig_amount = parse_amount(m1.group(1))
-        cur = (
-            m1.group(2)
-            .upper()
-            .replace("$", "USD")
-            .replace("€", "EUR")
-            .replace("₽", "RUB")
-            .replace("₸", "KZT")
-        )
-        orig_curr = cur
-
-    m2 = FX_BLOCK_RES[1].search(details)
-    if m2:
-        rate = parse_amount(m2.group(1))
-
-    m3 = FX_BLOCK_RES[2].search(details)
-    if m3:
-        charged_amt = parse_amount(m3.group(2))
-        cur = (
-            m3.group(3)
-            .upper()
-            .replace("$", "USD")
-            .replace("€", "EUR")
-            .replace("₽", "RUB")
-            .replace("₸", "KZT")
-        )
-        charged_curr = cur
-
-    return orig_amount, orig_curr, rate, charged_amt, charged_curr
-
 
 def detect_bank_from_text(text: str) -> Optional[str]:
     """Грубая детекция банка по шапке/тексту выписки."""
@@ -428,6 +360,7 @@ def extract_fields_from_chunk(chunk: List[str]) -> Dict:
     else:
         details = post.strip()
     details = normalize_hyphens(details)
+    details = re.sub(r'["\'\[\]\(\)]', '', details).strip()
 
     merchant = None if operation in ("Replenishment", "Others", "Transfer") else guess_merchant(details)
 
@@ -446,38 +379,6 @@ def extract_fields_from_chunk(chunk: List[str]) -> Dict:
         else None
     )
 
-    # MCC, карта, баланс
-    mcc_m = MCC_RE.search(details)
-    mcc = mcc_m.group(1) if mcc_m else None
-
-    card_m = CARD_MASK_RE.search(details)
-    card_mask = card_m.group(1) if card_m else None
-
-    bal_m = BALANCE_RE.search(details)
-    balance_amt = (
-        parse_amount(bal_m.group(1)) if bal_m else None
-    )
-    balance_curr = None
-    if bal_m and bal_m.group(2):
-        bc = (
-            bal_m.group(2)
-            .upper()
-            .replace("$", "USD")
-            .replace("€", "EUR")
-            .replace("₽", "RUB")
-            .replace("₸", "KZT")
-        )
-        balance_curr = bc
-
-    # FX
-    (
-        fx_orig_amt,
-        fx_orig_cur,
-        fx_rate,
-        fx_charged_amt,
-        fx_charged_cur,
-    ) = parse_fx_block(details)
-
     return {
         "date": date_iso,
         "amount_raw": amount_raw,
@@ -491,15 +392,6 @@ def extract_fields_from_chunk(chunk: List[str]) -> Dict:
         "operation": operation,
         "merchant": merchant,
         "details": details,
-        "mcc": mcc,
-        "card_mask": card_mask,
-        "balance_after": balance_amt,
-        "balance_currency": balance_curr,
-        "fx_orig_amount": fx_orig_amt,
-        "fx_orig_currency": fx_orig_cur,
-        "fx_rate": fx_rate,
-        "fx_charged_amount": fx_charged_amt,
-        "fx_charged_currency": fx_charged_cur,
     }
 
 
@@ -543,7 +435,9 @@ def try_parse_tables(pdf_path: str) -> List[Dict]:
             )
             op, op_sign = normalize_operation(raw_op)
             details = (
-                normalize_hyphens(re.sub(r"\s+", " ", str(row.get("details"))).strip())
+                re.sub(r'["\'\[\]\(\)]', '',
+                    normalize_hyphens(re.sub(r"\s+", " ", str(row.get("details"))).strip())
+                ).strip()
                 if pd.notna(row.get("details"))
                 else ""
             )
@@ -580,15 +474,6 @@ def try_parse_tables(pdf_path: str) -> List[Dict]:
                     "operation": op,
                     "merchant": merchant,
                     "details": details,
-                    "mcc": None,
-                    "card_mask": None,
-                    "balance_after": None,
-                    "balance_currency": None,
-                    "fx_orig_amount": None,
-                    "fx_orig_currency": None,
-                    "fx_rate": None,
-                    "fx_charged_amount": None,
-                    "fx_charged_currency": None,
                 }
             )
     return out
@@ -863,15 +748,6 @@ def main():
         "operation",
         "merchant",
         "details",
-        "mcc",
-        "card_mask",
-        "balance_after",
-        "balance_currency",
-        "fx_orig_amount",
-        "fx_orig_currency",
-        "fx_rate",
-        "fx_charged_amount",
-        "fx_charged_currency",
         "bank",
         "source_file",
     ]

@@ -1,237 +1,230 @@
-import pandas as pd
-import re
-from difflib import SequenceMatcher
+"""Normalize Freedom Bank CSV details: extract business_type, business_name, address, city."""
 
-# List of major cities in Kazakhstan
+import argparse
+import os
+import re
+from typing import Optional, Tuple
+
+import pandas as pd
+
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+
 KAZAKHSTAN_CITIES = [
     'ASTANA', 'ALMATY', 'SHYMKENT', 'KARAGANDA', 'TARAZ', 'PAVLODAR',
     'SEMEY', 'KOSTANAY', 'UST-KAMENOGORSK', 'PETROPAVLOVSK', 'ATYRAU',
     'ORAL', 'URALSK', 'KYZYLORDA', 'TALDYKORGAN', 'ARKALYK', 'AKTOBE',
-    'EKIBASTUZ', 'RUDNY', 'ZHEZKAZGAN', 'TURKESTAN'
+    'EKIBASTUZ', 'RUDNY', 'ZHEZKAZGAN', 'TURKESTAN',
+    'NUR-SULTAN',  # old name for Astana
 ]
 
-# List of known public places (malls, buildings)
+# NUR-SULTAN variants all map to ASTANA
+_CITY_NORMALIZE = {
+    'NUR-SULTAN': 'ASTANA',
+}
+
 KNOWN_PLACES = [
     'MEGA SILKWAY', 'MEGA SILK WAY', 'DOSTYK PLAZA', 'AZIYA PARK',
     'MEGA', 'DOSTYK',
 ]
 
-# Cache for unique details to build reference list for fuzzy matching
-_reference_details = set()
+# Tokens to discard from address (district abbreviations etc.)
+_DISCARD_TOKENS = {'Q.', 'Q'}
 
-def normalize_hyphens(text: str):
-    """Normalize spaces around dashes in Details and standardize to ASCII hyphen.
+BUSINESS_TYPE_RE = re.compile(
+    r'\b(IP|TOO|ТОО|IPP|LLP|LLC)\b\.?', flags=re.IGNORECASE
+)
 
-    - Replaces en dash (–) and em dash (—) with '-'
-    - Removes spaces around hyphens: "A - B" -> "A-B"
-    """
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def normalize_hyphens(text: str) -> str:
+    """Remove spaces around dashes, normalize en/em dash to ASCII hyphen."""
     if text is None or (isinstance(text, float) and pd.isna(text)):
         return text
     s = str(text)
-    s = s.replace("–", "-").replace("—", "-")
+    s = s.replace("\u2013", "-").replace("\u2014", "-")
     s = re.sub(r"\s*-\s*", "-", s)
     return s
 
-def normalize_city(text):
-    """Normalize city names in the address text."""
-    if not text:
-        return text
-    
-    # Apply city name normalizations - all variations to Astana
-    text = re.sub(r'\bNUR-SULTAN\b', 'ASTANA', text, flags=re.IGNORECASE)
-    text = re.sub(r'\bAST\s*[>]?\s*NA\b', 'ASTANA', text, flags=re.IGNORECASE)
-    text = re.sub(r'\bNUR-SU\s*\w*\s*TAN\b', 'ASTANA', text, flags=re.IGNORECASE)
-    text = re.sub(r'\bULTAN\b', 'ASTANA', text, flags=re.IGNORECASE)
-    
-    return text.strip()
 
-def fuzzy_match_details(details):
-    """
-    Apply fuzzy matching to correct typos in details string.
-    Looks for similar strings in reference list with 90% similarity threshold.
-    """
-    if not details or not _reference_details:
-        return details
-    
-    best_match = None
-    best_ratio = 0.9  # 90% threshold
-    
-    for reference in _reference_details:
-        # Calculate similarity ratio
-        ratio = SequenceMatcher(None, details.upper(), reference.upper()).ratio()
-        if ratio > best_ratio:
-            best_ratio = ratio
-            best_match = reference
-    
-    # Return best match if found, otherwise original
-    return best_match if best_match else details
+def _is_city(word: str) -> bool:
+    """Check if a word is a known city (case-insensitive)."""
+    return word.upper() in (c.upper() for c in KAZAKHSTAN_CITIES)
 
-def extract_city_from_text(text):
-    """
-    Extract city name from text by matching against known cities.
-    Returns the normalized city name or None.
-    """
+
+def _normalize_city_name(name: str) -> str:
+    """Normalize city name (e.g. NUR-SULTAN -> ASTANA)."""
+    upper = name.upper()
+    return _CITY_NORMALIZE.get(upper, upper)
+
+
+def extract_city_from_text(text: str) -> Optional[str]:
+    """Extract and normalize city name from text. Returns None if no city found."""
     if not text:
         return None
-    
-    text_upper = text.upper()
-    
-    # Check for each known city
+    upper = text.upper()
     for city in KAZAKHSTAN_CITIES:
-        if city in text_upper:
-            return city.upper()
-    
-    if re.search(r'NUR-SULTAN|AST\s*[>]?\s*NA|NUR-SU\s*\w*\s*TAN|ULTAN', text_upper):
-        return 'ASTANA'
-    
+        if city in upper:
+            return _normalize_city_name(city)
     return None
 
-def parse_details(details, operation):
+
+# ---------------------------------------------------------------------------
+# Main parsing
+# ---------------------------------------------------------------------------
+
+def parse_details(
+    details: str, operation: str
+) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str]]:
+    """Parse the details column to extract business_type, business_name, address, city.
+
+    Only processes Acquiring / Pending amount operations.
+    Returns (business_type, business_name, address, city).
     """
-    Parse the Details column to extract business type, name, address, and city.
-    Only processes rows where operation is 'Acquiring' or 'Pending amount'.
-    
-    Returns: (business_type, business_name, address, city)
-    """
-    # Initialize empty values
     business_type = None
     business_name = None
     address = None
     city = None
-    
-    # Only process Acquiring or Pending amount operations
-    if operation not in ['Acquiring', 'Pending amount']:
+
+    if operation not in ('Acquiring', 'Pending amount'):
         return business_type, business_name, address, city
-    
+
     if not details or pd.isna(details):
         return business_type, business_name, address, city
-    
-    # Step 1: Apply fuzzy matching first to correct typos
-    details = fuzzy_match_details(details)
-    
-    # Store in reference set for future fuzzy matching
-    _reference_details.add(details)
-    
-    # Step 2: Extract business type (can appear anywhere, not just at start)
-    business_type_pattern = r'\b(IP|TOO|ТОО|IPP|LLP|LLC)\b\.?'
-    type_match = re.search(business_type_pattern, details, flags=re.IGNORECASE)
-    
+
+    details = str(details)
+
+    # --- Step 1: extract business type ---
+    type_match = BUSINESS_TYPE_RE.search(details)
     if type_match:
         business_type = type_match.group(1).upper()
-        # Remove the business type from details for further processing
-        details_without_type = details[:type_match.start()] + details[type_match.end():]
-        details_without_type = details_without_type.strip()
+        details_no_type = details[:type_match.start()] + details[type_match.end():]
+        details_no_type = details_no_type.strip()
     else:
-        details_without_type = details
-    
-    # Step 3: Clean text - remove quotes and brackets
-    # Handle nested quotes like TOO ""KIKIS MS""
-    cleaned = re.sub(r'["\'\[\]\(\)]', '', details_without_type)
-    cleaned = re.sub(r'\s+', ' ', cleaned).strip()
-    
-    # Step 4: Determine address boundary
+        details_no_type = details
+
+    # --- Step 2: clean whitespace (quotes already stripped by parser) ---
+    cleaned = re.sub(r'\s+', ' ', details_no_type).strip()
+
+    # --- Step 3: detect city early (before stripping tokens) ---
+    city = extract_city_from_text(cleaned)
+
+    # --- Step 4: strip city-alias tokens (NUR-SULTAN, Nur-Sultan) ---
     words = cleaned.split()
-    if len(words) == 0:
+    words = [w for w in words if w.upper() not in _CITY_NORMALIZE]
+
+    # --- Step 5: strip discard tokens (Q.) ---
+    words = [w for w in words if w.upper().rstrip('.') not in
+             {t.upper().rstrip('.') for t in _DISCARD_TOKENS}]
+
+    if not words:
         return business_type, business_name, address, city
-    
-    # Check if "KZ" is present
-    has_kz = 'KZ' in [w.upper() for w in words]
-    
-    if has_kz:
-        # Address = last 2 words
-        if len(words) >= 2:
-            address_words = words[-2:]
-            name_words = words[:-2]
-        else:
-            address_words = words
-            name_words = []
+
+    # --- Step 6: split into name_words / address_words ---
+    # Find position of KZ and last city word to determine split point
+    kz_idx = None
+    last_city_idx = None
+    for i, w in enumerate(words):
+        if w.upper() == 'KZ':
+            kz_idx = i
+        if _is_city(w):
+            last_city_idx = i
+
+    if last_city_idx is not None:
+        # address starts at city
+        split = last_city_idx
+    elif kz_idx is not None:
+        # no city word left (was stripped) — just KZ
+        split = kz_idx
     else:
-        # Address = last 1 word (city only)
-        if len(words) >= 1:
-            address_words = words[-1:]
-            name_words = words[:-1]
-        else:
-            address_words = []
-            name_words = words
-    
-    # Check if name ends with a known place that should be included in address
-    # Only check the end of name_words to see if it matches a known place
+        # no KZ, no city — everything is business name
+        split = len(words)
+
+    name_words = words[:split]
+    address_words = words[split:]
+
+    # --- Step 8: known places move from name to address ---
     if name_words:
         name_text = ' '.join(name_words).upper()
-        found_place = False
-        
         for place in KNOWN_PLACES:
-            # Check if the known place appears at the end of the name
             if name_text.endswith(place):
-                # Find how many words make up this place
-                place_words = place.split()
-                place_word_count = len(place_words)
-                
-                # Move only those specific place words from name to address
+                place_word_count = len(place.split())
                 if len(name_words) >= place_word_count:
-                    place_from_name = name_words[-place_word_count:]
-                    address_words = place_from_name + address_words
+                    address_words = name_words[-place_word_count:] + address_words
                     name_words = name_words[:-place_word_count]
-                    found_place = True
                     break
-            # Also check if place appears anywhere in the last few words before address
             elif place in name_text:
-                # Find the position where this place starts
                 for i in range(len(name_words)):
-                    potential_phrase = ' '.join(name_words[i:]).upper()
-                    if potential_phrase.startswith(place):
-                        # Move words from this position to address
+                    if ' '.join(name_words[i:]).upper().startswith(place):
                         address_words = name_words[i:] + address_words
                         name_words = name_words[:i]
-                        found_place = True
                         break
-                if found_place:
-                    break
-    
-    # Step 5: Extract business name
+                break
+
+    # --- Step 9: assemble outputs ---
     business_name = ' '.join(name_words).strip() if name_words else None
-    
-    # Step 6: Normalize city and extract from address
     address = ' '.join(address_words).strip() if address_words else None
-    
-    if address:
-        # Extract city from address
-        city = extract_city_from_text(address)
-    
+
     return business_type, business_name, address, city
 
-def normalize_csv(input_file, output_file):
-    """
-    Read the bank CSV, normalize the Details column, and save to a new file.
-    """
-    # Read the CSV file
+
+# ---------------------------------------------------------------------------
+# CSV processing
+# ---------------------------------------------------------------------------
+
+def normalize_csv(input_file: str, output_file: str) -> pd.DataFrame:
+    """Read bank CSV, extract business columns, save to output_file."""
     df = pd.read_csv(input_file)
-    
-    # FIRST STEP: normalize Details in-place
-    if 'Details' in df.columns:
-        df['Details'] = df['Details'].apply(normalize_hyphens)
-    
-    # Apply parsing to each row
-    parsed_data = df.apply(
-        lambda row: parse_details(row['Details'], row['Operation']), 
-        axis=1
+
+    # Normalize hyphens in details
+    if 'details' in df.columns:
+        df['details'] = df['details'].apply(normalize_hyphens)
+
+    # Parse each row
+    parsed = df.apply(
+        lambda row: parse_details(
+            row.get('details', ''),
+            row.get('operation', ''),
+        ),
+        axis=1,
     )
-    
-    # Split the results into separate columns
-    df['Business Type'] = [x[0] for x in parsed_data]
-    df['Business Name'] = [x[1] for x in parsed_data]
-    df['Address'] = [x[2] for x in parsed_data]
-    df['City'] = [x[3] for x in parsed_data]
-    
-    # Save to new CSV
-    df.to_csv(output_file, index=False)
-    print(f"Normalized CSV saved to: {output_file}")
-    print(f"Total rows processed: {len(df)}")
-    print(f"Rows with parsed data: {len(df[df['Business Type'].notna()])}")
+
+    df['business_type'] = [x[0] for x in parsed]
+    df['business_name'] = [x[1] for x in parsed]
+    df['address'] = [x[2] for x in parsed]
+    df['city'] = [x[3] for x in parsed]
+
+    os.makedirs(os.path.dirname(output_file) or '.', exist_ok=True)
+    df.to_csv(output_file, index=False, encoding='utf-8-sig')
+
+    acq = df[df['operation'].isin(['Acquiring', 'Pending amount'])]
+    print(f"Done: {output_file}")
+    print(f"  Total rows: {len(df)}")
+    print(f"  Acquiring/Pending: {len(acq)}")
+    print(f"  business_type filled: {acq['business_type'].notna().sum()}")
+    print(f"  city filled: {acq['city'].notna().sum()}")
+
+    return df
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def main():
+    ap = argparse.ArgumentParser(
+        description="Normalize Freedom CSV: extract business_type, business_name, address, city"
+    )
+    ap.add_argument("--input", required=True, help="Input CSV path.")
+    ap.add_argument("--out", required=True, help="Output CSV path.")
+    args = ap.parse_args()
+
+    normalize_csv(args.input, args.out)
+
 
 if __name__ == '__main__':
-    input_file = r'C:\Users\Lenovo\Desktop\hw-nlp\bank-classifier\bank_statements.csv'
-    output_file = r'C:\Users\Lenovo\Desktop\hw-nlp\bank-classifier\bank_statements_normalized.csv'
-    
-    normalize_csv(input_file, output_file)
-
+    main()

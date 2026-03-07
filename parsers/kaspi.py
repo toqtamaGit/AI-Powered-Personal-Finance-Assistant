@@ -222,8 +222,9 @@ def parse_operation_line(line: str) -> Optional[Dict]:
     else:
         details = after_amt.strip()
 
-    # Clean newlines
+    # Clean newlines and strip quotes/brackets
     details = re.sub(r"\s+", " ", details).strip() if details else ""
+    details = re.sub(r'["\'\[\]\(\)]', '', details).strip()
 
     # Sign: prefer explicit +/- from amount string
     sign = op_sign

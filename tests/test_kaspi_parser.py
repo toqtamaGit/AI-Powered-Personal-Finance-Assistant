@@ -191,3 +191,40 @@ class TestHeaderFilter:
     ])
     def test_transaction_not_filtered(self, line):
         assert not is_header_like(line), f"Should NOT be filtered: {line}"
+
+
+# ---------------------------------------------------------------------------
+#  6. Quote/bracket stripping in parser
+# ---------------------------------------------------------------------------
+
+class TestQuoteStripping:
+    """Quotes and brackets should be stripped from details at parse time."""
+
+    def test_double_quotes_stripped(self):
+        line = '13.11.25 - 1 000,00 ₸ Purchases TOO "UNIQLOAST"'
+        rec = parse_operation_line(line)
+        assert rec is not None
+        assert '"' not in rec["details"]
+        assert "UNIQLOAST" in rec["details"]
+
+    def test_single_quotes_stripped(self):
+        line = "13.11.25 - 500,00 ₸ Purchases TOO 'SHOP'"
+        rec = parse_operation_line(line)
+        assert rec is not None
+        assert "'" not in rec["details"]
+        assert "SHOP" in rec["details"]
+
+    def test_brackets_stripped(self):
+        line = "13.11.25 - 200,00 ₸ Purchases NAME [EXTRA] (INFO)"
+        rec = parse_operation_line(line)
+        assert rec is not None
+        assert "[" not in rec["details"]
+        assert "]" not in rec["details"]
+        assert "(" not in rec["details"]
+        assert ")" not in rec["details"]
+
+    def test_no_quotes_unchanged(self):
+        line = "13.11.25 - 300,00 ₸ Purchases PLAIN MERCHANT"
+        rec = parse_operation_line(line)
+        assert rec is not None
+        assert rec["details"] == "PLAIN MERCHANT"

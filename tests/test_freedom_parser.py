@@ -16,6 +16,7 @@ from parsers.freedom import (
     normalize_operation,
     normalize_hyphens,
     extract_fields_from_chunk,
+    try_parse_tables,
     map_table_headers,
     normalize_ws,
     fix_similar_details,
@@ -352,3 +353,37 @@ class TestNormalizeHyphens:
         rec = extract_fields_from_chunk(chunk)
         assert "Nur-Sultan" in rec["details"]
         assert "Nur- " not in rec["details"]
+
+
+# ---------------------------------------------------------------------------
+# 10. Quote/bracket stripping in parser
+# ---------------------------------------------------------------------------
+
+class TestQuoteStripping:
+    """Quotes and brackets should be stripped from details at parse time."""
+
+    def test_double_quotes_stripped_chunk(self):
+        chunk = ['23.07.2025 1,000.00 KZT Acquiring TOO "UNIQLOAST" ASTANA KZ']
+        rec = extract_fields_from_chunk(chunk)
+        assert '"' not in rec["details"]
+        assert "UNIQLOAST" in rec["details"]
+
+    def test_single_quotes_stripped_chunk(self):
+        chunk = ["23.07.2025 500.00 KZT Acquiring TOO 'SHOP' ASTANA KZ"]
+        rec = extract_fields_from_chunk(chunk)
+        assert "'" not in rec["details"]
+        assert "SHOP" in rec["details"]
+
+    def test_brackets_stripped_chunk(self):
+        chunk = ["23.07.2025 200.00 KZT Acquiring NAME [EXTRA] (INFO) ASTANA KZ"]
+        rec = extract_fields_from_chunk(chunk)
+        assert "[" not in rec["details"]
+        assert "]" not in rec["details"]
+        assert "(" not in rec["details"]
+        assert ")" not in rec["details"]
+
+    def test_double_double_quotes_chunk(self):
+        chunk = ['23.07.2025 300.00 KZT Acquiring TOO ""KIKIS MS"" ASTANA KZ']
+        rec = extract_fields_from_chunk(chunk)
+        assert '"' not in rec["details"]
+        assert "KIKIS" in rec["details"]
