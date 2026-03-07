@@ -13,7 +13,6 @@ from parsers.kaspi import (
     parse_operation_line,
     is_header_like,
     normalize_ws,
-    fix_similar_details,
     NO_MERCHANT_OPS,
 )
 
@@ -192,34 +191,3 @@ class TestHeaderFilter:
     ])
     def test_transaction_not_filtered(self, line):
         assert not is_header_like(line), f"Should NOT be filtered: {line}"
-
-
-# ---------------------------------------------------------------------------
-#  6. fix_similar_details — correct PDF artifacts without dropping rows
-# ---------------------------------------------------------------------------
-
-class TestFixSimilarDetails:
-    def test_corrupted_gets_fixed(self):
-        records = [
-            {"date": "2025-11-01", "amount": -500.0, "operation": "Purchases",
-             "details": "TOO KASPI MAGAZIN ASTANA KZ", "merchant": "TOO KASPI MAGAZIN ASTANA KZ"},
-            {"date": "2025-11-02", "amount": -300.0, "operation": "Purchases",
-             "details": "TOO KASPI MAGAZIN ASTAN KZ", "merchant": "TOO KASPI MAGAZIN ASTAN KZ"},
-        ]
-        result = fix_similar_details(records)
-        assert len(result) == 2
-        assert result[1]["details"] == "TOO KASPI MAGAZIN ASTANA KZ"
-
-    def test_different_details_untouched(self):
-        records = [
-            {"date": "2025-11-01", "amount": -500.0, "operation": "Purchases",
-             "details": "MAGNUM STORE", "merchant": "MAGNUM"},
-            {"date": "2025-11-01", "amount": -500.0, "operation": "Purchases",
-             "details": "SOMETHING COMPLETELY DIFFERENT", "merchant": "OTHER"},
-        ]
-        result = fix_similar_details(records)
-        assert result[0]["details"] == "MAGNUM STORE"
-        assert result[1]["details"] == "SOMETHING COMPLETELY DIFFERENT"
-
-    def test_empty_records(self):
-        assert fix_similar_details([]) == []

@@ -257,6 +257,31 @@ class TestFixSimilarDetails:
     def test_empty_records(self):
         assert fix_similar_details([]) == []
 
+    def test_equal_length_similar_details_unified(self):
+        """Equal-length details with >85% similarity should be unified."""
+        records = [
+            {"date": "2025-06-01", "amount": -500.0, "details": "IP BERSINOVA S.IM.B.MOMY H KZ", "merchant": "IP BERSINOVA"},
+            {"date": "2025-06-01", "amount": -500.0, "details": "IP BERSINOVA S.IM.B.MOMY H KZ", "merchant": "IP BERSINOVA"},
+            {"date": "2025-06-02", "amount": -300.0, "details": "IP BERSINOVA S.IM.B.MOMYSH KZ", "merchant": "IP BERSINOVA"},
+        ]
+        result = fix_similar_details(records)
+        assert len(result) == 3
+        # All should have the same canonical detail
+        assert result[0]["details"] == result[1]["details"] == result[2]["details"]
+
+    def test_equal_length_most_frequent_wins(self):
+        """When equal length, the most frequent variant becomes canonical."""
+        records = [
+            {"date": "2025-06-01", "amount": -100.0, "details": "CAFE MOMYSH ASTANA KZ", "merchant": None},
+            {"date": "2025-06-02", "amount": -100.0, "details": "CAFE MOMYSH ASTANA KZ", "merchant": None},
+            {"date": "2025-06-03", "amount": -100.0, "details": "CAFE MOMYSH ASTANA KZ", "merchant": None},
+            {"date": "2025-06-04", "amount": -100.0, "details": "CAFE MOMY H ASTANA KZ", "merchant": None},
+        ]
+        result = fix_similar_details(records)
+        # The 3-occurrence version should win over the 1-occurrence version
+        for r in result:
+            assert r["details"] == "CAFE MOMYSH ASTANA KZ"
+
 
 # ---------------------------------------------------------------------------
 #  6. Replenishment, Others, Transfer operations should have merchant=None

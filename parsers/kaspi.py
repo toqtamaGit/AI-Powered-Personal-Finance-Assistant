@@ -6,7 +6,6 @@ import os
 import re
 import argparse
 from datetime import datetime
-from difflib import SequenceMatcher
 from typing import List, Dict, Optional, Tuple
 
 import pandas as pd
@@ -249,50 +248,6 @@ def parse_operation_line(line: str) -> Optional[Dict]:
     }
 
 
-# ---------------- fix_similar_details ----------------
-
-def fix_similar_details(records: List[Dict], threshold: float = 0.85) -> List[Dict]:
-    """Fix corrupted details from PDF generation artifacts.
-
-    For details with >= threshold similarity, replace the shorter one
-    with the longer version. All rows are kept.
-    """
-    if not records:
-        return records
-
-    unique_details = sorted(
-        {str(r.get("details") or "") for r in records},
-        key=len,
-        reverse=True,
-    )
-
-    fix_map: Dict[str, str] = {}
-    for detail in unique_details:
-        if not detail or detail in fix_map:
-            continue
-        for longer in unique_details:
-            if len(longer) <= len(detail):
-                break
-            if longer == detail:
-                continue
-            ratio = SequenceMatcher(None, detail, longer).ratio()
-            if ratio >= threshold:
-                fix_map[detail] = longer
-                break
-
-    if not fix_map:
-        return records
-
-    for rec in records:
-        old = str(rec.get("details") or "")
-        if old in fix_map:
-            rec["details"] = fix_map[old]
-            if rec.get("operation") not in NO_MERCHANT_OPS:
-                rec["merchant"] = fix_map[old] or None
-
-    return records
-
-
 # ---------------- Main parser ----------------
 
 def parse_kaspi_pdf(pdf_path: str) -> List[Dict]:
@@ -335,9 +290,6 @@ def parse_kaspi_pdf(pdf_path: str) -> List[Dict]:
 
     if current is not None:
         rows.append(current)
-
-    # Fix PDF generation artifacts
-    rows = fix_similar_details(rows)
 
     # Add bank metadata
     for r in rows:

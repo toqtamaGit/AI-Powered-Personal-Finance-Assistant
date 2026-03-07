@@ -597,40 +597,40 @@ def try_parse_tables(pdf_path: str) -> List[Dict]:
 def fix_similar_details(records: List[Dict], threshold: float = 0.85) -> List[Dict]:
     """Fix corrupted details caused by PDF generation artifacts.
 
-    Builds a reference set of unique details strings. For each record,
-    if a longer detail string exists with >= threshold similarity,
-    the record's details (and merchant) are replaced with the longer version.
-
-    All rows are kept — no rows are removed.
+    Builds a reference set of unique details strings. For each pair with
+    >= threshold similarity, keeps the longer one (or the most frequent one
+    when lengths are equal) as canonical. All rows are kept.
     """
     from difflib import SequenceMatcher
+    from collections import Counter
 
     if not records:
         return records
 
-    # Collect unique detail strings, sorted longest first
+    # Count how often each detail appears — prefer the most frequent variant
+    detail_counts = Counter(str(r.get("details") or "") for r in records)
+
+    # Collect unique detail strings, sorted longest first, then most frequent
     unique_details = sorted(
-        {str(r.get("details") or "") for r in records},
-        key=len,
+        detail_counts.keys(),
+        key=lambda d: (len(d), detail_counts[d]),
         reverse=True,
     )
 
-    # Build a map: short/corrupted detail -> best (longest) similar detail
+    # Build a map: corrupted detail -> canonical detail
     fix_map: Dict[str, str] = {}
 
-    for detail in unique_details:
+    for i, detail in enumerate(unique_details):
         if not detail or detail in fix_map:
             continue
-        # Check against already-seen (longer) details
-        for longer in unique_details:
-            if len(longer) <= len(detail):
-                break  # sorted longest-first; no point checking shorter
-            if longer == detail:
+        for j in range(i):
+            canonical = unique_details[j]
+            if canonical == detail or canonical in fix_map:
                 continue
-            ratio = SequenceMatcher(None, detail, longer).ratio()
+            ratio = SequenceMatcher(None, detail, canonical).ratio()
             if ratio >= threshold:
-                fix_map[detail] = longer
-                break  # take the first (longest) match
+                fix_map[detail] = canonical
+                break
 
     if not fix_map:
         return records
