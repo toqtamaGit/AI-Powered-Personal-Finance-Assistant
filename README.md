@@ -25,7 +25,8 @@ A machine learning-powered finance assistant that parses bank statement PDFs, ex
 │   ├── bank_detector.py   # Bank detection from PDF text
 │   ├── pdf_extractor.py   # PDF text extraction
 │   ├── transaction_parser.py # Parsing coordinator
-│   ├── normalize.py       # Text normalization utilities
+│   ├── normalize_freedom.py # Freedom CSV normalization (business, city, country)
+│   ├── normalize_kaspi.py  # Kaspi CSV normalization (business type/name)
 │   └── models/            # Trained ML models
 │
 ├── parsers/               # Bank-specific PDF parsers
