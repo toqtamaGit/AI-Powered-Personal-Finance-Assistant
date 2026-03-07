@@ -180,6 +180,13 @@ def normalize_csv(input_file: str, output_file: str) -> pd.DataFrame:
     """Read bank CSV, extract business columns, save to output_file."""
     df = pd.read_csv(input_file)
 
+    # Deduplicate by details column (keep first occurrence)
+    before = len(df)
+    df = df.drop_duplicates(subset=['details'], keep='first').reset_index(drop=True)
+    dropped = before - len(df)
+    if dropped:
+        print(f"  Deduplicated: dropped {dropped} rows with duplicate details")
+
     # Normalize hyphens in details
     if 'details' in df.columns:
         df['details'] = df['details'].apply(normalize_hyphens)
