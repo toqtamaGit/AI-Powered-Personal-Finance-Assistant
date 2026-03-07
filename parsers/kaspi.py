@@ -1,27 +1,74 @@
 # kaspi_statement_parser.py
-# Специализированный парсер PDF-выписок Kaspi Bank.
-# Требует: pdfplumber ИЛИ PyPDF2, а также pandas.
-#
-# Установка:
-#   py -m pip install pdfplumber PyPDF2 pandas openpyxl
+# Parser for Kaspi Bank PDF statements (Russian & English).
+# Requires: pdfplumber OR PyPDF2, pandas.
 
 import os
 import re
 import argparse
 from datetime import datetime
+from difflib import SequenceMatcher
 from typing import List, Dict, Optional, Tuple
 
 import pandas as pd
 
-# ---------------- Общие утилиты ----------------
+# ---------------- Constants / Regex ----------------
+
+DATE_RE = re.compile(r"^(\d{2}\.\d{2}\.\d{2,4})\b")
+
+# Canonical operation -> (default_sign, [aliases])
+OP_MAP: Dict[str, Tuple[int, List[str]]] = {
+    "Purchases":     (-1, ["Покупка", "Покупки"]),
+    "Transfers":     (-1, ["Перевод", "Переводы"]),
+    "Replenishment": (+1, ["Пополнение", "Пополнения"]),
+    "Commission":    (-1, ["Комиссия"]),
+    "Refund":        (+1, ["Возврат"]),
+    "Cashback":      (+1, ["Кэшбэк"]),
+    "Withdrawal":    (-1, ["Снятие", "Снятия", "Withdrawals"]),
+    "Others":        (-1, ["Разное", "Другое"]),
+}
+
+# Reverse lookup: any name/alias -> (canonical, sign)
+_OP_LOOKUP: Dict[str, Tuple[str, int]] = {}
+for _canon, (_sign, _aliases) in OP_MAP.items():
+    _OP_LOOKUP[_canon] = (_canon, _sign)
+    for _alias in _aliases:
+        _OP_LOOKUP[_alias] = (_canon, _sign)
+
+# Regex from all names, longest first
+_all_op_names = sorted(_OP_LOOKUP.keys(), key=len, reverse=True)
+OP_RE = re.compile(
+    r"(?<!\w)(" + "|".join(re.escape(n) for n in _all_op_names) + r")(?!\w)"
+)
+
+# Operations that should NOT have a merchant
+NO_MERCHANT_OPS = {"Replenishment", "Transfers", "Others"}
+
+
+# ---------------- Utilities ----------------
 
 def normalize_ws(s: str) -> str:
     s = s.replace("\xa0", " ")
-    s = re.sub(r"[ \t]+", " ", s)
+    s = re.sub(r"\s+", " ", s)
     return s.strip()
 
+
+def normalize_operation(raw_op: Optional[str]) -> Tuple[Optional[str], int]:
+    """Return (canonical_name, default_sign) for a matched operation string."""
+    if not raw_op:
+        return None, -1
+    cleaned = raw_op.replace("\n", " ").strip()
+    hit = _OP_LOOKUP.get(cleaned)
+    if hit:
+        return hit
+    # Case-insensitive fallback
+    for key, val in _OP_LOOKUP.items():
+        if key.lower() == cleaned.lower():
+            return val
+    return cleaned, -1
+
+
 def parse_kaspi_date(s: str) -> Optional[str]:
-    """Преобразует 05.11.25 или 05.11.2025 в 2025-11-05."""
+    """Convert 05.11.25 or 05.11.2025 to 2025-11-05."""
     s = s.strip()
     try:
         if len(s.split(".")[-1]) == 4:
@@ -32,15 +79,11 @@ def parse_kaspi_date(s: str) -> Optional[str]:
     except Exception:
         return None
 
+
 def parse_amount_kzt(raw: str) -> Tuple[str, Optional[float]]:
-    """
-    Извлекает число с учетом знака и форматов:
-    '-299,00', '+ 1 000.50', '299.00-', '299,00-'.
-    Возвращает (amount_raw, amount_float).
-    """
+    """Extract number with sign from various formats."""
     txt = normalize_ws(raw)
 
-    # ищем возможный минус/плюс
     sign = 1
     if txt.startswith("+"):
         sign = 1
@@ -56,16 +99,12 @@ def parse_amount_kzt(raw: str) -> Tuple[str, Optional[float]]:
         sign = 1
         txt = txt[:-1].strip()
 
-    # убираем пробелы тысяч
     num = txt.replace(" ", "")
 
-    # если есть и ',' и '.', считаем ',' разделитель тысяч
     if "," in num and "." in num:
         num = num.replace(",", "")
-    else:
-        # если только ',', считаем её десятичной
-        if "," in num:
-            num = num.replace(",", ".")
+    elif "," in num:
+        num = num.replace(",", ".")
 
     try:
         val = float(num) * sign
@@ -74,10 +113,9 @@ def parse_amount_kzt(raw: str) -> Tuple[str, Optional[float]]:
 
     return raw.strip(), val
 
+
 def extract_text_pages(pdf_path: str) -> List[str]:
     pages: List[str] = []
-
-    # 1) pdfplumber
     try:
         import pdfplumber
         with pdfplumber.open(pdf_path) as pdf:
@@ -89,7 +127,6 @@ def extract_text_pages(pdf_path: str) -> List[str]:
     except Exception:
         pass
 
-    # 2) PyPDF2
     try:
         import PyPDF2
         with open(pdf_path, "rb") as f:
@@ -99,46 +136,59 @@ def extract_text_pages(pdf_path: str) -> List[str]:
                 pages.append(text)
         return pages
     except Exception as e:
-        raise RuntimeError(f"Не удалось извлечь текст из PDF '{pdf_path}': {e}")
+        raise RuntimeError(f"Cannot extract text from PDF '{pdf_path}': {e}")
 
-# ---------------- Детекция Kaspi ----------------
+
+# ---------------- Detection ----------------
 
 def is_kaspi_statement(full_text: str) -> bool:
     t = full_text.lower()
     markers = [
-        "kaspi bank",
-        "www.kaspi.kz",
-        "kaspi.kz",
-        "касpi gold",   # частые OCR-штуки
-        "kaspi gold",
-        "касpi.kz",
+        "kaspi bank", "www.kaspi.kz", "kaspi.kz",
+        "kaspi gold", "касpi gold", "касpi.kz",
     ]
     return any(m in t for m in markers)
 
-# ---------------- Парсинг строк ----------------
 
-# Ключевые слова типов операций Kaspi (частичный список)
-OP_KEYWORDS = [
-    "покупка",
-    "платеж",
-    "перевод",
-    "пополнение",
-    "комиссия",
-    "возврат",
-    "кэшбэк",
-    "списание",
-    "зачисление",
-]
+# ---------------- Header filtering ----------------
+
+def is_header_like(line: str) -> bool:
+    """Filter obvious headers/junk lines."""
+    lw = line.lower()
+    if not lw.strip():
+        return True
+    if "kaspi bank" in lw or "www.kaspi.kz" in lw or "kaspi.kz" in lw:
+        return True
+    if lw.startswith("выписка") or lw.startswith("kaspi gold") or "balance statement" in lw:
+        return True
+    if "краткое содержание" in lw or "transaction summary" in lw:
+        return True
+    # Table header row
+    if ("дата" in lw and "сумма" in lw) or ("date" in lw and "amount" in lw):
+        return True
+    # Summary lines like "Доступно на" / "Card balance"
+    if "доступно на" in lw or "card balance" in lw:
+        return True
+    # Summary items
+    if any(k in lw for k in [
+        "валюта счета", "currency:", "номер карты", "card number",
+        "номер счета", "account number", "лимит на снятие",
+        "cash withdrawal", "остаток зарплатных", "salary",
+        "другие пополнения", "other deposits", "итого", "total",
+    ]):
+        return True
+    return False
+
+
+# ---------------- Line parsing ----------------
 
 def parse_operation_line(line: str) -> Optional[Dict]:
+    """Parse a single Kaspi transaction line.
+
+    Expected format:
+      DD.MM.YY  [+/-] amount ₸  Operation  Details
     """
-    Пытаемся распарсить одну строку операции Kaspi.
-    Ожидаем:
-      Дата  Сумма(₸/KZT)  [Операция]  [Детали]
-    Возвращает dict без bank/source_file или None, если не похоже.
-    """
-    # 1) дата в начале
-    m_date = re.match(r"^(\d{2}\.\d{2}\.\d{2,4})\b", line)
+    m_date = DATE_RE.match(line)
     if not m_date:
         return None
 
@@ -149,76 +199,110 @@ def parse_operation_line(line: str) -> Optional[Dict]:
     if not rest:
         return None
 
-    # 2) сумма до символа валюты
-    # Ищем первый блок, в котором есть цифры и потом ₸ или KZT
+    # Amount: look for number block followed by ₸ or KZT
     m_amt = re.search(r"([+\-]?\s*[\d\s.,]+(?:[-+])?)\s*(₸|KZT)", rest)
     if not m_amt:
-        # иногда валюта может потеряться OCR'ом, пробуем без неё
         m_amt = re.search(r"([+\-]?\s*[\d\s.,]+(?:[-+])?)\b", rest)
         if not m_amt:
             return None
-        currency = "KZT"
-    else:
-        currency = "KZT"
+    currency = "KZT"
 
     amount_raw_str = m_amt.group(1)
     amount_raw, amount_val = parse_amount_kzt(amount_raw_str)
 
-    after_amt = rest[m_amt.end():].strip() if m_amt else rest[m_amt.end():].strip()
+    after_amt = rest[m_amt.end():].strip()
 
-    # 3) тип операции — первое подходящее ключевое слово
-    operation = None
-    op_pos = -1
-    low = after_amt.lower()
-    for op in OP_KEYWORDS:
-        pos = low.find(op)
-        if pos != -1:
-            if op_pos == -1 or pos < op_pos:
-                op_pos = pos
-                operation = op.capitalize()
-    details = ""
-    if operation is not None and op_pos >= 0:
-        details = after_amt[op_pos + len(operation):].strip()
+    # Operation: use bilingual OP_RE
+    opm = OP_RE.search(after_amt)
+    raw_op = opm.group(1) if opm else None
+    operation, op_sign = normalize_operation(raw_op)
+
+    # Details
+    if raw_op and opm:
+        details = after_amt[opm.end():].strip()
     else:
         details = after_amt.strip()
 
-    merchant = details or None
+    # Clean newlines
+    details = re.sub(r"\s+", " ", details).strip() if details else ""
+
+    # Sign: prefer explicit +/- from amount string
+    sign = op_sign
+    if amount_raw.strip().startswith("+"):
+        sign = 1
+    elif amount_raw.strip().startswith("-"):
+        sign = -1
+
+    amount = amount_val  # already has sign from parse_amount_kzt
+
+    # Merchant
+    merchant = None if operation in NO_MERCHANT_OPS else (details or None)
 
     return {
         "date": date_iso,
         "amount_raw": f"{amount_raw} {currency}".strip(),
-        "amount": amount_val,
+        "amount": amount,
         "currency": currency,
         "operation": operation,
         "merchant": merchant,
         "details": details or None,
     }
 
-def is_header_like(line: str) -> bool:
-    """Фильтруем очевидные заголовки/мусор Kaspi."""
-    l = line.lower()
-    if not l.strip():
-        return True
-    if "kaspi bank" in l or "www.kaspi.kz" in l:
-        return True
-    if l.startswith("выписка"):
-        return True
-    if "краткое содержание операций" in l:
-        return True
-    if "дата" in l and "сумма" in l and "операц" in l:
-        return True
-    return False
 
-# ---------------- Основной парсер Kaspi ----------------
+# ---------------- fix_similar_details ----------------
+
+def fix_similar_details(records: List[Dict], threshold: float = 0.85) -> List[Dict]:
+    """Fix corrupted details from PDF generation artifacts.
+
+    For details with >= threshold similarity, replace the shorter one
+    with the longer version. All rows are kept.
+    """
+    if not records:
+        return records
+
+    unique_details = sorted(
+        {str(r.get("details") or "") for r in records},
+        key=len,
+        reverse=True,
+    )
+
+    fix_map: Dict[str, str] = {}
+    for detail in unique_details:
+        if not detail or detail in fix_map:
+            continue
+        for longer in unique_details:
+            if len(longer) <= len(detail):
+                break
+            if longer == detail:
+                continue
+            ratio = SequenceMatcher(None, detail, longer).ratio()
+            if ratio >= threshold:
+                fix_map[detail] = longer
+                break
+
+    if not fix_map:
+        return records
+
+    for rec in records:
+        old = str(rec.get("details") or "")
+        if old in fix_map:
+            rec["details"] = fix_map[old]
+            if rec.get("operation") not in NO_MERCHANT_OPS:
+                rec["merchant"] = fix_map[old] or None
+
+    return records
+
+
+# ---------------- Main parser ----------------
 
 def parse_kaspi_pdf(pdf_path: str) -> List[Dict]:
     pages = extract_text_pages(pdf_path)
     if not pages:
-        raise ValueError("PDF без текста")
+        raise ValueError("PDF has no text")
 
     full_text = "\n".join(pages)
     if not is_kaspi_statement(full_text):
-        raise ValueError("Не похоже на выписку Kaspi Bank")
+        raise ValueError("Not a Kaspi Bank statement")
 
     rows: List[Dict] = []
     current: Optional[Dict] = None
@@ -229,78 +313,54 @@ def parse_kaspi_pdf(pdf_path: str) -> List[Dict]:
             if not line:
                 continue
 
-            # пропускаем заголовки/служебные строки
             if is_header_like(line):
                 continue
 
-            # пробуем распарсить как новую операцию
             parsed = parse_operation_line(line)
             if parsed:
-                # закрываем предыдущую операцию
                 if current is not None:
                     rows.append(current)
-
-                # добавляем bank/source_file позже, здесь только "ядро"
                 current = parsed
             else:
-                # если есть текущая операция — это продолжение деталей
+                # Continuation of previous transaction's details
                 if current is not None:
                     extra = line.strip()
                     if not is_header_like(extra):
-                        if current.get("details"):
-                            current["details"] = (str(current["details"]) + " " + extra).strip()
-                        else:
-                            current["details"] = extra
-                        if not current.get("merchant"):
-                            # если merchant пустой — возьмём из первых слов описания
-                            current["merchant"] = " ".join(extra.split()[:6])
-                # иначе игнорируем мусор до первой операции
+                        prev_details = str(current.get("details") or "")
+                        current["details"] = (prev_details + " " + extra).strip()
+                        # Update merchant only for ops that should have one
+                        if current.get("operation") not in NO_MERCHANT_OPS:
+                            if not current.get("merchant"):
+                                current["merchant"] = " ".join(extra.split()[:6])
 
-    # добавляем последнюю операцию
     if current is not None:
         rows.append(current)
 
-    # дополняем общими полями
+    # Fix PDF generation artifacts
+    rows = fix_similar_details(rows)
+
+    # Add bank metadata
     for r in rows:
         r["bank"] = "Kaspi Bank"
         r["source_file"] = os.path.basename(pdf_path)
 
     return rows
 
+
 # ---------------- CLI ----------------
 
 def main():
     ap = argparse.ArgumentParser(
-        description="Парсер PDF-выписок Kaspi Bank -> CSV/XLSX"
+        description="Kaspi Bank PDF statement parser -> CSV/XLSX"
     )
-    ap.add_argument(
-        "--input",
-        required=True,
-        help="Путь к PDF-файлу или папке с PDF-выписками Kaspi."
-    )
-    ap.add_argument(
-        "--out",
-        required=True,
-        help="Путь к CSV файлу результата."
-    )
-    ap.add_argument(
-        "--xlsx",
-        help="(опционально) путь к XLSX файлу."
-    )
-    ap.add_argument(
-        "--dedupe",
-        action="store_true",
-        help="Удалить дубликаты (date, amount, merchant)."
-    )
-    ap.add_argument(
-        "--prune-empty",
-        action="store_true",
-        help="Удалить колонки, где все значения пустые."
-    )
+    ap.add_argument("--input", required=True, help="PDF file or folder path.")
+    ap.add_argument("--out", required=True, help="Output CSV path.")
+    ap.add_argument("--xlsx", help="Optional XLSX output path.")
+    ap.add_argument("--dedupe", action="store_true", help="Remove duplicates.")
+    ap.add_argument("--prune-empty", action="store_true", help="Remove empty columns.")
 
     args = ap.parse_args()
 
-    # Собираем PDF
     pdf_files: List[str] = []
     if os.path.isdir(args.input):
         for root, _, files in os.walk(args.input):
@@ -311,10 +371,10 @@ def main():
     elif os.path.isfile(args.input) and args.input.lower().endswith(".pdf"):
         pdf_files = [args.input]
     else:
-        raise SystemExit("Укажи существующий PDF или папку с PDF.")
+        raise SystemExit("Provide an existing PDF file or folder.")
 
     if not pdf_files:
-        raise SystemExit("В указанном пути нет PDF-файлов.")
+        raise SystemExit("No PDF files found.")
 
     all_rows: List[Dict] = []
     log: List[str] = []
@@ -324,38 +384,27 @@ def main():
             rows = parse_kaspi_pdf(path)
             all_rows.extend(rows)
         except ValueError as e:
-            # просто логируем, не падаем (например, это не Kaspi)
             log.append(f"[SKIP] {os.path.basename(path)}: {e}")
         except Exception as e:
             log.append(f"[ERROR] {os.path.basename(path)}: {e}")
 
     if not all_rows:
-        raise SystemExit("Не удалось извлечь операции (формат выписки Kaspi не узнан).")
+        raise SystemExit("Could not extract any transactions.")
 
     df = pd.DataFrame(all_rows)
 
-    # порядок колонок
     base_cols = [
-        "date",
-        "amount_raw",
-        "amount",
-        "currency",
-        "operation",
-        "merchant",
-        "details",
-        "bank",
-        "source_file",
+        "date", "amount_raw", "amount", "currency",
+        "operation", "merchant", "details", "bank", "source_file",
     ]
     for c in base_cols:
         if c not in df.columns:
             df[c] = None
     df = df[base_cols + [c for c in df.columns if c not in base_cols]]
 
-    # дедупликация
     if args.dedupe:
         df = df.drop_duplicates(subset=["date", "amount", "merchant"], keep="first")
 
-    # сортировка по дате
     def _to_dt(x):
         try:
             return datetime.strptime(str(x), "%Y-%m-%d")
@@ -366,34 +415,30 @@ def main():
         df["_dt"] = df["date"].apply(_to_dt)
         df = df.sort_values(by=["_dt", "source_file"], kind="stable").drop(columns=["_dt"])
 
-    # удаляем полностью пустые колонки
     if args.prune_empty:
         import numpy as np
         null_like = {"", " ", "null", "<null>", "None", "NaN", "nan"}
         for c in df.columns:
             df[c] = df[c].apply(
-                lambda v: np.nan
-                if isinstance(v, str) and v.strip() in null_like
-                else v
+                lambda v: np.nan if isinstance(v, str) and v.strip() in null_like else v
             )
         df = df.dropna(axis=1, how="all")
 
-    # сохраняем
     df.to_csv(args.out, index=False, encoding="utf-8-sig")
     if args.xlsx:
         df.to_excel(args.xlsx, index=False)
 
-    # лог
     if log:
         log_path = os.path.splitext(args.out)[0] + "_kaspi_log.txt"
         with open(log_path, "w", encoding="utf-8") as f:
             for line in log:
                 f.write(line + "\n")
-        print(f"[INFO] Лог: {log_path}")
+        print(f"[INFO] Log: {log_path}")
 
-    print(f"Готово: {args.out} (операций: {len(df)})")
+    print(f"Done: {args.out} ({len(df)} transactions)")
     if args.xlsx:
-        print(f"Также создан XLSX: {args.xlsx}")
+        print(f"XLSX: {args.xlsx}")
+
 
 if __name__ == "__main__":
     main()
