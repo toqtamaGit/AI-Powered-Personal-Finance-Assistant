@@ -14,6 +14,7 @@ from parsers.freedom import (
     OP_MAP,
     _OP_LOOKUP,
     normalize_operation,
+    normalize_hyphens,
     extract_fields_from_chunk,
     map_table_headers,
     normalize_ws,
@@ -287,3 +288,42 @@ class TestNoMerchantOperations:
         rec = extract_fields_from_chunk(chunk)
         assert rec["operation"] == "Acquiring"
         assert rec["merchant"] is not None
+
+
+# ---------------------------------------------------------------------------
+#  7. Hyphen normalization — no spaces around dashes in details
+# ---------------------------------------------------------------------------
+
+class TestNormalizeHyphens:
+    """Spaces before/after dashes must be removed in details."""
+
+    def test_space_after_dash(self):
+        assert normalize_hyphens("NUR- SULTAN") == "NUR-SULTAN"
+
+    def test_space_before_dash(self):
+        assert normalize_hyphens("NUR -SULTAN") == "NUR-SULTAN"
+
+    def test_spaces_around_dash(self):
+        assert normalize_hyphens("NUR - SULTAN") == "NUR-SULTAN"
+
+    def test_no_space_unchanged(self):
+        assert normalize_hyphens("NUR-SULTAN") == "NUR-SULTAN"
+
+    def test_en_dash_normalized(self):
+        assert normalize_hyphens("NUR\u2013 SULTAN") == "NUR-SULTAN"
+
+    def test_em_dash_normalized(self):
+        assert normalize_hyphens("NUR\u2014SULTAN") == "NUR-SULTAN"
+
+    def test_extract_fields_no_space_around_dash(self):
+        chunk = ["29.05.2025 1,538.00 KZT Acquiring MAGNUM CASH CARRY NF46 NUR- SULTAN"]
+        rec = extract_fields_from_chunk(chunk)
+        assert "NUR-SULTAN" in rec["details"]
+        assert "NUR- " not in rec["details"]
+        assert " -SULTAN" not in rec["details"]
+
+    def test_tangiers_lounge(self):
+        chunk = ["23.07.2025 41,899.00 KZT Acquiring TANGIERS LOUNGE EC ASTANA Nur- Sultan"]
+        rec = extract_fields_from_chunk(chunk)
+        assert "Nur-Sultan" in rec["details"]
+        assert "Nur- " not in rec["details"]

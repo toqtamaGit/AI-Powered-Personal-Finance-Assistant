@@ -111,6 +111,13 @@ def normalize_ws(s: str) -> str:
     return s.strip()
 
 
+def normalize_hyphens(s: str) -> str:
+    """Remove spaces around dashes/hyphens: 'NUR- SULTAN' -> 'NUR-SULTAN'."""
+    s = s.replace("–", "-").replace("—", "-")
+    s = re.sub(r"\s*-\s*", "-", s)
+    return s
+
+
 def parse_amount(s: str) -> Optional[float]:
     if not s:
         return None
@@ -420,6 +427,7 @@ def extract_fields_from_chunk(chunk: List[str]) -> Dict:
         details = post.split(am.group(0), 1)[1].strip()
     else:
         details = post.strip()
+    details = normalize_hyphens(details)
 
     merchant = None if operation in ("Replenishment", "Others", "Transfer") else guess_merchant(details)
 
@@ -535,7 +543,7 @@ def try_parse_tables(pdf_path: str) -> List[Dict]:
             )
             op, op_sign = normalize_operation(raw_op)
             details = (
-                re.sub(r"\s+", " ", str(row.get("details"))).strip()
+                normalize_hyphens(re.sub(r"\s+", " ", str(row.get("details"))).strip())
                 if pd.notna(row.get("details"))
                 else ""
             )
