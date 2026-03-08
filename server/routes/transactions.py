@@ -5,7 +5,7 @@ import tempfile
 
 from flask import Blueprint, request, jsonify
 
-from llm import parse_transactions, classify_transactions
+from categorize import process_pdf
 
 transactions_bp = Blueprint("transactions", __name__)
 
@@ -13,10 +13,16 @@ transactions_bp = Blueprint("transactions", __name__)
 @transactions_bp.route("/classify", methods=["POST"])
 def classify():
     """
-    Receive a PDF file, parse transactions, and return them categorized.
+    Receive a PDF file, run the full categorization pipeline, and return
+    enriched transactions as JSON.
 
     Usage:
         curl -X POST -F "file=@statement.pdf" http://localhost:5001/classify
+        curl -X POST -F "file=@statement.pdf" "http://localhost:5001/classify?skip_oked=1"
+
+    Query params (optional):
+        skip_oked=1     - skip OKED code fetching (faster)
+        skip_classify=1 - skip ML classification
 
     Returns:
         {
@@ -26,8 +32,11 @@ def classify():
                     "date": "2024-11-13",
                     "amount": -1500.0,
                     "currency": "KZT",
-                    "operation": "Покупка",
-                    "details": "YANDEX.GO ALMATY KZ",
+                    "operation": "Purchases",
+                    "details": "YANDEX GO ALMATY",
+                    "business_name": "YANDEX GO",
+                    "city": "ALMATY",
+                    "oked_description": "...",
                     "category": "Transport"
                 },
                 ...
@@ -53,39 +62,49 @@ def classify():
     if not file.filename.lower().endswith(".pdf"):
         return jsonify({"error": "File must be a PDF"}), 400
 
-    # Save to temp file and process
+    # Save to temp file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
         file.save(tmp.name)
         tmp_path = tmp.name
 
     try:
-        # Parse transactions from PDF
-        result = parse_transactions(tmp_path)
+        skip_oked = request.args.get("skip_oked", "0") == "1"
+        skip_classify = request.args.get("skip_classify", "0") == "1"
 
-        if result.get("error"):
-            return jsonify({
-                "bank": result.get("bank"),
-                "error": result["error"],
-                "transactions": []
-            }), 400 if not result.get("bank") else 200
+        df = process_pdf(
+            tmp_path,
+            workers=3,
+            skip_oked=skip_oked,
+            skip_classify=skip_classify,
+        )
 
-        # Classify transactions
-        transactions = classify_transactions(result["transactions"])
+        # Bank name from the DataFrame
+        bank_name = df["bank"].iloc[0] if "bank" in df.columns and len(df) else None
 
-        # Build summary
+        # Replace NaN/NaT with None for clean JSON serialization
+        df = df.where(df.notna(), None)
+
+        # Convert to list of dicts
+        transactions = df.to_dict(orient="records")
+
+        # Build category summary
         category_counts = {}
-        for tx in transactions:
-            cat = tx.get("category", "Other")
-            category_counts[cat] = category_counts.get(cat, 0) + 1
+        if "category" in df.columns:
+            for cat in df["category"].dropna():
+                category_counts[cat] = category_counts.get(cat, 0) + 1
 
         return jsonify({
-            "bank": result["bank"],
+            "bank": bank_name,
             "transactions": transactions,
             "summary": {
                 "total_transactions": len(transactions),
-                "by_category": category_counts
-            }
+                "by_category": category_counts,
+            },
         })
 
+    except ValueError as e:
+        return jsonify({"error": str(e), "transactions": []}), 400
+    except Exception as e:
+        return jsonify({"error": f"Processing failed: {e}", "transactions": []}), 500
     finally:
         os.unlink(tmp_path)

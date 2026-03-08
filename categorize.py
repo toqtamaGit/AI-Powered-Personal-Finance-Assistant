@@ -58,7 +58,72 @@ def detect_bank(pdf_path: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Main pipeline
+# Single-PDF processing (used by both CLI and server)
+# ---------------------------------------------------------------------------
+
+def process_pdf(
+    pdf_path: str,
+    workers: int = 5,
+    skip_oked: bool = False,
+    skip_classify: bool = False,
+) -> pd.DataFrame:
+    """Process a single PDF through the full pipeline and return a DataFrame.
+
+    Raises:
+        ValueError: if bank cannot be detected or no parser is registered.
+    """
+    basename = os.path.basename(pdf_path)
+    bank_name = detect_bank(pdf_path)
+
+    if bank_name not in REGISTRY:
+        raise ValueError(f"No parser registered for '{bank_name}'")
+
+    parser_cls, norm_cls = REGISTRY[bank_name]
+
+    # Parse
+    transactions, _ = parser_cls().parse(pdf_path)
+    if not transactions:
+        raise ValueError(f"No transactions extracted from {basename}")
+
+    for t in transactions:
+        t.setdefault('bank', bank_name)
+        t.setdefault('source_file', basename)
+
+    df = pd.DataFrame(transactions)
+
+    # Canonical column order
+    base_cols = [
+        'date', 'amount_raw', 'amount', 'currency',
+        'operation', 'details', 'bank', 'source_file',
+    ]
+    for c in base_cols:
+        if c not in df.columns:
+            df[c] = None
+    df = df[base_cols + [c for c in df.columns if c not in base_cols]]
+
+    # Normalize
+    df = norm_cls().normalize_dataframe(df)
+
+    # OKED
+    if not skip_oked:
+        df = fetch_oked_dataframe(df, workers=workers)
+
+    # Classify
+    if not skip_classify:
+        df['category'] = df['details'].apply(classify_transaction)
+
+    # Sort by date
+    if 'date' in df.columns:
+        df['_dt'] = df['date'].apply(
+            lambda x: datetime.strptime(str(x), "%Y-%m-%d") if pd.notna(x) else pd.NaT
+        )
+        df = df.sort_values('_dt', kind='stable').drop(columns=['_dt'])
+
+    return df
+
+
+# ---------------------------------------------------------------------------
+# Batch pipeline (multiple PDFs → single CSV)
 # ---------------------------------------------------------------------------
 
 def run_pipeline(

@@ -106,7 +106,7 @@ PDF → Detect Bank → Parse Transactions → Normalize Details → Fetch OKED 
 
 3. **Install dependencies**
    ```bash
-   pip install flask flask-cors scikit-learn pandas numpy pdfplumber PyPDF2 openpyxl requests
+   pip install -r requirements.txt
    ```
 
 4. **Run the pipeline**
