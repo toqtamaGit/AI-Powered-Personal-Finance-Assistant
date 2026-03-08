@@ -1,4 +1,8 @@
-"""Integration tests for the categorization pipeline (process_pdf)."""
+"""
+Integration tests for the categorization pipeline — reads real PDFs, no network.
+
+Run:  python -m pytest tests/integration/test_pipeline.py -v
+"""
 
 import os
 
@@ -11,7 +15,7 @@ from categorize import process_pdf, collect_pdfs, detect_bank
 # Paths
 # ---------------------------------------------------------------------------
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "pdfs")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "data", "pdfs")
 KASPI_PDF = os.path.join(DATA_DIR, "kaspi", "kaspi_en.pdf")
 FREEDOM_PDF = os.path.join(DATA_DIR, "freedom", "freedom_en.pdf")
 

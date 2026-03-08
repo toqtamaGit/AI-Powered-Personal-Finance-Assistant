@@ -1,11 +1,7 @@
 """
-Tests for parsers/freedom.py — bilingual operation detection.
+Unit tests for parsers/freedom.py — bilingual operation detection.
 
-Bug reproduced: the old OP_RE regex only contained Russian operation names
-(Покупка, Платеж, …). English PDFs from Freedom Bank use English names
-(Acquiring, Payment, …), so ~86% of transactions ended up with operation=None.
-
-Run:  python -m pytest tests/test_freedom_parser.py -v
+Run:  python -m pytest tests/unit/test_freedom_parser.py -v
 """
 import re
 import pytest

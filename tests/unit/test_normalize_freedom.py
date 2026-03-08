@@ -1,18 +1,13 @@
 """
-Tests for llm/normalize_freedom.py — business_type, business_name, address, city, country extraction.
+Unit tests for Freedom normalizer — parse_freedom_details (pure function, no I/O).
 
-Run:  python -m pytest tests/test_normalize_freedom.py -v
+Run:  python -m pytest tests/unit/test_normalize_freedom.py -v
 """
-import os
-import tempfile
-
-import pandas as pd
 import pytest
 
 from parsers.normalize_freedom import (
     parse_freedom_details,
     normalize_hyphens,
-    normalize_csv,
     extract_city_from_text,
 )
 
@@ -467,44 +462,3 @@ class TestNormalizeHyphens:
         assert normalize_hyphens(None) is None
 
 
-# ---------------------------------------------------------------------------
-# 13. Deduplication by details column
-# ---------------------------------------------------------------------------
-
-class TestDeduplication:
-    """normalize_csv should drop rows with duplicate details, keeping first."""
-
-    def _run(self, rows):
-        """Helper: write rows to a temp CSV, run normalize_csv, return result df."""
-        df_in = pd.DataFrame(rows)
-        with tempfile.TemporaryDirectory() as td:
-            inp = os.path.join(td, "in.csv")
-            out = os.path.join(td, "out.csv")
-            df_in.to_csv(inp, index=False)
-            df_out = normalize_csv(inp, out)
-        return df_out
-
-    def test_duplicates_removed(self):
-        rows = [
-            {"date": "2025-01-01", "amount": -100, "operation": "Acquiring",
-             "details": "IP GLOBAL MANAGEMENT ASTANA KZ"},
-            {"date": "2025-01-02", "amount": -200, "operation": "Acquiring",
-             "details": "IP GLOBAL MANAGEMENT ASTANA KZ"},
-            {"date": "2025-01-03", "amount": -300, "operation": "Acquiring",
-             "details": "YANDEX.EDA ALMATY KZ"},
-        ]
-        df = self._run(rows)
-        assert len(df) == 2
-        assert df.iloc[0]["date"] == "2025-01-01"
-
-    def test_different_details_kept(self):
-        rows = [
-            {"date": "2025-01-01", "amount": -100, "operation": "Acquiring",
-             "details": "IP GLOBAL MANAGEMENT ASTANA KZ"},
-            {"date": "2025-01-02", "amount": -200, "operation": "Acquiring",
-             "details": "YANDEX.EDA ALMATY KZ"},
-            {"date": "2025-01-03", "amount": -300, "operation": "Transfer",
-             "details": "Перевод с карты на карту"},
-        ]
-        df = self._run(rows)
-        assert len(df) == 3

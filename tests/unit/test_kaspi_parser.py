@@ -1,7 +1,7 @@
 """
-Tests for parsers/kaspi.py — bilingual operation detection & data quality.
+Unit tests for parsers/kaspi.py — bilingual operation detection & data quality.
 
-Run:  python -m pytest tests/test_kaspi_parser.py -v
+Run:  python -m pytest tests/unit/test_kaspi_parser.py -v
 """
 import re
 import pytest
