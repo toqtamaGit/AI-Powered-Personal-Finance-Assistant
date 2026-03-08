@@ -54,7 +54,7 @@ class TestStandardPattern:
             "YANDEX.EDA ALMATY KZ", "Acquiring"
         )
         assert btype is None
-        assert bname == "YANDEX.EDA"
+        assert bname == "YANDEX EDA"
         assert city == "ALMATY"
         assert country == "KZ"
 
@@ -63,7 +63,7 @@ class TestStandardPattern:
             "IP BUTYRSKAYA G.A. TARAZ KZ", "Acquiring"
         )
         assert btype == "IP"
-        assert bname == "BUTYRSKAYA G.A."
+        assert bname == "BUTYRSKAYA G A"
         assert city == "TARAZ"
         assert country == "KZ"
 
@@ -81,7 +81,7 @@ class TestStandardPattern:
             "THE BRITISH COUNCIL 441619577755 GB", "Acquiring"
         )
         assert btype is None
-        assert bname == "THE BRITISH COUNCIL 441619577755"
+        assert bname == "THE BRITISH COUNCIL"
         assert city is None
         assert country == "GB"
 
@@ -90,7 +90,7 @@ class TestStandardPattern:
             "CLAUDE.AI SUBSCRIPTION 14152360599 US", "Acquiring"
         )
         assert btype is None
-        assert bname == "CLAUDE.AI SUBSCRIPTION 14152360599"
+        assert bname == "CLAUDE AI SUBSCRIPTION"
         assert city is None
         assert country == "US"
 
@@ -105,7 +105,7 @@ class TestCityNoCountry:
             "TOO GLASMAN TRADE 3 ASTANA", "Acquiring"
         )
         assert btype == "TOO"
-        assert bname == "GLASMAN TRADE 3"
+        assert bname == "GLASMAN TRADE"
         assert city == "ASTANA"
         assert country is None
 
@@ -229,7 +229,7 @@ class TestNoCityCountry:
             "Возврат. Отмена покупки", "Acquiring"
         )
         assert btype is None
-        assert bname == "Возврат. Отмена покупки"
+        assert bname == "Возврат Отмена покупки"
         assert city is None
         assert country is None
 
@@ -244,6 +244,7 @@ class TestNoCity:
             "IP BERSINOVA S.IM.B.MOMYSH KZ", "Acquiring"
         )
         assert btype == "IP"
+        assert bname == "BERSINOVA S IM B MOMYSH"
         assert city is None
         assert country == "KZ"
 
@@ -262,7 +263,7 @@ class TestNoCity:
             "CURSOR AI POWERED IDE 18314259504", "Acquiring"
         )
         assert city is None
-        assert bname == "CURSOR AI POWERED IDE 18314259504"
+        assert bname == "CURSOR AI POWERED IDE"
         assert addr is None
 
 
@@ -381,7 +382,72 @@ class TestExtractCity:
 
 
 # ---------------------------------------------------------------------------
-# 12. normalize_hyphens
+# 12. Punctuation cleanup & trailing numbers
+# ---------------------------------------------------------------------------
+
+class TestPunctuationCleanup:
+    def test_dots_to_spaces(self):
+        btype, bname, addr, city, country = parse_freedom_details(
+            "MAGNUM.ASF46.KCO-1. ASTANA KZ", "Acquiring"
+        )
+        assert bname == "MAGNUM ASF46 KCO"
+        assert city == "ASTANA"
+        assert country == "KZ"
+
+    def test_asterisk_cleaned(self):
+        btype, bname, addr, city, country = parse_freedom_details(
+            "GOOGLE *Google One", "Acquiring"
+        )
+        assert bname == "GOOGLE Google One"
+
+    def test_trailing_store_code_stripped(self):
+        btype, bname, addr, city, country = parse_freedom_details(
+            "KFC 12780 ASTANA KZ", "Acquiring"
+        )
+        assert bname == "KFC"
+        assert city == "ASTANA"
+
+    def test_digit_tokens_stripped(self):
+        btype, bname, addr, city, country = parse_freedom_details(
+            "TOO GLASMAN TRADE 3 ASTANA", "Acquiring"
+        )
+        assert bname == "GLASMAN TRADE"
+
+    def test_hash_stripped(self):
+        btype, bname, addr, city, country = parse_freedom_details(
+            "ZERDE #201 ASTANA KZ", "Acquiring"
+        )
+        assert bname == "ZERDE"
+
+    def test_exclamation_stripped(self):
+        btype, bname, addr, city, country = parse_freedom_details(
+            "RAKHMET!!! SPASIBO!!!", "Acquiring"
+        )
+        assert bname == "RAKHMET SPASIBO"
+
+    def test_slash_to_space(self):
+        btype, bname, addr, city, country = parse_freedom_details(
+            "MELOMAN/MARWIN ALMATY KZ", "Acquiring"
+        )
+        assert bname == "MELOMAN MARWIN"
+
+    def test_foreign_amount_stripped(self):
+        btype, bname, addr, city, country = parse_freedom_details(
+            "PINDUODUO (- 36,49 CNY) ALMATY KZ", "Acquiring"
+        )
+        assert bname == "PINDUODUO"
+
+    def test_kz_suffix_stripped(self):
+        btype, bname, addr, city, country = parse_freedom_details(
+            "OKADZAKI.KZ ASTANA KZ", "Acquiring"
+        )
+        assert bname == "OKADZAKI"
+        assert city == "ASTANA"
+        assert country == "KZ"
+
+
+# ---------------------------------------------------------------------------
+# 13. normalize_hyphens
 # ---------------------------------------------------------------------------
 
 class TestNormalizeHyphens:

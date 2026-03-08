@@ -1,11 +1,11 @@
 ﻿date,amount_raw,amount,amount_abs,currency,operation,details,bank,source_file,category,business_type,business_name,address,city,country
-2025-08-23,"-2,060.00 ₸",-2060.0,2060.0,KZT,Acquiring,YANDEX.GO ALMATY KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,,,YANDEX.GO,,ALMATY,KZ
+2025-08-23,"-2,060.00 ₸",-2060.0,2060.0,KZT,Acquiring,YANDEX.GO ALMATY KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,,,YANDEX GO,,ALMATY,KZ
 2025-08-24,-640.00 ₸,-640.0,640.0,KZT,Acquiring,IP GLOBAL MANAGEMENT ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,,IP,GLOBAL MANAGEMENT,,ASTANA,KZ
-2025-09-01,-781.00 ₸,-781.0,781.0,KZT,Acquiring,MAGNUM.ASF46.KCO-2. ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,продукты,,MAGNUM.ASF46.KCO-2.,,ASTANA,KZ
-2025-09-01,"-26,300.00 ₸",-26300.0,26300.0,KZT,Acquiring,EXTAZ.KZ BOUTIQUE ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,,,EXTAZ.KZ BOUTIQUE,,ASTANA,KZ
+2025-09-01,-781.00 ₸,-781.0,781.0,KZT,Acquiring,MAGNUM.ASF46.KCO-2. ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,продукты,,MAGNUM ASF46 KCO,,ASTANA,KZ
+2025-09-01,"-26,300.00 ₸",-26300.0,26300.0,KZT,Acquiring,EXTAZ.KZ BOUTIQUE ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,,,EXTAZ KZ BOUTIQUE,,ASTANA,KZ
 2025-09-01,"-6,000.00 ₸",-6000.0,6000.0,KZT,Transfer,Лабакбай Болат Анварұлы Безвозмездный перевод,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы,,,,,
 2025-09-01,"-40,000.00 ₸",-40000.0,40000.0,KZT,Transfer,Перевод с карты на карту,Freedom Bank Kazakhstan,freedom_ru.pdf,переводы,,,,,
-2025-09-02,-675.00 ₸,-675.0,675.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,,IP,BERSINOVA S.IM.B.MOMYSH,,,KZ
+2025-09-02,-675.00 ₸,-675.0,675.0,KZT,Acquiring,IP BERSINOVA S.IM.B.MOMYSH KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,,IP,BERSINOVA S IM B MOMYSH,,,KZ
 2025-09-03,"-1,400.00 ₸",-1400.0,1400.0,KZT,Acquiring,IP SUNNATOVA ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,,IP,SUNNATOVA,,ASTANA,KZ
 2025-09-03,-570.00 ₸,-570.0,570.0,KZT,Acquiring,IP DANIYAROV A ASTANA KZ,Freedom Bank Kazakhstan,freedom_ru.pdf,,IP,DANIYAROV A,,ASTANA,KZ
 2025-09-03,"-12,840.00 ₸",-12840.0,12840.0,KZT,Payment,ТОО Ticketon Events Тикетон Евентс За оплату заказа Тикетон,Freedom Bank Kazakhstan,freedom_ru.pdf,,TOO,Ticketon Events Тикетон Евентс За оплату заказа Тикетон,,,

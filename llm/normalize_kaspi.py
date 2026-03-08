@@ -153,11 +153,18 @@ def parse_details(
         business_type = _TYPE_MAP.get(business_type, business_type)
         text = (text[:m.start()] + ' ' + text[m.end():]).strip()
 
-    # 3. Clean up quotes/brackets/punctuation → replace with spaces
-    text = re.sub(r'["\'\[\]\(\)«»,;.]', ' ', text).strip()
+    # 3. Strip foreign currency amounts e.g. "(- 36,49 CNY)" before punct strip
+    text = re.sub(r'\([-–]\s*[\d\s,.]+[A-Z]{3}\)', '', text).strip()
+
+    # 4. Clean up quotes/brackets/punctuation → replace with spaces
+    text = re.sub(r'["\'\[\]\(\)«»,;.*_#!/]', ' ', text)
+
+    # 5. Hyphen before digit → space (e.g. CAFE-2 → CAFE 2, KASSA-1 → KASSA 1)
+    text = re.sub(r'-(\d)', r' \1', text)
+
     text = re.sub(r'\s+', ' ', text).strip()
 
-    # 4. Known places → split into address
+    # 5. Known places → split into address
     address = None
     words = text.split()
     if words:
@@ -187,6 +194,15 @@ def parse_details(
                     break
 
     business_name = text.strip() if text.strip() else None
+
+    # Strip purely-digit tokens (store / kassa / phone numbers)
+    if business_name:
+        bwords = [w for w in business_name.split() if not w.isdigit()]
+        business_name = ' '.join(bwords).strip() or None
+
+    # Strip trailing "KZ" domain suffix (from e.g. OZON.KZ → OZON KZ)
+    if business_name and business_name.upper().endswith(' KZ'):
+        business_name = business_name[:-3].strip() or None
 
     # If extracting the known place left business_name empty,
     # keep the place as both business_name and address

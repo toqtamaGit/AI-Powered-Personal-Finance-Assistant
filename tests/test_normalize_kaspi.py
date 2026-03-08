@@ -131,7 +131,7 @@ class TestCityExtraction:
             "12 месяцев Астана", "Purchases"
         )
         assert city == "ASTANA"
-        assert bname == "12 месяцев"
+        assert bname == "месяцев"
 
     def test_konoha_astana(self):
         btype, bname, addr, city = parse_details(
@@ -145,7 +145,7 @@ class TestCityExtraction:
             "H-202 Тараз", "Purchases"
         )
         assert city == "TARAZ"
-        assert bname == "H-202"
+        assert bname == "H"
 
     def test_salon_taraz(self):
         btype, bname, addr, city = parse_details(
@@ -167,14 +167,14 @@ class TestCityExtraction:
             "Z-1 г. Астана", "Purchases"
         )
         assert city == "ASTANA"
-        assert bname == "Z-1"
+        assert bname == "Z"
 
     def test_g_dot_prefix_variant(self):
         btype, bname, addr, city = parse_details(
             "Z-313 г. Астана", "Purchases"
         )
         assert city == "ASTANA"
-        assert bname == "Z-313"
+        assert bname == "Z"
 
     def test_almaty_trailing(self):
         btype, bname, addr, city = parse_details(
@@ -373,7 +373,85 @@ class TestKnownPlaces:
 
 
 # ---------------------------------------------------------------------------
-#  4. Non-purchase operations → all None
+#  4. Foreign amounts & trailing numbers
+# ---------------------------------------------------------------------------
+
+class TestForeignAmountStripping:
+    def test_trailing_store_code(self):
+        btype, bname, addr, city = parse_details(
+            "KFC 12780", "Purchases"
+        )
+        assert bname == "KFC"
+
+    def test_digit_tokens_stripped(self):
+        btype, bname, addr, city = parse_details(
+            "АЗС 14", "Purchases"
+        )
+        assert bname == "АЗС"
+
+    def test_underscore_to_space(self):
+        btype, bname, addr, city = parse_details(
+            "ECO_SHINE", "Purchases"
+        )
+        assert bname == "ECO SHINE"
+
+    def test_asterisk_to_space(self):
+        btype, bname, addr, city = parse_details(
+            "GOOGLE *Google One", "Purchases"
+        )
+        assert bname == "GOOGLE Google One"
+
+    def test_hash_stripped(self):
+        btype, bname, addr, city = parse_details(
+            "Zerde #201", "Purchases"
+        )
+        assert bname == "Zerde"
+
+    def test_exclamation_stripped(self):
+        btype, bname, addr, city = parse_details(
+            "Рахмет!!! Спасибо!!!", "Purchases"
+        )
+        assert bname == "Рахмет Спасибо"
+
+    def test_slash_to_space(self):
+        btype, bname, addr, city = parse_details(
+            "Meloman/Marwin", "Purchases"
+        )
+        assert bname == "Meloman Marwin"
+
+    def test_foreign_amount_cny_stripped(self):
+        btype, bname, addr, city = parse_details(
+            "PINDUODUO (- 36,49 CNY)", "Purchases"
+        )
+        assert bname == "PINDUODUO"
+
+    def test_foreign_amount_usd_stripped(self):
+        btype, bname, addr, city = parse_details(
+            "PAYPAL *COHEECREATI (- 6,97 USD)", "Purchases"
+        )
+        assert bname == "PAYPAL COHEECREATI"
+
+    def test_foreign_amount_with_prefix(self):
+        btype, bname, addr, city = parse_details(
+            "FFT*PINDUODUO4 (- 89,77 CNY)", "Purchases"
+        )
+        assert bname == "FFT PINDUODUO4"
+
+    def test_kz_suffix_stripped(self):
+        btype, bname, addr, city = parse_details(
+            "OKADZAKI.KZ", "Purchases"
+        )
+        assert bname == "OKADZAKI"
+
+    def test_dn_market_hyphen_kept(self):
+        btype, bname, addr, city = parse_details(
+            "DN-маркет", "Purchases"
+        )
+        assert bname == "DN-маркет"
+
+
+# ---------------------------------------------------------------------------
+#  5. Non-purchase operations → all None (renumbered)
 # ---------------------------------------------------------------------------
 
 class TestNonPurchase:
