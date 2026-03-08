@@ -9,7 +9,7 @@ import tempfile
 import pandas as pd
 import pytest
 
-from llm.normalize_kaspi import parse_details, normalize_csv
+from parsers.normalize_kaspi import parse_details, normalize_csv
 
 
 # ---------------------------------------------------------------------------

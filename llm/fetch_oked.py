@@ -280,6 +280,78 @@ def _fetch_one(idx: int, total: int, key: tuple, print_lock: threading.Lock) -> 
     return key, oked
 
 
+def process_dataframe(df: pd.DataFrame, workers: int = 5) -> pd.DataFrame:
+    """Fetch OKED codes for a DataFrame (in-process, no file I/O).
+
+    Adds ``oked_code`` and ``oked_description`` columns and returns the
+    modified DataFrame.
+    """
+    print(f"  Total rows: {len(df)}")
+
+    # Filter for purchase operations
+    purchase_mask = df['operation'].isin(_PURCHASE_OPS)
+    purchase_df = df[purchase_mask]
+    print(f"  Purchase rows: {len(purchase_df)}")
+
+    # Get unique (business_name, business_type, city) tuples
+    biz_cols = ['business_name', 'business_type', 'city']
+    biz_df = purchase_df[biz_cols].dropna(subset=['business_name']).drop_duplicates()
+    total = len(biz_df)
+    print(f"  Unique businesses to search: {total}")
+    print(f"  Workers: {workers}\n")
+
+    keys = [
+        (row['business_name'], row['business_type'], row['city'])
+        for _, row in biz_df.iterrows()
+    ]
+
+    oked_code_map: dict[tuple, str | None] = {}
+    oked_desc_map: dict[tuple, str | None] = {}
+    found = 0
+    print_lock = threading.Lock()
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = {
+            pool.submit(_fetch_one, i, total, key, print_lock): key
+            for i, key in enumerate(keys, 1)
+        }
+
+        for future in as_completed(futures):
+            key, oked = future.result()
+            if oked:
+                oked_code_map[key] = oked.get('code')
+                oked_desc_map[key] = oked.get('description')
+                found += 1
+            else:
+                oked_code_map[key] = None
+                oked_desc_map[key] = None
+
+    print(f"\n{'=' * 70}")
+    print(f"Summary:")
+    print(f"  Unique businesses searched: {total}")
+    print(f"  OKED codes found: {found}")
+    print(f"  Not found: {total - found}")
+    print(f"{'=' * 70}\n")
+
+    # Map back to all rows
+    def _get_code(row):
+        if row['operation'] not in _PURCHASE_OPS:
+            return None
+        key = (row.get('business_name'), row.get('business_type'), row.get('city'))
+        return oked_code_map.get(key)
+
+    def _get_desc(row):
+        if row['operation'] not in _PURCHASE_OPS:
+            return None
+        key = (row.get('business_name'), row.get('business_type'), row.get('city'))
+        return oked_desc_map.get(key)
+
+    df['oked_code'] = df.apply(_get_code, axis=1)
+    df['oked_description'] = df.apply(_get_desc, axis=1)
+
+    return df
+
+
 def process_csv(input_file: str, output_file: str, workers: int = 5) -> pd.DataFrame:
     """Read normalized CSV, fetch OKED for purchase rows (multithreaded), save result."""
     print(f"Reading {input_file}...")

@@ -1,41 +1,93 @@
 # AI-Powered Personal Finance Assistant
 
-A machine learning-powered finance assistant that parses bank statement PDFs, extracts transactions, and automatically classifies them by category. Built with Flask and scikit-learn, designed for integration with mobile applications.
+A machine learning-powered finance assistant that parses bank statement PDFs, extracts transactions, normalizes business details, fetches OKED codes, and classifies transactions by category — all in a single command.
+
+## Quick Start
+
+```bash
+# Process a single PDF — produces a fully enriched CSV
+python categorize.py --input statement.pdf --out result.csv
+
+# Process a folder of PDFs
+python categorize.py --input data/pdfs/ --out data/final/all.csv
+
+# Skip OKED fetching (faster, no network needed)
+python categorize.py --input statement.pdf --out result.csv --skip-oked
+
+# Skip ML classification
+python categorize.py --input statement.pdf --out result.csv --skip-classify
+
+# Control OKED fetch parallelism (default: 5 threads)
+python categorize.py --input data/pdfs/ --out result.csv --workers 10
+```
+
+The pipeline auto-detects the bank from the PDF content and runs every step automatically:
+
+```
+PDF → Detect Bank → Parse Transactions → Normalize Details → Fetch OKED → ML Classify → CSV
+```
+
+### Output Columns
+
+| Column | Description |
+|--------|-------------|
+| `date` | Transaction date (YYYY-MM-DD) |
+| `amount_raw` | Original amount string from PDF |
+| `amount` | Parsed numeric amount (signed) |
+| `currency` | Currency code (KZT) |
+| `operation` | Operation type (Purchases, Transfers, etc.) |
+| `details` | Raw transaction details from PDF |
+| `bank` | Detected bank name |
+| `source_file` | Source PDF filename |
+| `business_type` | Extracted entity type (IP, TOO, LLC, etc.) |
+| `business_name` | Cleaned business/merchant name |
+| `address` | Known place or mall (if detected) |
+| `city` | Extracted city name (normalized to English) |
+| `oked_code` | OKED classification code from kompra.kz |
+| `oked_description` | OKED activity description |
+| `category` | ML-predicted spending category |
 
 ## Features
 
-- **Multi-Bank PDF Parsing**: Supports Kaspi Bank, Freedom Bank Kazakhstan, Halyk Bank, and Jusan Bank statement formats
-- **ML-Based Classification**: Automatically categorizes transactions using a trained LinearSVC model with TF-IDF vectorization
-- **REST API**: Flask-based API with CORS support for mobile app integration
-- **Robust Text Extraction**: Dual PDF extraction (pdfplumber + PyPDF2 fallback)
-- **Text Normalization**: Handles Cyrillic text, OCR errors, and fuzzy merchant matching
+- **Single-Command Pipeline**: `categorize.py` chains parsing, normalization, OKED lookup, and classification
+- **Auto Bank Detection**: Identifies Kaspi Bank and Freedom Bank Kazakhstan from PDF text
+- **Business Detail Extraction**: Extracts business type, name, city, and address from transaction details
+- **OKED Integration**: Fetches business activity codes from kompra.kz API (multithreaded)
+- **ML Classification**: Categorizes transactions using a trained LinearSVC model
+- **Robust PDF Parsing**: Dual extraction (pdfplumber + PyPDF2 fallback), handles Cyrillic text
 
 ## Project Structure
 
 ```
+├── categorize.py           # Main pipeline script (PDF → enriched CSV)
+│
+├── parsers/                # Bank-specific parsers & normalizers
+│   ├── __init__.py         # REGISTRY: maps bank name → (parser, normalizer)
+│   ├── base.py             # BaseParser / BaseNormalizer abstract classes
+│   ├── constants.py        # Shared constants (cities, places, regexes)
+│   ├── kaspi.py            # Kaspi Bank PDF parser
+│   ├── freedom.py          # Freedom Bank PDF parser
+│   ├── normalize_kaspi.py  # Kaspi detail normalizer
+│   └── normalize_freedom.py # Freedom detail normalizer
+│
+├── llm/                    # ML & API components
+│   ├── classifier.py       # Transaction classification (LinearSVC)
+│   ├── model_trainer.py    # Model training script
+│   ├── fetch_oked.py       # OKED code fetching from kompra.kz
+│   ├── bank_detector.py    # Bank detection from PDF text
+│   ├── pdf_extractor.py    # PDF text extraction utility
+│   └── models/             # Trained ML model artifacts
+│
 ├── server/                 # Flask REST API
-│   ├── app.py             # App factory & initialization
-│   └── routes/            # API endpoints
-│       ├── bank.py        # Bank detection endpoint
-│       └── transactions.py # Transaction parsing & classification
+│   ├── app.py              # App factory
+│   └── routes/             # API endpoints
 │
-├── llm/                   # ML & NLP components
-│   ├── classifier.py      # Transaction classification (LinearSVC)
-│   ├── model_trainer.py   # Model training pipeline
-│   ├── bank_detector.py   # Bank detection from PDF text
-│   ├── pdf_extractor.py   # PDF text extraction
-│   ├── transaction_parser.py # Parsing coordinator
-│   ├── normalize_freedom.py # Freedom CSV normalization (business, city, country)
-│   ├── normalize_kaspi.py  # Kaspi CSV normalization (business type/name)
-│   └── models/            # Trained ML models
-│
-├── parsers/               # Bank-specific PDF parsers
-│   ├── kaspi.py          # Kaspi Bank parser
-│   └── freedom.py        # Freedom Bank parser
-│
-├── notebooks/             # Jupyter notebooks for experimentation
-├── data/                  # Training data & datasets
-└── statements/            # Sample bank statements (gitignored)
+├── tests/                  # pytest test suite
+├── data/                   # PDFs, CSVs, and training data
+│   ├── pdfs/               # Source bank statement PDFs
+│   ├── final/              # Pipeline output CSVs (fully enriched)
+│   └── bank_statements_labeled.csv  # Labeled training data
+└── notebooks/              # Jupyter notebooks for experimentation
 ```
 
 ## Installation
@@ -57,86 +109,46 @@ A machine learning-powered finance assistant that parses bank statement PDFs, ex
    pip install flask flask-cors scikit-learn pandas numpy pdfplumber PyPDF2 openpyxl requests
    ```
 
-4. **Run the server**
+4. **Run the pipeline**
+   ```bash
+   python categorize.py --input data/pdfs/ --out data/final/all.csv
+   ```
+
+5. **Or run the server**
    ```bash
    python -m server.app
    ```
    The server will start at `http://localhost:5001`
 
-## API Endpoints
+## Pipeline Steps
 
-### Health Check
-```
-GET /health
-```
-Returns: `{"status": "ok"}`
+### 1. Bank Detection
+Scans PDF text for bank-specific keywords (e.g. "Kaspi", "Freedom Finance") and routes to the correct parser.
 
-### Detect Bank
-```
-POST /detect-bank
-Content-Type: multipart/form-data
+### 2. PDF Parsing
+Bank-specific parsers extract structured transaction rows from PDFs. Handles table layouts, multi-line entries, Cyrillic text, and OCR artifacts.
 
-file: <PDF file>
-```
-Returns:
-```json
-{
-  "bank": "Kaspi Bank",
-  "detected": true
-}
-```
+### 3. Normalization
+Extracts structured fields from raw transaction details:
+- **Business type** — IP, TOO, LLP, LLC
+- **Business name** — cleaned name with punctuation, digits, and domain suffixes removed
+- **Address** — known places (malls: Mega, Khan Shatyr, Dostyk Plaza, etc.)
+- **City** — Kazakhstan city names (Russian and English, including genitive forms)
 
-### Parse & Classify Transactions
-```
-POST /classify
-Content-Type: multipart/form-data
+### 4. OKED Fetching
+Queries kompra.kz API to find the business activity code for each unique business name. Uses multithreaded requests with BLEU-score matching. Online services (Spotify, Coursera, Netflix, etc.) are tagged directly without API calls.
 
-file: <PDF file>
-```
-Returns:
-```json
-{
-  "bank": "Kaspi Bank",
-  "transactions": [
-    {
-      "date": "2024-11-13",
-      "amount": -1500.0,
-      "currency": "KZT",
-      "operation": "Покупка",
-      "merchant": "YANDEX.GO",
-      "details": "YANDEX.GO ALMATY KZ",
-      "category": "транспорт"
-    }
-  ],
-  "summary": {
-    "total_transactions": 50,
-    "by_category": {
-      "транспорт": 10,
-      "рестораны и кафе": 8,
-      "супермаркеты": 12
-    }
-  }
-}
-```
+### 5. ML Classification
+Applies a pre-trained LinearSVC model to assign a spending category to each transaction based on its details text.
 
-## Transaction Categories
+## Supported Banks
 
-The classifier assigns transactions to the following categories:
-
-| Category | Description |
-|----------|-------------|
-| `переводы` | Transfers |
-| `покупки` | General purchases |
-| `транспорт` | Transport/Taxi |
-| `рестораны и кафе` | Restaurants & Cafes |
-| `супермаркеты` | Supermarkets |
-| `подписки` | Subscriptions |
-| `маркетплейсы` | Marketplaces |
-| `другое` | Other |
+| Bank | Parser | Normalizer | Status |
+|------|--------|------------|--------|
+| Kaspi Bank | `parsers/kaspi.py` | `parsers/normalize_kaspi.py` | Full support |
+| Freedom Bank Kazakhstan | `parsers/freedom.py` | `parsers/normalize_freedom.py` | Full support |
 
 ## Training the Model
-
-To retrain the classification model with new data:
 
 ```python
 from llm.model_trainer import ModelTrainer
@@ -146,24 +158,10 @@ trainer.train('data/bank_statements_labeled.csv')
 trainer.save_model('llm/models/')
 ```
 
-Or use the Jupyter notebook at `notebooks/classification.ipynb` for interactive training and experimentation.
-
-## Supported Banks
-
-| Bank | Parser | Status |
-|------|--------|--------|
-| Kaspi Bank | `parsers/kaspi.py` | Full support |
-| Freedom Bank Kazakhstan | `parsers/freedom.py` | Full support |
-| Halyk Bank | Freedom parser fallback | Partial support |
-| Jusan Bank | Freedom parser fallback | Partial support |
-
 ## Tech Stack
 
-- **Backend**: Python 3.14, Flask 3.1.2
-- **ML/NLP**: scikit-learn (LinearSVC, TfidfVectorizer)
-- **PDF Processing**: pdfplumber, PyPDF2
-- **Data Processing**: Pandas, NumPy
-
-## License
-
-MIT License
+- **Python 3**, Flask
+- **ML**: scikit-learn (LinearSVC, TfidfVectorizer)
+- **PDF**: pdfplumber, PyPDF2
+- **Data**: Pandas, NumPy
+- **OKED**: kompra.kz API

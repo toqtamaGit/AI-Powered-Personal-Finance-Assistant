@@ -1,26 +1,18 @@
-"""Transaction parser - extracts transactions from bank statement PDFs."""
+"""Transaction parser — dispatches to the correct bank parser via the registry.
+
+Kept for backward compatibility with server code.  New code should use
+``categorize.py`` or the ``parsers.REGISTRY`` directly.
+"""
 
 import os
 import sys
-from typing import List, Dict, Optional, Tuple
+from typing import Dict, List
 
-# Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from llm.bank_detector import detect_bank_from_text
 from llm.pdf_extractor import extract_text_from_pdf
-
-
-def parse_kaspi_transactions(pdf_path: str) -> List[Dict]:
-    """Parse transactions from Kaspi Bank PDF statement."""
-    from parsers.kaspi import parse_kaspi_pdf
-    return parse_kaspi_pdf(pdf_path)
-
-
-def parse_freedom_transactions(pdf_path: str) -> Tuple[List[Dict], List[str]]:
-    """Parse transactions from Freedom Bank PDF statement."""
-    from parsers.freedom import parse_pdf
-    return parse_pdf(pdf_path)
+from parsers import REGISTRY
 
 
 def parse_transactions(pdf_path: str) -> Dict:
@@ -36,7 +28,6 @@ def parse_transactions(pdf_path: str) -> Dict:
             - transactions: List of transaction dicts
             - error: Error message if parsing failed
     """
-    # Extract text and detect bank
     text = extract_text_from_pdf(pdf_path)
     bank_name = detect_bank_from_text(text)
 
@@ -44,54 +35,33 @@ def parse_transactions(pdf_path: str) -> Dict:
         return {
             "bank": None,
             "transactions": [],
-            "error": "Could not detect bank from PDF"
+            "error": "Could not detect bank from PDF",
+        }
+
+    if bank_name not in REGISTRY:
+        return {
+            "bank": bank_name,
+            "transactions": [],
+            "error": f"No parser available for {bank_name}",
         }
 
     try:
-        if bank_name == "Kaspi Bank":
-            transactions = parse_kaspi_transactions(pdf_path)
-            return {
-                "bank": bank_name,
-                "transactions": transactions,
-                "error": None
-            }
+        parser_cls, _ = REGISTRY[bank_name]
+        parser = parser_cls()
+        transactions, rejects = parser.parse(pdf_path)
 
-        elif bank_name == "Freedom Bank Kazakhstan":
-            transactions, rejects = parse_freedom_transactions(pdf_path)
-            return {
-                "bank": bank_name,
-                "transactions": transactions,
-                "rejected_lines": len(rejects),
-                "error": None
-            }
-
-        elif bank_name in ["Halyk Bank", "Jusan Bank"]:
-            # For now, try Freedom parser as fallback (similar format)
-            try:
-                transactions, rejects = parse_freedom_transactions(pdf_path)
-                return {
-                    "bank": bank_name,
-                    "transactions": transactions,
-                    "rejected_lines": len(rejects),
-                    "error": None
-                }
-            except Exception:
-                return {
-                    "bank": bank_name,
-                    "transactions": [],
-                    "error": f"Parser for {bank_name} not fully implemented yet"
-                }
-
-        else:
-            return {
-                "bank": bank_name,
-                "transactions": [],
-                "error": f"No parser available for {bank_name}"
-            }
+        result: Dict = {
+            "bank": bank_name,
+            "transactions": transactions,
+            "error": None,
+        }
+        if rejects:
+            result["rejected_lines"] = len(rejects)
+        return result
 
     except Exception as e:
         return {
             "bank": bank_name,
             "transactions": [],
-            "error": str(e)
+            "error": str(e),
         }

@@ -385,5 +385,28 @@ def main():
         print(f"XLSX: {args.xlsx}")
 
 
+
+# ---------------------------------------------------------------------------
+# Class-based API
+# ---------------------------------------------------------------------------
+
+from parsers.base import BaseParser as _BaseParser
+
+
+class KaspiParser(_BaseParser):
+    """Parser for Kaspi Bank PDF statements."""
+
+    @property
+    def bank_name(self) -> str:
+        return "Kaspi Bank"
+
+    def detect(self, text: str) -> bool:
+        return is_kaspi_statement(text)
+
+    def parse(self, pdf_path: str):
+        rows = parse_kaspi_pdf(pdf_path)
+        return rows, []
+
+
 if __name__ == "__main__":
     main()

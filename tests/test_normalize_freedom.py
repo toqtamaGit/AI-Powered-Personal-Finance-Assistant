@@ -9,7 +9,7 @@ import tempfile
 import pandas as pd
 import pytest
 
-from llm.normalize_freedom import (
+from parsers.normalize_freedom import (
     parse_freedom_details,
     normalize_hyphens,
     normalize_csv,

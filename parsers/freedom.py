@@ -767,5 +767,27 @@ def main():
         print(f"Также создан XLSX: {args.xlsx}")
 
 
+
+# ---------------------------------------------------------------------------
+# Class-based API
+# ---------------------------------------------------------------------------
+
+from parsers.base import BaseParser as _BaseParser
+
+
+class FreedomParser(_BaseParser):
+    """Parser for Freedom Bank Kazakhstan PDF statements."""
+
+    @property
+    def bank_name(self) -> str:
+        return "Freedom Bank Kazakhstan"
+
+    def detect(self, text: str) -> bool:
+        return detect_bank_from_text(text) == "Freedom Bank Kazakhstan"
+
+    def parse(self, pdf_path: str):
+        return parse_pdf(pdf_path)
+
+
 if __name__ == "__main__":
     main()
