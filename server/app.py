@@ -10,6 +10,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from server.routes.bank import bank_bp
+from server.routes.dashboard import dashboard_bp
 from server.routes.transactions import transactions_bp
 
 
@@ -23,6 +24,7 @@ def create_app() -> Flask:
     # Register blueprints
     app.register_blueprint(bank_bp)
     app.register_blueprint(transactions_bp)
+    app.register_blueprint(dashboard_bp)
 
     return app
 

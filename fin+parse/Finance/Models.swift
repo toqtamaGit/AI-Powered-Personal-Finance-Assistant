@@ -368,3 +368,169 @@ class SharedDataManager: ObservableObject {
     private static func daysAgo(_ n: Int) -> Date { Calendar.current.date(byAdding: .day, value: -n, to: Date())! }
     private static func daysFromNow(_ n: Int) -> Date { Calendar.current.date(byAdding: .day, value: n, to: Date())! }
 }
+
+// MARK: - Dashboard API Response Models
+
+/// GET /api/dashboard/overview
+struct DashboardOverview: Codable {
+    let totalSpent: Double
+    let totalIncome: Double
+    let balance: Double
+    let transactionCount: Int
+    let topCategory: String?
+    let thisMonthSpent: Double
+    let lastMonthSpent: Double
+    let trend: String                // "up" | "down"
+
+    enum CodingKeys: String, CodingKey {
+        case totalSpent = "total_spent"
+        case totalIncome = "total_income"
+        case balance
+        case transactionCount = "transaction_count"
+        case topCategory = "top_category"
+        case thisMonthSpent = "this_month_spent"
+        case lastMonthSpent = "last_month_spent"
+        case trend
+    }
+
+    var trendDirection: TrendDirection { trend == "up" ? .up : .down }
+}
+
+/// One row inside GET /api/dashboard/categories
+struct APICategoryItem: Codable, Identifiable {
+    var id: String { category }
+    let category: String
+    let amount: Double
+    let count: Int
+    let percentage: Double
+
+    /// Map API category string to the app's TransactionCategory enum.
+    var appCategory: TransactionCategory {
+        TransactionCategory(rawValue: category) ?? .other
+    }
+}
+
+/// GET /api/dashboard/categories
+struct APICategoryResponse: Codable {
+    let categories: [APICategoryItem]
+    let total: Double
+}
+
+/// One row inside GET /api/dashboard/banks
+struct APIBankItem: Codable, Identifiable {
+    var id: String { bank }
+    let bank: String
+    let amount: Double
+    let count: Int
+    let average: Double
+    let percentage: Double
+
+    /// Short display name.
+    var shortName: String {
+        if bank.lowercased().contains("kaspi") { return "Kaspi" }
+        if bank.lowercased().contains("freedom") { return "Freedom" }
+        return bank
+    }
+}
+
+/// GET /api/dashboard/banks
+struct APIBankResponse: Codable {
+    let banks: [APIBankItem]
+    let total: Double
+}
+
+/// One row inside GET /api/dashboard/operations
+struct APIOperationItem: Codable, Identifiable {
+    var id: String { operation }
+    let operation: String
+    let amount: Double
+    let count: Int
+    let percentage: Double
+}
+
+/// GET /api/dashboard/operations
+struct APIOperationResponse: Codable {
+    let operations: [APIOperationItem]
+    let total: Double
+}
+
+/// One month in GET /api/dashboard/trend
+struct APITrendMonth: Codable, Identifiable {
+    var id: String { month }
+    let month: String
+    let expenses: Double
+    let income: Double
+
+    /// Human-readable short label, e.g. "Nov 24"
+    var label: String {
+        let parts = month.split(separator: "-")
+        guard parts.count == 2,
+              let m = Int(parts[1]) else { return month }
+        let names = ["","Jan","Feb","Mar","Apr","May","Jun",
+                     "Jul","Aug","Sep","Oct","Nov","Dec"]
+        let yr = String(parts[0].suffix(2))
+        return m >= 1 && m <= 12 ? "\(names[m]) \(yr)" : month
+    }
+}
+
+/// GET /api/dashboard/trend
+struct APITrendResponse: Codable {
+    let trend: [APITrendMonth]
+}
+
+// MARK: - Dashboard Filter State
+
+/// Which time window the user picked.
+enum DashboardPeriod: String, CaseIterable, Identifiable {
+    case oneMonth  = "1m"
+    case threeMonths = "3m"
+    case sixMonths = "6m"
+    case oneYear   = "1y"
+    case all       = "all"
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .oneMonth:    return "1M"
+        case .threeMonths: return "3M"
+        case .sixMonths:   return "6M"
+        case .oneYear:     return "1Y"
+        case .all:         return "All"
+        }
+    }
+}
+
+/// Bank filter choices.
+enum DashboardBankFilter: String, CaseIterable, Identifiable {
+    case all     = ""
+    case kaspi   = "kaspi"
+    case freedom = "freedom"
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .all:     return "All"
+        case .kaspi:   return "Kaspi"
+        case .freedom: return "Freedom"
+        }
+    }
+}
+
+/// Transaction type filter choices.
+enum DashboardTypeFilter: String, CaseIterable, Identifiable {
+    case all       = ""
+    case transfer  = "transfer"
+    case expenses  = "expenses"
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .all:      return "All"
+        case .transfer: return "Transfers"
+        case .expenses: return "Expenses"
+        }
+    }
+}

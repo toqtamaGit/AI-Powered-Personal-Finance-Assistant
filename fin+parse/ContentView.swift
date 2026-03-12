@@ -81,6 +81,7 @@ struct FincoraTabBar: View {
 }
 
 #Preview {
-    BudgetView()
+    ContentView()
         .environmentObject(SharedDataManager())
+        .environmentObject(AuthManager())
 }
