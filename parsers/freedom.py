@@ -1,0 +1,793 @@
+# bank_statement_parser_plus.py
+
+import os
+import re
+import glob
+import argparse
+from datetime import datetime
+from typing import List, Dict, Optional, Tuple
+
+import pandas as pd
+
+# --- Константы / регулярки ---------------------------------------------------
+
+DATE_RE = re.compile(r"(^|\s)(\d{2}\.\d{2}\.\d{4})(?=\s|$)")
+CURRENCY_MAP = {"₸": "KZT", "$": "USD", "€": "EUR", "₽": "RUB"}
+
+AMOUNT_RE = re.compile(
+    r"\b([+-]?\d[\d\s,\.]*)\s*([₸$€₽]?)\s*(KZT|USD|EUR|RUB)?\b"
+)
+
+# Canonical operation name -> (default_sign, [aliases in other languages])
+OP_MAP: Dict[str, Tuple[int, List[str]]] = {
+    "Acquiring":      (-1, ["Покупка"]),
+    "Payment":        (-1, ["Платеж"]),
+    "Replenishment":  (+1, ["Пополнение"]),
+    "Transfer":       (-1, ["Перевод"]),
+    "Withdrawal":     (-1, ["Снятие"]),
+    "Others":         (-1, ["Другое"]),
+    "Commission":     (-1, ["Комиссия"]),
+    "Refund":         (+1, ["Возврат"]),
+    "Cashback":       (+1, ["Кэшбэк"]),
+    "Pending amount": (-1, ["Сумма в обработке"]),
+}
+
+# Build reverse lookup: any name/alias -> (canonical, sign)
+_OP_LOOKUP: Dict[str, Tuple[str, int]] = {}
+for _canon, (_sign, _aliases) in OP_MAP.items():
+    _OP_LOOKUP[_canon] = (_canon, _sign)
+    for _alias in _aliases:
+        _OP_LOOKUP[_alias] = (_canon, _sign)
+
+# Build regex from all names, longest first to avoid partial matches
+_all_op_names = sorted(_OP_LOOKUP.keys(), key=len, reverse=True)
+OP_RE = re.compile(
+    r"(?<!\w)(" + "|".join(re.escape(n) for n in _all_op_names) + r")(?!\w)"
+)
+
+
+# Базовые категории (можно переопределить через YAML)
+DEFAULT_CATEGORIES: Dict[str, List[str]] = {
+    "еда": [
+        "бургер", "кофе", "cafe", "restaurant", "stolovaya",
+        "food", "еда", "пицца", "kfc", "burger", "doner",
+    ],
+    "транспорт": [
+        "taxi", "yandex go", "индер", "bus", "metro", "aero", "rail",
+    ],
+    "продукты": [
+        "magnum", "small", "grocery", "market", "supermarket",
+    ],
+    "онлайн-сервисы": [
+        "spotify", "netflix", "aviata", "steam", "apple", "google",
+    ],
+    "мобильная связь": [
+        "tele2", "kcell", "beeline", "altel",
+    ],
+    "аптека/здоровье": [
+        "аптека", "pharma", "apteka", "doctor",
+    ],
+    "наличные": [
+        "снятие", "atm", "банкомат",
+    ],
+    "переводы": [
+        "перевод", "p2p", "transfer", "внутренний перевод",
+    ],
+}
+
+
+# --- Утилиты ------------------------------------------------------------------
+
+
+def normalize_ws(s: str) -> str:
+    s = s.replace("\xa0", " ")
+    s = re.sub(r"[ \t]+", " ", s)
+    return s.strip()
+
+
+def normalize_hyphens(s: str) -> str:
+    """Remove spaces around dashes/hyphens: 'NUR- SULTAN' -> 'NUR-SULTAN'."""
+    s = s.replace("–", "-").replace("—", "-")
+    s = re.sub(r"\s*-\s*", "-", s)
+    return s
+
+
+def parse_amount(s: str) -> Optional[float]:
+    if not s:
+        return None
+    s = s.strip()
+    sign = -1 if s.startswith("-") else 1
+    s_clean = re.sub(r"[^\d,.\-]", "", s)
+
+    if "," in s_clean and "." in s_clean:
+        # и запятая, и точка: запятая как разделитель тысяч
+        s_clean = s_clean.replace(",", "")
+    else:
+        # только запятая: если ,\d{3} — считаем разделитель тысяч
+        if re.search(r",\d{3}\b", s_clean):
+            s_clean = s_clean.replace(",", "")
+        else:
+            s_clean = s_clean.replace(",", ".")
+
+    try:
+        return sign * float(s_clean)
+    except ValueError:
+        return None
+
+
+def normalize_operation(raw_op: Optional[str]) -> Tuple[Optional[str], int]:
+    """Return (canonical_name, default_sign) for a matched operation string.
+
+    If raw_op is not recognized, returns (raw_op, -1).
+    """
+    if not raw_op:
+        return None, -1
+    cleaned = raw_op.replace("\n", " ").strip()
+    hit = _OP_LOOKUP.get(cleaned)
+    if hit:
+        return hit
+    # Try case-insensitive fallback
+    for key, val in _OP_LOOKUP.items():
+        if key.lower() == cleaned.lower():
+            return val
+    return cleaned, -1
+
+
+def extract_text_pages(pdf_path: str) -> List[str]:
+    pages: List[str] = []
+
+    # 1) pdfplumber
+    try:
+        import pdfplumber
+
+        with pdfplumber.open(pdf_path) as pdf:
+            for page in pdf.pages:
+                text = page.extract_text() or ""
+                pages.append(text)
+        if pages:
+            return pages
+    except Exception:
+        pass
+
+    # 2) PyPDF2
+    try:
+        import PyPDF2
+
+        with open(pdf_path, "rb") as f:
+            reader = PyPDF2.PdfReader(f)
+            for p in reader.pages:
+                text = p.extract_text() or ""
+                pages.append(text)
+        return pages
+    except Exception as e:
+        raise RuntimeError(f"Не удалось извлечь текст из PDF '{pdf_path}': {e}")
+
+
+def extract_tables(pdf_path: str) -> List[pd.DataFrame]:
+    """Пробуем вытащить таблицы, если банк рисует таблично."""
+    dfs: List[pd.DataFrame] = []
+    try:
+        import pdfplumber
+
+        with pdfplumber.open(pdf_path) as pdf:
+            for page in pdf.pages:
+                tables = page.extract_tables()
+                for t in tables or []:
+                    df = (
+                        pd.DataFrame(t)
+                        .dropna(how="all", axis=1)
+                        .dropna(how="all", axis=0)
+                    )
+                    if not df.empty:
+                        dfs.append(df)
+    except Exception:
+        pass
+    return dfs
+
+
+def map_table_headers(df: pd.DataFrame) -> pd.DataFrame:
+    """Пытаемся привести заголовки к: date, amount_raw, currency, operation, details."""
+    df2 = df.copy()
+    # Scan first few rows for a header row (may not be row 0)
+    header_idx = None
+    for idx in range(min(5, len(df2))):
+        row_vals = df2.iloc[idx].astype(str).str.lower()
+        if any("дата" in x or "date" in x for x in row_vals):
+            header_idx = idx
+            break
+
+    if header_idx is not None:
+        header_row = df2.iloc[header_idx].astype(str).str.lower()
+        df2.columns = header_row
+        df2 = df2.iloc[header_idx + 1:].reset_index(drop=True)
+
+    colmap: Dict[str, str] = {}
+    for c in df2.columns:
+        lc = str(c).lower()
+        if "дата" in lc or lc == "date":
+            colmap[c] = "date"
+        elif "сумм" in lc or "amount" in lc:
+            colmap[c] = "amount_raw"
+        elif "валют" in lc or "curr" in lc:
+            colmap[c] = "currency"
+        elif "операц" in lc or "тип" in lc or "operation" in lc:
+            colmap[c] = "operation"
+        elif any(
+            key in lc
+            for key in ("детал", "описан", "назнач", "merchant", "detail")
+        ):
+            colmap[c] = "details"
+
+    df2 = df2.rename(columns=colmap)
+    return df2
+
+
+def chunk_transactions_from_lines(lines: List[str]) -> List[List[str]]:
+    """Режем текст по строкам, которые начинаются с даты."""
+    chunks: List[List[str]] = []
+    i = 0
+    while i < len(lines):
+        ln = lines[i]
+        if DATE_RE.search(ln):
+            current = [ln]
+            j = i + 1
+            while j < len(lines) and not DATE_RE.search(lines[j]):
+                if lines[j].strip():
+                    current.append(lines[j])
+                j += 1
+            chunks.append(current)
+            i = j
+        else:
+            i += 1
+    return chunks
+
+
+
+def detect_bank_from_text(text: str) -> Optional[str]:
+    """Грубая детекция банка по шапке/тексту выписки."""
+    t = text.lower()
+
+    # Freedom Bank
+    if (
+        "фридом банк казахстан" in t
+        or 'ao "фридом банк казахстан"' in t
+        or "ao «фридом банк казахстан»" in t
+        or "freedom bank kazakhstan" in t
+        or "bankffin.kz" in t
+        or "выписка по карте super card" in t
+    ):
+        return "Freedom Bank Kazakhstan"
+
+    # здесь можно добавить Kaspi/Halyk/Jusan и т.д.
+    return None
+
+
+def extract_fields_from_chunk(chunk: List[str]) -> Dict:
+    text = normalize_ws(" ".join(chunk))
+
+    # дата
+    mdate = DATE_RE.search(text)
+    date_iso = None
+    if mdate:
+        date_str = mdate.group(2)
+        try:
+            date_iso = datetime.strptime(
+                date_str, "%d.%m.%Y"
+            ).date().isoformat()
+        except Exception:
+            date_iso = date_str
+
+    post = text[mdate.end():] if mdate else text
+
+    # сумма/валюта
+    am = AMOUNT_RE.search(post)
+    amount_raw = amount_val = currency = None
+    if am:
+        amount_raw = am.group(1)
+        amount_val = parse_amount(amount_raw)
+        symbol = (am.group(2) or "").strip()
+        code = (am.group(3) or "").strip()
+        currency = code or (
+            CURRENCY_MAP.get(symbol) if symbol in CURRENCY_MAP else None
+        )
+
+    # тип операции
+    opm = OP_RE.search(post)
+    raw_op = opm.group(1) if opm else None
+    operation, op_sign = normalize_operation(raw_op)
+
+    # детали — strip matched operation text from details
+    if raw_op:
+        details = post.split(raw_op, 1)[1].strip()
+    elif am:
+        details = post.split(am.group(0), 1)[1].strip()
+    else:
+        details = post.strip()
+    details = normalize_hyphens(details)
+    details = re.sub(r'["\'\[\]\(\)]', '', details).strip()
+
+    # знак: prefer explicit +/- from amount_raw, fallback to op_sign
+    sign = None
+    if isinstance(amount_raw, str):
+        if amount_raw.strip().startswith("+"):
+            sign = 1
+        elif amount_raw.strip().startswith("-"):
+            sign = -1
+    if sign is None:
+        sign = op_sign
+    amount = (
+        amount_val * sign
+        if isinstance(amount_val, (int, float))
+        else None
+    )
+
+    return {
+        "date": date_iso,
+        "amount_raw": amount_raw,
+        "amount": amount,
+        "amount_abs": (
+            abs(amount)
+            if isinstance(amount, (int, float))
+            else None
+        ),
+        "currency": currency,
+        "operation": operation,
+        "details": details,
+    }
+
+
+def try_parse_tables(pdf_path: str) -> List[Dict]:
+    """Парсим, если PDF — нормальная таблица."""
+    out: List[Dict] = []
+    tdfs = extract_tables(pdf_path)
+    for df in tdfs:
+        dfm = map_table_headers(df)
+        if "date" not in dfm.columns:
+            continue
+        for _, row in dfm.iterrows():
+            date_iso = None
+            if pd.notna(row.get("date")):
+                s = str(row["date"]).strip()
+                m = DATE_RE.search(" " + s)
+                if m:
+                    try:
+                        date_iso = datetime.strptime(
+                            m.group(2), "%d.%m.%Y"
+                        ).date().isoformat()
+                    except Exception:
+                        date_iso = m.group(2)
+
+            ar = str(
+                row.get("amount_raw") or row.get("amount") or ""
+            ).strip()
+            am_val = parse_amount(ar) if ar else None
+
+            curr = row.get("currency")
+            curr = (
+                str(curr).strip()
+                if pd.notna(curr)
+                else None
+            )
+
+            raw_op = (
+                str(row.get("operation")).strip()
+                if pd.notna(row.get("operation"))
+                else None
+            )
+            op, op_sign = normalize_operation(raw_op)
+            details = (
+                re.sub(r'["\'\[\]\(\)]', '',
+                    normalize_hyphens(re.sub(r"\s+", " ", str(row.get("details"))).strip())
+                ).strip()
+                if pd.notna(row.get("details"))
+                else ""
+            )
+
+            # prefer explicit +/- from amount string, fallback to op_sign
+            sign = op_sign
+            if isinstance(ar, str):
+                if ar.strip().startswith("+"):
+                    sign = 1
+                elif ar.strip().startswith("-"):
+                    sign = -1
+            amount = (
+                am_val * sign
+                if isinstance(am_val, (int, float))
+                else None
+            )
+
+            # skip junk rows with no date and no amount
+            if not date_iso and am_val is None:
+                continue
+
+            out.append(
+                {
+                    "date": date_iso,
+                    "amount_raw": ar or None,
+                    "amount": amount,
+                    "amount_abs": (
+                        abs(amount)
+                        if isinstance(amount, (int, float))
+                        else None
+                    ),
+                    "currency": curr,
+                    "operation": op,
+                    "details": details,
+                }
+            )
+    return out
+
+
+def fix_similar_details(records: List[Dict], threshold: float = 0.85) -> List[Dict]:
+    """Fix corrupted details caused by PDF generation artifacts.
+
+    Builds a reference set of unique details strings. For each pair with
+    >= threshold similarity, keeps the longer one (or the most frequent one
+    when lengths are equal) as canonical. All rows are kept.
+    """
+    from difflib import SequenceMatcher
+    from collections import Counter
+
+    if not records:
+        return records
+
+    # Count how often each detail appears — prefer the most frequent variant
+    detail_counts = Counter(str(r.get("details") or "") for r in records)
+
+    # Collect unique detail strings, sorted longest first, then most frequent
+    unique_details = sorted(
+        detail_counts.keys(),
+        key=lambda d: (len(d), detail_counts[d]),
+        reverse=True,
+    )
+
+    # Build a map: corrupted detail -> canonical detail
+    fix_map: Dict[str, str] = {}
+
+    for i, detail in enumerate(unique_details):
+        if not detail or detail in fix_map:
+            continue
+        for j in range(i):
+            canonical = unique_details[j]
+            if canonical == detail or canonical in fix_map:
+                continue
+            ratio = SequenceMatcher(None, detail, canonical).ratio()
+            if ratio >= threshold:
+                fix_map[detail] = canonical
+                break
+
+    if not fix_map:
+        return records
+
+    # Apply fixes
+    for rec in records:
+        old = str(rec.get("details") or "")
+        if old in fix_map:
+            rec["details"] = fix_map[old]
+
+    return records
+
+
+def parse_pdf(pdf_path: str) -> Tuple[List[Dict], List[str]]:
+    """
+    Возвращает (records, rejects).
+    Здесь же вставляем detect_bank_from_text, чтобы каждому record приписать bank.
+    """
+    pages = extract_text_pages(pdf_path)
+    full_text = "\n".join(pages)
+    bank_name = detect_bank_from_text(full_text)
+
+    # 1) Табличный режим
+    records = try_parse_tables(pdf_path)
+    if records:
+        if bank_name:
+            for r in records:
+                r["bank"] = bank_name
+        records = fix_similar_details(records)
+        return records, []
+
+    # 2) Построчный режим
+    rejects: List[str] = []
+    for page_text in pages:
+        lines = [
+            normalize_ws(x)
+            for x in page_text.splitlines()
+            if normalize_ws(x)
+        ]
+        chunks = chunk_transactions_from_lines(lines)
+        if not chunks:
+            chunks = [lines]
+
+        for ch in chunks:
+            rec = extract_fields_from_chunk(ch)
+            if not rec.get("date") and not rec.get("amount"):
+                rejects.append(" ".join(ch))
+            else:
+                if bank_name:
+                    rec["bank"] = bank_name
+                records.append(rec)
+
+    records = fix_similar_details(records)
+    return records, rejects
+
+
+def collect_pdfs(input_path: str) -> List[str]:
+    """Собираем список PDF (рекурсивно по папке или один файл)."""
+    if os.path.isdir(input_path):
+        pats = [
+            os.path.join(input_path, "**", "*.pdf"),
+            os.path.join(input_path, "**", "*.PDF"),
+        ]
+        files: List[str] = []
+        for p in pats:
+            files.extend(glob.glob(p, recursive=True))
+        files = sorted(set(files))
+        if not files:
+            raise FileNotFoundError(f"В папке нет PDF: {input_path}")
+        return files
+
+    if os.path.isfile(input_path) and input_path.lower().endswith(".pdf"):
+        return [input_path]
+
+    raise FileNotFoundError(f"Не найден PDF или папка: {input_path}")
+
+
+def load_categories(path: Optional[str]) -> Dict[str, List[str]]:
+    cats = DEFAULT_CATEGORIES.copy()
+    if not path:
+        return cats
+    try:
+        import yaml
+
+        with open(path, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+        for k, v in data.items():
+            if isinstance(v, list):
+                cats[k] = v
+    except Exception as e:
+        print(f"[WARN] не удалось загрузить категории из {path}: {e}")
+    return cats
+
+
+def classify_category(
+    details: Optional[str],
+    cats: Dict[str, List[str]],
+) -> Optional[str]:
+    text = (details or "").lower()
+    best_cat = None
+    best_hit = 0
+    for cat, kws in cats.items():
+        hits = sum(1 for kw in kws if kw.lower() in text)
+        if hits > best_hit:
+            best_cat, best_hit = cat, hits
+    return best_cat
+
+
+# --- main --------------------------------------------------------------------
+
+
+def main():
+    ap = argparse.ArgumentParser(
+        description="Усиленный парсер банковских PDF-выписок -> CSV/XLSX."
+    )
+    ap.add_argument(
+        "--input",
+        required=True,
+        help="Путь к PDF или папке (рекурсивно).",
+    )
+    ap.add_argument(
+        "--out",
+        required=True,
+        help="Путь к CSV.",
+    )
+    ap.add_argument(
+        "--xlsx",
+        help="Опционально — путь к XLSX.",
+    )
+    ap.add_argument(
+        "--categories",
+        help="YAML: {категория: [ключевые слова]} для автокатегоризации.",
+    )
+    ap.add_argument(
+        "--dedupe",
+        action="store_true",
+        help="Удалить дубликаты (date, amount, currency, details).",
+    )
+    ap.add_argument(
+        "--prune-empty",
+        action="store_true",
+        help="Удалить колонки, где все значения пустые/NaN.",
+    )
+    ap.add_argument(
+        "--match",
+        help="Глоб-шаблон по имени файла внутри папки (например, *2025-04*.pdf).",
+    )
+    ap.add_argument(
+        "--regex",
+        help="Regex по полному пути/имени файла.",
+    )
+    ap.add_argument(
+        "--latest",
+        action="store_true",
+        help="Взять самый свежий файл (по mtime) после фильтров.",
+    )
+    ap.add_argument(
+        "--limit",
+        type=int,
+        default=0,
+        help="Ограничить число файлов после фильтров (0 = без ограничения).",
+    )
+
+    args = ap.parse_args()
+
+    pdfs = collect_pdfs(args.input)
+
+    # фильтры выбора файлов
+    from pathlib import Path
+
+    def _apply_filters(files: List[str]) -> List[str]:
+        out = list(files)
+
+        # --match по basename
+        if args.match:
+            pat = args.match
+            out = [f for f in out if Path(f).match(pat)]
+
+        # --regex по полному пути
+        if args.regex:
+            rx = re.compile(args.regex)
+            out = [f for f in out if rx.search(f)]
+
+        # --latest: берём один самый свежий
+        if args.latest and out:
+            out = [max(out, key=lambda p: os.path.getmtime(p))]
+
+        # --limit
+        if args.limit and args.limit > 0:
+            out = out[: args.limit]
+
+        return out
+
+    pdfs = _apply_filters(pdfs)
+    if not pdfs:
+        raise SystemExit("После применения фильтров файлы не найдены.")
+
+    cats = load_categories(args.categories)
+
+    all_rows: List[Dict] = []
+    all_rejects: List[str] = []
+
+    for f in pdfs:
+        try:
+            rows, rejects = parse_pdf(f)
+            for r in rows:
+                r["source_file"] = os.path.basename(f)
+            all_rows.extend(rows)
+            all_rejects.extend(rejects)
+        except Exception as e:
+            all_rejects.append(
+                f"[{os.path.basename(f)}] ERROR: {e}"
+            )
+
+    if not all_rows:
+        raise SystemExit("Не удалось извлечь ни одной операции.")
+
+    # Формируем DataFrame
+    df = pd.DataFrame(all_rows)
+
+    # Гарантируем наличие всех колонок и порядок
+    desired_cols = [
+        "date",
+        "amount_raw",
+        "amount",
+        "amount_abs",
+        "currency",
+        "operation",
+        "details",
+        "bank",
+        "source_file",
+    ]
+    for c in desired_cols:
+        if c not in df.columns:
+            df[c] = None
+    df = df[desired_cols + [c for c in df.columns if c not in desired_cols]]
+
+    # Категоризация
+    df["category"] = df.apply(
+        lambda r: classify_category(
+            r.get("details"), cats
+        ),
+        axis=1,
+    )
+
+    # Дедупликация
+    if args.dedupe:
+        df = df.drop_duplicates(
+            subset=["date", "amount", "currency", "details"],
+            keep="first",
+        )
+
+    # Сортировка по дате
+    def _try_dt(x):
+        try:
+            return datetime.strptime(str(x), "%Y-%m-%d")
+        except Exception:
+            return pd.NaT
+
+    df["_dt"] = df["date"].apply(_try_dt)
+    df = df.sort_values(
+        by=["_dt", "source_file"], kind="stable"
+    ).drop(columns=["_dt"])
+
+    # Удаление полностью пустых колонок
+    if args.prune_empty:
+        import numpy as np
+
+        null_like = {
+            "",
+            " ",
+            "null",
+            "<null>",
+            "None",
+            "NaN",
+            "nan",
+        }
+        for c in df.columns:
+            df[c] = df[c].apply(
+                lambda x: np.nan
+                if isinstance(x, str)
+                and x.strip() in null_like
+                else x
+            )
+        df = df.dropna(axis=1, how="all")
+
+    # Сохранение
+    df.to_csv(args.out, index=False, encoding="utf-8-sig")
+    if args.xlsx:
+        df.to_excel(args.xlsx, index=False)
+
+    # Лог проблемных кусков
+    if all_rejects:
+        rej_path = (
+            os.path.splitext(args.out)[0]
+            + "_rejects.txt"
+        )
+        with open(rej_path, "w", encoding="utf-8") as f:
+            for line in all_rejects:
+                f.write(line.strip() + "\n")
+        print(
+            f"[INFO] Пропущено/не разобрано: {len(all_rejects)} строк(и). "
+            f"См. {rej_path}"
+        )
+
+    print(
+        f"Готово: {args.out} (всего операций: {len(df)})"
+    )
+    if args.xlsx:
+        print(f"Также создан XLSX: {args.xlsx}")
+
+
+
+# ---------------------------------------------------------------------------
+# Class-based API
+# ---------------------------------------------------------------------------
+
+from parsers.base import BaseParser as _BaseParser
+
+
+class FreedomParser(_BaseParser):
+    """Parser for Freedom Bank Kazakhstan PDF statements."""
+
+    @property
+    def bank_name(self) -> str:
+        return "Freedom Bank Kazakhstan"
+
+    def detect(self, text: str) -> bool:
+        return detect_bank_from_text(text) == "Freedom Bank Kazakhstan"
+
+    def parse(self, pdf_path: str):
+        return parse_pdf(pdf_path)
+
+
+if __name__ == "__main__":
+    main()

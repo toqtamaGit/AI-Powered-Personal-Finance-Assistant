@@ -1,0 +1,285 @@
+﻿date,amount_raw,amount,currency,operation,details,bank,source_file,business_type,business_name,address,city,oked_code,oked_description,category
+2024-11-13,"- 10,00 KZT",-10.0,KZT,Purchases,Zerde #201,Kaspi Bank,kaspi_ru_2.pdf,,Zerde,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2024-11-14,"- 13 000,00 KZT",-13000.0,KZT,Transfers,Mukhammadjon A.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-15,"- 5 525,00 KZT",-5525.0,KZT,Purchases,AMIGOPIZZA.KZ,Kaspi Bank,kaspi_ru_2.pdf,,AMIGOPIZZA,,,,,рестораны и кафе
+2024-11-16,"- 12 750,00 KZT",-12750.0,KZT,Purchases,Balgyn tort Astana,Kaspi Bank,kaspi_ru_2.pdf,,Balgyn tort,,ASTANA,,Прочая вспомогательная деятельность в области образования,покупки
+2024-11-16,"+ 20 000,00 KZT",20000.0,KZT,Replenishment,Умбигульсим А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-16,"+ 10 000,00 KZT",10000.0,KZT,Replenishment,Фатима А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-16,"+ 10 000,00 KZT",10000.0,KZT,Replenishment,Адина Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-17,"- 65 267,00 KZT",-65267.0,KZT,Purchases,ИП TezMart,Kaspi Bank,kaspi_ru_2.pdf,IP,TezMart,,,,"Прочая розничная торговля в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м ",покупки
+2024-11-17,"- 15 420,00 KZT",-15420.0,KZT,Purchases,DN-маркет,Kaspi Bank,kaspi_ru_2.pdf,,DN-маркет,,,,"Прочая розничная торговля в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м ",покупки
+2024-11-18,"+ 500,00 KZT",500.0,KZT,Replenishment,Санжар Ж.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-18,"+ 500,00 KZT",500.0,KZT,Replenishment,Мирас М.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-18,"+ 500,00 KZT",500.0,KZT,Replenishment,Султан Х.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-18,"+ 500,00 KZT",500.0,KZT,Replenishment,Аружан Н.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-18,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Марал У.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-19,"+ 100,00 KZT",100.0,KZT,Replenishment,Мерей Н.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,покупки
+2024-11-19,"- 1 500,00 KZT",-1500.0,KZT,Purchases,The Barbara,Kaspi Bank,kaspi_ru_2.pdf,,The Barbara,,,,Предоставление услуг парикмахерскими и салонами красоты,покупки
+2024-11-19,"+ 4 000,00 KZT",4000.0,KZT,Replenishment,Нұрайым И.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-19,"+ 4 980,00 KZT",4980.0,KZT,Replenishment,Алина С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-19,"+ 500,00 KZT",500.0,KZT,Replenishment,Теміршін К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-19,"+ 500,00 KZT",500.0,KZT,Replenishment,Диляра Р.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-19,"- 14 640,00 KZT",-14640.0,KZT,Purchases,MASTER COFFEE MEGA,Kaspi Bank,kaspi_ru_2.pdf,,MASTER COFFEE,MEGA,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",рестораны и кафе
+2024-11-19,"+ 500,00 KZT",500.0,KZT,Replenishment,Рафаэль Н.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-22,"- 385,00 KZT",-385.0,KZT,Transfers,Əлия Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-24,"- 1 500,00 KZT",-1500.0,KZT,Transfers,Абзал И.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-26,"- 3 000,00 KZT",-3000.0,KZT,Transfers,Елнұр Қ.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-26,"- 1 642,00 KZT",-1642.0,KZT,Purchases,OZON.KZ,Kaspi Bank,kaspi_ru_2.pdf,,OZON,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,маркетплейсы
+2024-11-27,"- 792,00 KZT",-792.0,KZT,Purchases,ТӨР,Kaspi Bank,kaspi_ru_2.pdf,,ТӨР,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,покупки
+2024-11-29,"- 19 990,00 KZT",-19990.0,KZT,Transfers,Насихат Ж.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-11-30,"- 3 000,00 KZT",-3000.0,KZT,Purchases,Чечел паб,Kaspi Bank,kaspi_ru_2.pdf,,Чечел паб,,,,"Прочая розничная торговля в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м ",рестораны и кафе
+2024-11-30,"+ 935,00 KZT",935.0,KZT,Replenishment,Рауан А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-12-01,"+ 2 770,00 KZT",2770.0,KZT,Replenishment,Акбота Т.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-12-02,"+ 200,00 KZT",200.0,KZT,Replenishment,Амира Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-12-05,"- 690,00 KZT",-690.0,KZT,Purchases,Куликовский ФМ «Алмагуль»,Kaspi Bank,kaspi_ru_2.pdf,,Куликовский ФМ Алмагуль,,,,,покупки
+2024-12-05,"- 230,00 KZT",-230.0,KZT,Transfers,Адема Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-12-07,"- 2 593,52 KZT",-2593.52,KZT,Purchases,"PINDUODUO (- 36,49 CNY)",Kaspi Bank,kaspi_ru_2.pdf,,PINDUODUO,,,,,маркетплейсы
+2024-12-08,"- 6 372,94 KZT",-6372.94,KZT,Purchases,"FFT*PINDUODUO4 (- 89,77 CNY)",Kaspi Bank,kaspi_ru_2.pdf,,FFT PINDUODUO4,,,,Образование в области спорта и отдыха,маркетплейсы
+2024-12-12,"- 10,00 KZT",-10.0,KZT,Purchases,JetPay*Dodopizza.kz,Kaspi Bank,kaspi_ru_2.pdf,,JetPay Dodopizza,,,,,рестораны и кафе
+2024-12-13,"- 400,00 KZT",-400.0,KZT,Purchases,Аида,Kaspi Bank,kaspi_ru_2.pdf,,Аида,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",переводы
+2024-12-13,"- 450,00 KZT",-450.0,KZT,Purchases,ИП Букаева,Kaspi Bank,kaspi_ru_2.pdf,IP,Букаева,,,,"Прочая розничная торговля в специализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м",покупки
+2024-12-15,"- 200,00 KZT",-200.0,KZT,Purchases,Бимарт_1,Kaspi Bank,kaspi_ru_2.pdf,,Бимарт,,,,"Производство прочих видов одежды и аксессуаров, не включенных в другие группировки",переводы
+2024-12-15,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Платные дороги. QazAvtoJol,Kaspi Bank,kaspi_ru_2.pdf,,Платные дороги QazAvtoJol,,,,Деятельность грузового автомобильного транспорта,покупки
+2024-12-16,"- 40 000,00 KZT",-40000.0,KZT,Purchases,Shymbulak Sales Department,Kaspi Bank,kaspi_ru_2.pdf,,Shymbulak Sales Department,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2024-12-17,"- 35 310,00 KZT",-35310.0,KZT,Purchases,Kaffe Gusto Food Beverage,Kaspi Bank,kaspi_ru_2.pdf,,Kaffe Gusto Food Beverage,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",покупки
+2024-12-17,"+ 500,00 KZT",500.0,KZT,Replenishment,Кербез К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-12-17,"+ 6 160,00 KZT",6160.0,KZT,Replenishment,Назым Т.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-12-17,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Shymbulak,Kaspi Bank,kaspi_ru_2.pdf,,Shymbulak,,,,,покупки
+2024-12-17,"- 6 500,00 KZT",-6500.0,KZT,Purchases,Shymbulak по номеру заказа,Kaspi Bank,kaspi_ru_2.pdf,,Shymbulak по номеру заказа,,,,,покупки
+2024-12-22,"- 550,00 KZT",-550.0,KZT,Purchases,Cup of Coffee Piece of Pie,Kaspi Bank,kaspi_ru_2.pdf,,Cup of Coffee Piece of Pie,,,,Прочая розничная торговля вне магазинов,рестораны и кафе
+2024-12-27,"- 7 845,00 KZT",-7845.0,KZT,Transfers,Резвон Р.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-12-27,"- 7 489,00 KZT",-7489.0,KZT,Transfers,Hojiaakbar H.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2024-12-31,"- 20 000,00 KZT",-20000.0,KZT,Transfers,Марал Ə.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-01-03,"- 645,00 KZT",-645.0,KZT,Purchases,64 My Mart Ходжанова,Kaspi Bank,kaspi_ru_2.pdf,,My Mart Ходжанова,,,,Прочая деятельность в области права,покупки
+2025-01-05,"- 3 650,00 KZT",-3650.0,KZT,Purchases,TT7 Mega,Kaspi Bank,kaspi_ru_2.pdf,,TT7,Mega,,,Деятельность спортивных клубов,покупки
+2025-01-05,"+ 14 990,00 KZT",14990.0,KZT,Purchases,Zara,Kaspi Bank,kaspi_ru_2.pdf,,Zara,,,,"Деятельность агентов, специализирующихся на оптовой торговле отдельными видами товаров или группами товаров, не включенными в другие группировки",покупки
+2025-01-05,"- 5 840,00 KZT",-5840.0,KZT,Purchases,KFC 12703,Kaspi Bank,kaspi_ru_2.pdf,,KFC,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,рестораны и кафе
+2025-01-05,"- 15 998,00 KZT",-15998.0,KZT,Purchases,ТЦ Мега Супермаркет Золотое Яблоко,Kaspi Bank,kaspi_ru_2.pdf,,Супермаркет Золотое Яблоко,ТЦ Мега,,,"Прочая деятельность в области образования, не включенная в другие группировки",супермаркеты
+2025-01-06,"- 6 170,00 KZT",-6170.0,KZT,Purchases,iU Market,Kaspi Bank,kaspi_ru_2.pdf,,iU Market,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,покупки
+2025-01-06,"- 2 950,00 KZT",-2950.0,KZT,Purchases,BTB GROUP,Kaspi Bank,kaspi_ru_2.pdf,,BTB GROUP,,,,Прочие отделочные работы,покупки
+2025-01-06,"- 500,00 KZT",-500.0,KZT,Purchases,Гардероб,Kaspi Bank,kaspi_ru_2.pdf,,Гардероб,,,,Розничная торговля прочими товарами на рынках,покупки
+2025-01-06,"- 2 500,00 KZT",-2500.0,KZT,Purchases,Медео. Аренда коньков,Kaspi Bank,kaspi_ru_2.pdf,,Аренда коньков,Медео,,,Аренда (субаренда) и управление собственной или арендованной жилой недвижимостью,покупки
+2025-01-07,"- 60 000,00 KZT",-60000.0,KZT,Transfers,Ұлтай С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-01-08,"- 3 000,00 KZT",-3000.0,KZT,Purchases,Ателье Татьяна,Kaspi Bank,kaspi_ru_2.pdf,,Ателье Татьяна,,,,"Розничная торговля семенами и удобрениями в специализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м",переводы
+2025-01-14,"- 1 500,00 KZT",-1500.0,KZT,Transfers,Роза С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-01-23,"- 7 000,00 KZT",-7000.0,KZT,Transfers,Диляра А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-01-24,"- 4 270,00 KZT",-4270.0,KZT,Transfers,Жандос А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-01-24,"- 7 300,00 KZT",-7300.0,KZT,Purchases,Кабанбай батыра 49А,Kaspi Bank,kaspi_ru_2.pdf,,Кабанбай батыра 49А,,,,Деятельность такси,переводы
+2025-01-25,"- 500,00 KZT",-500.0,KZT,Transfers,Руслан А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-01-31,"- 5 236,00 KZT",-5236.0,KZT,Purchases,Пинта Мега,Kaspi Bank,kaspi_ru_2.pdf,,Пинта,Мега,,,Предоставление услуг парикмахерскими и салонами красоты,покупки
+2025-02-12,"- 1 200,00 KZT",-1200.0,KZT,Transfers,Нұрдаулет М.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-02-15,"- 32 550,00 KZT",-32550.0,KZT,Purchases,Бар Үйде,Kaspi Bank,kaspi_ru_2.pdf,,Бар Үйде,,,,,переводы
+2025-02-22,"+ 1 500,00 KZT",1500.0,KZT,Replenishment,Аида Ш.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-02-24,"- 3 078,32 KZT",-3078.32,KZT,Purchases,Jana Post,Kaspi Bank,kaspi_ru_2.pdf,,Jana Post,,,,Розничная торговля прочими товарами на рынках,покупки
+2025-02-25,"- 1 580,00 KZT",-1580.0,KZT,Transfers,Сағыныш А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-02-26,"- 18 000,00 KZT",-18000.0,KZT,Purchases,Терапия Кожи,Kaspi Bank,kaspi_ru_2.pdf,,Терапия Кожи,,,,Общая врачебная практика,покупки
+2025-02-28,"- 750,00 KZT",-750.0,KZT,Purchases,Segafredo T2,Kaspi Bank,kaspi_ru_2.pdf,,Segafredo T2,,,,,покупки
+2025-03-13,"- 4 400,00 KZT",-4400.0,KZT,Purchases,ИП ПОЛКИ,Kaspi Bank,kaspi_ru_2.pdf,IP,ПОЛКИ,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,покупки
+2025-03-13,"- 995,00 KZT",-995.0,KZT,Purchases,TOO Kaspi Magazin,Kaspi Bank,kaspi_ru_2.pdf,TOO,Kaspi Magazin,,,,Аренда (субаренда) и управление собственной или арендованной жилой недвижимостью,покупки
+2025-03-13,"- 3 500,00 KZT",-3500.0,KZT,Purchases,Kz_Relay_Dep_Air,Kaspi Bank,kaspi_ru_2.pdf,,Kz Relay Dep Air,,,,,переводы
+2025-03-14,"+ 3 190,00 KZT",3190.0,KZT,Replenishment,Нұртөре О.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-03-15,"- 3 990,00 KZT",-3990.0,KZT,Purchases,Береке,Kaspi Bank,kaspi_ru_2.pdf,,Береке,,,,Прочие электромонтажные работы,покупки
+2025-03-15,"- 1 500,00 KZT",-1500.0,KZT,Transfers,Аслан С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-03-15,"- 1 080,00 KZT",-1080.0,KZT,Purchases,Береке 2,Kaspi Bank,kaspi_ru_2.pdf,,Береке,,,,Прочие электромонтажные работы,покупки
+2025-03-22,"- 12 300,00 KZT",-12300.0,KZT,Purchases,Fame City 3,Kaspi Bank,kaspi_ru_2.pdf,,Fame City,,,,"Розничная торговля преимущественно продуктами питания, напитками и табачными изделиями в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м ",покупки
+2025-03-22,"- 6 600,00 KZT",-6600.0,KZT,Purchases,ТРЦ Керуен,Kaspi Bank,kaspi_ru_2.pdf,,ТРЦ Керуен,ТРЦ Керуен,,,"Прочая розничная торговля в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м ",покупки
+2025-03-22,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Qaz_plov,Kaspi Bank,kaspi_ru_2.pdf,,Qaz plov,,,,"Производство прочих пищевых продуктов, не включенных в другие группировки",переводы
+2025-03-23,"- 2 853,00 KZT",-2853.0,KZT,Purchases,Леонардо,Kaspi Bank,kaspi_ru_2.pdf,,Леонардо,,,,Размещение рекламы в средствах массовой информации ,покупки
+2025-03-23,"- 700,00 KZT",-700.0,KZT,Transfers,Мухағали М.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-03-24,"- 10 329,00 KZT",-10329.0,KZT,Purchases,ИП Хасенов,Kaspi Bank,kaspi_ru_2.pdf,IP,Хасенов,,,,Другие виды деятельности в области информационных технологий ,покупки
+2025-03-24,"- 3 235,00 KZT",-3235.0,KZT,Purchases,Nanduk mega silkway,Kaspi Bank,kaspi_ru_2.pdf,,Nanduk,mega silkway,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",покупки
+2025-03-25,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Мөлдір К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-01,"- 500,00 KZT",-500.0,KZT,Transfers,Ботагөз Ə.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-02,"- 1 490,00 KZT",-1490.0,KZT,Purchases,Zebra coffee,Kaspi Bank,kaspi_ru_2.pdf,,Zebra coffee,,,,Деятельность рекламных агентств,рестораны и кафе
+2025-04-03,"- 17 000,00 KZT",-17000.0,KZT,Purchases,ТОО Добрая Аптека,Kaspi Bank,kaspi_ru_2.pdf,TOO,Добрая Аптека,,,,"Розничная торговля фармацевтическими товарами в специализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м",покупки
+2025-04-04,"- 490,00 KZT",-490.0,KZT,Purchases,Sandwich Spot,Kaspi Bank,kaspi_ru_2.pdf,,Sandwich Spot,,,,Производство готовых пищевых продуктов,рестораны и кафе
+2025-04-06,"- 5 000,00 KZT",-5000.0,KZT,Transfers,Бейбарыс Ж.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-07,"- 1 830,00 KZT",-1830.0,KZT,Transfers,Меирбек К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-07,"- 4 990,00 KZT",-4990.0,KZT,Purchases,Лаундж Ken s Достык,Kaspi Bank,kaspi_ru_2.pdf,,Лаундж Ken s Достык,,,,Деятельность грузового автомобильного транспорта,переводы
+2025-04-07,"+ 300,00 KZT",300.0,KZT,Replenishment,Жаннұр С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-11,"- 2 500,00 KZT",-2500.0,KZT,Transfers,Зарина У.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-12,"- 13 990,00 KZT",-13990.0,KZT,Purchases,Лепим и Варим,Kaspi Bank,kaspi_ru_2.pdf,,Лепим и Варим,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",переводы
+2025-04-18,"- 100,00 KZT",-100.0,KZT,Purchases,Фонд «Мама Про»,Kaspi Bank,kaspi_ru_2.pdf,,Фонд Мама Про,,,,"Деятельность прочих общественных организаций, не включенных в другие группировки",покупки
+2025-04-19,"- 1 065,00 KZT",-1065.0,KZT,Purchases,Aiwa,Kaspi Bank,kaspi_ru_2.pdf,,Aiwa,,,,"Розничная торговля преимущественно продуктами питания, напитками и табачными изделиями в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м ",покупки
+2025-04-19,"+ 17 560,00 KZT",17560.0,KZT,Purchases,YANDEX.EDA,Kaspi Bank,kaspi_ru_2.pdf,,YANDEX EDA,,,ONLINE,Рестораны и услуги по доставке продуктов питания,транспорт
+2025-04-19,"+ 42 854,00 KZT",42854.0,KZT,Replenishment,Алдияр Д.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-21,"- 5 000,00 KZT",-5000.0,KZT,Transfers,Қымбат А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,покупки
+2025-04-23,"- 720,00 KZT",-720.0,KZT,Purchases,ТОО Эвита,Kaspi Bank,kaspi_ru_2.pdf,TOO,Эвита,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2025-04-25,"- 1 200,00 KZT",-1200.0,KZT,Transfers,Алишер-Полат К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-25,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Куаныш Ж.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-27,"- 2 600,00 KZT",-2600.0,KZT,Transfers,Динара Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-28,"+ 500,00 KZT",500.0,KZT,Replenishment,Жомарт Т.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-04-29,"+ 500,00 KZT",500.0,KZT,Replenishment,Аружан И.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-05-02,"- 21 000,00 KZT",-21000.0,KZT,Purchases,Print Station,Kaspi Bank,kaspi_ru_2.pdf,,Print Station,,,,Ремонт компьютеров и периферийного оборудования,покупки
+2025-05-02,"+ 950,00 KZT",950.0,KZT,Replenishment,Дінмұхаммед С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-05-02,"+ 950,00 KZT",950.0,KZT,Replenishment,Аяулым Ф.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-05-02,"- 900,00 KZT",-900.0,KZT,Purchases,Q-tea,Kaspi Bank,kaspi_ru_2.pdf,,Q-tea,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",рестораны и кафе
+2025-05-03,"- 500,00 KZT",-500.0,KZT,Purchases,Садака в мечети,Kaspi Bank,kaspi_ru_2.pdf,,Садака в мечети,,,,Прочая розничная торговля вне магазинов,переводы
+2025-05-03,"- 1 490,00 KZT",-1490.0,KZT,Purchases,Oneshott Nazarbayev,Kaspi Bank,kaspi_ru_2.pdf,,Oneshott Nazarbayev,,,,Оптовая торговля прочими продуктами питания,рестораны и кафе
+2025-05-04,"+ 400,00 KZT",400.0,KZT,Replenishment,Айнур А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-05-04,"- 50 176,00 KZT",-50176.0,KZT,Transfers,Angi K.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-05-04,"+ 5 340,00 KZT",5340.0,KZT,Replenishment,Дамелия Д.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-05-04,"+ 4 300,00 KZT",4300.0,KZT,Replenishment,Əсел А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,покупки
+2025-05-04,"+ 4 271,00 KZT",4271.0,KZT,Replenishment,Зинаэнур И.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-05-06,"- 5 000,00 KZT",-5000.0,KZT,Purchases,SCAT,Kaspi Bank,kaspi_ru_2.pdf,,SCAT,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",транспорт
+2025-05-07,"- 400,00 KZT",-400.0,KZT,Transfers,Меруерт А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-05-19,"- 380,00 KZT",-380.0,KZT,Purchases,Армаркет,Kaspi Bank,kaspi_ru_2.pdf,,Армаркет,,,,Аренда (субаренда) и управление собственной или арендованной жилой недвижимостью,переводы
+2025-05-27,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Beeline,Kaspi Bank,kaspi_ru_2.pdf,,Beeline,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2025-05-27,"- 835,00 KZT",-835.0,KZT,Purchases,ABDI,Kaspi Bank,kaspi_ru_2.pdf,,ABDI,,,,Производство кухонной мебели,переводы
+2025-06-03,"+ 5 000,00 KZT",5000.0,KZT,Replenishment,Томирис Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-06-04,"- 270,00 KZT",-270.0,KZT,Purchases,JARDI RETAIL,Kaspi Bank,kaspi_ru_2.pdf,,JARDI RETAIL,,,,"Розничная торговля преимущественно продуктами питания, напитками и табачными изделиями в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м ",покупки
+2025-06-05,"- 2 990,00 KZT",-2990.0,KZT,Purchases,KFC 12722,Kaspi Bank,kaspi_ru_2.pdf,,KFC,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,рестораны и кафе
+2025-06-19,"- 200,00 KZT",-200.0,KZT,Purchases,ИП AZA,Kaspi Bank,kaspi_ru_2.pdf,IP,AZA,,,,Аренда (субаренда) и управление собственной или арендованной жилой недвижимостью,покупки
+2025-06-23,"- 8 999,00 KZT",-8999.0,KZT,Purchases,YANDEX.PLUS,Kaspi Bank,kaspi_ru_2.pdf,,YANDEX PLUS,,,ONLINE,Онлайн подписка,транспорт
+2025-06-29,"- 4 300,00 KZT",-4300.0,KZT,Transfers,Рамазан К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-07-06,"- 2 100,00 KZT",-2100.0,KZT,Purchases,Chaplin Mega Alma-Ata,Kaspi Bank,kaspi_ru_2.pdf,,Chaplin Alma-Ata,Mega,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2025-07-09,"+ 414,00 KZT",414.0,KZT,Replenishment,Іңкəр Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-07-09,"- 414,00 KZT",-414.0,KZT,Purchases,Choco,Kaspi Bank,kaspi_ru_2.pdf,,Choco,,,,Розничная торговля прочими товарами на рынках,рестораны и кафе
+2025-07-10,"- 1 100,00 KZT",-1100.0,KZT,Purchases,ТТ4 Ньютон,Kaspi Bank,kaspi_ru_2.pdf,,ТТ4 Ньютон,,,,Образование в области культуры,переводы
+2025-07-16,"- 3 500,00 KZT",-3500.0,KZT,Purchases,Hardees 14710,Kaspi Bank,kaspi_ru_2.pdf,,Hardees,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,переводы
+2025-07-23,"- 25 062,00 KZT",-25062.0,KZT,Purchases,TC Dostyk Plaza,Kaspi Bank,kaspi_ru_2.pdf,,TC Dostyk Plaza,TC Dostyk Plaza,,,,покупки
+2025-07-23,"- 1 600,00 KZT",-1600.0,KZT,Purchases,ип кулипа,Kaspi Bank,kaspi_ru_2.pdf,IP,кулипа,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2025-07-24,"- 2 200,00 KZT",-2200.0,KZT,Transfers,Фатима М.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-07-24,"- 1 850,00 KZT",-1850.0,KZT,Transfers,Диас Н.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-07-25,"- 3 000,00 KZT",-3000.0,KZT,Withdrawal,Банкомат Magnum Super,Kaspi Bank,kaspi_ru_2.pdf,,Банкомат Magnum Super,,,,Деятельность грузового автомобильного транспорта,супермаркеты
+2025-07-28,"- 200,00 KZT",-200.0,KZT,Purchases,ИП AMIRE LOGISTICS,Kaspi Bank,kaspi_ru_2.pdf,IP,AMIRE LOGISTICS,,,,Транспортно-экспедиционные  услуги,покупки
+2025-08-01,"- 2 700,00 KZT",-2700.0,KZT,Purchases,Багила Орынбасаровна,Kaspi Bank,kaspi_ru_2.pdf,,Багила Орынбасаровна,,,,"Прочая розничная торговля в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м ",переводы
+2025-08-04,"- 1 790,00 KZT",-1790.0,KZT,Transfers,Алдыоңғарсын Т.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-05,"- 4 500,00 KZT",-4500.0,KZT,Transfers,Айзере Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-05,"+ 20 498,00 KZT",20498.0,KZT,Replenishment,Райхан К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-05,"- 3 400,00 KZT",-3400.0,KZT,Transfers,Ботагоз А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-05,"- 1 710,00 KZT",-1710.0,KZT,Purchases,Apple city,Kaspi Bank,kaspi_ru_2.pdf,,Apple city,,,ONLINE,Online technology services,покупки
+2025-08-06,"- 970,00 KZT",-970.0,KZT,Purchases,Толе би 70,Kaspi Bank,kaspi_ru_2.pdf,,Толе би,,,,"Производство смешанное, мясояичное",покупки
+2025-08-06,"+ 1 098,00 KZT",1098.0,KZT,Purchases,Jet Sharing Powerbank,Kaspi Bank,kaspi_ru_2.pdf,,Jet Sharing Powerbank,,,,Деятельность в области разработки и тестирования программного кода,подписки
+2025-08-07,"- 330,00 KZT",-330.0,KZT,Purchases,City market Утепова,Kaspi Bank,kaspi_ru_2.pdf,,City market Утепова,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2025-08-09,"- 1 500,00 KZT",-1500.0,KZT,Purchases,Ivy,Kaspi Bank,kaspi_ru_2.pdf,,Ivy,,,,Производство прочих пластмассовых изделий,переводы
+2025-08-09,"- 500,00 KZT",-500.0,KZT,Transfers,Айгуль С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-09,"- 20 000,00 KZT",-20000.0,KZT,Transfers,Дулат М.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-10,"- 13 939,00 KZT",-13939.0,KZT,Purchases,WOLT.COM,Kaspi Bank,kaspi_ru_2.pdf,,WOLT COM,,,ONLINE,Рестораны и услуги по доставке продуктов питания,подписки
+2025-08-12,"- 900,00 KZT",-900.0,KZT,Transfers,Айбар А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-14,"- 669,00 KZT",-669.0,KZT,Purchases,Magnum Cash&Carry Рамстор,Kaspi Bank,kaspi_ru_2.pdf,,Magnum Cash&Carry Рамстор,,,,"Прочая розничная торговля в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью более 2000 кв.м (2000 кв.м и выше)",супермаркеты
+2025-08-16,"- 795,00 KZT",-795.0,KZT,Transfers,Ойбек Ж.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-16,"- 2 560,00 KZT",-2560.0,KZT,Purchases,Спортмастер,Kaspi Bank,kaspi_ru_2.pdf,,Спортмастер,,,,Прочие виды деятельности по организации отдыха и развлечений,переводы
+2025-08-16,"- 5 800,00 KZT",-5800.0,KZT,Purchases,Tap-Tatti ТД Сауран,Kaspi Bank,kaspi_ru_2.pdf,,Tap-Tatti ТД Сауран,,,,Производство хлебобулочных и мучных кондитерских изделий недлительного хранения,покупки
+2025-08-18,"+ 500,00 KZT",500.0,KZT,Purchases,JET SHARING,Kaspi Bank,kaspi_ru_2.pdf,,JET SHARING,,,,Деятельность в области разработки и тестирования программного кода,подписки
+2025-08-19,"+ 200,00 KZT",200.0,KZT,Replenishment,Нұрай Н.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-20,"- 2 010,00 KZT",-2010.0,KZT,Purchases,Yandex.GO,Kaspi Bank,kaspi_ru_2.pdf,,Yandex GO,,,ONLINE,Услуги такси и перевозок,транспорт
+2025-08-20,"- 3 090,00 KZT",-3090.0,KZT,Purchases,Pharmacom,Kaspi Bank,kaspi_ru_2.pdf,,Pharmacom,,,,"Розничная торговля фармацевтическими товарами в специализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м",переводы
+2025-08-20,"- 1 590,00 KZT",-1590.0,KZT,Purchases,Flat White,Kaspi Bank,kaspi_ru_2.pdf,,Flat White,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,покупки
+2025-08-21,"- 200,00 KZT",-200.0,KZT,Purchases,ТОО ТА Фарм НУ,Kaspi Bank,kaspi_ru_2.pdf,TOO,ТА Фарм НУ,,,,"Розничная торговля фармацевтическими товарами в специализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м",покупки
+2025-08-22,"- 900,00 KZT",-900.0,KZT,Purchases,Q-tea Ночная Витрина,Kaspi Bank,kaspi_ru_2.pdf,,Q-tea Ночная Витрина,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",рестораны и кафе
+2025-08-23,"+ 3 000,00 KZT",3000.0,KZT,Replenishment,Абзал А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-23,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Golden Hall 2,Kaspi Bank,kaspi_ru_2.pdf,,Golden Hall,,,,Другие виды деятельности в области информационных технологий ,переводы
+2025-08-23,"+ 1 000,00 KZT",1000.0,KZT,Replenishment,Анар К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-24,"+ 1 000,00 KZT",1000.0,KZT,Replenishment,Айдос Ж.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-24,"+ 3 300,00 KZT",3300.0,KZT,Replenishment,Ернар С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-25,"- 5 000,00 KZT",-5000.0,KZT,Purchases,NU.EDU.KZ,Kaspi Bank,kaspi_ru_2.pdf,,NU EDU,,,,,покупки
+2025-08-27,"+ 3 400,00 KZT",3400.0,KZT,Replenishment,Наргиза И.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-27,"- 19 000,00 KZT",-19000.0,KZT,Purchases,ип Азубаева,Kaspi Bank,kaspi_ru_2.pdf,IP,Азубаева,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2025-08-27,"+ 3 333,00 KZT",3333.0,KZT,Replenishment,Досан С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-27,"+ 3 400,00 KZT",3400.0,KZT,Replenishment,Асет Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-08-29,"- 49 885,00 KZT",-49885.0,KZT,Purchases,The Pocha,Kaspi Bank,kaspi_ru_2.pdf,,The Pocha,,,,"Деятельность прочего пассажирского сухопутного транспорта, не включенного в другие группировки",покупки
+2025-08-30,"- 650,00 KZT",-650.0,KZT,Purchases,WEDRINK,Kaspi Bank,kaspi_ru_2.pdf,,WEDRINK,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",покупки
+2025-08-30,"- 3 000,00 KZT",-3000.0,KZT,Transfers,Нурай С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-01,"- 1 200,00 KZT",-1200.0,KZT,Purchases,Fudzi Cafe,Kaspi Bank,kaspi_ru_2.pdf,,Fudzi Cafe,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",покупки
+2025-09-02,"- 8 620,00 KZT",-8620.0,KZT,Purchases,MINISO,Kaspi Bank,kaspi_ru_2.pdf,,MINISO,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,переводы
+2025-09-03,"- 1 090,00 KZT",-1090.0,KZT,Purchases,Central Astana,Kaspi Bank,kaspi_ru_2.pdf,,Central,,ASTANA,,Посреднические услуги при купле-продаже и сдаче внаем жилья и другого недвижимого имущества непроизводственного назначения,покупки
+2025-09-03,"- 200,00 KZT",-200.0,KZT,Purchases,Рахмет!! Спасибо!!,Kaspi Bank,kaspi_ru_2.pdf,,Рахмет Спасибо,,,,"Выращивание зерновых и зернобобовых культур, включая семеноводство",покупки
+2025-09-04,"- 1 200,00 KZT",-1200.0,KZT,Purchases,DailyCup,Kaspi Bank,kaspi_ru_2.pdf,,DailyCup,,,,,рестораны и кафе
+2025-09-05,"- 5 000,00 KZT",-5000.0,KZT,Transfers,Рахат С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-06,"+ 430,00 KZT",430.0,KZT,Replenishment,Əсел С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,покупки
+2025-09-06,"+ 430,00 KZT",430.0,KZT,Replenishment,Зарина М.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-09,"- 1 400,00 KZT",-1400.0,KZT,Purchases,ИП ZHANDOS,Kaspi Bank,kaspi_ru_2.pdf,IP,ZHANDOS,,,,Прочие виды печатного производства,покупки
+2025-09-11,"- 500,00 KZT",-500.0,KZT,Purchases,Рахмет!!! Спасибо!!!,Kaspi Bank,kaspi_ru_2.pdf,,Рахмет Спасибо,,,,"Выращивание зерновых и зернобобовых культур, включая семеноводство",покупки
+2025-09-11,"- 800,00 KZT",-800.0,KZT,Purchases,"Bambino, Силквэй 1эт",Kaspi Bank,kaspi_ru_2.pdf,,Bambino Силквэй 1эт,,,,Аренда и лизинг развлекательного и спортивного оборудования,переводы
+2025-09-11,"- 1 900,00 KZT",-1900.0,KZT,Purchases,ЛЕПИМ и ВАРИМ Mega Silk Way,Kaspi Bank,kaspi_ru_2.pdf,,ЛЕПИМ и ВАРИМ,Mega Silk Way,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",рестораны и кафе
+2025-09-12,"- 3 900,00 KZT",-3900.0,KZT,Transfers,Ариана К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-12,"- 600,00 KZT",-600.0,KZT,Purchases,Алые Паруса Mega Silk Way,Kaspi Bank,kaspi_ru_2.pdf,,Алые Паруса,Mega Silk Way,,,"Прочая деятельность в области образования, не включенная в другие группировки",рестораны и кафе
+2025-09-12,"+ 3 500,00 KZT",3500.0,KZT,Replenishment,Дарын Д.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-12,"+ 3 500,00 KZT",3500.0,KZT,Replenishment,Абылай Ж.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-12,"+ 3 500,00 KZT",3500.0,KZT,Replenishment,Диас А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-13,"- 8 000,00 KZT",-8000.0,KZT,Purchases,TTP*BAO-ASTANA.KZ,Kaspi Bank,kaspi_ru_2.pdf,,TTP BAO-ASTANA,,,,"Розничная торговля автомобильными деталями, узлами и принадлежностями в торговых объектах с торговой площадью менее 2000 кв.м",покупки
+2025-09-13,"+ 3 500,00 KZT",3500.0,KZT,Replenishment,Нұрсұлтан А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-14,"- 105,00 KZT",-105.0,KZT,Purchases,Боба Туркестан,Kaspi Bank,kaspi_ru_2.pdf,,Боба,,TURKESTAN,,Розничная торговля прочими товарами на рынках,покупки
+2025-09-17,"- 5 885,00 KZT",-5885.0,KZT,Purchases,Happy Cake,Kaspi Bank,kaspi_ru_2.pdf,,Happy Cake,,,,Производство хлебобулочных и мучных кондитерских изделий недлительного хранения,покупки
+2025-09-19,"- 3 600,00 KZT",-3600.0,KZT,Purchases,KINO.KZ,Kaspi Bank,kaspi_ru_2.pdf,,KINO,,,,"Розничная торговля цветами, комнатными растениями в специализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м",покупки
+2025-09-19,"- 700,00 KZT",-700.0,KZT,Purchases,keenfort,Kaspi Bank,kaspi_ru_2.pdf,,keenfort,,,,"Прочая деятельность в области образования, не включенная в другие группировки",покупки
+2025-09-19,"- 2 950,00 KZT",-2950.0,KZT,Purchases,KFC 12745,Kaspi Bank,kaspi_ru_2.pdf,,KFC,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,рестораны и кафе
+2025-09-20,"- 90,00 KZT",-90.0,KZT,Purchases,Meloman/Marwin,Kaspi Bank,kaspi_ru_2.pdf,,Meloman Marwin,,,,"Техническое обслуживание и ремонт автомобилей, за исключением произведенных станциями технического обслуживания, находящимися на придорожной полосе",покупки
+2025-09-20,"- 2 200,00 KZT",-2200.0,KZT,Transfers,Əмірбек А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-20,"- 90,00 KZT",-90.0,KZT,Purchases,Doner na Abaya,Kaspi Bank,kaspi_ru_2.pdf,,Doner na Abaya,,,,Прочая розничная торговля вне магазинов,рестораны и кафе
+2025-09-21,"- 617,00 KZT",-617.0,KZT,Purchases,SMALL,Kaspi Bank,kaspi_ru_2.pdf,,SMALL,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",супермаркеты
+2025-09-22,"- 1 350,00 KZT",-1350.0,KZT,Transfers,Аружан Т.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-09-23,"- 790,00 KZT",-790.0,KZT,Purchases,ТОО BREND KZ 2000,Kaspi Bank,kaspi_ru_2.pdf,TOO,BREND,,,,Художественное и литературное творчество,покупки
+2025-09-23,"- 2 580,00 KZT",-2580.0,KZT,Purchases,Green Food,Kaspi Bank,kaspi_ru_2.pdf,,Green Food,,,,Развозная и разносная розничная торговля,покупки
+2025-09-26,"- 1 500,00 KZT",-1500.0,KZT,Purchases,ИП Мега Студио,Kaspi Bank,kaspi_ru_2.pdf,IP,Мега Студио,,,,Деятельность по подготовке материалов к печати и распространению,покупки
+2025-10-02,"- 999,00 KZT",-999.0,KZT,Purchases,APPLE.COM/BILL,Kaspi Bank,kaspi_ru_2.pdf,,APPLE COM BILL,,,ONLINE,Online technology services,подписки
+2025-10-04,"- 32 500,00 KZT",-32500.0,KZT,Transfers,Баршын У.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-10-06,"- 3 815,52 KZT",-3815.52,KZT,Purchases,"PAYPAL *COHEECREATI (- 6,97 USD)",Kaspi Bank,kaspi_ru_2.pdf,,PAYPAL COHEECREATI,,,,,покупки
+2025-10-09,"- 120,00 KZT",-120.0,KZT,Transfers,Елена М.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-10-09,"- 240,00 KZT",-240.0,KZT,Purchases,ONAY.KZ,Kaspi Bank,kaspi_ru_2.pdf,,ONAY,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,покупки
+2025-10-12,"- 4 540,00 KZT",-4540.0,KZT,Purchases,Сеть Столовых Тагам,Kaspi Bank,kaspi_ru_2.pdf,,Сеть Столовых Тагам,,,,"Прочая деятельность по обеспечению питанием, не включенная в другие группировки",переводы
+2025-10-12,"- 1 087,00 KZT",-1087.0,KZT,Purchases,OZON,Kaspi Bank,kaspi_ru_2.pdf,,OZON,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,маркетплейсы
+2025-10-13,"- 1 450,00 KZT",-1450.0,KZT,Purchases,Fermento NU,Kaspi Bank,kaspi_ru_2.pdf,,Fermento NU,,,,Прочая розничная торговля вне магазинов,рестораны и кафе
+2025-10-14,"+ 3 550,00 KZT",3550.0,KZT,Replenishment,Ақнұр С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-10-15,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Əділет Т.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,покупки
+2025-10-16,"- 1 995,00 KZT",-1995.0,KZT,Others,Оплата за годовое обслуживание,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,покупки
+2025-10-17,"- 1 724,00 KZT",-1724.0,KZT,Purchases,AYALA Invest,Kaspi Bank,kaspi_ru_2.pdf,,AYALA Invest,,,,Производство металлических дверей и окон,переводы
+2025-10-17,"- 2 700,00 KZT",-2700.0,KZT,Transfers,Мираббос М.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-10-17,"- 9 000,00 KZT",-9000.0,KZT,Purchases,ИП DANA,Kaspi Bank,kaspi_ru_2.pdf,IP,DANA,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2025-10-20,"- 1 000,00 KZT",-1000.0,KZT,Purchases,Супермаркет GALMART,Kaspi Bank,kaspi_ru_2.pdf,,Супермаркет GALMART,,,,"Прочая розничная торговля продуктами питания в специализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м",супермаркеты
+2025-10-21,"- 1 800,00 KZT",-1800.0,KZT,Purchases,Пабло Назарбаев Университет,Kaspi Bank,kaspi_ru_2.pdf,,Пабло,Назарбаев Университет,,,,рестораны и кафе
+2025-10-21,"- 2 300,00 KZT",-2300.0,KZT,Purchases,Drinkit 5 QR,Kaspi Bank,kaspi_ru_2.pdf,,Drinkit QR,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",рестораны и кафе
+2025-10-21,"- 1 200,00 KZT",-1200.0,KZT,Purchases,USM Astana,Kaspi Bank,kaspi_ru_2.pdf,,USM,,ASTANA,,Консультирование по вопросам коммерческой деятельности и управления,покупки
+2025-10-22,"- 465,00 KZT",-465.0,KZT,Purchases,ИП Берсиновв,Kaspi Bank,kaspi_ru_2.pdf,IP,Берсиновв,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2025-10-23,"- 600,00 KZT",-600.0,KZT,Purchases,Qazaq Catering,Kaspi Bank,kaspi_ru_2.pdf,,Qazaq Catering,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",рестораны и кафе
+2025-10-23,"- 2 790,00 KZT",-2790.0,KZT,Purchases,DailyCup NU,Kaspi Bank,kaspi_ru_2.pdf,,DailyCup NU,,,,,рестораны и кафе
+2025-10-24,"- 150,00 KZT",-150.0,KZT,Purchases,Ип ZNM,Kaspi Bank,kaspi_ru_2.pdf,IP,ZNM,,,,Аренда (субаренда) и управление собственной или арендованной жилой недвижимостью,покупки
+2025-10-24,"- 1 500,00 KZT",-1500.0,KZT,Purchases,Astana Ball 2025,Kaspi Bank,kaspi_ru_2.pdf,,Astana Ball,,,,Прочая вспомогательная деятельность в области образования,покупки
+2025-10-24,"+ 10 000,00 KZT",10000.0,KZT,Replenishment,Ерлан Т.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-10-25,"- 30 720,00 KZT",-30720.0,KZT,Purchases,Авиакомпания «SCAT»,Kaspi Bank,kaspi_ru_2.pdf,,Авиакомпания SCAT,,,,"Деятельность  воздушного пассажирского транспорта, подчиняющегося расписанию",транспорт
+2025-10-25,"- 1 700,00 KZT",-1700.0,KZT,Purchases,Керей-Жанибек систерс,Kaspi Bank,kaspi_ru_2.pdf,,Керей-Жанибек систерс,,,,"Предоставление прочих индивидуальных услуг, не включенных в другие группировки",покупки
+2025-10-26,"+ 5 000,00 KZT",5000.0,KZT,Replenishment,Айнұр О.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-10-26,"+ 707,00 KZT",707.0,KZT,Purchases,Magnum,Kaspi Bank,kaspi_ru_2.pdf,,Magnum,,,,Деятельность грузового автомобильного транспорта,супермаркеты
+2025-10-27,"- 20 000,00 KZT",-20000.0,KZT,Transfers,Эраст К.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-10-27,"- 800,00 KZT",-800.0,KZT,Purchases,WEDRINK KR,Kaspi Bank,kaspi_ru_2.pdf,,WEDRINK KR,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",рестораны и кафе
+2025-10-28,"- 1 690,00 KZT",-1690.0,KZT,Purchases,EspressoDay,Kaspi Bank,kaspi_ru_2.pdf,,EspressoDay,,,,Подача напитков,рестораны и кафе
+2025-10-28,"- 2 405,00 KZT",-2405.0,KZT,Purchases,HP Canteen,Kaspi Bank,kaspi_ru_2.pdf,,HP Canteen,,,,"Деятельность ресторанов и предоставление услуг по доставке продуктов питания, за исключением деятельности объектов, находящихся на придорожной полосе",рестораны и кафе
+2025-10-29,"- 400,00 KZT",-400.0,KZT,Transfers,Мансур Д.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-10-30,"- 1 800,00 KZT",-1800.0,KZT,Purchases,HP COFFEE,Kaspi Bank,kaspi_ru_2.pdf,,HP COFFEE,,,,Аренда (субаренда) и управление собственной или арендованной жилой недвижимостью,рестораны и кафе
+2025-10-30,"- 2 150,00 KZT",-2150.0,KZT,Purchases,Столовая,Kaspi Bank,kaspi_ru_2.pdf,,Столовая,,,,"Прочая деятельность по обеспечению питанием, не включенная в другие группировки",переводы
+2025-10-30,"- 500,00 KZT",-500.0,KZT,Transfers,Сандугаш Б.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-10-31,"- 10 000,00 KZT",-10000.0,KZT,Transfers,Темірлан Қ.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,покупки
+2025-10-31,"+ 10 000,00 KZT",10000.0,KZT,Replenishment,В Kaspi Терминале,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,покупки
+2025-11-02,"- 10 000,00 KZT",-10000.0,KZT,Transfers,На Kaspi Депозит,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-02,"- 3 390,00 KZT",-3390.0,KZT,Purchases,Lanzhou,Kaspi Bank,kaspi_ru_2.pdf,,Lanzhou,,,,,переводы
+2025-11-07,"- 10 000,00 KZT",-10000.0,KZT,Transfers,Аяулым М.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-07,"+ 8 000,00 KZT",8000.0,KZT,Replenishment,С Kaspi Депозита,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-07,"- 400,00 KZT",-400.0,KZT,Purchases,NU,Kaspi Bank,kaspi_ru_2.pdf,,NU,,,,,покупки
+2025-11-07,"- 1 340,00 KZT",-1340.0,KZT,Purchases,YANDEX.DELIVERY,Kaspi Bank,kaspi_ru_2.pdf,,YANDEX DELIVERY,,,ONLINE,Услуги доставки,транспорт
+2025-11-07,"- 2 990,00 KZT",-2990.0,KZT,Purchases,ROYALTY street,Kaspi Bank,kaspi_ru_2.pdf,,ROYALTY street,,,,"Прочая розничная торговля в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью менее 2000 кв.м ",покупки
+2025-11-07,"- 3 800,00 KZT",-3800.0,KZT,Purchases,ИП БАЛТАБАЕВА,Kaspi Bank,kaspi_ru_2.pdf,IP,БАЛТАБАЕВА,,,,Аренда (субаренда) и управление собственной или арендованной жилой недвижимостью,покупки
+2025-11-08,"+ 350,00 KZT",350.0,KZT,Replenishment,Абылайхан С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-08,"- 1 148,00 KZT",-1148.0,KZT,Purchases,Magnum Cash&Carry,Kaspi Bank,kaspi_ru_2.pdf,,Magnum Cash&Carry,,,,"Прочая розничная торговля в неспециализированных магазинах, являющихся торговыми объектами, с торговой площадью более 2000 кв.м (2000 кв.м и выше)",супермаркеты
+2025-11-08,"- 850,00 KZT",-850.0,KZT,Purchases,IM Restaurants,Kaspi Bank,kaspi_ru_2.pdf,,IM Restaurants,,,,Другие виды деятельности в области информационных технологий ,покупки
+2025-11-08,"- 1 000,00 KZT",-1000.0,KZT,Purchases,La Brilliance,Kaspi Bank,kaspi_ru_2.pdf,,La Brilliance,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,покупки
+2025-11-08,"- 1 935,00 KZT",-1935.0,KZT,Purchases,Corner Meal,Kaspi Bank,kaspi_ru_2.pdf,,Corner Meal,,,,Розничная торговля путем заказа товаров по почте или через сеть Интернет,покупки
+2025-11-08,"- 560,00 KZT",-560.0,KZT,Purchases,SEVEN,Kaspi Bank,kaspi_ru_2.pdf,,SEVEN,,,,"Строительство нежилых зданий, за исключением стационарных торговых объектов категорий 1, 2",супермаркеты
+2025-11-08,"+ 10 000,00 KZT",10000.0,KZT,Replenishment,Айым Ш.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-08,"- 10 000,00 KZT",-10000.0,KZT,Withdrawal,Банкомат DN,Kaspi Bank,kaspi_ru_2.pdf,,Банкомат DN,,,,,покупки
+2025-11-09,"- 1 190,00 KZT",-1190.0,KZT,Purchases,SANDWICH SPOT,Kaspi Bank,kaspi_ru_2.pdf,,SANDWICH SPOT,,,,Производство готовых пищевых продуктов,рестораны и кафе
+2025-11-09,"- 3 003,68 KZT",-3003.68,KZT,Purchases,"FFT*PINDUODUO10 (- 40,40 CNY)",Kaspi Bank,kaspi_ru_2.pdf,,FFT PINDUODUO10,,,,Образование в области спорта и отдыха,маркетплейсы
+2025-11-09,"+ 100,00 KZT",100.0,KZT,Replenishment,Анастасия С.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-09,"- 1 000,00 KZT",-1000.0,KZT,Transfers,Анель А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-09,"- 2 000,00 KZT",-2000.0,KZT,Transfers,Жібек Е.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-10,"- 350,00 KZT",-350.0,KZT,Purchases,Mood,Kaspi Bank,kaspi_ru_2.pdf,,Mood,,,,"Прочая деятельность в области образования, не включенная в другие группировки",переводы
+2025-11-10,"- 100 000,00 KZT",-100000.0,KZT,Purchases,outpeerkz,Kaspi Bank,kaspi_ru_2.pdf,,outpeerkz,,,,,переводы
+2025-11-11,"- 110,00 KZT",-110.0,KZT,Purchases,Avtobys. Пригород. Оплата проезда по QR,Kaspi Bank,kaspi_ru_2.pdf,,Avtobys Пригород Оплата проезда по QR,,,,,транспорт
+2025-11-11,"- 18 000,00 KZT",-18000.0,KZT,Purchases,Ботанический кекс,Kaspi Bank,kaspi_ru_2.pdf,,Ботанический кекс,,,,Аренда (субаренда) и управление собственной или арендованной жилой недвижимостью,переводы
+2025-11-11,"+ 4 500,00 KZT",4500.0,KZT,Replenishment,Айдын О.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-11,"+ 4 500,00 KZT",4500.0,KZT,Replenishment,С карты другого банка,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-11,"+ 4 800,00 KZT",4800.0,KZT,Replenishment,Батырхан Ш.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-11,"+ 4 800,00 KZT",4800.0,KZT,Replenishment,Сабина А.,Kaspi Bank,kaspi_ru_2.pdf,,,,,,,переводы
+2025-11-11,"- 1 040,00 KZT",-1040.0,KZT,Purchases,YANDEX.GO,Kaspi Bank,kaspi_ru_2.pdf,,YANDEX GO,,,ONLINE,Услуги такси и перевозок,транспорт
+2025-11-11,"- 150,00 KZT",-150.0,KZT,Purchases,Аппарат самообслуживания,Kaspi Bank,kaspi_ru_2.pdf,,Аппарат самообслуживания,,,,Производство чая и кофе,покупки
+2025-11-11,"- 110,00 KZT",-110.0,KZT,Purchases,Avtobys. Оплата проезда по QR,Kaspi Bank,kaspi_ru_2.pdf,,Avtobys Оплата проезда по QR,,,,,транспорт
