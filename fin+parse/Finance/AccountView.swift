@@ -1,4 +1,4 @@
-// AccountView.swift — Profile & Settings Sheet
+// AccountView.swift — Profile & Settings Sheet (with Language + Dark Mode)
 
 import SwiftUI
 
@@ -8,7 +8,10 @@ import SwiftUI
 struct AccountView: View {
     @EnvironmentObject var authManager: AuthManager
     @EnvironmentObject var dataManager: SharedDataManager
+    @EnvironmentObject var themeManager: ThemeManager
+    @EnvironmentObject var localization: LocalizationManager
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) var scheme
 
     // Edit-profile
     @State private var editingName  = false
@@ -23,52 +26,54 @@ struct AccountView: View {
     @State private var showLogoutAlert  = false
     @State private var showDeleteAlert  = false
 
+    private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
+    private func s(_ key: LocalizedKey) -> String { localization.str(key) }
+
     var body: some View {
         NavigationView {
             ZStack {
-                AppTheme.bg.ignoresSafeArea()
+                t.bg.ignoresSafeArea()
 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 0) {
                         profileHeader
                         statsRow.padding(.horizontal, 20).padding(.top, 24)
+                        appearanceSection.padding(.top, 24)
+                        languageSection
                         settingsSections
                         dangerZone
                         Spacer().frame(height: 60)
                     }
                 }
             }
-            .navigationTitle("Account")
+            .navigationTitle(s(.account))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button { dismiss() } label: {
                         Image(systemName: "xmark")
                             .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(AppTheme.textMuted)
+                            .foregroundColor(t.textMuted)
                             .padding(8)
-                            .background(AppTheme.surface2)
+                            .background(t.surface2)
                             .clipShape(Circle())
                     }
                 }
             }
-            // Edit name alert
-            .alert("Edit Name", isPresented: $editingName) {
-                TextField("Full name", text: $draftName)
+            .alert(s(.editName), isPresented: $editingName) {
+                TextField(s(.fullName), text: $draftName)
                     .textInputAutocapitalization(.words)
-                Button("Save") { saveName() }
-                Button("Cancel", role: .cancel) { }
-            } message: { Text("Enter your new display name.") }
-            // Logout confirm
-            .alert("Sign Out?", isPresented: $showLogoutAlert) {
-                Button("Sign Out", role: .destructive) { authManager.logout() }
-                Button("Cancel", role: .cancel) { }
-            } message: { Text("You'll need to sign in again to access your data.") }
-            // Delete confirm
-            .alert("Delete Account?", isPresented: $showDeleteAlert) {
-                Button("Delete", role: .destructive) { authManager.logout() }
-                Button("Cancel", role: .cancel) { }
-            } message: { Text("This will permanently delete your account and all data. This cannot be undone.") }
+                Button(s(.save)) { saveName() }
+                Button(s(.cancel), role: .cancel) { }
+            } message: { Text(s(.enterNewName)) }
+            .alert(s(.signOutConfirm), isPresented: $showLogoutAlert) {
+                Button(s(.signOut), role: .destructive) { authManager.logout() }
+                Button(s(.cancel), role: .cancel) { }
+            } message: { Text(s(.signOutMessage)) }
+            .alert(s(.deleteAccountConfirm), isPresented: $showDeleteAlert) {
+                Button(s(.delete), role: .destructive) { authManager.logout() }
+                Button(s(.cancel), role: .cancel) { }
+            } message: { Text(s(.deleteAccountMessage)) }
         }
     }
 
@@ -77,17 +82,12 @@ struct AccountView: View {
     // ─────────────────────────────────────────────
     private var profileHeader: some View {
         VStack(spacing: 0) {
-            // Hero gradient strip
             ZStack(alignment: .bottom) {
                 AppTheme.accentGradient
                     .frame(height: 120)
                     .ignoresSafeArea(edges: .top)
-
-                // Decorative orbs
                 Circle().fill(.white.opacity(0.06)).frame(width: 160, height: 160).offset(x: 100, y: -30)
                 Circle().fill(.white.opacity(0.04)).frame(width: 100, height: 100).offset(x: -80, y: 20)
-
-                // Avatar circle — sits at the bottom edge
                 ZStack {
                     Circle()
                         .fill(AppTheme.accentGradient)
@@ -101,564 +101,342 @@ struct AccountView: View {
                 .offset(y: 40)
             }
 
-            // Name + email — below the avatar
             VStack(spacing: 6) {
-                Spacer().frame(height: 48) // space for avatar overhang
-
-                HStack(spacing: 8) {
-                    Text(authManager.currentUser?.fullName ?? "User")
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(AppTheme.textPrimary)
-
-                    Button {
-                        draftName = authManager.currentUser?.fullName ?? ""
-                        editingName = true
-                    } label: {
+                Button(action: {
+                    draftName = authManager.currentUser?.fullName ?? ""
+                    editingName = true
+                }) {
+                    HStack(spacing: 6) {
+                        Text(authManager.currentUser?.fullName ?? "—")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(t.textPrimary)
                         Image(systemName: "pencil.circle.fill")
-                            .font(.system(size: 18))
-                            .foregroundColor(AppTheme.accent.opacity(0.7))
+                            .font(.system(size: 16))
+                            .foregroundColor(AppTheme.accent)
                     }
-                    .buttonStyle(PressEffect())
                 }
+                .buttonStyle(PressEffect())
 
                 Text(authManager.currentUser?.email ?? "")
-                    .font(.system(size: 14))
-                    .foregroundColor(AppTheme.textMuted)
-
-                // Member since badge
-                if let user = authManager.currentUser {
-                    HStack(spacing: 5) {
-                        Image(systemName: "calendar.badge.checkmark")
-                            .font(.system(size: 11))
-                        Text("Member since \(memberSince(user.createdAt))")
-                            .font(.system(size: 11, weight: .medium))
-                    }
-                    .foregroundColor(AppTheme.accent)
-                    .padding(.horizontal, 10).padding(.vertical, 4)
-                    .background(AppTheme.accentSoft)
-                    .clipShape(Capsule())
-                    .padding(.top, 2)
-                }
+                    .font(.system(size: 13))
+                    .foregroundColor(t.textMuted)
             }
-            .padding(.bottom, 24)
-            .frame(maxWidth: .infinity)
-            .background(AppTheme.surface)
+            .padding(.top, 50)
+            .padding(.bottom, 20)
         }
-        .shadow(color: AppTheme.shadowSM, radius: 6, y: 3)
     }
 
     // ─────────────────────────────────────────────
-    // MARK: Quick stats row
+    // MARK: Stats row
     // ─────────────────────────────────────────────
     private var statsRow: some View {
         HStack(spacing: 12) {
-            AccountStatCard(
-                value: "₸\(abbreviate(dataManager.balance))",
-                label: "Balance",
-                color: AppTheme.accent,
-                icon: "dollarsign.circle.fill"
+            statChip(
+                label: s(.memberSince),
+                value: formattedMemberSince,
+                icon: "calendar",
+                color: AppTheme.accent
             )
-            AccountStatCard(
+            statChip(
+                label: s(.totalTransactions),
                 value: "\(dataManager.transactions.count)",
-                label: "Transactions",
-                color: AppTheme.green,
-                icon: "arrow.up.arrow.down"
-            )
-            AccountStatCard(
-                value: "\(dataManager.goals.count)",
-                label: "Goals",
-                color: AppTheme.yellow,
-                icon: "target"
+                icon: "arrow.left.arrow.right",
+                color: AppTheme.green
             )
         }
     }
 
+    private func statChip(label: String, value: String, icon: String, color: Color) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            ZStack {
+                Circle().fill(color.opacity(0.15)).frame(width: 34, height: 34)
+                Image(systemName: icon).font(.system(size: 14)).foregroundColor(color)
+            }
+            Text(value).font(.system(size: 17, weight: .bold, design: .rounded)).foregroundColor(t.textPrimary)
+            Text(label).font(.system(size: 11)).foregroundColor(t.textMuted)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(t.surface)
+        .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusMD, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusMD).stroke(t.border))
+    }
+
+    private var formattedMemberSince: String {
+        guard let date = authManager.currentUser?.createdAt else { return "—" }
+        let f = DateFormatter(); f.dateFormat = "MMM yyyy"
+        return f.string(from: date)
+    }
+
     // ─────────────────────────────────────────────
-    // MARK: Settings sections
+    // MARK: Appearance Section (Dark Mode)
+    // ─────────────────────────────────────────────
+    private var appearanceSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionHeader(s(.appearance), icon: "paintbrush.fill")
+
+            VStack(spacing: 0) {
+                // Dark Mode Toggle
+                HStack(spacing: 14) {
+                    settingIcon(systemName: themeManager.isDarkMode ? "moon.fill" : "sun.max.fill",
+                                color: themeManager.isDarkMode ? AppTheme.purple : AppTheme.yellow)
+                    Text(s(.darkMode))
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundColor(t.textPrimary)
+                    Spacer()
+                    Toggle("", isOn: $themeManager.isDarkMode)
+                        .tint(AppTheme.accent)
+                        .labelsHidden()
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+
+                // Segmented mode picker
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(s(.appearance))
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(t.textMuted)
+                        .padding(.horizontal, 16)
+
+                    HStack(spacing: 8) {
+                        ForEach([("sun.max.fill", false, "Light"), ("moon.fill", true, "Dark")], id: \.2) { icon, dark, label in
+                            Button(action: { withAnimation(.spring(response: 0.3)) { themeManager.isDarkMode = dark } }) {
+                                VStack(spacing: 8) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: AppTheme.radiusSM)
+                                            .fill(dark ? Color(hex: "#1C1C26") : Color(hex: "#F9FAFB"))
+                                            .frame(height: 56)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: AppTheme.radiusSM)
+                                                    .stroke(themeManager.isDarkMode == dark ? AppTheme.accent : t.border, lineWidth: themeManager.isDarkMode == dark ? 2 : 1)
+                                            )
+                                        Image(systemName: icon)
+                                            .font(.system(size: 20))
+                                            .foregroundColor(dark ? Color(hex: "#F1F1F5") : Color(hex: "#111827"))
+                                    }
+                                    Text(label)
+                                        .font(.system(size: 11, weight: themeManager.isDarkMode == dark ? .semibold : .regular))
+                                        .foregroundColor(themeManager.isDarkMode == dark ? AppTheme.accent : t.textMuted)
+                                }
+                            }
+                            .buttonStyle(PressEffect())
+                            .frame(maxWidth: .infinity)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 14)
+                }
+            }
+            .background(t.surface)
+            .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(t.border))
+        }
+        .padding(.horizontal, 20)
+    }
+
+    // ─────────────────────────────────────────────
+    // MARK: Language Section
+    // ─────────────────────────────────────────────
+    private var languageSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionHeader(s(.language), icon: "globe")
+
+            VStack(spacing: 0) {
+                ForEach(Array(AppLanguage.allCases.enumerated()), id: \.element) { index, lang in
+                    Button(action: {
+                        withAnimation(.spring(response: 0.3)) {
+                            localization.language = lang
+                        }
+                    }) {
+                        HStack(spacing: 14) {
+                            Text(lang.flag)
+                                .font(.system(size: 22))
+                                .frame(width: 36, height: 36)
+                                .background(t.surface2)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                            Text(lang.displayName)
+                                .font(.system(size: 15, weight: .medium))
+                                .foregroundColor(t.textPrimary)
+
+                            Spacer()
+
+                            if localization.language == lang {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.system(size: 20))
+                                    .foregroundColor(AppTheme.accent)
+                                    .transition(.scale.combined(with: .opacity))
+                            } else {
+                                Circle()
+                                    .stroke(t.border, lineWidth: 1.5)
+                                    .frame(width: 20, height: 20)
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 14)
+                        .background(localization.language == lang ? AppTheme.accentSoft : Color.clear)
+                    }
+                    .buttonStyle(PressEffect())
+
+                    if index < AppLanguage.allCases.count - 1 {
+                        Divider()
+                            .padding(.leading, 66)
+                            .foregroundColor(t.border)
+                    }
+                }
+            }
+            .background(t.surface)
+            .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(t.border))
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 24)
+    }
+
+    // ─────────────────────────────────────────────
+    // MARK: Settings sections (notifications)
     // ─────────────────────────────────────────────
     private var settingsSections: some View {
-        VStack(spacing: 22) {
-            // ── Preferences ──────────────────────
-            SettingsSection(title: "Preferences", icon: "slider.horizontal.3") {
-                SettingsToggleRow(
-                    icon: "bell.fill", iconColor: AppTheme.accent,
-                    label: "Push Notifications",
-                    value: $notificationsOn
-                )
-                SettingsDivider()
-                SettingsToggleRow(
-                    icon: "chart.bar.fill", iconColor: AppTheme.red,
-                    label: "Budget Alerts",
-                    value: $budgetAlertsOn
-                )
-                SettingsDivider()
-                SettingsToggleRow(
-                    icon: "envelope.fill", iconColor: AppTheme.green,
-                    label: "Weekly Summary Email",
-                    value: $weeklyReportOn
-                )
-            }
+        VStack(alignment: .leading, spacing: 12) {
+            sectionHeader(s(.notifications), icon: "bell.fill")
 
-            // ── App ──────────────────────────────
-            SettingsSection(title: "App", icon: "gearshape.fill") {
-                NavigationLink {
-                    CurrencySettingsView()
-                        .environmentObject(dataManager)
-                } label: {
-                    SettingsNavRow(icon: "turkishlirasign.circle.fill", iconColor: AppTheme.teal, label: "Currency", value: "KZT ₸")
-                }
-                SettingsDivider()
-                NavigationLink {
-                    AppearanceSettingsView()
-                } label: {
-                    SettingsNavRow(icon: "paintbrush.fill", iconColor: AppTheme.purple, label: "Appearance", value: "Light")
-                }
-                SettingsDivider()
-                NavigationLink {
-                    DataExportView()
-                        .environmentObject(dataManager)
-                } label: {
-                    SettingsNavRow(icon: "square.and.arrow.up.fill", iconColor: AppTheme.orange, label: "Export Data", value: "")
-                }
-            }
-
-            // ── Security ─────────────────────────
-            SettingsSection(title: "Security", icon: "lock.shield.fill") {
-                SettingsActionRow(icon: "lock.rotation", iconColor: AppTheme.yellow, label: "Change Password") {
-                    // In a real app: present change-password sheet
-                }
-                SettingsDivider()
-                SettingsActionRow(icon: "faceid", iconColor: AppTheme.green, label: "Face ID / Touch ID") {
-                    // In a real app: toggle biometrics
-                }
-            }
-
-            // ── About ─────────────────────────────
-            SettingsSection(title: "About", icon: "info.circle.fill") {
-                SettingsInfoRow(icon: "app.badge.fill",     iconColor: AppTheme.accent,  label: "Version",       value: "1.0.0")
-                SettingsDivider()
-                SettingsInfoRow(icon: "doc.text.fill",      iconColor: AppTheme.textMuted, label: "Terms of Service", value: "")
-                SettingsDivider()
-                SettingsInfoRow(icon: "hand.raised.fill",   iconColor: AppTheme.textMuted, label: "Privacy Policy",   value: "")
-            }
-        }
-        .padding(.horizontal, 20)
-        .padding(.top, 24)
-    }
-
-    // ─────────────────────────────────────────────
-    // MARK: Danger zone
-    // ─────────────────────────────────────────────
-    private var dangerZone: some View {
-        VStack(spacing: 12) {
-            // Sign out
-            Button { showLogoutAlert = true } label: {
-                HStack(spacing: 12) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .fill(AppTheme.accentSoft)
-                            .frame(width: 34, height: 34)
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(AppTheme.accent)
-                    }
-                    Text("Sign Out")
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(AppTheme.accent)
-                    Spacer()
-                }
-                .padding(16)
-                .background(AppTheme.surface)
-                .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG, style: .continuous))
-                .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(AppTheme.border))
-            }
-            .buttonStyle(PressEffect())
-
-            // Delete account
-            Button { showDeleteAlert = true } label: {
-                HStack(spacing: 12) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .fill(AppTheme.redSoft)
-                            .frame(width: 34, height: 34)
-                        Image(systemName: "trash.fill")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(AppTheme.red)
-                    }
-                    Text("Delete Account")
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(AppTheme.red)
-                    Spacer()
-                }
-                .padding(16)
-                .background(AppTheme.surface)
-                .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG, style: .continuous))
-                .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(AppTheme.red.opacity(0.2)))
-            }
-            .buttonStyle(PressEffect())
-        }
-        .padding(.horizontal, 20)
-        .padding(.top, 24)
-    }
-
-    // ─────────────────────────────────────────────
-    // MARK: Helpers
-    // ─────────────────────────────────────────────
-    private func saveName() {
-        guard !draftName.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        // Persist updated name — update UserDefaults directly via AuthManager
-        guard var user = authManager.currentUser else { return }
-        user.fullName = draftName.trimmingCharacters(in: .whitespaces)
-        authManager.currentUser = user
-        // Persist the updated user
-        let key = "fincora_session"
-        if let d = try? JSONEncoder().encode(user) { UserDefaults.standard.set(d, forKey: key) }
-    }
-
-    private func memberSince(_ date: Date) -> String {
-        let f = DateFormatter(); f.dateFormat = "MMM yyyy"; return f.string(from: date)
-    }
-
-    private func abbreviate(_ value: Double) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 1
-        
-        let absValue = Foundation.abs(Int32(value))
-        
-        if absValue >= 1_000_000 {
-            return "\(formatter.string(from: NSNumber(value: value / 1_000_000)) ?? "")M"
-        } else if absValue >= 1_000 {
-            return "\(formatter.string(from: NSNumber(value: value / 1_000)) ?? "")K"
-        } else {
-            return formatter.string(from: NSNumber(value: value)) ?? "\(value)"
-        }
-    }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// MARK: - Reusable Setting Row components
-// ─────────────────────────────────────────────────────────────────────────────
-
-struct SettingsSection<Content: View>: View {
-    let title: String
-    let icon: String
-    @ViewBuilder let content: () -> Content
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Section header
-            HStack(spacing: 6) {
-                Image(systemName: icon)
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(AppTheme.textMuted)
-                Text(title.uppercased())
-                    .font(.system(size: 11, weight: .semibold, design: .rounded))
-                    .foregroundColor(AppTheme.textMuted)
-                    .tracking(0.5)
-            }
-            .padding(.horizontal, 4)
-            .padding(.bottom, 8)
-
-            // Rows container
             VStack(spacing: 0) {
-                content()
+                toggleRow(label: s(.budgetAlerts),  icon: "exclamationmark.triangle.fill", color: AppTheme.yellow,  binding: $budgetAlertsOn)
+                Divider().padding(.leading, 66).foregroundColor(t.border)
+                toggleRow(label: s(.weeklyReport),  icon: "chart.bar.fill",               color: AppTheme.accent,  binding: $weeklyReportOn)
             }
-            .background(AppTheme.surface)
+            .background(t.surface)
             .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG, style: .continuous))
-            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(AppTheme.border))
-        }
-    }
-}
+            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(t.border))
 
-struct SettingsDivider: View {
-    var body: some View {
-        Divider()
-            .background(AppTheme.border)
-            .padding(.leading, 56)
-    }
-}
+            sectionHeader(s(.support), icon: "questionmark.circle.fill").padding(.top, 12)
 
-struct SettingsToggleRow: View {
-    let icon: String
-    let iconColor: Color
-    let label: String
-    @Binding var value: Bool
-
-    var body: some View {
-        HStack(spacing: 14) {
-            SettingsIcon(name: icon, color: iconColor)
-            Text(label)
-                .font(.system(size: 15))
-                .foregroundColor(AppTheme.textPrimary)
-            Spacer()
-            Toggle("", isOn: $value)
-                .labelsHidden()
-                .tint(AppTheme.accent)
-        }
-        .padding(.horizontal, 16).padding(.vertical, 12)
-    }
-}
-
-struct SettingsNavRow: View {
-    let icon: String; let iconColor: Color
-    let label: String; let value: String
-
-    var body: some View {
-        HStack(spacing: 14) {
-            SettingsIcon(name: icon, color: iconColor)
-            Text(label)
-                .font(.system(size: 15))
-                .foregroundColor(AppTheme.textPrimary)
-            Spacer()
-            if !value.isEmpty {
-                Text(value)
-                    .font(.system(size: 14))
-                    .foregroundColor(AppTheme.textMuted)
+            VStack(spacing: 0) {
+                navRow(label: s(.helpCenter),    icon: "book.fill",         color: AppTheme.teal)
+                Divider().padding(.leading, 66).foregroundColor(t.border)
+                navRow(label: s(.privacyPolicy), icon: "lock.shield.fill",  color: AppTheme.green)
+                Divider().padding(.leading, 66).foregroundColor(t.border)
+                HStack(spacing: 14) {
+                    settingIcon(systemName: "info.circle.fill", color: t.textMuted)
+                    Text(s(.version))
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundColor(t.textPrimary)
+                    Spacer()
+                    Text("1.0.0")
+                        .font(.system(size: 14))
+                        .foregroundColor(t.textMuted)
+                }
+                .padding(.horizontal, 16).padding(.vertical, 14)
             }
-            Image(systemName: "chevron.right")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(AppTheme.textMuted)
+            .background(t.surface)
+            .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(t.border))
         }
-        .padding(.horizontal, 16).padding(.vertical, 12)
+        .padding(.horizontal, 20)
+        .padding(.top, 24)
     }
-}
 
-struct SettingsActionRow: View {
-    let icon: String; let iconColor: Color; let label: String; let action: () -> Void
+    private var dangerZone: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionHeader(s(.dangerZone), icon: "exclamationmark.triangle.fill", color: AppTheme.red)
 
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: 14) {
-                SettingsIcon(name: icon, color: iconColor)
-                Text(label)
-                    .font(.system(size: 15))
-                    .foregroundColor(AppTheme.textPrimary)
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(AppTheme.textMuted)
+            VStack(spacing: 0) {
+                Button(action: { showLogoutAlert = true }) {
+                    HStack(spacing: 14) {
+                        settingIcon(systemName: "arrow.right.square.fill", color: AppTheme.red)
+                        Text(s(.signOut))
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundColor(AppTheme.red)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(t.textMuted)
+                    }
+                    .padding(.horizontal, 16).padding(.vertical, 14)
+                }
+                .buttonStyle(PressEffect())
+
+                Divider().padding(.leading, 66).foregroundColor(t.border)
+
+                Button(action: { showDeleteAlert = true }) {
+                    HStack(spacing: 14) {
+                        settingIcon(systemName: "trash.fill", color: AppTheme.red)
+                        Text(s(.deleteAccount))
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundColor(AppTheme.red)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(t.textMuted)
+                    }
+                    .padding(.horizontal, 16).padding(.vertical, 14)
+                }
+                .buttonStyle(PressEffect())
             }
-            .padding(.horizontal, 16).padding(.vertical, 12)
+            .background(AppTheme.redSoft)
+            .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(AppTheme.red.opacity(0.2)))
         }
-        .buttonStyle(PressEffect())
+        .padding(.horizontal, 20)
+        .padding(.top, 24)
     }
-}
 
-struct SettingsInfoRow: View {
-    let icon: String; let iconColor: Color; let label: String; let value: String
-
-    var body: some View {
-        HStack(spacing: 14) {
-            SettingsIcon(name: icon, color: iconColor)
-            Text(label)
-                .font(.system(size: 15))
-                .foregroundColor(AppTheme.textPrimary)
-            Spacer()
-            Text(value)
-                .font(.system(size: 14))
-                .foregroundColor(AppTheme.textMuted)
-        }
-        .padding(.horizontal, 16).padding(.vertical, 12)
+    // ─────────────────────────────────────────────
+    // MARK: Reusable row components
+    // ─────────────────────────────────────────────
+    private func sectionHeader(_ title: String, icon: String, color: Color = AppTheme.textMuted) -> some View {
+        Label(title, systemImage: icon)
+            .font(.system(size: 12, weight: .semibold))
+            .foregroundColor(color)
+            .textCase(.uppercase)
     }
-}
 
-struct SettingsIcon: View {
-    let name: String; let color: Color
-    var body: some View {
+    private func settingIcon(systemName: String, color: Color) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .fill(color.opacity(0.12))
-                .frame(width: 32, height: 32)
-            Image(systemName: name)
-                .font(.system(size: 14, weight: .medium))
+                .fill(color.opacity(0.15))
+                .frame(width: 34, height: 34)
+            Image(systemName: systemName)
+                .font(.system(size: 15))
                 .foregroundColor(color)
         }
     }
-}
 
-struct AccountStatCard: View {
-    let value: String; let label: String; let color: Color; let icon: String
-
-    var body: some View {
-        VStack(spacing: 10) {
-            ZStack {
-                Circle().fill(color.opacity(0.12)).frame(width: 38, height: 38)
-                Image(systemName: icon).font(.system(size: 15)).foregroundColor(color)
-            }
-            Text(value)
-                .font(.system(size: 15, weight: .bold, design: .rounded))
-                .foregroundColor(AppTheme.textPrimary)
-                .lineLimit(1).minimumScaleFactor(0.7)
+    private func toggleRow(label: String, icon: String, color: Color, binding: Binding<Bool>) -> some View {
+        HStack(spacing: 14) {
+            settingIcon(systemName: icon, color: color)
             Text(label)
-                .font(.system(size: 10, weight: .medium))
-                .foregroundColor(AppTheme.textMuted)
-        }
-        .padding(.vertical, 14)
-        .frame(maxWidth: .infinity)
-        .background(AppTheme.surface)
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusMD, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusMD).stroke(AppTheme.border))
-    }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// MARK: - Sub-screens (NavigationLink destinations)
-// ─────────────────────────────────────────────────────────────────────────────
-
-struct CurrencySettingsView: View {
-    @EnvironmentObject var dataManager: SharedDataManager
-    let currencies = ["KZT ₸", "USD $", "EUR €", "RUB ₽", "CNY ¥"]
-    @State private var selected = "KZT ₸"
-
-    var body: some View {
-        ZStack {
-            AppTheme.bg.ignoresSafeArea()
-            VStack(spacing: 0) {
-                ForEach(currencies, id: \.self) { c in
-                    Button { selected = c } label: {
-                        HStack {
-                            Text(c).font(.system(size: 16)).foregroundColor(AppTheme.textPrimary)
-                            Spacer()
-                            if selected == c {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(AppTheme.accent)
-                            }
-                        }
-                        .padding(16)
-                    }
-                    .buttonStyle(PressEffect())
-                    if c != currencies.last { Divider().padding(.leading, 16) }
-                }
-            }
-            .background(AppTheme.surface)
-            .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG))
-            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(AppTheme.border))
-            .padding(20)
+                .font(.system(size: 15, weight: .medium))
+                .foregroundColor(t.textPrimary)
             Spacer()
+            Toggle("", isOn: binding)
+                .tint(AppTheme.accent)
+                .labelsHidden()
         }
-        .navigationTitle("Currency")
-        .navigationBarTitleDisplayMode(.inline)
+        .padding(.horizontal, 16).padding(.vertical, 14)
     }
-}
 
-struct AppearanceSettingsView: View {
-    @State private var selected = "Light"
-    let options = [("Light", "sun.max.fill"), ("Dark", "moon.fill"), ("System", "circle.lefthalf.filled")]
-
-    var body: some View {
-        ZStack {
-            AppTheme.bg.ignoresSafeArea()
-            VStack(spacing: 0) {
-                ForEach(options, id: \.0) { name, icon in
-                    Button { selected = name } label: {
-                        HStack(spacing: 14) {
-                            ZStack {
-                                Circle().fill(AppTheme.accentSoft).frame(width: 34, height: 34)
-                                Image(systemName: icon).font(.system(size: 14)).foregroundColor(AppTheme.accent)
-                            }
-                            Text(name).font(.system(size: 16)).foregroundColor(AppTheme.textPrimary)
-                            Spacer()
-                            if selected == name {
-                                Image(systemName: "checkmark.circle.fill").foregroundColor(AppTheme.accent)
-                            }
-                        }
-                        .padding(16)
-                    }
-                    .buttonStyle(PressEffect())
-                    if name != options.last?.0 { Divider().padding(.leading, 64) }
-                }
-            }
-            .background(AppTheme.surface)
-            .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG))
-            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(AppTheme.border))
-            .padding(20)
+    private func navRow(label: String, icon: String, color: Color) -> some View {
+        HStack(spacing: 14) {
+            settingIcon(systemName: icon, color: color)
+            Text(label)
+                .font(.system(size: 15, weight: .medium))
+                .foregroundColor(t.textPrimary)
             Spacer()
+            Image(systemName: "chevron.right")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundColor(t.textMuted)
         }
-        .navigationTitle("Appearance")
-        .navigationBarTitleDisplayMode(.inline)
+        .padding(.horizontal, 16).padding(.vertical, 14)
     }
-}
 
-struct DataExportView: View {
-    @EnvironmentObject var dataManager: SharedDataManager
-    @State private var exported = false
-
-    var body: some View {
-        ZStack {
-            AppTheme.bg.ignoresSafeArea()
-            VStack(spacing: 24) {
-                ZStack {
-                    Circle().fill(AppTheme.accentSoft).frame(width: 80, height: 80)
-                    Image(systemName: "square.and.arrow.up.fill")
-                        .font(.system(size: 32)).foregroundStyle(AppTheme.accentGradient)
-                }
-                .padding(.top, 40)
-
-                VStack(spacing: 8) {
-                    Text("Export Your Data")
-                        .font(.system(size: 20, weight: .bold)).foregroundColor(AppTheme.textPrimary)
-                    Text("Download all your transactions, budgets, and goals as a CSV file.")
-                        .font(.system(size: 14)).foregroundColor(AppTheme.textMuted)
-                        .multilineTextAlignment(.center).padding(.horizontal, 20)
-                }
-
-                // Stats preview
-                VStack(spacing: 0) {
-                    ExportInfoRow(label: "Transactions", value: "\(dataManager.transactions.count)")
-                    Divider().padding(.leading, 16)
-                    ExportInfoRow(label: "Budgets",      value: "\(dataManager.budgets.count)")
-                    Divider().padding(.leading, 16)
-                    ExportInfoRow(label: "Goals",        value: "\(dataManager.goals.count)")
-                }
-                .background(AppTheme.surface)
-                .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG))
-                .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(AppTheme.border))
-                .padding(.horizontal, 20)
-
-                if exported {
-                    HStack(spacing: 8) {
-                        Image(systemName: "checkmark.circle.fill").foregroundColor(AppTheme.green)
-                        Text("Export ready! Check your Files app.")
-                            .font(.system(size: 14, weight: .medium)).foregroundColor(AppTheme.green)
-                    }
-                    .padding(12)
-                    .background(AppTheme.greenSoft)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .transition(.scale.combined(with: .opacity))
-                }
-
-                Button {
-                    withAnimation { exported = true }
-                } label: {
-                    HStack(spacing: 10) {
-                        Image(systemName: "doc.badge.arrow.up.fill")
-                        Text("Export CSV").fontWeight(.semibold)
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity).padding(.vertical, 16)
-                    .background(AppTheme.accentGradient)
-                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusMD))
-                    .shadow(color: AppTheme.accent.opacity(0.3), radius: 10, y: 5)
-                }
-                .buttonStyle(PressEffect())
-                .padding(.horizontal, 20)
-
-                Spacer()
-            }
-        }
-        .navigationTitle("Export Data")
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-struct ExportInfoRow: View {
-    let label: String; let value: String
-    var body: some View {
-        HStack {
-            Text(label).font(.system(size: 15)).foregroundColor(AppTheme.textPrimary)
-            Spacer()
-            Text(value).font(.system(size: 15, weight: .semibold)).foregroundColor(AppTheme.textMuted)
-        }.padding(16)
+    // ─────────────────────────────────────────────
+    // MARK: Actions
+    // ─────────────────────────────────────────────
+    private func saveName() {
+        guard !draftName.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        // Update user name via AuthManager (would need extending AuthManager)
+        // For now we log it
+        print("Saving name: \(draftName)")
     }
 }

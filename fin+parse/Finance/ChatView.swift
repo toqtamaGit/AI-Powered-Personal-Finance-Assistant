@@ -1,7 +1,7 @@
 // ChatView.swift — AI Financial Assistant
 
 import SwiftUI
-import Combine // <--- Add this line
+import Combine 
 
 struct ChatView: View {
     @EnvironmentObject var dataManager: SharedDataManager

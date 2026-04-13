@@ -1,16 +1,29 @@
 // TransactionsView.swift
+// Updated: dark/light theme + localization
 
 import SwiftUI
 
 struct TransactionsView: View {
     @EnvironmentObject var dataManager: SharedDataManager
+    @EnvironmentObject var localization: LocalizationManager
+    @Environment(\.colorScheme) var scheme
     @State private var search     = ""
     @State private var showAdd    = false
-    @State private var showImport = false          // ← import sheet
+    @State private var showImport = false
     @State private var filter: FilterType = .all
 
-    enum FilterType: String, CaseIterable {
-        case all = "All"; case income = "Income"; case expense = "Expense"
+    private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
+    private func s(_ key: LocalizedKey) -> String { localization.str(key) }
+
+    enum FilterType: CaseIterable {
+        case all, income, expense
+        func label(_ loc: LocalizationManager) -> String {
+            switch self {
+            case .all:     return loc.str(.filterBy) == loc.str(.filterBy) ? "All" : loc.str(.filterBy)
+            case .income:  return loc.str(.incomeLabel)
+            case .expense: return loc.str(.expense)
+            }
+        }
     }
 
     var filtered: [Transaction] {
@@ -33,26 +46,21 @@ struct TransactionsView: View {
         ZStack(alignment: .bottomTrailing) {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-
-                    // ── Header ───────────────────────────────────────────
+                    // Header
                     HStack {
                         VStack(alignment: .leading, spacing: 3) {
-                            Text("Transactions")
+                            Text(s(.transactions))
                                 .font(.system(size: 26, weight: .black, design: .rounded))
-                                .foregroundColor(AppTheme.textPrimary)
+                                .foregroundColor(t.textPrimary)
                             Text("\(dataManager.transactions.count) total entries")
                                 .font(.system(size: 12))
-                                .foregroundColor(AppTheme.textMuted)
+                                .foregroundColor(t.textMuted)
                         }
                         Spacer()
-
-                        // Import button
                         Button { showImport = true } label: {
                             HStack(spacing: 6) {
-                                Image(systemName: "arrow.up.doc.fill")
-                                    .font(.system(size: 12, weight: .semibold))
-                                Text("Import")
-                                    .font(.system(size: 13, weight: .semibold))
+                                Image(systemName: "arrow.up.doc.fill").font(.system(size: 12, weight: .semibold))
+                                Text(s(.uploadStatement)).font(.system(size: 13, weight: .semibold))
                             }
                             .foregroundColor(AppTheme.accent)
                             .padding(.horizontal, 12).padding(.vertical, 8)
@@ -63,38 +71,38 @@ struct TransactionsView: View {
                     }
                     .padding(.horizontal, 20).padding(.top, 16)
 
-                    // ── Search ───────────────────────────────────────────
+                    // Search
                     HStack(spacing: 10) {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(AppTheme.textMuted).font(.system(size: 15))
-                        TextField("Search transactions…", text: $search)
-                            .foregroundColor(AppTheme.textPrimary)
+                            .foregroundColor(t.textMuted).font(.system(size: 15))
+                        TextField(s(.searchTransactions), text: $search)
+                            .foregroundColor(t.textPrimary)
                             .font(.system(size: 15))
                             .tint(AppTheme.accent)
                         if !search.isEmpty {
                             Button { search = "" } label: {
                                 Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(AppTheme.textMuted).font(.system(size: 15))
+                                    .foregroundColor(t.textMuted).font(.system(size: 15))
                             }
                         }
                     }
                     .padding(.horizontal, 16).padding(.vertical, 14)
-                    .background(AppTheme.surface)
+                    .background(t.surface)
                     .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusMD, style: .continuous))
-                    .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusMD).stroke(AppTheme.border))
+                    .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusMD).stroke(t.border))
                     .padding(.horizontal, 20)
 
-                    // ── Filter Pills ──────────────────────────────────────
+                    // Filter Pills
                     HStack(spacing: 8) {
                         ForEach(FilterType.allCases, id: \.self) { f in
                             Button {
                                 withAnimation(.spring(response: 0.3)) { filter = f }
                             } label: {
-                                Text(f.rawValue)
+                                Text(filterLabel(f))
                                     .font(.system(size: 13, weight: .semibold))
-                                    .foregroundColor(filter == f ? .white : AppTheme.textMuted)
+                                    .foregroundColor(filter == f ? .white : t.textMuted)
                                     .padding(.horizontal, 16).padding(.vertical, 8)
-                                    .background(filter == f ? AppTheme.accent : AppTheme.surface2)
+                                    .background(filter == f ? AppTheme.accent : t.surface2)
                                     .clipShape(Capsule())
                             }
                             .buttonStyle(PressEffect())
@@ -103,14 +111,14 @@ struct TransactionsView: View {
                     }
                     .padding(.horizontal, 20)
 
-                    // ── List ─────────────────────────────────────────────
+                    // List
                     if filtered.isEmpty {
                         VStack(spacing: 12) {
                             Image(systemName: "doc.text.magnifyingglass")
-                                .font(.system(size: 40)).foregroundColor(AppTheme.textMuted)
-                            Text("No transactions found")
+                                .font(.system(size: 40)).foregroundColor(t.textMuted)
+                            Text(s(.noTransactions))
                                 .font(.system(size: 15, weight: .medium))
-                                .foregroundColor(AppTheme.textMuted)
+                                .foregroundColor(t.textMuted)
                         }
                         .frame(maxWidth: .infinity).padding(.vertical, 60)
                     } else {
@@ -125,39 +133,38 @@ struct TransactionsView: View {
                                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                                     Button(role: .destructive) {
                                                         dataManager.deleteTransaction(txn)
-                                                    } label: { Label("Delete", systemImage: "trash") }
+                                                    } label: { Label(s(.delete), systemImage: "trash") }
                                                 }
                                             if txn.id != grouped[date]!.last?.id {
                                                 Divider()
-                                                    .background(AppTheme.border)
+                                                    .background(t.border)
                                                     .padding(.horizontal, 20)
                                                     .padding(.leading, 56)
                                             }
                                         }
                                     }
-                                    .background(AppTheme.surface)
+                                    .background(t.surface)
                                     .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusLG, style: .continuous))
-                                    .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(AppTheme.border))
+                                    .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusLG).stroke(t.border))
                                     .padding(.horizontal, 20)
                                     .padding(.bottom, 12)
                                 } header: {
                                     Text(sectionHeader(date))
                                         .font(.system(size: 12, weight: .semibold))
-                                        .foregroundColor(AppTheme.textMuted)
+                                        .foregroundColor(t.textMuted)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.horizontal, 24).padding(.vertical, 6)
-                                        .background(AppTheme.bg)
+                                        .background(t.bg)
                                 }
                             }
                         }
                     }
-
                     Spacer().frame(height: 100)
                 }
             }
-            .background(AppTheme.bg)
+            .background(t.bg)
 
-            // FAB – add manual transaction
+            // FAB
             Button { showAdd = true } label: {
                 ZStack {
                     Circle()
@@ -172,15 +179,31 @@ struct TransactionsView: View {
             .buttonStyle(PressEffect())
             .padding(.trailing, 24).padding(.bottom, 100)
         }
-        .sheet(isPresented: $showAdd)    { AddTransactionSheet() }
-        .sheet(isPresented: $showImport) { BankStatementUploadView() }  // ← import sheet
+        .sheet(isPresented: $showAdd) {
+            AddTransactionSheet()
+                .environmentObject(dataManager)
+                .environmentObject(localization)
+        }
+        .sheet(isPresented: $showImport) {
+            BankStatementUploadView()
+                .environmentObject(dataManager)
+                .environmentObject(localization)
+        }
     }
 
-    // MARK: - Grouping helpers
+    private func filterLabel(_ f: FilterType) -> String {
+        switch f {
+        case .all:     return "All"
+        case .income:  return s(.incomeLabel)
+        case .expense: return s(.expense)
+        }
+    }
+
     private var groupedTransactions: [String: [Transaction]] {
         let fmt = DateFormatter(); fmt.dateFormat = "yyyy-MM-dd"
         return Dictionary(grouping: filtered) { fmt.string(from: $0.date) }
     }
+
     private func sectionHeader(_ key: String) -> String {
         let fmt = DateFormatter(); fmt.dateFormat = "yyyy-MM-dd"
         guard let d = fmt.date(from: key) else { return key }
@@ -194,6 +217,9 @@ struct TransactionsView: View {
 // MARK: - Full Transaction Row
 struct TxnFullRow: View {
     let transaction: Transaction
+    @Environment(\.colorScheme) var scheme
+    private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
+
     var body: some View {
         HStack(spacing: 12) {
             ZStack {
@@ -206,15 +232,15 @@ struct TxnFullRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(transaction.title)
                     .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(AppTheme.textPrimary)
+                    .foregroundColor(t.textPrimary)
                 Text(transaction.category.rawValue)
                     .font(.system(size: 11))
-                    .foregroundColor(AppTheme.textMuted)
+                    .foregroundColor(t.textMuted)
             }
             Spacer()
             Text(transaction.formattedAmount)
                 .font(.system(size: 15, weight: .bold, design: .rounded))
-                .foregroundColor(transaction.isExpense ? AppTheme.textPrimary : AppTheme.green)
+                .foregroundColor(transaction.isExpense ? t.textPrimary : AppTheme.green)
         }
         .padding(.horizontal, 16).padding(.vertical, 14)
     }
@@ -223,15 +249,20 @@ struct TxnFullRow: View {
 // MARK: - Add Transaction Sheet
 struct AddTransactionSheet: View {
     @EnvironmentObject var dataManager: SharedDataManager
+    @EnvironmentObject var localization: LocalizationManager
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) var scheme
 
-    @State private var title    = ""
-    @State private var amount   = ""
+    @State private var title     = ""
+    @State private var amount    = ""
     @State private var isExpense = true
     @State private var category: TransactionCategory = .food
-    @State private var date     = Date()
-    @State private var note     = ""
+    @State private var date      = Date()
+    @State private var note      = ""
     @State private var errorMessage: String?
+
+    private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
+    private func s(_ key: LocalizedKey) -> String { localization.str(key) }
 
     var expenseCategories: [TransactionCategory] { TransactionCategory.allCases.filter { !$0.isIncomeCategory } }
     var incomeCategories:  [TransactionCategory] { TransactionCategory.allCases.filter {  $0.isIncomeCategory } }
@@ -240,41 +271,41 @@ struct AddTransactionSheet: View {
 
     var body: some View {
         ZStack {
-            AppTheme.bg.ignoresSafeArea()
+            t.bg.ignoresSafeArea()
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 22) {
-                    RoundedRectangle(cornerRadius: 3).fill(AppTheme.surface2)
+                    RoundedRectangle(cornerRadius: 3).fill(t.surface2)
                         .frame(width: 36, height: 4).padding(.top, 12)
 
                     HStack {
-                        Text("Add Transaction")
+                        Text(s(.addTransaction))
                             .font(.system(size: 20, weight: .black, design: .rounded))
-                            .foregroundColor(AppTheme.textPrimary)
+                            .foregroundColor(t.textPrimary)
                         Spacer()
                         Button { dismiss() } label: {
                             Image(systemName: "xmark")
                                 .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(AppTheme.textMuted)
-                                .padding(8).background(AppTheme.surface2).clipShape(Circle())
+                                .foregroundColor(t.textMuted)
+                                .padding(8).background(t.surface2).clipShape(Circle())
                         }
                     }
 
                     // Type Toggle
                     HStack(spacing: 4) {
-                        TypeToggleBtn(label: "💸  Expense", active: isExpense, activeColor: AppTheme.red) {
+                        TypeToggleBtn(label: "💸  \(s(.expense))",      active: isExpense,  activeColor: AppTheme.red) {
                             withAnimation(.spring(response: 0.3)) { isExpense = true; category = .food }
                         }
-                        TypeToggleBtn(label: "💰  Income", active: !isExpense, activeColor: AppTheme.green) {
+                        TypeToggleBtn(label: "💰  \(s(.incomeLabel))",  active: !isExpense, activeColor: AppTheme.green) {
                             withAnimation(.spring(response: 0.3)) { isExpense = false; category = .salary }
                         }
                     }
-                    .padding(4).background(AppTheme.surface2)
+                    .padding(4).background(t.surface2)
                     .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusMD, style: .continuous))
 
                     // Amount
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("Amount", systemImage: "dollarsign.circle.fill")
-                            .font(.system(size: 12, weight: .semibold)).foregroundColor(AppTheme.textMuted)
+                        Label(s(.amount), systemImage: "dollarsign.circle.fill")
+                            .font(.system(size: 12, weight: .semibold)).foregroundColor(t.textMuted)
                         HStack {
                             Text("₸")
                                 .font(.system(size: 28, weight: .bold))
@@ -282,10 +313,10 @@ struct AddTransactionSheet: View {
                             TextField("0", text: $amount)
                                 .font(.system(size: 32, weight: .black, design: .rounded))
                                 .keyboardType(.decimalPad)
-                                .foregroundColor(AppTheme.textPrimary)
+                                .foregroundColor(t.textPrimary)
                                 .tint(isExpense ? AppTheme.red : AppTheme.green)
                         }
-                        .padding(16).background(AppTheme.surface)
+                        .padding(16).background(t.surface)
                         .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusMD))
                         .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusMD)
                             .stroke(isExpense ? AppTheme.red.opacity(0.3) : AppTheme.green.opacity(0.3)))
@@ -293,15 +324,15 @@ struct AddTransactionSheet: View {
 
                     // Description
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("Description", systemImage: "text.alignleft")
-                            .font(.system(size: 12, weight: .semibold)).foregroundColor(AppTheme.textMuted)
+                        Label(s(.title), systemImage: "text.alignleft")
+                            .font(.system(size: 12, weight: .semibold)).foregroundColor(t.textMuted)
                         AuthField(icon: "pencil", placeholder: "e.g. Magnum Market", text: $title, isSecure: false)
                     }
 
                     // Category grid
                     VStack(alignment: .leading, spacing: 10) {
-                        Label("Category", systemImage: "tag.fill")
-                            .font(.system(size: 12, weight: .semibold)).foregroundColor(AppTheme.textMuted)
+                        Label(s(.category), systemImage: "tag.fill")
+                            .font(.system(size: 12, weight: .semibold)).foregroundColor(t.textMuted)
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 3), spacing: 8) {
                             ForEach(availableCategories, id: \.self) { cat in
                                 Button {
@@ -311,14 +342,14 @@ struct AddTransactionSheet: View {
                                         Image(systemName: cat.icon).font(.system(size: 18))
                                             .foregroundColor(category == cat ? .white : cat.color)
                                         Text(cat.rawValue).font(.system(size: 10, weight: .medium))
-                                            .foregroundColor(category == cat ? .white : AppTheme.textMuted)
+                                            .foregroundColor(category == cat ? .white : t.textMuted)
                                             .lineLimit(1)
                                     }
                                     .frame(maxWidth: .infinity).padding(.vertical, 12)
-                                    .background(category == cat ? cat.color : AppTheme.surface)
+                                    .background(category == cat ? cat.color : t.surface)
                                     .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusMD, style: .continuous))
                                     .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusMD)
-                                        .stroke(category == cat ? cat.color : AppTheme.border))
+                                        .stroke(category == cat ? cat.color : t.border))
                                 }
                                 .buttonStyle(PressEffect())
                             }
@@ -327,14 +358,16 @@ struct AddTransactionSheet: View {
 
                     // Date
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("Date", systemImage: "calendar")
-                            .font(.system(size: 12, weight: .semibold)).foregroundColor(AppTheme.textMuted)
+                        Label(s(.date), systemImage: "calendar")
+                            .font(.system(size: 12, weight: .semibold)).foregroundColor(t.textMuted)
                         DatePicker("", selection: $date, displayedComponents: .date)
                             .datePickerStyle(.compact).labelsHidden().tint(AppTheme.accent)
-                            .padding(14).background(AppTheme.surface)
+                            .padding(14).background(t.surface)
                             .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusMD))
-                            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusMD).stroke(AppTheme.border))
+                            .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusMD).stroke(t.border))
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            // Force date picker label color for dark mode
+                            .colorScheme(scheme)
                     }
 
                     if let err = errorMessage {
@@ -348,10 +381,10 @@ struct AddTransactionSheet: View {
                                       ? (isExpense
                                          ? LinearGradient(colors: [AppTheme.red, AppTheme.orange], startPoint: .leading, endPoint: .trailing)
                                          : AppTheme.greenGradient)
-                                      : LinearGradient(colors: [AppTheme.surface2], startPoint: .leading, endPoint: .trailing))
+                                      : LinearGradient(colors: [t.surface2], startPoint: .leading, endPoint: .trailing))
                                 .shadow(color: isValid ? (isExpense ? AppTheme.red.opacity(0.3) : AppTheme.green.opacity(0.3)) : .clear,
                                         radius: 12, y: 5)
-                            Text("Add Transaction")
+                            Text(s(.saveTransaction))
                                 .font(.system(size: 16, weight: .bold)).foregroundColor(.white)
                         }.frame(height: 54)
                     }
@@ -373,13 +406,19 @@ struct AddTransactionSheet: View {
     }
 }
 
+// MARK: - Type Toggle Button
 struct TypeToggleBtn: View {
-    let label: String; let active: Bool; let activeColor: Color; let action: () -> Void
+    let label: String
+    let active: Bool
+    let activeColor: Color
+    let action: () -> Void
+    @Environment(\.colorScheme) var scheme
+
     var body: some View {
         Button(action: action) {
             Text(label)
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(active ? .white : AppTheme.textMuted)
+                .foregroundColor(active ? .white : ThemedColors(isDark: scheme == .dark).textMuted)
                 .frame(maxWidth: .infinity).padding(.vertical, 11)
                 .background(active ? activeColor : Color.clear)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))

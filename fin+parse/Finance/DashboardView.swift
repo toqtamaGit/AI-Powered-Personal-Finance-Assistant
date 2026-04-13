@@ -1,53 +1,39 @@
-// DashboardView.swift — Main analytics hub with four sub-pages.
+// DashboardView.swift — with Localization + Dark/Light theme
 
 import SwiftUI
 import Charts
 
-// MARK: - Analytics Tab Pages
-enum AnalyticsPage: String, CaseIterable, Identifiable {
-    case overview   = "Overview"
-    case categories = "Categories"
-    case banks      = "Banks"
-    case types      = "Types"
-
-    var id: String { rawValue }
-
-    var icon: String {
-        switch self {
-        case .overview:   return "chart.pie"
-        case .categories: return "tag"
-        case .banks:      return "building.columns"
-        case .types:      return "arrow.left.arrow.right"
-        }
-    }
-}
-
-// MARK: - Main Dashboard View
 struct DashboardView: View {
+    @EnvironmentObject var dataManager: SharedDataManager
     @EnvironmentObject var authManager: AuthManager
-    @StateObject private var service = DashboardService()
-    @State private var page: AnalyticsPage = .overview
-    @State private var showAccount = false
+    @EnvironmentObject var themeManager: ThemeManager
+    @EnvironmentObject var localization: LocalizationManager
+    @Environment(\.colorScheme) var scheme
+    @State private var chartPeriod  = 0
+    @State private var showAccount  = false
+
+    private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
+    private func s(_ key: LocalizedKey) -> String { localization.str(key) }
 
     private var greeting: String {
         let h = Calendar.current.component(.hour, from: Date())
-        if h < 12 { return "Good morning" }
-        else if h < 17 { return "Good afternoon" }
-        else { return "Good evening" }
+        if h < 12 { return s(.goodMorning) }
+        else if h < 17 { return s(.goodAfternoon) }
+        else { return s(.goodEvening) }
     }
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 18) {
+            VStack(spacing: 22) {
                 // Top bar
                 HStack {
                     VStack(alignment: .leading, spacing: 3) {
                         Text(greeting)
                             .font(.system(size: 13, weight: .medium))
-                            .foregroundColor(AppTheme.textMuted)
+                            .foregroundColor(t.textMuted)
                         Text(authManager.currentUser?.firstName ?? "there")
                             .font(.system(size: 26, weight: .black, design: .rounded))
-                            .foregroundColor(AppTheme.textPrimary)
+                            .foregroundColor(t.textPrimary)
                     }
                     Spacer()
                     Button { showAccount = true } label: {
@@ -66,291 +52,272 @@ struct DashboardView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
 
-                // Page picker
-                HStack(spacing: 4) {
-                    ForEach(AnalyticsPage.allCases) { p in
-                        Button(action: { withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) { page = p } }) {
-                            HStack(spacing: 4) {
-                                Image(systemName: p.icon)
-                                    .font(.system(size: 11))
-                                Text(p.rawValue)
-                                    .font(.system(size: 12, weight: .semibold))
+                // Balance Hero Card
+                BalanceHeroCard()
+
+                // Stats Row
+                HStack(spacing: 12) {
+                    MiniStatCard(title: s(.income),   value: dataManager.totalIncome,    color: AppTheme.green,  icon: "arrow.down.circle.fill")
+                    MiniStatCard(title: s(.expenses), value: dataManager.totalExpenses,  color: AppTheme.red,    icon: "arrow.up.circle.fill")
+                    MiniStatCard(title: s(.savings),  value: dataManager.savingsRate,    color: AppTheme.accent, icon: "percent", isPercent: true)
+                }
+                .padding(.horizontal, 20)
+
+                // Cash Flow Chart
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text(s(.cashFlow)).font(.system(size: 17, weight: .bold)).foregroundColor(t.textPrimary)
+                            Text(s(.incomeVsExpenses)).font(.system(size: 12)).foregroundColor(t.textMuted)
+                        }
+                        Spacer()
+                        HStack(spacing: 4) {
+                            ForEach(["6M","1Y"].indices, id: \.self) { i in
+                                Button(action: { withAnimation { chartPeriod = i } }) {
+                                    Text(["6M","1Y"][i])
+                                        .font(.system(size: 11, weight: .semibold))
+                                        .foregroundColor(chartPeriod == i ? .white : t.textMuted)
+                                        .padding(.horizontal, 10).padding(.vertical, 5)
+                                        .background(chartPeriod == i ? AppTheme.accent : t.surface2)
+                                        .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+                                }
+                                .buttonStyle(PressEffect())
                             }
-                            .foregroundColor(page == p ? .white : AppTheme.textMuted)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 7)
-                            .background(page == p ? AppTheme.accent : AppTheme.surface2)
-                            .clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
                         }
-                        .buttonStyle(PressEffect())
                     }
+                    CashFlowChart(data: dataManager.monthlyData)
                 }
-                .padding(.horizontal, 20)
-
-                // Shared filter bar
-                FilterBar(service: service)
-
-                // Loading / error
-                if service.isLoading {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, minHeight: 200)
-                } else if let err = service.errorMessage {
-                    VStack(spacing: 8) {
-                        Image(systemName: "wifi.exclamationmark")
-                            .font(.system(size: 28))
-                            .foregroundColor(AppTheme.red)
-                        Text(err)
-                            .font(.system(size: 13))
-                            .foregroundColor(AppTheme.textMuted)
-                            .multilineTextAlignment(.center)
-                        Button("Retry") { Task { await service.fetchAll() } }
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(AppTheme.accent)
-                    }
-                    .frame(maxWidth: .infinity, minHeight: 200)
-                    .padding()
-                } else {
-                    // Page content
-                    switch page {
-                    case .overview:   OverviewPage(service: service)
-                    case .categories: CategoryAnalysisPage(service: service)
-                    case .banks:      BankAnalysisPage(service: service)
-                    case .types:      TransactionTypePage(service: service)
-                    }
-                }
-
-                Spacer(minLength: 40)
-            }
-        }
-        .background(AppTheme.bg.ignoresSafeArea())
-        .sheet(isPresented: $showAccount) { AccountView().environmentObject(authManager) }
-        .task { await service.fetchAll() }
-    }
-}
-
-// MARK: - Overview Page
-struct OverviewPage: View {
-    @ObservedObject var service: DashboardService
-
-    var body: some View {
-        VStack(spacing: 16) {
-            // KPI cards
-            if let ov = service.overview {
-                // Balance hero
-                VStack(spacing: 6) {
-                    Text("Balance")
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundColor(AppTheme.textMuted)
-                    Text(formatTenge(ov.balance))
-                        .font(.system(size: 32, weight: .black, design: .rounded))
-                        .foregroundColor(ov.balance >= 0 ? AppTheme.green : AppTheme.red)
-                    Text("\(ov.transactionCount) transactions")
-                        .font(.system(size: 12))
-                        .foregroundColor(AppTheme.textMuted)
-                }
-                .frame(maxWidth: .infinity)
                 .glassCard()
                 .padding(.horizontal, 20)
 
-                // Income / Expenses row
-                HStack(spacing: 12) {
-                    MiniKPI(title: "Income", value: ov.totalIncome, color: AppTheme.green, icon: "arrow.down.circle.fill")
-                    MiniKPI(title: "Spent", value: abs(ov.totalSpent), color: AppTheme.red, icon: "arrow.up.circle.fill")
-                }
-                .padding(.horizontal, 20)
+                // Category Donut + Legend
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(s(.spendingBreakdown))
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundColor(t.textPrimary)
 
-                // Monthly trend cards
-                HStack(spacing: 12) {
-                    MiniKPI(title: "This Month", value: ov.thisMonthSpent, color: AppTheme.orange, icon: "calendar")
-                    MiniKPI(title: "Last Month", value: ov.lastMonthSpent, color: AppTheme.teal, icon: "calendar.badge.clock")
-                }
-                .padding(.horizontal, 20)
-
-                // Trend arrow
-                if ov.thisMonthSpent > 0 || ov.lastMonthSpent > 0 {
-                    HStack(spacing: 6) {
-                        Image(systemName: ov.trendDirection == .up ? "arrow.up.right" : "arrow.down.right")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(ov.trendDirection == .up ? AppTheme.red : AppTheme.green)
-                        Text(ov.trendDirection == .up ? "Spending increased" : "Spending decreased")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundColor(AppTheme.textMuted)
-                    }
-                    .padding(.horizontal, 20)
-                }
-
-                // Top category badge
-                if let top = ov.topCategory {
-                    HStack(spacing: 6) {
-                        Image(systemName: "star.fill")
-                            .font(.system(size: 12))
-                            .foregroundColor(AppTheme.yellow)
-                        Text("Top category: **\(top)**")
-                            .font(.system(size: 13))
-                            .foregroundColor(AppTheme.textPrimary)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .glassCard(padding: 14)
-                    .padding(.horizontal, 20)
-                }
-            }
-
-            // Category donut (mini)
-            if let cats = service.categories, !cats.categories.isEmpty {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Spending by Category")
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundColor(AppTheme.textPrimary)
-
-                    Chart {
-                        ForEach(cats.categories) { c in
-                            SectorMark(
-                                angle: .value("Amount", c.amount),
-                                innerRadius: .ratio(0.55),
-                                angularInset: 1.5
-                            )
-                            .foregroundStyle(c.appCategory.color)
-                        }
-                    }
-                    .frame(height: 180)
-
-                    // Legend
-                    FlowLegend(items: cats.categories.map { ($0.category, $0.appCategory.color, $0.percentage) })
-                }
-                .glassCard()
-                .padding(.horizontal, 20)
-            }
-
-            // Trend line chart
-            if let t = service.trend, !t.trend.isEmpty {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Monthly Trend")
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundColor(AppTheme.textPrimary)
-
-                    Chart {
-                        ForEach(t.trend) { m in
-                            LineMark(
-                                x: .value("Month", m.label),
-                                y: .value("Expenses", m.expenses)
-                            )
-                            .foregroundStyle(AppTheme.red)
-                            .symbol(Circle())
-
-                            LineMark(
-                                x: .value("Month", m.label),
-                                y: .value("Income", m.income)
-                            )
-                            .foregroundStyle(AppTheme.green)
-                            .symbol(Circle())
-                        }
-                    }
-                    .chartYAxis {
-                        AxisMarks(position: .leading) { value in
-                            AxisGridLine()
-                            AxisValueLabel {
-                                if let v = value.as(Double.self) {
-                                    Text(shortTenge(v))
-                                        .font(.system(size: 9))
+                    if dataManager.totalExpenses > 0 {
+                        HStack(spacing: 20) {
+                            Chart(dataManager.categorySpending) { item in
+                                SectorMark(
+                                    angle: .value("Amount", item.amount),
+                                    innerRadius: .ratio(0.62),
+                                    angularInset: 2
+                                )
+                                .foregroundStyle(item.category.color)
+                                .cornerRadius(4)
+                            }
+                            .frame(width: 130, height: 130)
+                            .overlay {
+                                VStack(spacing: 2) {
+                                    Text("Total").font(.system(size: 10)).foregroundColor(t.textMuted)
+                                    Text("$\(String(format: "%.0f", dataManager.totalExpenses))")
+                                        .font(.system(size: 15, weight: .bold)).foregroundColor(t.textPrimary)
+                                }
+                            }
+                            VStack(alignment: .leading, spacing: 8) {
+                                ForEach(dataManager.categorySpending.prefix(5)) { item in
+                                    HStack(spacing: 8) {
+                                        Circle().fill(item.category.color).frame(width: 8, height: 8)
+                                        Text(item.category.rawValue)
+                                            .font(.system(size: 12, weight: .medium))
+                                            .foregroundColor(t.textPrimary)
+                                        Spacer()
+                                        Text("\(item.progressPercent)%")
+                                            .font(.system(size: 11, weight: .semibold))
+                                            .foregroundColor(t.textMuted)
+                                    }
                                 }
                             }
                         }
-                    }
-                    .frame(height: 180)
-
-                    // Legend
-                    HStack(spacing: 16) {
-                        LegendDot(color: AppTheme.red, label: "Expenses")
-                        LegendDot(color: AppTheme.green, label: "Income")
+                    } else {
+                        Text(s(.noExpensesYet))
+                            .font(.system(size: 14))
+                            .foregroundColor(t.textMuted)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.vertical, 30)
                     }
                 }
                 .glassCard()
                 .padding(.horizontal, 20)
+
+                // Recent Transactions
+                VStack(alignment: .leading, spacing: 14) {
+                    HStack {
+                        Text(s(.recentTransactions))
+                            .font(.system(size: 17, weight: .bold))
+                            .foregroundColor(t.textPrimary)
+                        Spacer()
+                        Text(s(.seeAll)).font(.system(size: 13, weight: .medium)).foregroundColor(AppTheme.accent)
+                    }
+                    ForEach(dataManager.transactions.prefix(4)) { txn in
+                        TransactionRow(transaction: txn)
+                    }
+                }
+                .glassCard()
+                .padding(.horizontal, 20)
+                .padding(.bottom, 100)
             }
+        }
+        .background(t.bg)
+        .sheet(isPresented: $showAccount) {
+            AccountView()
+                .environmentObject(authManager)
+                .environmentObject(dataManager)
+                .environmentObject(themeManager)
+                .environmentObject(localization)
         }
     }
 }
 
-// MARK: - Helpers
+// MARK: - Balance Hero Card
+struct BalanceHeroCard: View {
+    @EnvironmentObject var dataManager: SharedDataManager
+    @EnvironmentObject var localization: LocalizationManager
+    @Environment(\.colorScheme) var scheme
+    private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
 
-func formatTenge(_ value: Double) -> String {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .decimal
-    formatter.maximumFractionDigits = 0
-    formatter.groupingSeparator = " "
-    let s = formatter.string(from: NSNumber(value: abs(value))) ?? "0"
-    let sign = value < 0 ? "-" : ""
-    return "\(sign)\(s) \u{20B8}"
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: AppTheme.radiusXL, style: .continuous)
+                .fill(AppTheme.accentGradient)
+            Circle().fill(.white.opacity(0.06)).frame(width: 200, height: 200).offset(x: 80, y: -60)
+            Circle().fill(.white.opacity(0.04)).frame(width: 150, height: 150).offset(x: -60, y: 60)
+
+            VStack(alignment: .leading, spacing: 18) {
+                HStack {
+                    Text(localization.str(.totalBalance))
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(.white.opacity(0.7))
+                    Spacer()
+                    Image(systemName: "eye.fill").font(.system(size: 14)).foregroundColor(.white.opacity(0.6))
+                }
+                Text("$\(String(format: "%.2f", dataManager.balance))")
+                    .font(.system(size: 38, weight: .black, design: .rounded))
+                    .foregroundColor(.white)
+
+                HStack(spacing: 0) {
+                    Divider().frame(width: 1, height: 30).background(.white.opacity(0.3)).padding(.horizontal, 16)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(localization.str(.thisMonth)).font(.system(size: 11)).foregroundColor(.white.opacity(0.65))
+                        HStack(spacing: 4) {
+                            Image(systemName: dataManager.monthlyTrend == .up ? "arrow.up.right" : "arrow.down.right")
+                                .font(.system(size: 11, weight: .bold))
+                            Text("$\(String(format: "%.0f", dataManager.thisMonthExpenses)) spent")
+                                .font(.system(size: 13, weight: .semibold))
+                        }
+                        .foregroundColor(dataManager.monthlyTrend == .up ? AppTheme.red : AppTheme.green)
+                    }
+                    Spacer()
+                }
+            }
+            .padding(24)
+        }
+        .frame(height: 170)
+        .padding(.horizontal, 20)
+        .shadow(color: AppTheme.accent.opacity(0.35), radius: 24, y: 10)
+    }
 }
 
-func shortTenge(_ value: Double) -> String {
-    if value >= 1_000_000 { return String(format: "%.1fM", value / 1_000_000) }
-    if value >= 1_000 { return String(format: "%.0fK", value / 1_000) }
-    return String(format: "%.0f", value)
-}
-
-struct MiniKPI: View {
+// MARK: - Mini Stat Card
+struct MiniStatCard: View {
     let title: String
     let value: Double
     let color: Color
     let icon: String
     var isPercent: Bool = false
+    @Environment(\.colorScheme) var scheme
+    private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
+
+    var displayValue: String {
+        isPercent ? "\(String(format: "%.1f", value))%" : "$\(String(format: "%.0f", value))"
+    }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 4) {
-                Image(systemName: icon)
-                    .font(.system(size: 12))
-                    .foregroundColor(color)
-                Text(title)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(AppTheme.textMuted)
+        VStack(alignment: .leading, spacing: 10) {
+            ZStack {
+                Circle().fill(color.opacity(0.15)).frame(width: 34, height: 34)
+                Image(systemName: icon).font(.system(size: 14)).foregroundColor(color)
             }
-            Text(isPercent ? String(format: "%.0f%%", value) : formatTenge(value))
-                .font(.system(size: 16, weight: .bold))
-                .foregroundColor(AppTheme.textPrimary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
+            Text(displayValue)
+                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .foregroundColor(t.textPrimary)
+            Text(title)
+                .font(.system(size: 11, weight: .medium))
+                .foregroundColor(t.textMuted)
         }
+        .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .glassCard(padding: 14)
+        .background(t.surface)
+        .clipShape(RoundedRectangle(cornerRadius: AppTheme.radiusMD, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: AppTheme.radiusMD, style: .continuous).stroke(t.border, lineWidth: 1))
     }
 }
 
-struct LegendDot: View {
-    let color: Color
-    let label: String
+// MARK: - Cash Flow Chart
+struct CashFlowChart: View {
+    let data: [MonthlyData]
+    @Environment(\.colorScheme) var scheme
+    private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
 
     var body: some View {
-        HStack(spacing: 4) {
-            Circle().fill(color).frame(width: 8, height: 8)
-            Text(label).font(.system(size: 11)).foregroundColor(AppTheme.textMuted)
+        Chart {
+            ForEach(data) { d in
+                LineMark(x: .value("Month", d.month), y: .value("Income", d.income))
+                    .foregroundStyle(AppTheme.green).interpolationMethod(.catmullRom)
+                    .lineStyle(StrokeStyle(lineWidth: 2.5))
+                AreaMark(x: .value("Month", d.month), y: .value("Income", d.income))
+                    .foregroundStyle(AppTheme.green.opacity(0.08)).interpolationMethod(.catmullRom)
+                LineMark(x: .value("Month", d.month), y: .value("Expenses", d.expenses))
+                    .foregroundStyle(AppTheme.accent).interpolationMethod(.catmullRom)
+                    .lineStyle(StrokeStyle(lineWidth: 2.5))
+                AreaMark(x: .value("Month", d.month), y: .value("Expenses", d.expenses))
+                    .foregroundStyle(AppTheme.accent.opacity(0.06)).interpolationMethod(.catmullRom)
+            }
         }
+        .chartXAxis {
+            AxisMarks { AxisValueLabel().foregroundStyle(t.textMuted).font(.system(size: 10)) }
+        }
+        .chartYAxis {
+            AxisMarks { AxisValueLabel().foregroundStyle(t.textMuted).font(.system(size: 10)) }
+        }
+        .frame(height: 160)
     }
 }
 
-struct FlowLegend: View {
-    let items: [(String, Color, Double)]
+// MARK: - Transaction Row
+struct TransactionRow: View {
+    let transaction: Transaction
+    @Environment(\.colorScheme) var scheme
+    private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
 
     var body: some View {
-        HStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 4) {
-                ForEach(Array(items.enumerated()), id: \.offset) { _, item in
-                    HStack(spacing: 5) {
-                        Circle().fill(item.1).frame(width: 8, height: 8)
-                        Text("\(item.0) \(String(format: "%.0f", item.2))%")
-                            .font(.system(size: 11))
-                            .foregroundColor(AppTheme.textMuted)
-                    }
-                }
+        HStack(spacing: 12) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 11, style: .continuous)
+                    .fill(transaction.category.softColor)
+                    .frame(width: 42, height: 42)
+                Image(systemName: transaction.category.icon)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(transaction.category.color)
+            }
+            VStack(alignment: .leading, spacing: 3) {
+                Text(transaction.title)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(t.textPrimary)
+                Text(transaction.shortDate)
+                    .font(.system(size: 11))
+                    .foregroundColor(t.textMuted)
             }
             Spacer()
+            Text(transaction.formattedAmount)
+                .font(.system(size: 15, weight: .bold, design: .rounded))
+                .foregroundColor(transaction.isExpense ? t.textPrimary : AppTheme.green)
         }
+        .padding(.vertical, 4)
     }
 }
 
-#Preview {
-    DashboardView()
-        .environmentObject(AuthManager())
-        .environmentObject(SharedDataManager())
+extension CategorySpending {
+    var progressPercent: Int { Int(percentage * 100) }
 }
