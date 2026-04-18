@@ -1,5 +1,3 @@
-// FincoraApp.swift — Updated root with ThemeManager + LocalizationManager
-// Replace your existing @main App file with this.
 
 import SwiftUI
 

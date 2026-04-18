@@ -207,7 +207,7 @@ enum LocalizedKey {
     // MARK: - English
     var english: String {
         switch self {
-        case .appName: return "Fincora"
+        case .appName: return "FinAPP"
         case .cancel: return "Cancel"
         case .save: return "Save"
         case .delete: return "Delete"
@@ -342,7 +342,7 @@ enum LocalizedKey {
     // MARK: - Russian
     var russian: String {
         switch self {
-        case .appName: return "Fincora"
+        case .appName: return "FinAPP"
         case .cancel: return "Отмена"
         case .save: return "Сохранить"
         case .delete: return "Удалить"
@@ -477,7 +477,7 @@ enum LocalizedKey {
     // MARK: - Kazakh
     var kazakh: String {
         switch self {
-        case .appName: return "Fincora"
+        case .appName: return "FinAPP"
         case .cancel: return "Болдырмау"
         case .save: return "Сақтау"
         case .delete: return "Жою"
