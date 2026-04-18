@@ -111,7 +111,7 @@ struct DashboardView: View {
                             .overlay {
                                 VStack(spacing: 2) {
                                     Text("Total").font(.system(size: 10)).foregroundColor(t.textMuted)
-                                    Text("$\(String(format: "%.0f", dataManager.totalExpenses))")
+                                    Text("₸\(String(format: "%.0f", dataManager.totalExpenses))")
                                         .font(.system(size: 15, weight: .bold)).foregroundColor(t.textPrimary)
                                 }
                             }
@@ -192,7 +192,7 @@ struct BalanceHeroCard: View {
                     Spacer()
                     Image(systemName: "eye.fill").font(.system(size: 14)).foregroundColor(.white.opacity(0.6))
                 }
-                Text("$\(String(format: "%.2f", dataManager.balance))")
+                Text("₸\(String(format: "%.2f", dataManager.balance))")
                     .font(.system(size: 38, weight: .black, design: .rounded))
                     .foregroundColor(.white)
 
@@ -203,7 +203,7 @@ struct BalanceHeroCard: View {
                         HStack(spacing: 4) {
                             Image(systemName: dataManager.monthlyTrend == .up ? "arrow.up.right" : "arrow.down.right")
                                 .font(.system(size: 11, weight: .bold))
-                            Text("$\(String(format: "%.0f", dataManager.thisMonthExpenses)) spent")
+                            Text("₸\(String(format: "%.0f", dataManager.thisMonthExpenses)) spent")
                                 .font(.system(size: 13, weight: .semibold))
                         }
                         .foregroundColor(dataManager.monthlyTrend == .up ? AppTheme.red : AppTheme.green)
@@ -230,7 +230,7 @@ struct MiniStatCard: View {
     private var t: ThemedColors { ThemedColors(isDark: scheme == .dark) }
 
     var displayValue: String {
-        isPercent ? "\(String(format: "%.1f", value))%" : "$\(String(format: "%.0f", value))"
+        isPercent ? "\(String(format: "%.1f", value))%" : "₸\(String(format: "%.0f", value))"
     }
 
     var body: some View {

@@ -203,11 +203,11 @@ struct ChatView: View {
     private func buildFinancialContext() -> String {
         let dm = dataManager
         return """
-        Balance: $\(String(format: "%.2f", dm.balance))
-        Total Income: $\(String(format: "%.2f", dm.totalIncome))
-        Total Expenses: $\(String(format: "%.2f", dm.totalExpenses))
+        Balance: ₸\(String(format: "%.2f", dm.balance))
+        Total Income: ₸\(String(format: "%.2f", dm.totalIncome))
+        Total Expenses: ₸\(String(format: "%.2f", dm.totalExpenses))
         Savings Rate: \(String(format: "%.1f", dm.savingsRate))%
-        This Month Expenses: $\(String(format: "%.2f", dm.thisMonthExpenses))
+        This Month Expenses: ₸\(String(format: "%.2f", dm.thisMonthExpenses))
         Top Spending Categories: \(dm.categorySpending.prefix(3).map { "\($0.category.rawValue): $\(String(format: "%.0f", $0.amount))" }.joined(separator: ", "))
         Active Goals: \(dm.goals.map { "\($0.name) (\($0.progressPercent)% complete)" }.joined(separator: ", "))
         """
@@ -220,33 +220,33 @@ struct ChatView: View {
 
         if msg.contains("spending") || msg.contains("expense") || msg.contains("month") {
             let topCat = dm.categorySpending.first?.category.rawValue ?? "various categories"
-            return "This month you've spent $\(String(format: "%.2f", dm.thisMonthExpenses)). Your biggest spending category is \(topCat). Your savings rate is currently \(String(format: "%.1f", dm.savingsRate))% — \(dm.savingsRate >= 20 ? "great job! 🎉" : "there's room to improve this. Try cutting discretionary spending.")"
+            return "This month you've spent ₸\(String(format: "%.2f", dm.thisMonthExpenses)). Your biggest spending category is \(topCat). Your savings rate is currently \(String(format: "%.1f", dm.savingsRate))% — \(dm.savingsRate >= 20 ? "great job! 🎉" : "there's room to improve this. Try cutting discretionary spending.")"
         }
         if msg.contains("save") || msg.contains("savings") || msg.contains("tip") {
             let potential = dm.totalExpenses * 0.1
-            return "Based on your spending, you could save an extra $\(String(format: "%.0f", potential))/month by reducing discretionary expenses by 10%. 💡 Consider reviewing your subscriptions and dining out less — those tend to add up quickly!"
+            return "Based on your spending, you could save an extra ₸\(String(format: "%.0f", potential))/month by reducing discretionary expenses by 10%. 💡 Consider reviewing your subscriptions and dining out less — those tend to add up quickly!"
         }
         if msg.contains("balance") || msg.contains("account") {
-            return "Your current balance is $\(String(format: "%.2f", dm.balance)). You've earned $\(String(format: "%.2f", dm.totalIncome)) in income and spent $\(String(format: "%.2f", dm.totalExpenses)) total. Keep it up! 💪"
+            return "Your current balance is ₸\(String(format: "%.2f", dm.balance)). You've earned ₸\(String(format: "%.2f", dm.totalIncome)) in income and spent ₸\(String(format: "%.2f", dm.totalExpenses)) total. Keep it up! 💪"
         }
         if msg.contains("goal") {
             let nearestGoal = dm.goals.sorted { $0.progress > $1.progress }.first
             if let g = nearestGoal {
-                return "Your '\(g.name)' goal is \(g.progressPercent)% complete! 🎯 You've saved $\(String(format: "%.0f", g.savedAmount)) of your $\(String(format: "%.0f", g.targetAmount)) target. Keep it going!"
+                return "Your '\(g.name)' goal is \(g.progressPercent)% complete! 🎯 You've saved ₸\(String(format: "%.0f", g.savedAmount)) of your ₸\(String(format: "%.0f", g.targetAmount)) target. Keep it going!"
             }
             return "Set up savings goals to track your progress toward big purchases and milestones! 🎯 Tap the Goals tab to get started."
         }
         if msg.contains("budget") {
-            return "You have \(dm.budgets.count) active budgets. 📊 To stay on track, try the 50/30/20 rule: 50% needs, 30% wants, 20% savings. Based on your income of $\(String(format: "%.0f", dm.totalIncome)), you should aim to save at least $\(String(format: "%.0f", dm.totalIncome * 0.2)) per month."
+            return "You have \(dm.budgets.count) active budgets. 📊 To stay on track, try the 50/30/20 rule: 50% needs, 30% wants, 20% savings. Based on your income of $\(String(format: "%.0f", dm.totalIncome)), you should aim to save at least ₸\(String(format: "%.0f", dm.totalIncome * 0.2)) per month."
         }
         if msg.contains("invest") {
-            return "With a $\(String(format: "%.0f", dm.balance)) balance and \(String(format: "%.1f", dm.savingsRate))% savings rate, you're building a solid foundation. 📈 Consider putting your emergency fund first (3-6 months of expenses = ~$\(String(format: "%.0f", dm.thisMonthExpenses * 4))), then explore index fund investing."
+            return "With a ₸\(String(format: "%.0f", dm.balance)) balance and \(String(format: "%.1f", dm.savingsRate))% savings rate, you're building a solid foundation. 📈 Consider putting your emergency fund first (3-6 months of expenses = ~₸\(String(format: "%.0f", dm.thisMonthExpenses * 4))), then explore index fund investing."
         }
 
         let responses = [
             "Based on your financials, you're doing well with a \(String(format: "%.1f", dm.savingsRate))% savings rate! 💰 Keep tracking your expenses and you'll hit your goals faster.",
-            "Great question! With $\(String(format: "%.2f", dm.balance)) in your balance, focus on maintaining your budget and growing your savings. What specific area would you like advice on?",
-            "Financial wellness is a journey! Your current balance of $\(String(format: "%.2f", dm.balance)) is a great foundation. Would you like tips on budgeting, saving, or investing? 🌱",
+            "Great question! With ₸\(String(format: "%.2f", dm.balance)) in your balance, focus on maintaining your budget and growing your savings. What specific area would you like advice on?",
+            "Financial wellness is a journey! Your current balance of ₸\(String(format: "%.2f", dm.balance)) is a great foundation. Would you like tips on budgeting, saving, or investing? 🌱",
         ]
         return responses.randomElement()!
     }

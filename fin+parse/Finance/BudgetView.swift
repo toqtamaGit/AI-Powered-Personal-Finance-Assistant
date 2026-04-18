@@ -134,7 +134,7 @@ struct BudgetCard: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(budget.category.rawValue)
                     .font(.system(size: 14, weight: .bold)).foregroundColor(t.textPrimary)
-                Text("$\(String(format: "%.0f", remaining)) left")
+                Text("₸\(String(format: "%.0f", remaining)) left")
                     .font(.system(size: 11)).foregroundColor(t.textMuted)
             }
             GeometryReader { geo in
@@ -146,9 +146,9 @@ struct BudgetCard: View {
                 }
             }.frame(height: 6)
             HStack {
-                Text("$\(String(format: "%.0f", spent))")
+                Text("₸\(String(format: "%.0f", spent))")
                     .font(.system(size: 11, weight: .semibold)).foregroundColor(progressColor)
-                Text("/ $\(String(format: "%.0f", budget.limit))")
+                Text("/₸\(String(format: "%.0f", budget.limit))")
                     .font(.system(size: 11)).foregroundColor(t.textMuted)
             }
         }
@@ -165,7 +165,7 @@ struct BudgetSummaryChip: View {
 
     var body: some View {
         VStack(spacing: 4) {
-            Text("$\(String(format: "%.0f", abs(value)))")
+            Text("₸\(String(format: "%.0f", abs(value)))")
                 .font(.system(size: 16, weight: .black, design: .rounded)).foregroundColor(color)
             Text(label).font(.system(size: 10, weight: .medium)).foregroundColor(ThemedColors(isDark: scheme == .dark).textMuted)
         }

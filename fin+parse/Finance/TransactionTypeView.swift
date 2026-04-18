@@ -65,7 +65,23 @@ struct TransactionTypePage: View {
             }
             .frame(height: 200)
 
-            FlowLegend(items: data.operations.map { ($0.operation, opColor($0.operation), $0.percentage) })
+            // Inline legend replacing missing FlowLegend
+            VStack(alignment: .leading, spacing: 8) {
+                ForEach(data.operations) { op in
+                    HStack(spacing: 8) {
+                        Circle()
+                            .fill(opColor(op.operation))
+                            .frame(width: 10, height: 10)
+                        Text(op.operation)
+                            .font(.system(size: 12))
+                            .foregroundColor(AppTheme.textPrimary)
+                        Spacer()
+                        Text("\(Int(op.percentage))%")
+                            .font(.system(size: 12))
+                            .foregroundColor(AppTheme.textMuted)
+                    }
+                }
+            }
         }
         .glassCard()
         .padding(.horizontal, 20)
@@ -152,5 +168,38 @@ struct TransactionTypePage: View {
             .glassCard(padding: 14)
             .padding(.horizontal, 20)
         }
+    }
+
+    // MARK: - Local formatting helpers (fallbacks if global helpers are missing)
+    private func formatTenge(_ amount: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = "KZT"
+        formatter.maximumFractionDigits = 0
+        return formatter.string(from: NSNumber(value: amount)) ?? ""
+    }
+
+    private func shortTenge(_ amount: Double) -> String {
+        // Short scale: K, M, B for readability in annotations
+        let absVal = abs(amount)
+        let sign = amount < 0 ? "-" : ""
+        let value: Double
+        let suffix: String
+        switch absVal {
+        case 1_000_000_000...:
+            value = absVal / 1_000_000_000
+            suffix = "B"
+        case 1_000_000...:
+            value = absVal / 1_000_000
+            suffix = "M"
+        case 1_000...:
+            value = absVal / 1_000
+            suffix = "K"
+        default:
+            value = absVal
+            suffix = ""
+        }
+        let formatted = String(format: value.truncatingRemainder(dividingBy: 1) == 0 ? "%.0f" : "%.1f", value)
+        return "\(sign)\(formatted)\(suffix) ₸"
     }
 }

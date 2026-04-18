@@ -23,6 +23,7 @@ struct CategoryAnalysisPage: View {
 
     @ViewBuilder
     private func content(_ data: APICategoryResponse) -> some View {
+        
         // Total spent badge
         HStack {
             Text("Total Spent")
@@ -131,5 +132,72 @@ struct CategoryAnalysisPage: View {
         }
         .glassCard()
         .padding(.horizontal, 20)
+    }
+}
+
+
+// MARK: - Local helpers for currency formatting used in this view
+private func formatTenge(_ amount: Double) -> String {
+    // Full currency formatting for Kazakhstani Tenge (KZT)
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.currencyCode = "KZT"
+    formatter.maximumFractionDigits = 0
+    formatter.minimumFractionDigits = 0
+    return formatter.string(from: NSNumber(value: amount)) ?? "\(Int(amount)) ₸"
+}
+
+private func shortTenge(_ amount: Double) -> String {
+    // Compact formatting like 1.2K ₸, 3.4M ₸
+    let absValue = abs(amount)
+    let sign = amount < 0 ? "-" : ""
+
+    let formatted: String
+    switch absValue {
+    case 1_000_000_000...:
+        formatted = String(format: "%.1fB", absValue / 1_000_000_000)
+    case 1_000_000...:
+        formatted = String(format: "%.1fM", absValue / 1_000_000)
+    case 1_000...:
+        formatted = String(format: "%.1fK", absValue / 1_000)
+    default:
+        formatted = String(Int(absValue))
+    }
+    return "\(sign)\(formatted) ₸"
+}
+
+// MARK: - Minimal fallback FlowLegend used by this view
+// If a project-wide FlowLegend exists, this local version can be removed.
+private struct FlowLegend: View {
+    struct LegendItem: Identifiable {
+        let id = UUID()
+        let title: String
+        let color: Color
+        let percentage: Double
+    }
+
+    let items: [LegendItem]
+
+    init(items: [(String, Color, Double)]) {
+        self.items = items.map { .init(title: $0.0, color: $0.1, percentage: $0.2) }
+    }
+
+    var body: some View {
+        LazyVStack(alignment: .leading, spacing: 8) {
+            ForEach(items) { item in
+                HStack(spacing: 8) {
+                    Circle()
+                        .fill(item.color)
+                        .frame(width: 10, height: 10)
+                    Text(item.title)
+                        .font(.system(size: 12))
+                        .foregroundColor(AppTheme.textPrimary)
+                    Spacer()
+                    Text("\(Int(item.percentage))%")
+                        .font(.system(size: 12))
+                        .foregroundColor(AppTheme.textMuted)
+                }
+            }
+        }
     }
 }

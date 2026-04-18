@@ -120,10 +120,10 @@ struct GoalCard: View {
                     }
                 }.frame(height: 8)
                 HStack {
-                    Text("$\(String(format: "%.0f", goal.savedAmount)) saved")
+                    Text("₸\(String(format: "%.0f", goal.savedAmount)) saved")
                         .font(.system(size: 12, weight: .semibold)).foregroundColor(goal.color)
                     Spacer()
-                    Text("$\(String(format: "%.0f", goal.targetAmount)) target")
+                    Text("₸\(String(format: "%.0f", goal.targetAmount)) target")
                         .font(.system(size: 12)).foregroundColor(t.textMuted)
                 }
             }
@@ -132,7 +132,7 @@ struct GoalCard: View {
             if remaining > 0 {
                 HStack(spacing: 6) {
                     Image(systemName: "arrow.up.circle.fill").font(.system(size: 12)).foregroundColor(AppTheme.accent)
-                    Text("$\(String(format: "%.0f", remaining)) \(localization.str(.moreToGoal))")
+                    Text("₸\(String(format: "%.0f", remaining)) \(localization.str(.moreToGoal))")
                         .font(.system(size: 12)).foregroundColor(t.textMuted)
                 }
             } else {

@@ -124,3 +124,36 @@ struct StatBox: View {
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
     }
 }
+
+/// Formats a Double as Kazakhstani Tenge (KZT) with grouping separators.
+/// Examples: 12500 -> "₸12,500"
+private func formatTenge(_ amount: Double) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.currencyCode = "KZT"
+    formatter.currencySymbol = "₸"
+    formatter.maximumFractionDigits = amount.truncatingRemainder(dividingBy: 1) == 0 ? 0 : 2
+    formatter.minimumFractionDigits = 0
+    return formatter.string(from: NSNumber(value: amount)) ?? "₸\(Int(amount))"
+}
+
+/// Small legend item with a colored dot and label used in charts.
+private struct LegendDot: View {
+    let color: Color
+    let label: String
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Circle()
+                .fill(color)
+                .frame(width: 10, height: 10)
+            Text(label)
+                .font(.system(size: 12))
+                .foregroundColor(AppTheme.textPrimary)
+        }
+        .padding(.vertical, 4)
+        .padding(.horizontal, 6)
+        .background(AppTheme.surface2)
+        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+    }
+}

@@ -121,7 +121,7 @@ struct Transaction: Identifiable, Hashable, Codable {
 
     var formattedAmount: String {
         let sign = isExpense ? "-" : "+"
-        return "\(sign)$\(String(format: "%.2f", abs(amount)))"
+        return "\(sign)₸\(String(format: "%.2f", abs(amount)))"
     }
     var formattedDate: String {
         let f = DateFormatter(); f.dateFormat = "MMM d, yyyy"
